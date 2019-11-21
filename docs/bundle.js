@@ -1,1 +1,11711 @@
-var app=function(){"use strict";function t(){}const e=t=>t;function i(t,e){for(const i in e)t[i]=e[i];return t}function n(t){return t()}function o(){return Object.create(null)}function a(t){t.forEach(n)}function s(t){return"function"==typeof t}function r(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function l(t,e,i){const n=e.subscribe(i);t.$$.on_destroy.push(n.unsubscribe?()=>n.unsubscribe():n)}function u(t,e,i){if(t){const n=d(t,e,i);return t[0](n)}}function d(t,e,n){return t[1]?i({},i(e.$$scope.ctx,t[1](n?n(e):{}))):e.$$scope.ctx}function f(t,e,n,o){return t[1]?i({},i(e.$$scope.changed||{},t[1](o?o(n):{}))):e.$$scope.changed||{}}let h="undefined"!=typeof window?()=>window.performance.now():()=>Date.now(),c=t=>requestAnimationFrame(t);const p=new Set;let y,_=!1;function m(){p.forEach(t=>{t[0](h())||(p.delete(t),t[1]())}),(_=p.size>0)&&c(m)}function v(t){let e;return _||(_=!0,c(m)),{promise:new Promise(i=>{p.add(e=[t,i])}),abort(){p.delete(e)}}}function g(t,e){t.appendChild(e)}function b(t,e,i){t.insertBefore(e,i||null)}function S(t){t.parentNode.removeChild(t)}function T(t,e){for(let i=0;i<t.length;i+=1)t[i]&&t[i].d(e)}function w(t){return document.createElement(t)}function x(t){return document.createElementNS("http://www.w3.org/2000/svg",t)}function A(t){return document.createTextNode(t)}function k(){return A(" ")}function O(){return A("")}function P(t,e,i,n){return t.addEventListener(e,i,n),()=>t.removeEventListener(e,i,n)}function M(t,e,i){null==i?t.removeAttribute(e):t.setAttribute(e,i)}function E(t,e){e=""+e,t.data!==e&&(t.data=e)}function F(t,e,i){t.classList[i?"add":"remove"](e)}function q(t,e){const i=document.createEvent("CustomEvent");return i.initCustomEvent(t,!1,!1,e),i}let C,R=0,$={};function N(t,e,i,n,o,a,s,r=0){const l=16.666/n;let u="{\n";for(let t=0;t<=1;t+=l){const n=e+(i-e)*a(t);u+=100*t+`%{${s(n,1-n)}}\n`}const d=u+`100% {${s(i,1-i)}}\n}`,f=`__svelte_${function(t){let e=5381,i=t.length;for(;i--;)e=(e<<5)-e^t.charCodeAt(i);return e>>>0}(d)}_${r}`;if(!$[f]){if(!y){const t=w("style");document.head.appendChild(t),y=t.sheet}$[f]=!0,y.insertRule(`@keyframes ${f} ${d}`,y.cssRules.length)}const h=t.style.animation||"";return t.style.animation=`${h?`${h}, `:""}${f} ${n}ms linear ${o}ms 1 both`,R+=1,f}function j(t,e){t.style.animation=(t.style.animation||"").split(", ").filter(e?t=>t.indexOf(e)<0:t=>-1===t.indexOf("__svelte")).join(", "),e&&!--R&&c(()=>{if(R)return;let t=y.cssRules.length;for(;t--;)y.deleteRule(t);$={}})}function B(t){C=t}function D(){if(!C)throw new Error("Function called outside component initialization");return C}function L(){const t=C;return(e,i)=>{const n=t.$$.callbacks[e];if(n){const o=q(e,i);n.slice().forEach(e=>{e.call(t,o)})}}}const I=[],V=[],U=[],G=[],z=Promise.resolve();let W,Q=!1;function X(t){U.push(t)}function H(){const t=new Set;do{for(;I.length;){const t=I.shift();B(t),Z(t.$$)}for(;V.length;)V.pop()();for(let e=0;e<U.length;e+=1){const i=U[e];t.has(i)||(i(),t.add(i))}U.length=0}while(I.length);for(;G.length;)G.pop()();Q=!1}function Z(t){t.fragment&&(t.update(t.dirty),a(t.before_update),t.fragment.p(t.dirty,t.ctx),t.dirty=null,t.after_update.forEach(X))}function Y(){return W||(W=Promise.resolve()).then(()=>{W=null}),W}function J(t,e,i){t.dispatchEvent(q(`${e?"intro":"outro"}${i}`))}const K=new Set;let tt;function et(){tt={remaining:0,callbacks:[]}}function it(){tt.remaining||a(tt.callbacks)}function nt(t,e){t&&t.i&&(K.delete(t),t.i(e))}function ot(t,e,i,n){if(t&&t.o){if(K.has(t))return;K.add(t),tt.callbacks.push(()=>{K.delete(t),n&&(i&&t.d(1),n())}),t.o(e)}}function at(i,n,o){let a,r,l=n(i,o),u=!1,d=0;function f(){a&&j(i,a)}function c(){const{delay:n=0,duration:o=300,easing:s=e,tick:c=t,css:p}=l;p&&(a=N(i,0,1,o,n,s,p,d++)),c(0,1);const y=h()+n,_=y+o;r&&r.abort(),u=!0,X(()=>J(i,!0,"start")),r=v(t=>{if(u){if(t>=_)return c(1,0),J(i,!0,"end"),f(),u=!1;if(t>=y){const e=s((t-y)/o);c(e,1-e)}}return u})}let p=!1;return{start(){p||(j(i),s(l)?(l=l(),Y().then(c)):c())},invalidate(){p=!1},end(){u&&(f(),u=!1)}}}function st(i,n,o){let r,l=n(i,o),u=!0;const d=tt;function f(){const{delay:n=0,duration:o=300,easing:s=e,tick:f=t,css:c}=l;c&&(r=N(i,1,0,o,n,s,c));const p=h()+n,y=p+o;X(()=>J(i,!1,"start")),v(t=>{if(u){if(t>=y)return f(0,1),J(i,!1,"end"),--d.remaining||a(d.callbacks),!1;if(t>=p){const e=s((t-p)/o);f(1-e,e)}}return u})}return d.remaining+=1,s(l)?Y().then(()=>{l=l(),f()}):f(),{end(t){t&&l.tick&&l.tick(1,0),u&&(r&&j(i,r),u=!1)}}}const rt="undefined"!=typeof window?window:global;function lt(t,e){t.d(1),e.delete(t.key)}function ut(t,e){ot(t,1,1,()=>{e.delete(t.key)})}function dt(t,e,i,n,o,a,s,r,l,u,d,f){let h=t.length,c=a.length,p=h;const y={};for(;p--;)y[t[p].key]=p;const _=[],m=new Map,v=new Map;for(p=c;p--;){const t=f(o,a,p),r=i(t);let l=s.get(r);l?n&&l.p(e,t):(l=u(r,t)).c(),m.set(r,_[p]=l),r in y&&v.set(r,Math.abs(p-y[r]))}const g=new Set,b=new Set;function S(t){nt(t,1),t.m(r,d),s.set(t.key,t),d=t.first,c--}for(;h&&c;){const e=_[c-1],i=t[h-1],n=e.key,o=i.key;e===i?(d=e.first,h--,c--):m.has(o)?!s.has(n)||g.has(n)?S(e):b.has(o)?h--:v.get(n)>v.get(o)?(b.add(n),S(e)):(g.add(o),h--):(l(i,s),h--)}for(;h--;){const e=t[h];m.has(e.key)||l(e,s)}for(;c;)S(_[c-1]);return _}function ft(t){let e;const i=t.subscribe(t=>e=t);return i.unsubscribe?i.unsubscribe():i(),e}function ht(t,e,i){const{fragment:o,on_mount:r,on_destroy:l,after_update:u}=t.$$;o.m(e,i),X(()=>{const e=r.map(n).filter(s);l?l.push(...e):a(e),t.$$.on_mount=[]}),u.forEach(X)}function ct(t,e){t.$$.fragment&&(a(t.$$.on_destroy),t.$$.fragment.d(e),t.$$.on_destroy=t.$$.fragment=null,t.$$.ctx={})}function pt(t,e){t.$$.dirty||(I.push(t),Q||(Q=!0,z.then(H)),t.$$.dirty=o()),t.$$.dirty[e]=!0}function yt(e,i,n,s,r,l){const u=C;B(e);const d=i.props||{},f=e.$$={fragment:null,ctx:null,props:l,update:t,not_equal:r,bound:o(),on_mount:[],on_destroy:[],before_update:[],after_update:[],context:new Map(u?u.$$.context:[]),callbacks:o(),dirty:null};let h=!1;var c;f.ctx=n?n(e,d,(t,i)=>{f.ctx&&r(f.ctx[t],f.ctx[t]=i)&&(f.bound[t]&&f.bound[t](i),h&&pt(e,t))}):d,f.update(),h=!0,a(f.before_update),f.fragment=s(f.ctx),i.target&&(i.hydrate?f.fragment.l((c=i.target,Array.from(c.childNodes))):f.fragment.c(),i.intro&&nt(e.$$.fragment),ht(e,i.target,i.anchor),H()),B(u)}class _t{$destroy(){ct(this,1),this.$destroy=t}$on(t,e){const i=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return i.push(e),()=>{const t=i.indexOf(e);-1!==t&&i.splice(t,1)}}$set(){}}function mt(t){const e=t-1;return e*e*e+1}function vt(t,{delay:e=0,duration:i=400}){const n=+getComputedStyle(t).opacity;return{delay:e,duration:i,css:t=>`opacity: ${t*n}`}}function gt(t,{delay:e=0,duration:i=400,easing:n=mt,x:o=0,y:a=0,opacity:s=0}){const r=getComputedStyle(t),l=+r.opacity,u="none"===r.transform?"":r.transform,d=l*(1-s);return{delay:e,duration:i,easing:n,css:(t,e)=>`\n\t\t\ttransform: ${u} translate(${(1-t)*o}px, ${(1-t)*a}px);\n\t\t\topacity: ${l-d*e}`}}"undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self&&self;function bt(t,e){return t(e={exports:{}},e.exports),e.exports}var St,Tt=bt(function(t,e){"undefined"!=typeof self&&self,t.exports=function(t){var e={};function i(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,i),o.l=!0,o.exports}return i.m=t,i.c=e,i.d=function(t,e,n){i.o(t,e)||Object.defineProperty(t,e,{configurable:!1,enumerable:!0,get:n})},i.r=function(t){Object.defineProperty(t,"__esModule",{value:!0})},i.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return i.d(e,"a",e),e},i.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},i.p="",i(i.s=148)}([function(t,e,i){i.r(e),function(t){var n=i(93),o=function(){if(!(this instanceof o))throw new Error("constructor needs to be called with the 'new' keyword")};o.prototype.toString=function(){for(var t in o){var e=t[0].match(/^[A-Z]$/),i=o[t]===this.constructor;if(o.isFunction(o[t])&&e&&i)return t}return"Tone"},o.prototype.dispose=function(){return this},o.prototype.set=function(t,e){if(o.isString(t)){var i={};i[t]=e,t=i}t:for(var n in t){e=t[n];var a=this;if(-1!==n.indexOf(".")){for(var s=n.split("."),r=0;r<s.length-1;r++)if((a=a[s[r]])instanceof o){s.splice(0,r+1);var l=s.join(".");a.set(l,e);continue t}n=s[s.length-1]}var u=a[n];o.isUndef(u)||(o.Signal&&u instanceof o.Signal||o.Param&&u instanceof o.Param?u.value!==e&&(u.value=e):u instanceof AudioParam?u.value!==e&&(u.value=e):o.TimeBase&&u instanceof o.TimeBase?a[n]=e:u instanceof o?u.set(e):u!==e&&(a[n]=e))}return this},o.prototype.get=function(t){o.isUndef(t)?t=this._collectDefaults(this.constructor):o.isString(t)&&(t=[t]);for(var e={},i=0;i<t.length;i++){var n=t[i],a=this,s=e;if(-1!==n.indexOf(".")){for(var r=n.split("."),l=0;l<r.length-1;l++){var u=r[l];s[u]=s[u]||{},s=s[u],a=a[u]}n=r[r.length-1]}var d=a[n];o.isObject(t[n])?s[n]=d.get():o.Signal&&d instanceof o.Signal?s[n]=d.value:o.Param&&d instanceof o.Param?s[n]=d.value:d instanceof AudioParam?s[n]=d.value:d instanceof o?s[n]=d.get():!o.isFunction(d)&&o.isDefined(d)&&(s[n]=d)}return e},o.prototype._collectDefaults=function(t){var e=[];if(o.isDefined(t.defaults)&&(e=Object.keys(t.defaults)),o.isDefined(t._super))for(var i=this._collectDefaults(t._super),n=0;n<i.length;n++)-1===e.indexOf(i[n])&&e.push(i[n]);return e},o.defaults=function(t,e,i){var n={};if(1===t.length&&o.isObject(t[0]))n=t[0];else for(var a=0;a<e.length;a++)n[e[a]]=t[a];return o.isDefined(i.defaults)?o.defaultArg(n,i.defaults):o.isObject(i)?o.defaultArg(n,i):n},o.defaultArg=function(t,e){if(o.isObject(t)&&o.isObject(e)){var i={};for(var n in t)i[n]=o.defaultArg(e[n],t[n]);for(var a in e)i[a]=o.defaultArg(t[a],e[a]);return i}return o.isUndef(t)?e:t},o.prototype.log=function(){if(this.debug||this.toString()===o.global.TONE_DEBUG_CLASS){var t=Array.from(arguments);t.unshift(this.toString()+":"),console.log.apply(void 0,t)}},o.prototype.assert=function(t,e){if(!t)throw new Error(e)},o.connectSeries=function(){for(var t=arguments[0],e=1;e<arguments.length;e++){var i=arguments[e];o.connect(t,i),t=i}return o},o.connect=function(t,e,i,n){for(;o.isDefined(e.input);)o.isArray(e.input)?(n=o.defaultArg(n,0),e=e.input[n],n=0):e.input&&(e=e.input);return e instanceof AudioParam?t.connect(e,i):e instanceof AudioNode&&t.connect(e,i,n),o},o.disconnect=function(t,e,i,n){if(e){for(var a=!1;!a;)o.isArray(e.input)?(o.isDefined(n)?o.disconnect(t,e.input[n],i):e.input.forEach(function(e){try{o.disconnect(t,e,i)}catch(t){}}),a=!0):e.input?e=e.input:a=!0;e instanceof AudioParam?t.disconnect(e,i):e instanceof AudioNode&&t.disconnect(e,i,n)}else t.disconnect();return o},o.isUndef=function(t){return void 0===t},o.isDefined=function(t){return!o.isUndef(t)},o.isFunction=function(t){return"function"==typeof t},o.isNumber=function(t){return"number"==typeof t},o.isObject=function(t){return"[object Object]"===Object.prototype.toString.call(t)&&t.constructor===Object},o.isBoolean=function(t){return"boolean"==typeof t},o.isArray=function(t){return Array.isArray(t)},o.isString=function(t){return"string"==typeof t},o.isNote=function(t){return o.isString(t)&&/^([a-g]{1}(?:b|#|x|bb)?)(-?[0-9]+)/i.test(t)},o.noOp=function(){},o.prototype._readOnly=function(t){if(Array.isArray(t))for(var e=0;e<t.length;e++)this._readOnly(t[e]);else Object.defineProperty(this,t,{writable:!1,enumerable:!0})},o.prototype._writable=function(t){if(Array.isArray(t))for(var e=0;e<t.length;e++)this._writable(t[e]);else Object.defineProperty(this,t,{writable:!0})},o.State={Started:"started",Stopped:"stopped",Paused:"paused"},o.global=o.isUndef(t)?window:t,o.equalPowerScale=function(t){var e=.5*Math.PI;return Math.sin(t*e)},o.dbToGain=function(t){return Math.pow(10,t/20)},o.gainToDb=function(t){return Math.log(t)/Math.LN10*20},o.intervalToFrequencyRatio=function(t){return Math.pow(2,t/12)},o.prototype.now=function(){return o.context.now()},o.now=function(){return o.context.now()},o.prototype.immediate=function(){return o.context.currentTime},o.immediate=function(){return o.context.currentTime},o.extend=function(t,e){function i(){}o.isUndef(e)&&(e=o),i.prototype=e.prototype,t.prototype=new i,t.prototype.constructor=t,t._super=e},o._audioContext=null,o.start=function(){return o.context.resume()},Object.defineProperty(o,"context",{get:function(){return o._audioContext},set:function(t){t.isContext?o._audioContext=t:o._audioContext=new o.Context(t),o.Context.emit("init",o._audioContext)}}),Object.defineProperty(o.prototype,"context",{get:function(){return o.context}}),o.setContext=function(t){o.context=t},Object.defineProperty(o.prototype,"blockTime",{get:function(){return 128/this.context.sampleRate}}),Object.defineProperty(o.prototype,"sampleTime",{get:function(){return 1/this.context.sampleRate}}),Object.defineProperty(o,"supported",{get:function(){var t=o.global.hasOwnProperty("AudioContext")||o.global.hasOwnProperty("webkitAudioContext"),e=o.global.hasOwnProperty("Promise");return t&&e}}),Object.defineProperty(o,"initialized",{get:function(){return Boolean(o.context)}}),o.getContext=function(t){if(o.initialized)t(o.context);else{var e=function(){t(o.context),o.Context.off("init",e)};o.Context.on("init",e)}return o},o.version=n.a,e.default=o}.call(this,i(147))},function(t,e,i){i.r(e);var n=i(0);if(i(20),n.default.supported){var o=new OfflineAudioContext(2,1,44100),a=o.createGain(),s=o.createGain();if(a.connect(s)!==s){var r=AudioNode.prototype.connect;AudioNode.prototype.connect=function(){return r.apply(this,arguments),arguments[0]}}}n.default.AudioNode=function(){n.default.call(this);var t=n.default.defaults(arguments,["context"],{context:n.default.context});this._context=t.context},n.default.extend(n.default.AudioNode),Object.defineProperty(n.default.AudioNode.prototype,"context",{get:function(){return this._context}}),n.default.AudioNode.prototype.createInsOuts=function(t,e){1===t?this.input=this.context.createGain():t>1&&(this.input=new Array(t)),1===e?this.output=this.context.createGain():e>1&&(this.output=new Array(e))},Object.defineProperty(n.default.AudioNode.prototype,"channelCount",{get:function(){return this.output.channelCount},set:function(t){return this.output.channelCount=t}}),Object.defineProperty(n.default.AudioNode.prototype,"channelCountMode",{get:function(){return this.output.channelCountMode},set:function(t){return this.output.channelCountMode=t}}),Object.defineProperty(n.default.AudioNode.prototype,"channelInterpretation",{get:function(){return this.output.channelInterpretation},set:function(t){return this.output.channelInterpretation=t}}),Object.defineProperty(n.default.AudioNode.prototype,"numberOfInputs",{get:function(){return this.input?n.default.isArray(this.input)?this.input.length:1:0}}),Object.defineProperty(n.default.AudioNode.prototype,"numberOfOutputs",{get:function(){return this.output?n.default.isArray(this.output)?this.output.length:1:0}}),n.default.AudioNode.prototype.connect=function(t,e,i){return n.default.isArray(this.output)?(e=n.default.defaultArg(e,0),this.output[e].connect(t,0,i)):n.default.connect(this.output,t,e,i),this},n.default.AudioNode.prototype.disconnect=function(t,e,i){return n.default.isArray(this.output)?(e=n.default.defaultArg(e,0),this.output[e].disconnect(t,0,i)):n.default.disconnect(this.output,t,e,i),this},n.default.AudioNode.prototype.chain=function(){var t=Array.from(arguments);return t.unshift(this),n.default.connectSeries.apply(void 0,t),this},n.default.AudioNode.prototype.fan=function(){for(var t=0;t<arguments.length;t++)this.connect(arguments[t]);return this},n.default.AudioNode.prototype.dispose=function(){return n.default.isDefined(this.input)&&(this.input instanceof AudioNode&&this.input.disconnect(),this.input=null),n.default.isDefined(this.output)&&(this.output instanceof AudioNode&&this.output.disconnect(),this.output=null),this._context=null,this},e.default=n.default.AudioNode},function(t,e,i){i.r(e);var n=i(0);if(i(4),i(14),i(30),i(44),i(20),i(3),n.default.supported&&!n.default.global.AudioContext.prototype.createConstantSource){var o=function(t){this.context=t;for(var e=t.createBuffer(1,128,t.sampleRate),i=e.getChannelData(0),n=0;n<i.length;n++)i[n]=1;this._bufferSource=t.createBufferSource(),this._bufferSource.channelCount=1,this._bufferSource.channelCountMode="explicit",this._bufferSource.buffer=e,this._bufferSource.loop=!0;var o=this._output=t.createGain();this.offset=o.gain,this._bufferSource.connect(o)};o.prototype.start=function(t){return this._bufferSource.start(t),this},o.prototype.stop=function(t){return this._bufferSource.stop(t),this},o.prototype.connect=function(){return this._output.connect.apply(this._output,arguments),this},o.prototype.disconnect=function(){return this._output.disconnect.apply(this._output,arguments),this},AudioContext.prototype.createConstantSource=function(){return new o(this)},n.default.Context.prototype.createConstantSource=function(){return new o(this)}}n.default.Signal=function(){var t=n.default.defaults(arguments,["value","units"],n.default.Signal);n.default.Param.call(this,t),this._constantSource=this.context.createConstantSource(),this._constantSource.start(0),this._param=this._constantSource.offset,this.value=t.value,this.output=this._constantSource,this.input=this._param=this.output.offset},n.default.extend(n.default.Signal,n.default.Param),n.default.Signal.defaults={value:0,units:n.default.Type.Default,convert:!0},n.default.Signal.prototype.connect=n.default.SignalBase.prototype.connect,n.default.Signal.prototype.disconnect=n.default.SignalBase.prototype.disconnect,n.default.Signal.prototype.getValueAtTime=function(t){return this._param.getValueAtTime?this._param.getValueAtTime(t):n.default.Param.prototype.getValueAtTime.call(this,t)},n.default.Signal.prototype.dispose=function(){return n.default.Param.prototype.dispose.call(this),this._constantSource.stop(),this._constantSource.disconnect(),this._constantSource=null,this},e.default=n.default.Signal},function(t,e,i){i.r(e);var n=i(0);i(14),i(4),i(1),n.default.Gain=function(){var t=n.default.defaults(arguments,["gain","units"],n.default.Gain);n.default.AudioNode.call(this,t),this.input=this.output=this._gainNode=this.context.createGain(),this.gain=new n.default.Param({param:this._gainNode.gain,units:t.units,value:t.gain,convert:t.convert}),this._readOnly("gain")},n.default.extend(n.default.Gain,n.default.AudioNode),n.default.Gain.defaults={gain:1,convert:!0},n.default.Gain.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this._gainNode.disconnect(),this._gainNode=null,this._writable("gain"),this.gain.dispose(),this.gain=null},e.default=n.default.Gain},function(t,e,i){i.r(e);var n=i(0);i(63),i(46),i(45),i(20),n.default.Type={Default:"number",Time:"time",Frequency:"frequency",TransportTime:"transportTime",Ticks:"ticks",NormalRange:"normalRange",AudioRange:"audioRange",Decibels:"db",Interval:"interval",BPM:"bpm",Positive:"positive",Gain:"gain",Cents:"cents",Degrees:"degrees",MIDI:"midi",BarsBeatsSixteenths:"barsBeatsSixteenths",Samples:"samples",Hertz:"hertz",Note:"note",Milliseconds:"milliseconds",Seconds:"seconds",Notation:"notation"},n.default.prototype.toSeconds=function(t){return n.default.isNumber(t)?t:n.default.isUndef(t)?this.now():n.default.isString(t)||n.default.isObject(t)?new n.default.Time(t).toSeconds():t instanceof n.default.TimeBase?t.toSeconds():void 0},n.default.prototype.toFrequency=function(t){return n.default.isNumber(t)?t:n.default.isString(t)||n.default.isUndef(t)||n.default.isObject(t)?new n.default.Frequency(t).valueOf():t instanceof n.default.TimeBase?t.toFrequency():void 0},n.default.prototype.toTicks=function(t){return n.default.isNumber(t)||n.default.isString(t)||n.default.isObject(t)?new n.default.TransportTime(t).toTicks():n.default.isUndef(t)?n.default.Transport.ticks:t instanceof n.default.TimeBase?t.toTicks():void 0},e.default=n.default},function(t,e,i){i.r(e);var n=i(0);i(14),i(3),i(30),n.default.Multiply=function(t){n.default.Signal.call(this),this.createInsOuts(2,0),this._mult=this.input[0]=this.output=new n.default.Gain,this._param=this.input[1]=this.output.gain,this.value=n.default.defaultArg(t,0)},n.default.extend(n.default.Multiply,n.default.Signal),n.default.Multiply.prototype.dispose=function(){return n.default.Signal.prototype.dispose.call(this),this._mult.dispose(),this._mult=null,this._param=null,this},e.default=n.default.Multiply},function(t,e,i){i.r(e);var n=i(0);i(16),i(27),i(40),i(4),i(34),i(2),i(1),n.default.Source=function(t){t=n.default.defaultArg(t,n.default.Source.defaults),n.default.AudioNode.call(this),this._volume=this.output=new n.default.Volume(t.volume),this.volume=this._volume.volume,this._readOnly("volume"),this._state=new n.default.TimelineState(n.default.State.Stopped),this._state.memory=100,this._synced=!1,this._scheduled=[],this._volume.output.output.channelCount=2,this._volume.output.output.channelCountMode="explicit",this.mute=t.mute},n.default.extend(n.default.Source,n.default.AudioNode),n.default.Source.defaults={volume:0,mute:!1},Object.defineProperty(n.default.Source.prototype,"state",{get:function(){return this._synced?n.default.Transport.state===n.default.State.Started?this._state.getValueAtTime(n.default.Transport.seconds):n.default.State.Stopped:this._state.getValueAtTime(this.now())}}),Object.defineProperty(n.default.Source.prototype,"mute",{get:function(){return this._volume.mute},set:function(t){this._volume.mute=t}}),n.default.Source.prototype._start=n.default.noOp,n.default.Source.prototype.restart=n.default.noOp,n.default.Source.prototype._stop=n.default.noOp,n.default.Source.prototype.start=function(t,e,i){if(n.default.isUndef(t)&&this._synced?t=n.default.Transport.seconds:(t=this.toSeconds(t),t=Math.max(t,this.context.currentTime)),this._state.getValueAtTime(t)===n.default.State.Started)this._state.cancel(t),this._state.setStateAtTime(n.default.State.Started,t),this.restart(t,e,i);else if(this._state.setStateAtTime(n.default.State.Started,t),this._synced){var o=this._state.get(t);o.offset=n.default.defaultArg(e,0),o.duration=i;var a=n.default.Transport.schedule(function(t){this._start(t,e,i)}.bind(this),t);this._scheduled.push(a),n.default.Transport.state===n.default.State.Started&&this._syncedStart(this.now(),n.default.Transport.seconds)}else this._start.apply(this,arguments);return this},n.default.Source.prototype.stop=function(t){if(n.default.isUndef(t)&&this._synced?t=n.default.Transport.seconds:(t=this.toSeconds(t),t=Math.max(t,this.context.currentTime)),this._synced){var e=n.default.Transport.schedule(this._stop.bind(this),t);this._scheduled.push(e)}else this._stop.apply(this,arguments);return this._state.cancel(t),this._state.setStateAtTime(n.default.State.Stopped,t),this},n.default.Source.prototype.sync=function(){return this._synced=!0,this._syncedStart=function(t,e){if(e>0){var i=this._state.get(e);if(i&&i.state===n.default.State.Started&&i.time!==e){var o,a=e-this.toSeconds(i.time);i.duration&&(o=this.toSeconds(i.duration)-a),this._start(t,this.toSeconds(i.offset)+a,o)}}}.bind(this),this._syncedStop=function(t){var e=n.default.Transport.getSecondsAtTime(Math.max(t-this.sampleTime,0));this._state.getValueAtTime(e)===n.default.State.Started&&this._stop(t)}.bind(this),n.default.Transport.on("start loopStart",this._syncedStart),n.default.Transport.on("stop pause loopEnd",this._syncedStop),this},n.default.Source.prototype.unsync=function(){this._synced&&(n.default.Transport.off("stop pause loopEnd",this._syncedStop),n.default.Transport.off("start loopStart",this._syncedStart)),this._synced=!1;for(var t=0;t<this._scheduled.length;t++){var e=this._scheduled[t];n.default.Transport.clear(e)}return this._scheduled=[],this._state.cancel(0),this},n.default.Source.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this.unsync(),this._scheduled=null,this._writable("volume"),this._volume.dispose(),this._volume=null,this.volume=null,this._state.dispose(),this._state=null},e.default=n.default.Source},function(t,e,i){i.r(e);var n=i(0);if(i(30),i(44),n.default.supported&&!n.default.global.AudioContext.prototype._native_createWaveShaper){var o=navigator.userAgent.toLowerCase();if(o.includes("safari")&&!o.includes("chrome")){var a=function(t){for(var e in this._internalNode=this.input=this.output=t._native_createWaveShaper(),this._curve=null,this._internalNode)this._defineProperty(this._internalNode,e)};Object.defineProperty(a.prototype,"curve",{get:function(){return this._curve},set:function(t){this._curve=t;var e=new Float32Array(t.length+1);e.set(t,1),e[0]=t[0],this._internalNode.curve=e}}),a.prototype._defineProperty=function(t,e){n.default.isUndef(this[e])&&Object.defineProperty(this,e,{get:function(){return"function"==typeof t[e]?t[e].bind(t):t[e]},set:function(i){t[e]=i}})},n.default.global.AudioContext.prototype._native_createWaveShaper=n.default.global.AudioContext.prototype.createWaveShaper,n.default.global.AudioContext.prototype.createWaveShaper=function(){return new a(this)}}}n.default.WaveShaper=function(t,e){n.default.SignalBase.call(this),this._shaper=this.input=this.output=this.context.createWaveShaper(),this._curve=null,Array.isArray(t)?this.curve=t:isFinite(t)||n.default.isUndef(t)?this._curve=new Float32Array(n.default.defaultArg(t,1024)):n.default.isFunction(t)&&(this._curve=new Float32Array(n.default.defaultArg(e,1024)),this.setMap(t))},n.default.extend(n.default.WaveShaper,n.default.SignalBase),n.default.WaveShaper.prototype.setMap=function(t){for(var e=new Array(this._curve.length),i=0,n=this._curve.length;i<n;i++){var o=i/(n-1)*2-1;e[i]=t(o,i)}return this.curve=e,this},Object.defineProperty(n.default.WaveShaper.prototype,"curve",{get:function(){return this._shaper.curve},set:function(t){this._curve=new Float32Array(t),this._shaper.curve=this._curve}}),Object.defineProperty(n.default.WaveShaper.prototype,"oversample",{get:function(){return this._shaper.oversample},set:function(t){if(!["none","2x","4x"].includes(t))throw new RangeError("Tone.WaveShaper: oversampling must be either 'none', '2x', or '4x'");this._shaper.oversample=t}}),n.default.WaveShaper.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._shaper.disconnect(),this._shaper=null,this._curve=null,this},e.default=n.default.WaveShaper},function(t,e,i){i.r(e);var n=i(0);i(23),i(1),n.default.Effect=function(){var t=n.default.defaults(arguments,["wet"],n.default.Effect);n.default.AudioNode.call(this),this.createInsOuts(1,1),this._dryWet=new n.default.CrossFade(t.wet),this.wet=this._dryWet.fade,this.effectSend=new n.default.Gain,this.effectReturn=new n.default.Gain,n.default.connect(this.input,this._dryWet.a),n.default.connect(this.input,this.effectSend),this.effectReturn.connect(this._dryWet.b),this._dryWet.connect(this.output),this._readOnly(["wet"])},n.default.extend(n.default.Effect,n.default.AudioNode),n.default.Effect.defaults={wet:1},n.default.Effect.prototype.connectEffect=function(t){return this.effectSend.chain(t,this.effectReturn),this},n.default.Effect.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._dryWet.dispose(),this._dryWet=null,this.effectSend.dispose(),this.effectSend=null,this.effectReturn.dispose(),this.effectReturn=null,this._writable(["wet"]),this.wet=null,this},e.default=n.default.Effect},function(t,e,i){i.r(e);var n=i(0);i(2),i(1),n.default.Filter=function(){var t=n.default.defaults(arguments,["frequency","type","rolloff"],n.default.Filter);n.default.AudioNode.call(this),this.createInsOuts(1,1),this._filters=[],this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.detune=new n.default.Signal(0,n.default.Type.Cents),this.gain=new n.default.Signal({value:t.gain,convert:!0,type:n.default.Type.Decibels}),this.Q=new n.default.Signal(t.Q),this._type=t.type,this._rolloff=t.rolloff,this.rolloff=t.rolloff,this._readOnly(["detune","frequency","gain","Q"])},n.default.extend(n.default.Filter,n.default.AudioNode),n.default.Filter.defaults={type:"lowpass",frequency:350,rolloff:-12,Q:1,gain:0},Object.defineProperty(n.default.Filter.prototype,"type",{get:function(){return this._type},set:function(t){if(-1===["lowpass","highpass","bandpass","lowshelf","highshelf","notch","allpass","peaking"].indexOf(t))throw new TypeError("Tone.Filter: invalid type "+t);this._type=t;for(var e=0;e<this._filters.length;e++)this._filters[e].type=t}}),Object.defineProperty(n.default.Filter.prototype,"rolloff",{get:function(){return this._rolloff},set:function(t){t=parseInt(t,10);var e=[-12,-24,-48,-96].indexOf(t);if(-1===e)throw new RangeError("Tone.Filter: rolloff can only be -12, -24, -48 or -96");e+=1,this._rolloff=t,this.input.disconnect();for(var i=0;i<this._filters.length;i++)this._filters[i].disconnect(),this._filters[i]=null;this._filters=new Array(e);for(var o=0;o<e;o++){var a=this.context.createBiquadFilter();a.type=this._type,this.frequency.connect(a.frequency),this.detune.connect(a.detune),this.Q.connect(a.Q),this.gain.connect(a.gain),this._filters[o]=a}var s=[this.input].concat(this._filters).concat([this.output]);n.default.connectSeries.apply(n.default,s)}}),n.default.Filter.prototype.getFrequencyResponse=function(t){t=n.default.defaultArg(t,128);for(var e=new Float32Array(t).map(function(){return 1}),i=new Float32Array(t),o=0;o<t;o++){var a=19980*Math.pow(o/t,2)+20;i[o]=a}var s=new Float32Array(t),r=new Float32Array(t);return this._filters.forEach(function(){var t=this.context.createBiquadFilter();t.type=this._type,t.Q.value=this.Q.value,t.frequency.value=this.frequency.value,t.gain.value=this.gain.value,t.getFrequencyResponse(i,s,r),s.forEach(function(t,i){e[i]*=t})}.bind(this)),e},n.default.Filter.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this);for(var t=0;t<this._filters.length;t++)this._filters[t].disconnect(),this._filters[t]=null;return this._filters=null,this._writable(["detune","frequency","gain","Q"]),this.frequency.dispose(),this.Q.dispose(),this.frequency=null,this.Q=null,this.detune.dispose(),this.detune=null,this.gain.dispose(),this.gain=null,this},e.default=n.default.Filter},function(t,e,i){i.r(e);var n=i(0);i(1),n.default.Merge=function(t){t=n.default.defaultArg(t,2),n.default.AudioNode.call(this),this.createInsOuts(t,0),this._merger=this.output=this.context.createChannelMerger(t);for(var e=0;e<t;e++)this.input[e]=new n.default.Gain,this.input[e].connect(this._merger,0,e),this.input[e].channelCount=1,this.input[e].channelCountMode="explicit";this.left=this.input[0],this.right=this.input[1]},n.default.extend(n.default.Merge,n.default.AudioNode),n.default.Merge.prototype.dispose=function(){return this.input.forEach(function(t){t.dispose()}),n.default.AudioNode.prototype.dispose.call(this),this.left=null,this.right=null,this._merger.disconnect(),this._merger=null,this},e.default=n.default.Merge},function(t,e,i){i.r(e);var n=i(0);i(35),i(4),n.default.supported&&(AudioBuffer.prototype.copyToChannel||(AudioBuffer.prototype.copyToChannel=function(t,e,i){var n=this.getChannelData(e);i=i||0;for(var o=0;o<n.length;o++)n[o+i]=t[o]},AudioBuffer.prototype.copyFromChannel=function(t,e,i){var n=this.getChannelData(e);i=i||0;for(var o=0;o<t.length;o++)t[o]=n[o+i]})),n.default.Buffer=function(){var t=n.default.defaults(arguments,["url","onload","onerror"],n.default.Buffer);n.default.call(this),this._buffer=null,this._reversed=t.reverse,this._xhr=null,this.onload=n.default.noOp,t.url instanceof AudioBuffer||t.url instanceof n.default.Buffer?(this.set(t.url),this.loaded||(this.onload=t.onload)):n.default.isString(t.url)&&this.load(t.url).then(t.onload).catch(t.onerror)},n.default.extend(n.default.Buffer),n.default.Buffer.defaults={url:void 0,reverse:!1,onload:n.default.noOp,onerror:n.default.noOp},n.default.Buffer.prototype.set=function(t){return t instanceof n.default.Buffer?t.loaded?this._buffer=t.get():t.onload=function(){this.set(t),this.onload(this)}.bind(this):this._buffer=t,this._reversed&&this._reverse(),this},n.default.Buffer.prototype.get=function(){return this._buffer},n.default.Buffer.prototype.load=function(t,e,i){return new Promise(function(o,a){this._xhr=n.default.Buffer.load(t,function(t){this._xhr=null,this.set(t),o(this),this.onload(this),e&&e(this)}.bind(this),function(t){this._xhr=null,a(t),i&&i(t)}.bind(this))}.bind(this))},n.default.Buffer.prototype.dispose=function(){return n.default.prototype.dispose.call(this),this._buffer=null,this._xhr&&(n.default.Buffer._removeFromDownloadQueue(this._xhr),this._xhr.abort(),this._xhr=null),this},Object.defineProperty(n.default.Buffer.prototype,"loaded",{get:function(){return this.length>0}}),Object.defineProperty(n.default.Buffer.prototype,"duration",{get:function(){return this._buffer?this._buffer.duration:0}}),Object.defineProperty(n.default.Buffer.prototype,"length",{get:function(){return this._buffer?this._buffer.length:0}}),Object.defineProperty(n.default.Buffer.prototype,"numberOfChannels",{get:function(){return this._buffer?this._buffer.numberOfChannels:0}}),n.default.Buffer.prototype.fromArray=function(t){var e=t[0].length>0,i=e?t.length:1,n=e?t[0].length:t.length,o=this.context.createBuffer(i,n,this.context.sampleRate);e||1!==i||(t=[t]);for(var a=0;a<i;a++)o.copyToChannel(t[a],a);return this._buffer=o,this},n.default.Buffer.prototype.toMono=function(t){if(n.default.isNumber(t))this.fromArray(this.toArray(t));else{for(var e=new Float32Array(this.length),i=this.numberOfChannels,o=0;o<i;o++)for(var a=this.toArray(o),s=0;s<a.length;s++)e[s]+=a[s];e=e.map(function(t){return t/i}),this.fromArray(e)}return this},n.default.Buffer.prototype.toArray=function(t){if(n.default.isNumber(t))return this.getChannelData(t);if(1===this.numberOfChannels)return this.toArray(0);for(var e=[],i=0;i<this.numberOfChannels;i++)e[i]=this.getChannelData(i);return e},n.default.Buffer.prototype.getChannelData=function(t){return this._buffer.getChannelData(t)},n.default.Buffer.prototype.slice=function(t,e){e=n.default.defaultArg(e,this.duration);for(var i=Math.floor(this.context.sampleRate*this.toSeconds(t)),o=Math.floor(this.context.sampleRate*this.toSeconds(e)),a=[],s=0;s<this.numberOfChannels;s++)a[s]=this.toArray(s).slice(i,o);return(new n.default.Buffer).fromArray(a)},n.default.Buffer.prototype._reverse=function(){if(this.loaded)for(var t=0;t<this.numberOfChannels;t++)Array.prototype.reverse.call(this.getChannelData(t));return this},Object.defineProperty(n.default.Buffer.prototype,"reverse",{get:function(){return this._reversed},set:function(t){this._reversed!==t&&(this._reversed=t,this._reverse())}}),n.default.Emitter.mixin(n.default.Buffer),n.default.Buffer._downloadQueue=[],n.default.Buffer.baseUrl="",n.default.Buffer.fromArray=function(t){return(new n.default.Buffer).fromArray(t)},n.default.Buffer.fromUrl=function(t){var e=new n.default.Buffer;return e.load(t).then(function(){return e})},n.default.Buffer._removeFromDownloadQueue=function(t){var e=n.default.Buffer._downloadQueue.indexOf(t);-1!==e&&n.default.Buffer._downloadQueue.splice(e,1)},n.default.Buffer.load=function(t,e,i){e=n.default.defaultArg(e,n.default.noOp);var o=t.match(/\[(.+\|?)+\]$/);if(o){for(var a=o[1].split("|"),s=a[0],r=0;r<a.length;r++)if(n.default.Buffer.supportsType(a[r])){s=a[r];break}t=t.replace(o[0],s)}function l(t){if(n.default.Buffer._removeFromDownloadQueue(d),n.default.Buffer.emit("error",t),!i)throw t;i(t)}function u(){for(var t=0,e=0;e<n.default.Buffer._downloadQueue.length;e++)t+=n.default.Buffer._downloadQueue[e].progress;n.default.Buffer.emit("progress",t/n.default.Buffer._downloadQueue.length)}var d=new XMLHttpRequest;return d.open("GET",n.default.Buffer.baseUrl+t,!0),d.responseType="arraybuffer",d.progress=0,n.default.Buffer._downloadQueue.push(d),d.addEventListener("load",function(){200===d.status?n.default.context.decodeAudioData(d.response).then(function(t){d.progress=1,u(),e(t),n.default.Buffer._removeFromDownloadQueue(d),0===n.default.Buffer._downloadQueue.length&&n.default.Buffer.emit("load")}).catch(function(){n.default.Buffer._removeFromDownloadQueue(d),l("Tone.Buffer: could not decode audio data: "+t)}):l("Tone.Buffer: could not locate file: "+t)}),d.addEventListener("error",l),d.addEventListener("progress",function(t){t.lengthComputable&&(d.progress=t.loaded/t.total*.95,u())}),d.send(),d},n.default.Buffer.cancelDownloads=function(){return n.default.Buffer._downloadQueue.slice().forEach(function(t){n.default.Buffer._removeFromDownloadQueue(t),t.abort()}),n.default.Buffer},n.default.Buffer.supportsType=function(t){var e=t.split(".");return e=e[e.length-1],""!==document.createElement("audio").canPlayType("audio/"+e)},n.default.loaded=function(){var t,e;function i(){n.default.Buffer.off("load",t),n.default.Buffer.off("error",e)}return new Promise(function(i,o){t=function(){i()},e=function(){o()},n.default.Buffer.on("load",t),n.default.Buffer.on("error",e)}).then(i).catch(function(t){throw i(),new Error(t)})},e.default=n.default.Buffer},function(t,e,i){i.r(e);var n=i(0);i(17),i(26),i(1),i(2),i(22),i(4),i(28),n.default.LFO=function(){var t=n.default.defaults(arguments,["frequency","min","max"],n.default.LFO);n.default.AudioNode.call(this),this._oscillator=new n.default.Oscillator({frequency:t.frequency,type:t.type}),this.frequency=this._oscillator.frequency,this.amplitude=this._oscillator.volume,this.amplitude.units=n.default.Type.NormalRange,this.amplitude.value=t.amplitude,this._stoppedSignal=new n.default.Signal(0,n.default.Type.AudioRange),this._zeros=new n.default.Zero,this._stoppedValue=0,this._a2g=new n.default.AudioToGain,this._scaler=this.output=new n.default.Scale(t.min,t.max),this._units=n.default.Type.Default,this.units=t.units,this._oscillator.chain(this._a2g,this._scaler),this._zeros.connect(this._a2g),this._stoppedSignal.connect(this._a2g),this._readOnly(["amplitude","frequency"]),this.phase=t.phase},n.default.extend(n.default.LFO,n.default.AudioNode),n.default.LFO.defaults={type:"sine",min:0,max:1,phase:0,frequency:"4n",amplitude:1,units:n.default.Type.Default},n.default.LFO.prototype.start=function(t){return t=this.toSeconds(t),this._stoppedSignal.setValueAtTime(0,t),this._oscillator.start(t),this},n.default.LFO.prototype.stop=function(t){return t=this.toSeconds(t),this._stoppedSignal.setValueAtTime(this._stoppedValue,t),this._oscillator.stop(t),this},n.default.LFO.prototype.sync=function(){return this._oscillator.sync(),this._oscillator.syncFrequency(),this},n.default.LFO.prototype.unsync=function(){return this._oscillator.unsync(),this._oscillator.unsyncFrequency(),this},Object.defineProperty(n.default.LFO.prototype,"min",{get:function(){return this._toUnits(this._scaler.min)},set:function(t){t=this._fromUnits(t),this._scaler.min=t}}),Object.defineProperty(n.default.LFO.prototype,"max",{get:function(){return this._toUnits(this._scaler.max)},set:function(t){t=this._fromUnits(t),this._scaler.max=t}}),Object.defineProperty(n.default.LFO.prototype,"type",{get:function(){return this._oscillator.type},set:function(t){this._oscillator.type=t,this._stoppedValue=this._oscillator._getInitialValue(),this._stoppedSignal.value=this._stoppedValue}}),Object.defineProperty(n.default.LFO.prototype,"phase",{get:function(){return this._oscillator.phase},set:function(t){this._oscillator.phase=t,this._stoppedValue=this._oscillator._getInitialValue(),this._stoppedSignal.value=this._stoppedValue}}),Object.defineProperty(n.default.LFO.prototype,"units",{get:function(){return this._units},set:function(t){var e=this.min,i=this.max;this._units=t,this.min=e,this.max=i}}),Object.defineProperty(n.default.LFO.prototype,"state",{get:function(){return this._oscillator.state}}),n.default.LFO.prototype.connect=function(t){return t.constructor!==n.default.Signal&&t.constructor!==n.default.Param||(this.convert=t.convert,this.units=t.units),n.default.SignalBase.prototype.connect.apply(this,arguments),this},n.default.LFO.prototype._fromUnits=n.default.Param.prototype._fromUnits,n.default.LFO.prototype._toUnits=n.default.Param.prototype._toUnits,n.default.LFO.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["amplitude","frequency"]),this._oscillator.dispose(),this._oscillator=null,this._stoppedSignal.dispose(),this._stoppedSignal=null,this._zeros.dispose(),this._zeros=null,this._scaler.dispose(),this._scaler=null,this._a2g.dispose(),this._a2g=null,this.frequency=null,this.amplitude=null,this},e.default=n.default.LFO},function(t,e,i){i.r(e);var n=i(0);i(29),i(90),i(2),i(3),n.default.Subtract=function(t){n.default.Signal.call(this),this.createInsOuts(2,0),this._sum=this.input[0]=this.output=new n.default.Gain,this._neg=new n.default.Negate,this._param=this.input[1]=new n.default.Signal(t),this._param.chain(this._neg,this._sum)},n.default.extend(n.default.Subtract,n.default.Signal),n.default.Subtract.prototype.dispose=function(){return n.default.Signal.prototype.dispose.call(this),this._neg.dispose(),this._neg=null,this._sum.disconnect(),this._sum=null,this},e.default=n.default.Subtract},function(t,e,i){i.r(e);var n=i(0);i(4),i(1),i(24),n.default.Param=function(){var t=n.default.defaults(arguments,["param","units","convert"],n.default.Param);n.default.AudioNode.call(this,t),this._param=this.input=t.param,this.units=t.units,this.convert=t.convert,this.overridden=!1,this._events=new n.default.Timeline(1e3),n.default.isDefined(t.value)&&this._param&&this.setValueAtTime(t.value,0)},n.default.extend(n.default.Param,n.default.AudioNode),n.default.Param.defaults={units:n.default.Type.Default,convert:!0,param:void 0},Object.defineProperty(n.default.Param.prototype,"value",{get:function(){var t=this.now();return this._toUnits(this.getValueAtTime(t))},set:function(t){this._initialValue=this._fromUnits(t),this.cancelScheduledValues(this.now()),this.setValueAtTime(t,this.now())}}),Object.defineProperty(n.default.Param.prototype,"minValue",{get:function(){return this.units===n.default.Type.Time||this.units===n.default.Type.Frequency||this.units===n.default.Type.NormalRange||this.units===n.default.Type.Positive||this.units===n.default.Type.BPM?0:this.units===n.default.Type.AudioRange?-1:this.units===n.default.Type.Decibels?-1/0:this._param.minValue}}),Object.defineProperty(n.default.Param.prototype,"maxValue",{get:function(){return this.units===n.default.Type.NormalRange||this.units===n.default.Type.AudioRange?1:this._param.maxValue}}),n.default.Param.prototype._fromUnits=function(t){if(!this.convert&&!n.default.isUndef(this.convert)||this.overridden)return t;switch(this.units){case n.default.Type.Time:return this.toSeconds(t);case n.default.Type.Frequency:return this.toFrequency(t);case n.default.Type.Decibels:return n.default.dbToGain(t);case n.default.Type.NormalRange:return Math.min(Math.max(t,0),1);case n.default.Type.AudioRange:return Math.min(Math.max(t,-1),1);case n.default.Type.Positive:return Math.max(t,0);default:return t}},n.default.Param.prototype._toUnits=function(t){if(!this.convert&&!n.default.isUndef(this.convert))return t;switch(this.units){case n.default.Type.Decibels:return n.default.gainToDb(t);default:return t}},n.default.Param.prototype._minOutput=1e-5,n.default.Param.AutomationType={Linear:"linearRampToValueAtTime",Exponential:"exponentialRampToValueAtTime",Target:"setTargetAtTime",SetValue:"setValueAtTime",Cancel:"cancelScheduledValues"},n.default.Param.prototype.setValueAtTime=function(t,e){return e=this.toSeconds(e),t=this._fromUnits(t),this._events.add({type:n.default.Param.AutomationType.SetValue,value:t,time:e}),this.log(n.default.Param.AutomationType.SetValue,t,e),this._param.setValueAtTime(t,e),this},n.default.Param.prototype.getValueAtTime=function(t){t=this.toSeconds(t);var e=this._events.getAfter(t),i=this._events.get(t),o=n.default.defaultArg(this._initialValue,this._param.defaultValue),a=o;if(null===i)a=o;else if(i.type===n.default.Param.AutomationType.Target){var s,r=this._events.getBefore(i.time);s=null===r?o:r.value,a=this._exponentialApproach(i.time,s,i.value,i.constant,t)}else a=null===e?i.value:e.type===n.default.Param.AutomationType.Linear?this._linearInterpolate(i.time,i.value,e.time,e.value,t):e.type===n.default.Param.AutomationType.Exponential?this._exponentialInterpolate(i.time,i.value,e.time,e.value,t):i.value;return a},n.default.Param.prototype.setRampPoint=function(t){t=this.toSeconds(t);var e=this.getValueAtTime(t);return this.cancelAndHoldAtTime(t),0===e&&(e=this._minOutput),this.setValueAtTime(this._toUnits(e),t),this},n.default.Param.prototype.linearRampToValueAtTime=function(t,e){return t=this._fromUnits(t),e=this.toSeconds(e),this._events.add({type:n.default.Param.AutomationType.Linear,value:t,time:e}),this.log(n.default.Param.AutomationType.Linear,t,e),this._param.linearRampToValueAtTime(t,e),this},n.default.Param.prototype.exponentialRampToValueAtTime=function(t,e){return t=this._fromUnits(t),t=Math.max(this._minOutput,t),e=this.toSeconds(e),this._events.add({type:n.default.Param.AutomationType.Exponential,time:e,value:t}),this.log(n.default.Param.AutomationType.Exponential,t,e),this._param.exponentialRampToValueAtTime(t,e),this},n.default.Param.prototype.exponentialRampTo=function(t,e,i){return i=this.toSeconds(i),this.setRampPoint(i),this.exponentialRampToValueAtTime(t,i+this.toSeconds(e)),this},n.default.Param.prototype.linearRampTo=function(t,e,i){return i=this.toSeconds(i),this.setRampPoint(i),this.linearRampToValueAtTime(t,i+this.toSeconds(e)),this},n.default.Param.prototype.targetRampTo=function(t,e,i){return i=this.toSeconds(i),this.setRampPoint(i),this.exponentialApproachValueAtTime(t,i,e),this},n.default.Param.prototype.exponentialApproachValueAtTime=function(t,e,i){var n=Math.log(this.toSeconds(i)+1)/Math.log(200);return e=this.toSeconds(e),this.setTargetAtTime(t,e,n),this.cancelAndHoldAtTime(e+.9*i),this.linearRampToValueAtTime(t,e+i),this},n.default.Param.prototype.setTargetAtTime=function(t,e,i){if(t=this._fromUnits(t),i<=0)throw new Error("timeConstant must be greater than 0");return e=this.toSeconds(e),this._events.add({type:n.default.Param.AutomationType.Target,value:t,time:e,constant:i}),this.log(n.default.Param.AutomationType.Target,t,e,i),this._param.setTargetAtTime(t,e,i),this},n.default.Param.prototype.setValueCurveAtTime=function(t,e,i,o){o=n.default.defaultArg(o,1),i=this.toSeconds(i),e=this.toSeconds(e),this.setValueAtTime(t[0]*o,e);for(var a=i/(t.length-1),s=1;s<t.length;s++)this.linearRampToValueAtTime(t[s]*o,e+s*a);return this},n.default.Param.prototype.cancelScheduledValues=function(t){return t=this.toSeconds(t),this._events.cancel(t),this._param.cancelScheduledValues(t),this.log(n.default.Param.AutomationType.Cancel,t),this},n.default.Param.prototype.cancelAndHoldAtTime=function(t){t=this.toSeconds(t);var e=this.getValueAtTime(t);this.log("cancelAndHoldAtTime",t,"value="+e),this._param.cancelScheduledValues(t);var i=this._events.get(t),o=this._events.getAfter(t);return i&&i.time===t?o?this._events.cancel(o.time):this._events.cancel(t+this.sampleTime):o&&(this._events.cancel(o.time),o.type===n.default.Param.AutomationType.Linear?this.linearRampToValueAtTime(e,t):o.type===n.default.Param.AutomationType.Exponential&&this.exponentialRampToValueAtTime(e,t)),this._events.add({type:n.default.Param.AutomationType.SetValue,value:e,time:t}),this._param.setValueAtTime(e,t),this},n.default.Param.prototype.rampTo=function(t,e,i){return e=n.default.defaultArg(e,.1),this.units===n.default.Type.Frequency||this.units===n.default.Type.BPM||this.units===n.default.Type.Decibels?this.exponentialRampTo(t,e,i):this.linearRampTo(t,e,i),this},n.default.Param.prototype._exponentialApproach=function(t,e,i,n,o){return i+(e-i)*Math.exp(-(o-t)/n)},n.default.Param.prototype._linearInterpolate=function(t,e,i,n,o){return e+(o-t)/(i-t)*(n-e)},n.default.Param.prototype._exponentialInterpolate=function(t,e,i,n,o){return e*Math.pow(n/e,(o-t)/(i-t))},n.default.Param.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._param=null,this._events=null,this},e.default=n.default.Param},function(t,e,i){i.r(e);var n=i(0);i(8),i(19),i(10),i(23),n.default.StereoEffect=function(){n.default.AudioNode.call(this);var t=n.default.defaults(arguments,["wet"],n.default.Effect);this.createInsOuts(1,1),this._dryWet=new n.default.CrossFade(t.wet),this.wet=this._dryWet.fade,this._split=new n.default.Split,this.effectSendL=this._split.left,this.effectSendR=this._split.right,this._merge=new n.default.Merge,this.effectReturnL=this._merge.left,this.effectReturnR=this._merge.right,n.default.connect(this.input,this._split),n.default.connect(this.input,this._dryWet,0,0),this._merge.connect(this._dryWet,0,1),this._dryWet.connect(this.output),this._readOnly(["wet"])},n.default.extend(n.default.StereoEffect,n.default.Effect),n.default.StereoEffect.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._dryWet.dispose(),this._dryWet=null,this._split.dispose(),this._split=null,this._merge.dispose(),this._merge=null,this.effectSendL=null,this.effectSendR=null,this.effectReturnL=null,this.effectReturnR=null,this._writable(["wet"]),this.wet=null,this},e.default=n.default.StereoEffect},function(t,e,i){i.r(e);var n=i(0);i(83),i(4),i(24),i(35),i(3),i(81),i(80),i(56),n.default.Transport=function(){n.default.Emitter.call(this),n.default.getContext(function(){this.loop=!1,this._loopStart=0,this._loopEnd=0,this._ppq=o.defaults.PPQ,this._clock=new n.default.Clock({callback:this._processTick.bind(this),frequency:0}),this._bindClockEvents(),this.bpm=this._clock.frequency,this.bpm._toUnits=this._toUnits.bind(this),this.bpm._fromUnits=this._fromUnits.bind(this),this.bpm.units=n.default.Type.BPM,this.bpm.value=o.defaults.bpm,this._readOnly("bpm"),this._timeSignature=o.defaults.timeSignature,this._scheduledEvents={},this._timeline=new n.default.Timeline,this._repeatedEvents=new n.default.IntervalTimeline,this._syncedSignals=[],this._swingTicks=o.defaults.PPQ/2,this._swingAmount=0,this.context.transport=this}.bind(this))},n.default.extend(n.default.Transport,n.default.Emitter),n.default.Transport.defaults={bpm:120,swing:0,swingSubdivision:"8n",timeSignature:4,loopStart:0,loopEnd:"4m",PPQ:192},n.default.Transport.prototype.isTransport=!0,n.default.Transport.prototype._processTick=function(t,e){if(this._swingAmount>0&&e%this._ppq!=0&&e%(2*this._swingTicks)!=0){var i=e%(2*this._swingTicks)/(2*this._swingTicks),o=Math.sin(i*Math.PI)*this._swingAmount;t+=n.default.Ticks(2*this._swingTicks/3).toSeconds()*o}this.loop&&e>=this._loopEnd&&(this.emit("loopEnd",t),this._clock.setTicksAtTime(this._loopStart,t),e=this._loopStart,this.emit("loopStart",t,this._clock.getSecondsAtTime(t)),this.emit("loop",t)),this._timeline.forEachAtTime(e,function(e){e.invoke(t)})},n.default.Transport.prototype.schedule=function(t,e){var i=new n.default.TransportEvent(this,{time:n.default.TransportTime(e),callback:t});return this._addEvent(i,this._timeline)},n.default.Transport.prototype.scheduleRepeat=function(t,e,i,o){var a=new n.default.TransportRepeatEvent(this,{callback:t,interval:n.default.Time(e),time:n.default.TransportTime(i),duration:n.default.Time(n.default.defaultArg(o,1/0))});return this._addEvent(a,this._repeatedEvents)},n.default.Transport.prototype.scheduleOnce=function(t,e){var i=new n.default.TransportEvent(this,{time:n.default.TransportTime(e),callback:t,once:!0});return this._addEvent(i,this._timeline)},n.default.Transport.prototype.clear=function(t){if(this._scheduledEvents.hasOwnProperty(t)){var e=this._scheduledEvents[t.toString()];e.timeline.remove(e.event),e.event.dispose(),delete this._scheduledEvents[t.toString()]}return this},n.default.Transport.prototype._addEvent=function(t,e){return this._scheduledEvents[t.id.toString()]={event:t,timeline:e},e.add(t),t.id},n.default.Transport.prototype.cancel=function(t){return t=n.default.defaultArg(t,0),t=this.toTicks(t),this._timeline.forEachFrom(t,function(t){this.clear(t.id)}.bind(this)),this._repeatedEvents.forEachFrom(t,function(t){this.clear(t.id)}.bind(this)),this},n.default.Transport.prototype._bindClockEvents=function(){this._clock.on("start",function(t,e){e=n.default.Ticks(e).toSeconds(),this.emit("start",t,e)}.bind(this)),this._clock.on("stop",function(t){this.emit("stop",t)}.bind(this)),this._clock.on("pause",function(t){this.emit("pause",t)}.bind(this))},Object.defineProperty(n.default.Transport.prototype,"state",{get:function(){return this._clock.getStateAtTime(this.now())}}),n.default.Transport.prototype.start=function(t,e){return n.default.isDefined(e)&&(e=this.toTicks(e)),this._clock.start(t,e),this},n.default.Transport.prototype.stop=function(t){return this._clock.stop(t),this},n.default.Transport.prototype.pause=function(t){return this._clock.pause(t),this},n.default.Transport.prototype.toggle=function(t){return t=this.toSeconds(t),this._clock.getStateAtTime(t)!==n.default.State.Started?this.start(t):this.stop(t),this},Object.defineProperty(n.default.Transport.prototype,"timeSignature",{get:function(){return this._timeSignature},set:function(t){n.default.isArray(t)&&(t=t[0]/t[1]*4),this._timeSignature=t}}),Object.defineProperty(n.default.Transport.prototype,"loopStart",{get:function(){return n.default.Ticks(this._loopStart).toSeconds()},set:function(t){this._loopStart=this.toTicks(t)}}),Object.defineProperty(n.default.Transport.prototype,"loopEnd",{get:function(){return n.default.Ticks(this._loopEnd).toSeconds()},set:function(t){this._loopEnd=this.toTicks(t)}}),n.default.Transport.prototype.setLoopPoints=function(t,e){return this.loopStart=t,this.loopEnd=e,this},Object.defineProperty(n.default.Transport.prototype,"swing",{get:function(){return this._swingAmount},set:function(t){this._swingAmount=t}}),Object.defineProperty(n.default.Transport.prototype,"swingSubdivision",{get:function(){return n.default.Ticks(this._swingTicks).toNotation()},set:function(t){this._swingTicks=this.toTicks(t)}}),Object.defineProperty(n.default.Transport.prototype,"position",{get:function(){var t=this.now(),e=this._clock.getTicksAtTime(t);return n.default.Ticks(e).toBarsBeatsSixteenths()},set:function(t){var e=this.toTicks(t);this.ticks=e}}),Object.defineProperty(n.default.Transport.prototype,"seconds",{get:function(){return this._clock.seconds},set:function(t){var e=this.now(),i=this.bpm.timeToTicks(t,e);this.ticks=i}}),Object.defineProperty(n.default.Transport.prototype,"progress",{get:function(){if(this.loop){var t=this.now();return(this._clock.getTicksAtTime(t)-this._loopStart)/(this._loopEnd-this._loopStart)}return 0}}),Object.defineProperty(n.default.Transport.prototype,"ticks",{get:function(){return this._clock.ticks},set:function(t){if(this._clock.ticks!==t){var e=this.now();this.state===n.default.State.Started?(this.emit("stop",e),this._clock.setTicksAtTime(t,e),this.emit("start",e,this.seconds)):this._clock.setTicksAtTime(t,e)}}}),n.default.Transport.prototype.getTicksAtTime=function(t){return Math.round(this._clock.getTicksAtTime(t))},n.default.Transport.prototype.getSecondsAtTime=function(t){return this._clock.getSecondsAtTime(t)},Object.defineProperty(n.default.Transport.prototype,"PPQ",{get:function(){return this._ppq},set:function(t){var e=this.bpm.value;this._ppq=t,this.bpm.value=e}}),n.default.Transport.prototype._fromUnits=function(t){return 1/(60/t/this.PPQ)},n.default.Transport.prototype._toUnits=function(t){return t/this.PPQ*60},n.default.Transport.prototype.nextSubdivision=function(t){if(t=this.toTicks(t),this.state!==n.default.State.Started)return 0;var e=this.now(),i=t-this.getTicksAtTime(e)%t;return this._clock.nextTickTime(i,e)},n.default.Transport.prototype.syncSignal=function(t,e){if(!e){var i=this.now();e=0!==t.getValueAtTime(i)?t.getValueAtTime(i)/this.bpm.getValueAtTime(i):0}var o=new n.default.Gain(e);return this.bpm.chain(o,t._param),this._syncedSignals.push({ratio:o,signal:t,initial:t.value}),t.value=0,this},n.default.Transport.prototype.unsyncSignal=function(t){for(var e=this._syncedSignals.length-1;e>=0;e--){var i=this._syncedSignals[e];i.signal===t&&(i.ratio.dispose(),i.signal.value=i.initial,this._syncedSignals.splice(e,1))}return this},n.default.Transport.prototype.dispose=function(){return n.default.Emitter.prototype.dispose.call(this),this._clock.dispose(),this._clock=null,this._writable("bpm"),this.bpm=null,this._timeline.dispose(),this._timeline=null,this._repeatedEvents.dispose(),this._repeatedEvents=null,this};var o=n.default.Transport;n.default.Transport=new o,n.default.Context.on("init",function(t){t.transport&&t.transport.isTransport?n.default.Transport=t.transport:n.default.Transport=new o}),n.default.Context.on("close",function(t){t.transport&&t.transport.isTransport&&t.transport.dispose()}),e.default=n.default.Transport},function(t,e,i){i.r(e);var n=i(0);i(2),i(6),i(16),i(64),n.default.Oscillator=function(){var t=n.default.defaults(arguments,["frequency","type"],n.default.Oscillator);n.default.Source.call(this,t),this._oscillator=null,this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this._wave=null,this._partials=t.partials,this._partialCount=t.partialCount,this._phase=t.phase,this._type=t.type,t.partialCount&&t.type!==n.default.Oscillator.Type.Custom&&(this._type=this.baseType+t.partialCount.toString()),this.phase=this._phase,this._readOnly(["frequency","detune"])},n.default.extend(n.default.Oscillator,n.default.Source),n.default.Oscillator.defaults={type:"sine",frequency:440,detune:0,phase:0,partials:[],partialCount:0},n.default.Oscillator.Type={Sine:"sine",Triangle:"triangle",Sawtooth:"sawtooth",Square:"square",Custom:"custom"},n.default.Oscillator.prototype._start=function(t){this.log("start",t);var e=new n.default.OscillatorNode;this._oscillator=e,this._wave?this._oscillator.setPeriodicWave(this._wave):this._oscillator.type=this._type,this._oscillator.connect(this.output),this.frequency.connect(this._oscillator.frequency),this.detune.connect(this._oscillator.detune),t=this.toSeconds(t),this._oscillator.start(t)},n.default.Oscillator.prototype._stop=function(t){return this.log("stop",t),this._oscillator&&(t=this.toSeconds(t),this._oscillator.stop(t)),this},n.default.Oscillator.prototype.restart=function(t){return this._oscillator&&this._oscillator.cancelStop(),this._state.cancel(this.toSeconds(t)),this},n.default.Oscillator.prototype.syncFrequency=function(){return n.default.Transport.syncSignal(this.frequency),this},n.default.Oscillator.prototype.unsyncFrequency=function(){return n.default.Transport.unsyncSignal(this.frequency),this},Object.defineProperty(n.default.Oscillator.prototype,"type",{get:function(){return this._type},set:function(t){var e=[n.default.Oscillator.Type.Sine,n.default.Oscillator.Type.Square,n.default.Oscillator.Type.Triangle,n.default.Oscillator.Type.Sawtooth].includes(t);if(0===this._phase&&e)this._wave=null,this._partialCount=0,null!==this._oscillator&&(this._oscillator.type=t);else{var i=this._getRealImaginary(t,this._phase),o=this.context.createPeriodicWave(i[0],i[1]);this._wave=o,null!==this._oscillator&&this._oscillator.setPeriodicWave(this._wave)}this._type=t}}),Object.defineProperty(n.default.Oscillator.prototype,"baseType",{get:function(){return this._type.replace(this.partialCount,"")},set:function(t){this.partialCount&&this._type!==n.default.Oscillator.Type.Custom&&t!==n.default.Oscillator.Type.Custom?this.type=t+this.partialCount:this.type=t}}),Object.defineProperty(n.default.Oscillator.prototype,"partialCount",{get:function(){return this._partialCount},set:function(t){var e=this._type,i=/^(sine|triangle|square|sawtooth)(\d+)$/.exec(this._type);i&&(e=i[1]),this._type!==n.default.Oscillator.Type.Custom&&(this.type=0===t?e:e+t.toString())}}),n.default.Oscillator.prototype.get=function(){var t=n.default.prototype.get.apply(this,arguments);return t.type!==n.default.Oscillator.Type.Custom&&delete t.partials,t},n.default.Oscillator.prototype._getRealImaginary=function(t,e){var i=2048,o=new Float32Array(i),a=new Float32Array(i),s=1;if(t===n.default.Oscillator.Type.Custom)s=this._partials.length+1,this._partialCount=this._partials.length,i=s;else{var r=/^(sine|triangle|square|sawtooth)(\d+)$/.exec(t);r?(s=parseInt(r[2])+1,this._partialCount=parseInt(r[2]),t=r[1],i=s=Math.max(s,2)):this._partialCount=0,this._partials=[]}for(var l=1;l<i;++l){var u,d=2/(l*Math.PI);switch(t){case n.default.Oscillator.Type.Sine:u=l<=s?1:0,this._partials[l-1]=u;break;case n.default.Oscillator.Type.Square:u=1&l?2*d:0,this._partials[l-1]=u;break;case n.default.Oscillator.Type.Sawtooth:u=d*(1&l?1:-1),this._partials[l-1]=u;break;case n.default.Oscillator.Type.Triangle:u=1&l?d*d*2*(l-1>>1&1?-1:1):0,this._partials[l-1]=u;break;case n.default.Oscillator.Type.Custom:u=this._partials[l-1];break;default:throw new TypeError("Tone.Oscillator: invalid type: "+t)}0!==u?(o[l]=-u*Math.sin(e*l),a[l]=u*Math.cos(e*l)):(o[l]=0,a[l]=0)}return[o,a]},n.default.Oscillator.prototype._inverseFFT=function(t,e,i){for(var n=0,o=t.length,a=0;a<o;a++)n+=t[a]*Math.cos(a*i)+e[a]*Math.sin(a*i);return n},n.default.Oscillator.prototype._getInitialValue=function(){for(var t=this._getRealImaginary(this._type,0),e=t[0],i=t[1],n=0,o=2*Math.PI,a=0;a<8;a++)n=Math.max(this._inverseFFT(e,i,a/8*o),n);return-this._inverseFFT(e,i,this._phase)/n},Object.defineProperty(n.default.Oscillator.prototype,"partials",{get:function(){return this._partials},set:function(t){this._partials=t,this.type=n.default.Oscillator.Type.Custom}}),Object.defineProperty(n.default.Oscillator.prototype,"phase",{get:function(){return this._phase*(180/Math.PI)},set:function(t){this._phase=t*Math.PI/180,this.type=this._type}}),n.default.Oscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),null!==this._oscillator&&(this._oscillator.dispose(),this._oscillator=null),this._wave=null,this._writable(["frequency","detune"]),this.frequency.dispose(),this.frequency=null,this.detune.dispose(),this.detune=null,this._partials=null,this},e.default=n.default.Oscillator},function(t,e,i){i.r(e);var n=i(0);i(14),i(1),n.default.Delay=function(){var t=n.default.defaults(arguments,["delayTime","maxDelay"],n.default.Delay);n.default.AudioNode.call(this,t),this._maxDelay=Math.max(this.toSeconds(t.maxDelay),this.toSeconds(t.delayTime)),this._delayNode=this.input=this.output=this.context.createDelay(this._maxDelay),this.delayTime=new n.default.Param({param:this._delayNode.delayTime,units:n.default.Type.Time,value:t.delayTime}),this._readOnly("delayTime")},n.default.extend(n.default.Delay,n.default.AudioNode),n.default.Delay.defaults={maxDelay:1,delayTime:0},Object.defineProperty(n.default.Delay.prototype,"maxDelay",{get:function(){return this._maxDelay}}),n.default.Delay.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._delayNode.disconnect(),this._delayNode=null,this._writable("delayTime"),this.delayTime=null,this},e.default=n.default.Delay},function(t,e,i){i.r(e);var n=i(0);i(3),i(1),n.default.Split=function(t){t=n.default.defaultArg(t,2),n.default.AudioNode.call(this),this.createInsOuts(0,t),this._splitter=this.input=this.context.createChannelSplitter(t);for(var e=0;e<t;e++)this.output[e]=new n.default.Gain,n.default.connect(this._splitter,this.output[e],e,0),this.output[e].channelCount=1,this.output[e].channelCountMode="explicit";this.left=this.output[0],this.right=this.output[1]},n.default.extend(n.default.Split,n.default.AudioNode),n.default.Split.prototype.dispose=function(){return this.output.forEach(function(t){t.dispose()}),n.default.AudioNode.prototype.dispose.call(this),this._splitter.disconnect(),this.left=null,this.right=null,this._splitter=null,this},e.default=n.default.Split},function(t,e,i){i.r(e);var n=i(0),o=(i(35),i(24),i(44),["baseLatency","destination","currentTime","sampleRate","listener","state"]),a=["suspend","close","resume","getOutputTimestamp","createMediaElementSource","createMediaStreamSource","createMediaStreamDestination","createBuffer","decodeAudioData","createBufferSource","createConstantSource","createGain","createDelay","createBiquadFilter","createIIRFilter","createWaveShaper","createPanner","createConvolver","createDynamicsCompressor","createAnalyser","createScriptProcessor","createStereoPanner","createOscillator","createPeriodicWave","createChannelSplitter","createChannelMerger","audioWorklet"];n.default.Context=function(){n.default.Emitter.call(this);var t=n.default.defaults(arguments,["context"],n.default.Context);if(!t.context&&(t.context=new n.default.global.AudioContext,!t.context))throw new Error("could not create AudioContext. Possibly too many AudioContexts running already.");for(this._context=t.context;this._context.rawContext;)this._context=this._context.rawContext;o.forEach(function(t){this._defineProperty(this._context,t)}.bind(this)),a.forEach(function(t){this._defineMethod(this._context,t)}.bind(this)),this._latencyHint=t.latencyHint,this._constants={},this.lookAhead=t.lookAhead,this._computedUpdateInterval=0,this._ticker=new s(this.emit.bind(this,"tick"),t.clockSource,t.updateInterval),this._timeouts=new n.default.Timeline,this._timeoutIds=0,this.on("tick",this._timeoutLoop.bind(this)),this._context.onstatechange=function(t){this.emit("statechange",t)}.bind(this)},n.default.extend(n.default.Context,n.default.Emitter),n.default.Emitter.mixin(n.default.Context),n.default.Context.defaults={clockSource:"worker",latencyHint:"interactive",lookAhead:.1,updateInterval:.03},n.default.Context.prototype.isContext=!0,n.default.Context.prototype._defineProperty=function(t,e){n.default.isUndef(this[e])&&Object.defineProperty(this,e,{get:function(){return t[e]},set:function(i){t[e]=i}})},n.default.Context.prototype._defineMethod=function(t,e){n.default.isUndef(this[e])&&Object.defineProperty(this,e,{get:function(){return t[e].bind(t)}})},n.default.Context.prototype.now=function(){return this._context.currentTime+this.lookAhead},Object.defineProperty(n.default.Context.prototype,"destination",{get:function(){return this.master?this.master:this._context.destination}}),n.default.Context.prototype.resume=function(){return"suspended"===this._context.state&&this._context instanceof AudioContext?this._context.resume():Promise.resolve()},n.default.Context.prototype.close=function(){var t=Promise.resolve();return this!==n.default.global.TONE_AUDIO_CONTEXT&&(t=this.rawContext.close()),t.then(function(){n.default.Context.emit("close",this)}.bind(this))},n.default.Context.prototype.getConstant=function(t){if(this._constants[t])return this._constants[t];for(var e=this._context.createBuffer(1,128,this._context.sampleRate),i=e.getChannelData(0),n=0;n<i.length;n++)i[n]=t;var o=this._context.createBufferSource();return o.channelCount=1,o.channelCountMode="explicit",o.buffer=e,o.loop=!0,o.start(0),this._constants[t]=o,o},n.default.Context.prototype._timeoutLoop=function(){for(var t=this.now();this._timeouts&&this._timeouts.length&&this._timeouts.peek().time<=t;)this._timeouts.shift().callback()},n.default.Context.prototype.setTimeout=function(t,e){this._timeoutIds++;var i=this.now();return this._timeouts.add({callback:t,time:i+e,id:this._timeoutIds}),this._timeoutIds},n.default.Context.prototype.clearTimeout=function(t){return this._timeouts.forEach(function(e){e.id===t&&this.remove(e)}),this},Object.defineProperty(n.default.Context.prototype,"updateInterval",{get:function(){return this._ticker.updateInterval},set:function(t){this._ticker.updateInterval=t}}),Object.defineProperty(n.default.Context.prototype,"rawContext",{get:function(){return this._context}}),Object.defineProperty(n.default.Context.prototype,"clockSource",{get:function(){return this._ticker.type},set:function(t){this._ticker.type=t}}),Object.defineProperty(n.default.Context.prototype,"latencyHint",{get:function(){return this._latencyHint},set:function(t){var e=t;if(this._latencyHint=t,n.default.isString(t))switch(t){case"interactive":e=.1,this._context.latencyHint=t;break;case"playback":e=.8,this._context.latencyHint=t;break;case"balanced":e=.25,this._context.latencyHint=t;break;case"fastest":this._context.latencyHint="interactive",e=.01}this.lookAhead=e,this.updateInterval=e/3}}),n.default.Context.prototype.dispose=function(){return this.close().then(function(){for(var t in n.default.Emitter.prototype.dispose.call(this),this._ticker.dispose(),this._ticker=null,this._timeouts.dispose(),this._timeouts=null,this._constants)this._constants[t].disconnect();this._constants=null}.bind(this))};var s=function(t,e,i){this._type=e,this._updateInterval=i,this._callback=n.default.defaultArg(t,n.default.noOp),this._createClock()};if(s.Type={Worker:"worker",Timeout:"timeout",Offline:"offline"},s.prototype._createWorker=function(){n.default.global.URL=n.default.global.URL||n.default.global.webkitURL;var t=new Blob(["var timeoutTime = "+(1e3*this._updateInterval).toFixed(1)+";self.onmessage = function(msg){\ttimeoutTime = parseInt(msg.data);};function tick(){\tsetTimeout(tick, timeoutTime);\tself.postMessage('tick');}tick();"]),e=URL.createObjectURL(t),i=new Worker(e);i.onmessage=this._callback.bind(this),this._worker=i},s.prototype._createTimeout=function(){this._timeout=setTimeout(function(){this._createTimeout(),this._callback()}.bind(this),1e3*this._updateInterval)},s.prototype._createClock=function(){if(this._type===s.Type.Worker)try{this._createWorker()}catch(t){this._type=s.Type.Timeout,this._createClock()}else this._type===s.Type.Timeout&&this._createTimeout()},Object.defineProperty(s.prototype,"updateInterval",{get:function(){return this._updateInterval},set:function(t){this._updateInterval=Math.max(t,128/44100),this._type===s.Type.Worker&&this._worker.postMessage(Math.max(1e3*t,1))}}),Object.defineProperty(s.prototype,"type",{get:function(){return this._type},set:function(t){this._disposeClock(),this._type=t,this._createClock()}}),s.prototype._disposeClock=function(){this._timeout&&(clearTimeout(this._timeout),this._timeout=null),this._worker&&(this._worker.terminate(),this._worker.onmessage=null,this._worker=null)},s.prototype.dispose=function(){this._disposeClock(),this._callback=null},n.default.supported&&!n.default.initialized){if(n.default.global.TONE_AUDIO_CONTEXT||(n.default.global.TONE_AUDIO_CONTEXT=new n.default.Context),n.default.context=n.default.global.TONE_AUDIO_CONTEXT,!n.default.global.TONE_SILENCE_LOGGING){var r="v";"dev"===n.default.version&&(r="");var l=" * Tone.js "+r+n.default.version+" * ";console.log("%c"+l,"background: #000; color: #fff")}}else n.default.supported||n.default.global.TONE_SILENCE_LOGGING||console.warn("This browser does not support Tone.js");e.default=n.default.Context},function(t,e,i){i.r(e);var n=i(0);i(4),i(40),n.default.Instrument=function(t){t=n.default.defaultArg(t,n.default.Instrument.defaults),n.default.AudioNode.call(this),this._volume=this.output=new n.default.Volume(t.volume),this.volume=this._volume.volume,this._readOnly("volume"),this._scheduledEvents=[]},n.default.extend(n.default.Instrument,n.default.AudioNode),n.default.Instrument.defaults={volume:0},n.default.Instrument.prototype.triggerAttack=n.default.noOp,n.default.Instrument.prototype.triggerRelease=n.default.noOp,n.default.Instrument.prototype.sync=function(){return this._syncMethod("triggerAttack",1),this._syncMethod("triggerRelease",0),this},n.default.Instrument.prototype._syncMethod=function(t,e){var i=this["_original_"+t]=this[t];this[t]=function(){var t=Array.prototype.slice.call(arguments),o=t[e],a=n.default.Transport.schedule(function(n){t[e]=n,i.apply(this,t)}.bind(this),o);this._scheduledEvents.push(a)}.bind(this)},n.default.Instrument.prototype.unsync=function(){return this._scheduledEvents.forEach(function(t){n.default.Transport.clear(t)}),this._scheduledEvents=[],this._original_triggerAttack&&(this.triggerAttack=this._original_triggerAttack,this.triggerRelease=this._original_triggerRelease),this},n.default.Instrument.prototype.triggerAttackRelease=function(t,e,i,n){return i=this.toSeconds(i),e=this.toSeconds(e),this.triggerAttack(t,i,n),this.triggerRelease(i+e),this},n.default.Instrument.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._volume.dispose(),this._volume=null,this._writable(["volume"]),this.volume=null,this.unsync(),this._scheduledEvents=null,this},e.default=n.default.Instrument},function(t,e,i){i.r(e);var n=i(0);i(7),i(2),n.default.AudioToGain=function(){n.default.SignalBase.call(this),this._norm=this.input=this.output=new n.default.WaveShaper(function(t){return(t+1)/2})},n.default.extend(n.default.AudioToGain,n.default.SignalBase),n.default.AudioToGain.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._norm.dispose(),this._norm=null,this},e.default=n.default.AudioToGain},function(t,e,i){i.r(e);var n=i(0);i(2),i(13),i(89),i(3),i(1),n.default.CrossFade=function(t){n.default.AudioNode.call(this),this.createInsOuts(2,1),this.a=this.input[0]=new n.default.Gain,this.b=this.input[1]=new n.default.Gain,this.fade=new n.default.Signal(n.default.defaultArg(t,.5),n.default.Type.NormalRange),this._equalPowerA=new n.default.EqualPowerGain,this._equalPowerB=new n.default.EqualPowerGain,this._one=this.context.getConstant(1),this._invert=new n.default.Subtract,this.a.connect(this.output),this.b.connect(this.output),this.fade.chain(this._equalPowerB,this.b.gain),n.default.connect(this._one,this._invert,0,0),this.fade.connect(this._invert,0,1),this._invert.chain(this._equalPowerA,this.a.gain),this._readOnly("fade")},n.default.extend(n.default.CrossFade,n.default.AudioNode),n.default.CrossFade.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable("fade"),this._equalPowerA.dispose(),this._equalPowerA=null,this._equalPowerB.dispose(),this._equalPowerB=null,this.fade.dispose(),this.fade=null,this._invert.dispose(),this._invert=null,this._one=null,this.a.dispose(),this.a=null,this.b.dispose(),this.b=null,this},e.default=n.default.CrossFade},function(t,e,i){i.r(e);var n=i(0);n.default.Timeline=function(){var t=n.default.defaults(arguments,["memory"],n.default.Timeline);n.default.call(this),this._timeline=[],this.memory=t.memory},n.default.extend(n.default.Timeline),n.default.Timeline.defaults={memory:1/0},Object.defineProperty(n.default.Timeline.prototype,"length",{get:function(){return this._timeline.length}}),n.default.Timeline.prototype.add=function(t){if(n.default.isUndef(t.time))throw new Error("Tone.Timeline: events must have a time attribute");t.time=t.time.valueOf();var e=this._search(t.time);if(this._timeline.splice(e+1,0,t),this.length>this.memory){var i=this.length-this.memory;this._timeline.splice(0,i)}return this},n.default.Timeline.prototype.remove=function(t){var e=this._timeline.indexOf(t);return-1!==e&&this._timeline.splice(e,1),this},n.default.Timeline.prototype.get=function(t,e){e=n.default.defaultArg(e,"time");var i=this._search(t,e);return-1!==i?this._timeline[i]:null},n.default.Timeline.prototype.peek=function(){return this._timeline[0]},n.default.Timeline.prototype.shift=function(){return this._timeline.shift()},n.default.Timeline.prototype.getAfter=function(t,e){e=n.default.defaultArg(e,"time");var i=this._search(t,e);return i+1<this._timeline.length?this._timeline[i+1]:null},n.default.Timeline.prototype.getBefore=function(t,e){e=n.default.defaultArg(e,"time");var i=this._timeline.length;if(i>0&&this._timeline[i-1][e]<t)return this._timeline[i-1];var o=this._search(t,e);return o-1>=0?this._timeline[o-1]:null},n.default.Timeline.prototype.cancel=function(t){if(this._timeline.length>1){var e=this._search(t);if(e>=0)if(this._timeline[e].time===t){for(var i=e;i>=0&&this._timeline[i].time===t;i--)e=i;this._timeline=this._timeline.slice(0,e)}else this._timeline=this._timeline.slice(0,e+1);else this._timeline=[]}else 1===this._timeline.length&&this._timeline[0].time>=t&&(this._timeline=[]);return this},n.default.Timeline.prototype.cancelBefore=function(t){var e=this._search(t);return e>=0&&(this._timeline=this._timeline.slice(e+1)),this},n.default.Timeline.prototype.previousEvent=function(t){var e=this._timeline.indexOf(t);return e>0?this._timeline[e-1]:null},n.default.Timeline.prototype._search=function(t,e){if(0===this._timeline.length)return-1;e=n.default.defaultArg(e,"time");var i=0,o=this._timeline.length,a=o;if(o>0&&this._timeline[o-1][e]<=t)return o-1;for(;i<a;){var s=Math.floor(i+(a-i)/2),r=this._timeline[s],l=this._timeline[s+1];if(r[e]===t){for(var u=s;u<this._timeline.length;u++)this._timeline[u][e]===t&&(s=u);return s}if(r[e]<t&&l[e]>t)return s;r[e]>t?a=s:i=s+1}return-1},n.default.Timeline.prototype._iterate=function(t,e,i){e=n.default.defaultArg(e,0),i=n.default.defaultArg(i,this._timeline.length-1),this._timeline.slice(e,i+1).forEach(function(e){t.call(this,e)}.bind(this))},n.default.Timeline.prototype.forEach=function(t){return this._iterate(t),this},n.default.Timeline.prototype.forEachBefore=function(t,e){var i=this._search(t);return-1!==i&&this._iterate(e,0,i),this},n.default.Timeline.prototype.forEachAfter=function(t,e){var i=this._search(t);return this._iterate(e,i+1),this},n.default.Timeline.prototype.forEachBetween=function(t,e,i){var n=this._search(t),o=this._search(e);return-1!==n&&-1!==o?(this._timeline[n].time!==t&&(n+=1),this._timeline[o].time===e&&(o-=1),this._iterate(i,n,o)):-1===n&&this._iterate(i,0,o),this},n.default.Timeline.prototype.forEachFrom=function(t,e){for(var i=this._search(t);i>=0&&this._timeline[i].time>=t;)i--;return this._iterate(e,i+1),this},n.default.Timeline.prototype.forEachAtTime=function(t,e){var i=this._search(t);return-1!==i&&this._iterate(function(i){i.time===t&&e.call(this,i)},0,i),this},n.default.Timeline.prototype.dispose=function(){return n.default.prototype.dispose.call(this),this._timeline=null,this},e.default=n.default.Timeline},function(t,e,i){i.r(e);var n=i(0);i(21),i(2),n.default.Monophonic=function(t){t=n.default.defaultArg(t,n.default.Monophonic.defaults),n.default.Instrument.call(this,t),this.portamento=t.portamento},n.default.extend(n.default.Monophonic,n.default.Instrument),n.default.Monophonic.defaults={portamento:0},n.default.Monophonic.prototype.triggerAttack=function(t,e,i){return this.log("triggerAttack",t,e,i),e=this.toSeconds(e),this._triggerEnvelopeAttack(e,i),this.setNote(t,e),this},n.default.Monophonic.prototype.triggerRelease=function(t){return this.log("triggerRelease",t),t=this.toSeconds(t),this._triggerEnvelopeRelease(t),this},n.default.Monophonic.prototype._triggerEnvelopeAttack=function(){},n.default.Monophonic.prototype._triggerEnvelopeRelease=function(){},n.default.Monophonic.prototype.getLevelAtTime=function(t){return t=this.toSeconds(t),this.envelope.getValueAtTime(t)},n.default.Monophonic.prototype.setNote=function(t,e){if(e=this.toSeconds(e),this.portamento>0&&this.getLevelAtTime(e)>.05){var i=this.toSeconds(this.portamento);this.frequency.exponentialRampTo(t,i,e)}else this.frequency.setValueAtTime(t,e);return this},e.default=n.default.Monophonic},function(t,e,i){i.r(e);var n=i(0);i(29),i(5),i(2),n.default.Scale=function(t,e){n.default.SignalBase.call(this),this._outputMin=n.default.defaultArg(t,0),this._outputMax=n.default.defaultArg(e,1),this._scale=this.input=new n.default.Multiply(1),this._add=this.output=new n.default.Add(0),this._scale.connect(this._add),this._setRange()},n.default.extend(n.default.Scale,n.default.SignalBase),Object.defineProperty(n.default.Scale.prototype,"min",{get:function(){return this._outputMin},set:function(t){this._outputMin=t,this._setRange()}}),Object.defineProperty(n.default.Scale.prototype,"max",{get:function(){return this._outputMax},set:function(t){this._outputMax=t,this._setRange()}}),n.default.Scale.prototype._setRange=function(){this._add.value=this._outputMin,this._scale.value=this._outputMax-this._outputMin},n.default.Scale.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._add.dispose(),this._add=null,this._scale.dispose(),this._scale=null,this},e.default=n.default.Scale},function(t,e,i){i.r(e);var n=i(0);i(2),i(3),i(1),n.default.Volume=function(){var t=n.default.defaults(arguments,["volume"],n.default.Volume);n.default.AudioNode.call(this,t),this.output=this.input=new n.default.Gain(t.volume,n.default.Type.Decibels),this._unmutedVolume=t.volume,this.volume=this.output.gain,this._readOnly("volume"),this.mute=t.mute},n.default.extend(n.default.Volume,n.default.AudioNode),n.default.Volume.defaults={volume:0,mute:!1},Object.defineProperty(n.default.Volume.prototype,"mute",{get:function(){return this.volume.value===-1/0},set:function(t){!this.mute&&t?(this._unmutedVolume=this.volume.value,this.volume.value=-1/0):this.mute&&!t&&(this.volume.value=this._unmutedVolume)}}),n.default.Volume.prototype.dispose=function(){return this.input.dispose(),n.default.AudioNode.prototype.dispose.call(this),this._writable("volume"),this.volume.dispose(),this.volume=null,this},e.default=n.default.Volume},function(t,e,i){i.r(e);var n=i(0);i(3),i(30),n.default.Zero=function(){n.default.SignalBase.call(this),this._gain=this.input=this.output=new n.default.Gain,n.default.connect(this.context.getConstant(0),this._gain)},n.default.extend(n.default.Zero,n.default.SignalBase),n.default.Zero.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._gain.dispose(),this._gain=null,this},e.default=n.default.Zero},function(t,e,i){i.r(e);var n=i(0);i(2),i(3),n.default.Add=function(t){n.default.Signal.call(this),this.createInsOuts(2,0),this._sum=this.input[0]=this.input[1]=this.output=new n.default.Gain,this._param=this.input[1]=new n.default.Signal(t),this._param.connect(this._sum)},n.default.extend(n.default.Add,n.default.Signal),n.default.Add.prototype.dispose=function(){return n.default.Signal.prototype.dispose.call(this),this._sum.dispose(),this._sum=null,this},e.default=n.default.Add},function(t,e,i){i.r(e);var n=i(0);i(1),n.default.SignalBase=function(){n.default.AudioNode.call(this)},n.default.extend(n.default.SignalBase,n.default.AudioNode),n.default.SignalBase.prototype.connect=function(t,e,i){return n.default.Signal&&n.default.Signal===t.constructor||n.default.Param&&n.default.Param===t.constructor?(t._param.cancelScheduledValues(0),t._param.setValueAtTime(0,0),t.overridden=!0):t instanceof AudioParam&&(t.cancelScheduledValues(0),t.setValueAtTime(0,0)),n.default.AudioNode.prototype.connect.call(this,t,e,i),this},e.default=n.default.SignalBase},function(t,e,i){i.r(e);var n=i(0);i(47),i(3),n.default.AmplitudeEnvelope=function(){n.default.Envelope.apply(this,arguments),this.input=this.output=new n.default.Gain,this._sig.connect(this.output.gain)},n.default.extend(n.default.AmplitudeEnvelope,n.default.Envelope),n.default.AmplitudeEnvelope.prototype.dispose=function(){return n.default.Envelope.prototype.dispose.call(this),this},e.default=n.default.AmplitudeEnvelope},function(t,e,i){i.r(e);var n=i(0);i(11),i(6),i(3),i(1),n.default.BufferSource=function(){var t=n.default.defaults(arguments,["buffer","onload"],n.default.BufferSource);n.default.AudioNode.call(this,t),this.onended=t.onended,this._startTime=-1,this._sourceStarted=!1,this._sourceStopped=!1,this._stopTime=-1,this._gainNode=this.output=new n.default.Gain(0),this._source=this.context.createBufferSource(),n.default.connect(this._source,this._gainNode),this._source.onended=this._onended.bind(this),this._buffer=new n.default.Buffer(t.buffer,t.onload),this.playbackRate=new n.default.Param({param:this._source.playbackRate,units:n.default.Type.Positive,value:t.playbackRate}),this.fadeIn=t.fadeIn,this.fadeOut=t.fadeOut,this.curve=t.curve,this._onendedTimeout=-1,this.loop=t.loop,this.loopStart=t.loopStart,this.loopEnd=t.loopEnd},n.default.extend(n.default.BufferSource,n.default.AudioNode),n.default.BufferSource.defaults={onended:n.default.noOp,onload:n.default.noOp,loop:!1,loopStart:0,loopEnd:0,fadeIn:0,fadeOut:0,curve:"linear",playbackRate:1},Object.defineProperty(n.default.BufferSource.prototype,"state",{get:function(){return this.getStateAtTime(this.now())}}),n.default.BufferSource.prototype.getStateAtTime=function(t){return t=this.toSeconds(t),-1!==this._startTime&&this._startTime<=t&&(-1===this._stopTime||t<this._stopTime)&&!this._sourceStopped?n.default.State.Started:n.default.State.Stopped},n.default.BufferSource.prototype.start=function(t,e,i,o){this.log("start",t,e,i,o),this.assert(-1===this._startTime,"can only be started once"),this.assert(this.buffer.loaded,"buffer is either not set or not loaded"),this.assert(!this._sourceStopped,"source is already stopped"),t=this.toSeconds(t),e=this.loop?n.default.defaultArg(e,this.loopStart):n.default.defaultArg(e,0),e=this.toSeconds(e),e=Math.max(e,0),o=n.default.defaultArg(o,1);var a=this.toSeconds(this.fadeIn);if(a>0?(this._gainNode.gain.setValueAtTime(0,t),"linear"===this.curve?this._gainNode.gain.linearRampToValueAtTime(o,t+a):this._gainNode.gain.exponentialApproachValueAtTime(o,t,a)):this._gainNode.gain.setValueAtTime(o,t),this._startTime=t,n.default.isDefined(i)){var s=this.toSeconds(i);s=Math.max(s,0),this.stop(t+s)}if(this.loop){var r=this.loopEnd||this.buffer.duration,l=this.loopStart;e>=r&&(e=(e-l)%(r-l)+l)}return this._source.buffer=this.buffer.get(),this._source.loopEnd=this.loopEnd||this.buffer.duration,e<this.buffer.duration&&(this._sourceStarted=!0,this._source.start(t,e)),this},n.default.BufferSource.prototype.stop=function(t){this.log("stop",t),this.assert(this.buffer.loaded,"buffer is either not set or not loaded"),this.assert(!this._sourceStopped,"source is already stopped"),t=this.toSeconds(t),-1!==this._stopTime&&this.cancelStop();var e=this.toSeconds(this.fadeOut);return this._stopTime=t+e,e>0?"linear"===this.curve?this._gainNode.gain.linearRampTo(0,e,t):this._gainNode.gain.targetRampTo(0,e,t):(this._gainNode.gain.cancelAndHoldAtTime(t),this._gainNode.gain.setValueAtTime(0,t)),n.default.context.clearTimeout(this._onendedTimeout),this._onendedTimeout=n.default.context.setTimeout(this._onended.bind(this),this._stopTime-this.now()),this},n.default.BufferSource.prototype.cancelStop=function(){if(-1!==this._startTime&&!this._sourceStopped){var t=this.toSeconds(this.fadeIn);this._gainNode.gain.cancelScheduledValues(this._startTime+t+this.sampleTime),this.context.clearTimeout(this._onendedTimeout),this._stopTime=-1}return this},n.default.BufferSource.prototype._onended=function(){if(!this._sourceStopped){this._sourceStopped=!0;var t="exponential"===this.curve?2*this.fadeOut:0;this._sourceStarted&&-1!==this._stopTime&&this._source.stop(this._stopTime+t),this.onended(this),setTimeout(function(){this._source&&(this._source.disconnect(),this._gainNode.disconnect())}.bind(this),1e3*t+100)}},Object.defineProperty(n.default.BufferSource.prototype,"loopStart",{get:function(){return this._source.loopStart},set:function(t){this._source.loopStart=this.toSeconds(t)}}),Object.defineProperty(n.default.BufferSource.prototype,"loopEnd",{get:function(){return this._source.loopEnd},set:function(t){this._source.loopEnd=this.toSeconds(t)}}),Object.defineProperty(n.default.BufferSource.prototype,"buffer",{get:function(){return this._buffer},set:function(t){this._buffer.set(t)}}),Object.defineProperty(n.default.BufferSource.prototype,"loop",{get:function(){return this._source.loop},set:function(t){this._source.loop=t,this.cancelStop()}}),n.default.BufferSource.prototype.dispose=function(){return this._wasDisposed||(this._wasDisposed=!0,n.default.AudioNode.prototype.dispose.call(this),this.onended=null,this._source.onended=null,this._source.disconnect(),this._source=null,this._gainNode.dispose(),this._gainNode=null,this._buffer.dispose(),this._buffer=null,this._startTime=-1,this.playbackRate=null,n.default.context.clearTimeout(this._onendedTimeout)),this},e.default=n.default.BufferSource},function(t,e,i){i.r(e);var n=i(0);i(8),i(2),i(5),i(3),n.default.FeedbackEffect=function(){var t=n.default.defaults(arguments,["feedback"],n.default.FeedbackEffect);n.default.Effect.call(this,t),this._feedbackGain=new n.default.Gain(t.feedback,n.default.Type.NormalRange),this.feedback=this._feedbackGain.gain,this.effectReturn.chain(this._feedbackGain,this.effectSend),this._readOnly(["feedback"])},n.default.extend(n.default.FeedbackEffect,n.default.Effect),n.default.FeedbackEffect.defaults={feedback:.125},n.default.FeedbackEffect.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._writable(["feedback"]),this._feedbackGain.dispose(),this._feedbackGain=null,this.feedback=null,this},e.default=n.default.FeedbackEffect},function(t,e,i){i.r(e);var n=i(0);i(24),i(4),n.default.TimelineState=function(t){n.default.Timeline.call(this),this._initial=t},n.default.extend(n.default.TimelineState,n.default.Timeline),n.default.TimelineState.prototype.getValueAtTime=function(t){var e=this.get(t);return null!==e?e.state:this._initial},n.default.TimelineState.prototype.setStateAtTime=function(t,e){return this.add({state:t,time:e}),this},n.default.TimelineState.prototype.getLastState=function(t,e){e=this.toSeconds(e);for(var i=this._search(e);i>=0;i--){var n=this._timeline[i];if(n.state===t)return n}},n.default.TimelineState.prototype.getNextState=function(t,e){e=this.toSeconds(e);var i=this._search(e);if(-1!==i)for(var n=i;n<this._timeline.length;n++){var o=this._timeline[n];if(o.state===t)return o}},e.default=n.default.TimelineState},function(t,e,i){i.r(e);var n=i(0);n.default.Emitter=function(){n.default.call(this),this._events={}},n.default.extend(n.default.Emitter),n.default.Emitter.prototype.on=function(t,e){for(var i=t.split(/\W+/),n=0;n<i.length;n++){var o=i[n];this._events.hasOwnProperty(o)||(this._events[o]=[]),this._events[o].push(e)}return this},n.default.Emitter.prototype.once=function(t,e){var i=function(){e.apply(this,arguments),this.off(t,i)}.bind(this);return this.on(t,i),this},n.default.Emitter.prototype.off=function(t,e){for(var i=t.split(/\W+/),o=0;o<i.length;o++)if(t=i[o],this._events.hasOwnProperty(t))if(n.default.isUndef(e))this._events[t]=[];else for(var a=this._events[t],s=0;s<a.length;s++)a[s]===e&&a.splice(s,1);return this},n.default.Emitter.prototype.emit=function(t){if(this._events){var e=Array.apply(null,arguments).slice(1);if(this._events.hasOwnProperty(t))for(var i=this._events[t].slice(0),n=0,o=i.length;n<o;n++)i[n].apply(this,e)}return this},n.default.Emitter.mixin=function(t){var e=["on","once","off","emit"];t._events={};for(var i=0;i<e.length;i++){var o=e[i],a=n.default.Emitter.prototype[o];t[o]=a}return n.default.Emitter},n.default.Emitter.prototype.dispose=function(){return n.default.prototype.dispose.call(this),this._events=null,this},e.default=n.default.Emitter},function(t,e,i){i.r(e);var n=i(0);i(1),i(44),n.default.supported&&(AnalyserNode.prototype.getFloatTimeDomainData||(AnalyserNode.prototype.getFloatTimeDomainData=function(t){var e=new Uint8Array(t.length);this.getByteTimeDomainData(e);for(var i=0;i<e.length;i++)t[i]=(e[i]-128)/128})),n.default.Analyser=function(){var t=n.default.defaults(arguments,["type","size"],n.default.Analyser);n.default.AudioNode.call(this),this._analyser=this.input=this.output=this.context.createAnalyser(),this._type=t.type,this._buffer=null,this.size=t.size,this.type=t.type},n.default.extend(n.default.Analyser,n.default.AudioNode),n.default.Analyser.defaults={size:1024,type:"fft",smoothing:.8},n.default.Analyser.Type={Waveform:"waveform",FFT:"fft"},n.default.Analyser.prototype.getValue=function(){return this._type===n.default.Analyser.Type.FFT?this._analyser.getFloatFrequencyData(this._buffer):this._type===n.default.Analyser.Type.Waveform&&this._analyser.getFloatTimeDomainData(this._buffer),this._buffer},Object.defineProperty(n.default.Analyser.prototype,"size",{get:function(){return this._analyser.frequencyBinCount},set:function(t){this._analyser.fftSize=2*t,this._buffer=new Float32Array(t)}}),Object.defineProperty(n.default.Analyser.prototype,"type",{get:function(){return this._type},set:function(t){if(t!==n.default.Analyser.Type.Waveform&&t!==n.default.Analyser.Type.FFT)throw new TypeError("Tone.Analyser: invalid type: "+t);this._type=t}}),Object.defineProperty(n.default.Analyser.prototype,"smoothing",{get:function(){return this._analyser.smoothingTimeConstant},set:function(t){this._analyser.smoothingTimeConstant=t}}),n.default.Analyser.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this._analyser.disconnect(),this._analyser=null,this._buffer=null},e.default=n.default.Analyser},function(t,e,i){i.r(e);var n=i(0);i(6),i(17),i(50),i(69),i(49),i(68),i(67),n.default.OmniOscillator=function(){var t=n.default.defaults(arguments,["frequency","type"],n.default.OmniOscillator);n.default.Source.call(this,t),this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this._sourceType=void 0,this._oscillator=null,this.type=t.type,this._readOnly(["frequency","detune"]),this.set(t)},n.default.extend(n.default.OmniOscillator,n.default.Source),n.default.OmniOscillator.defaults={frequency:440,detune:0,type:"sine",phase:0};var o="PulseOscillator",a="PWMOscillator",s="FMOscillator",r="AMOscillator",l="FatOscillator";n.default.OmniOscillator.prototype._start=function(t){this._oscillator.start(t)},n.default.OmniOscillator.prototype._stop=function(t){this._oscillator.stop(t)},n.default.OmniOscillator.prototype.restart=function(t){this._oscillator.restart(t)},Object.defineProperty(n.default.OmniOscillator.prototype,"type",{get:function(){var t="";return this._sourceType===s?t="fm":this._sourceType===r?t="am":this._sourceType===l&&(t="fat"),t+this._oscillator.type},set:function(t){"fm"===t.substr(0,2)?(this._createNewOscillator(s),this._oscillator.type=t.substr(2)):"am"===t.substr(0,2)?(this._createNewOscillator(r),this._oscillator.type=t.substr(2)):"fat"===t.substr(0,3)?(this._createNewOscillator(l),this._oscillator.type=t.substr(3)):"pwm"===t?this._createNewOscillator(a):"pulse"===t?this._createNewOscillator(o):(this._createNewOscillator("Oscillator"),this._oscillator.type=t)}}),Object.defineProperty(n.default.OmniOscillator.prototype,"partials",{get:function(){return this._oscillator.partials},set:function(t){this._oscillator.partials=t}}),Object.defineProperty(n.default.OmniOscillator.prototype,"partialCount",{get:function(){return this._oscillator.partialCount},set:function(t){this._oscillator.partialCount=t}}),n.default.OmniOscillator.prototype.set=function(t,e){return"type"===t?this.type=e:n.default.isObject(t)&&t.hasOwnProperty("type")&&(this.type=t.type),n.default.prototype.set.apply(this,arguments),this},n.default.OmniOscillator.prototype.get=function(t){var e=this._oscillator.get(t);return e.type=this.type,e},n.default.OmniOscillator.prototype._createNewOscillator=function(t){if(t!==this._sourceType){this._sourceType=t;var e=n.default[t],i=this.now();if(null!==this._oscillator){var o=this._oscillator;o.stop(i),this.context.setTimeout(function(){o.dispose(),o=null},this.blockTime)}this._oscillator=new e,this.frequency.connect(this._oscillator.frequency),this.detune.connect(this._oscillator.detune),this._oscillator.connect(this.output),this.state===n.default.State.Started&&this._oscillator.start(i)}},Object.defineProperty(n.default.OmniOscillator.prototype,"phase",{get:function(){return this._oscillator.phase},set:function(t){this._oscillator.phase=t}});var u={PulseOscillator:"pulse",PWMOscillator:"pwm",Oscillator:"oscillator",FMOscillator:"fm",AMOscillator:"am",FatOscillator:"fat"};Object.defineProperty(n.default.OmniOscillator.prototype,"sourceType",{get:function(){return u[this._sourceType]},set:function(t){var e="sine";"pwm"!==this._oscillator.type&&"pulse"!==this._oscillator.type&&(e=this._oscillator.type),t===u.FMOscillator?this.type="fm"+e:t===u.AMOscillator?this.type="am"+e:t===u.FatOscillator?this.type="fat"+e:t===u.Oscillator?this.type=e:t===u.PulseOscillator?this.type="pulse":t===u.PWMOscillator&&(this.type="pwm")}}),Object.defineProperty(n.default.OmniOscillator.prototype,"baseType",{get:function(){return this._oscillator.baseType},set:function(t){this.sourceType!==u.PulseOscillator&&this.sourceType!==u.PWMOscillator&&(this._oscillator.baseType=t)}}),Object.defineProperty(n.default.OmniOscillator.prototype,"width",{get:function(){return this._sourceType===o?this._oscillator.width:void 0}}),Object.defineProperty(n.default.OmniOscillator.prototype,"count",{get:function(){return this._sourceType===l?this._oscillator.count:void 0},set:function(t){this._sourceType===l&&(this._oscillator.count=t)}}),Object.defineProperty(n.default.OmniOscillator.prototype,"spread",{get:function(){return this._sourceType===l?this._oscillator.spread:void 0},set:function(t){this._sourceType===l&&(this._oscillator.spread=t)}}),Object.defineProperty(n.default.OmniOscillator.prototype,"modulationType",{get:function(){return this._sourceType===s||this._sourceType===r?this._oscillator.modulationType:void 0},set:function(t){this._sourceType!==s&&this._sourceType!==r||(this._oscillator.modulationType=t)}}),Object.defineProperty(n.default.OmniOscillator.prototype,"modulationIndex",{get:function(){return this._sourceType===s?this._oscillator.modulationIndex:void 0}}),Object.defineProperty(n.default.OmniOscillator.prototype,"harmonicity",{get:function(){return this._sourceType===s||this._sourceType===r?this._oscillator.harmonicity:void 0}}),Object.defineProperty(n.default.OmniOscillator.prototype,"modulationFrequency",{get:function(){return this._sourceType===a?this._oscillator.modulationFrequency:void 0}}),n.default.OmniOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._writable(["frequency","detune"]),this.detune.dispose(),this.detune=null,this.frequency.dispose(),this.frequency=null,this._oscillator.dispose(),this._oscillator=null,this._sourceType=null,this},e.default=n.default.OmniOscillator},function(t,e,i){i.r(e);var n=i(0);i(31),i(37),i(25),n.default.Synth=function(t){t=n.default.defaultArg(t,n.default.Synth.defaults),n.default.Monophonic.call(this,t),this.oscillator=new n.default.OmniOscillator(t.oscillator),this.frequency=this.oscillator.frequency,this.detune=this.oscillator.detune,this.envelope=new n.default.AmplitudeEnvelope(t.envelope),this.oscillator.chain(this.envelope,this.output),this._readOnly(["oscillator","frequency","detune","envelope"])},n.default.extend(n.default.Synth,n.default.Monophonic),n.default.Synth.defaults={oscillator:{type:"triangle"},envelope:{attack:.005,decay:.1,sustain:.3,release:1}},n.default.Synth.prototype._triggerEnvelopeAttack=function(t,e){return this.envelope.triggerAttack(t,e),this.oscillator.start(t),0===this.envelope.sustain&&this.oscillator.stop(t+this.toSeconds(this.envelope.attack)+this.toSeconds(this.envelope.decay)),this},n.default.Synth.prototype._triggerEnvelopeRelease=function(t){return t=this.toSeconds(t),this.envelope.triggerRelease(t),this.oscillator.stop(t+this.toSeconds(this.envelope.release)),this},n.default.Synth.prototype.dispose=function(){return n.default.Monophonic.prototype.dispose.call(this),this._writable(["oscillator","frequency","detune","envelope"]),this.oscillator.dispose(),this.oscillator=null,this.envelope.dispose(),this.envelope=null,this.frequency=null,this.detune=null,this},e.default=n.default.Synth},function(t,e,i){i.r(e);var n=i(0);i(6),i(11),i(32),n.default.Noise=function(){var t=n.default.defaults(arguments,["type"],n.default.Noise);n.default.Source.call(this,t),this._source=null,this._type=t.type,this._playbackRate=t.playbackRate},n.default.extend(n.default.Noise,n.default.Source),n.default.Noise.defaults={type:"white",playbackRate:1},Object.defineProperty(n.default.Noise.prototype,"type",{get:function(){return this._type},set:function(t){if(this._type!==t){if(!(t in o))throw new TypeError("Tone.Noise: invalid type: "+t);if(this._type=t,this.state===n.default.State.Started){var e=this.now();this._stop(e),this._start(e)}}}}),Object.defineProperty(n.default.Noise.prototype,"playbackRate",{get:function(){return this._playbackRate},set:function(t){this._playbackRate=t,this._source&&(this._source.playbackRate.value=t)}}),n.default.Noise.prototype._start=function(t){var e=o[this._type];this._source=new n.default.BufferSource(e).connect(this.output),this._source.loop=!0,this._source.playbackRate.value=this._playbackRate,this._source.start(this.toSeconds(t),Math.random()*(e.duration-.001))},n.default.Noise.prototype._stop=function(t){this._source&&(this._source.stop(this.toSeconds(t)),this._source=null)},n.default.Noise.prototype.restart=function(t){return this._stop(t),this._start(t),this},n.default.Noise.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),null!==this._source&&(this._source.disconnect(),this._source=null),this._buffer=null,this};var o={},a={};Object.defineProperty(o,"pink",{get:function(){if(!a.pink){for(var t=[],e=0;e<2;e++){var i,o,s,r,l,u,d,f=new Float32Array(220500);t[e]=f,i=o=s=r=l=u=d=0;for(var h=0;h<220500;h++){var c=2*Math.random()-1;i=.99886*i+.0555179*c,o=.99332*o+.0750759*c,s=.969*s+.153852*c,r=.8665*r+.3104856*c,l=.55*l+.5329522*c,u=-.7616*u-.016898*c,f[h]=i+o+s+r+l+u+d+.5362*c,f[h]*=.11,d=.115926*c}}a.pink=(new n.default.Buffer).fromArray(t)}return a.pink}}),Object.defineProperty(o,"brown",{get:function(){if(!a.brown){for(var t=[],e=0;e<2;e++){var i=new Float32Array(220500);t[e]=i;for(var o=0,s=0;s<220500;s++){var r=2*Math.random()-1;i[s]=(o+.02*r)/1.02,o=i[s],i[s]*=3.5}}a.brown=(new n.default.Buffer).fromArray(t)}return a.brown}}),Object.defineProperty(o,"white",{get:function(){if(!a.white){for(var t=[],e=0;e<2;e++){var i=new Float32Array(220500);t[e]=i;for(var o=0;o<220500;o++)i[o]=2*Math.random()-1}a.white=(new n.default.Buffer).fromArray(t)}return a.white}}),e.default=n.default.Noise},function(t,e,i){i.r(e);var n=i(0);i(27),i(20),i(1),n.default.Master=function(){n.default.AudioNode.call(this),n.default.getContext(function(){this.createInsOuts(1,0),this._volume=this.output=new n.default.Volume,this.volume=this._volume.volume,this._readOnly("volume"),n.default.connectSeries(this.input,this.output,this.context.destination),this.context.master=this}.bind(this))},n.default.extend(n.default.Master,n.default.AudioNode),n.default.Master.defaults={volume:0,mute:!1},n.default.Master.prototype.isMaster=!0,Object.defineProperty(n.default.Master.prototype,"mute",{get:function(){return this._volume.mute},set:function(t){this._volume.mute=t}}),n.default.Master.prototype.chain=function(){this.input.disconnect();var t=Array.from(arguments);t.unshift(this.input),t.push(this.output),n.default.connectSeries.apply(void 0,t)},n.default.Master.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this._writable("volume"),this._volume.dispose(),this._volume=null,this.volume=null},n.default.AudioNode.prototype.toMaster=function(){return this.connect(this.context.master),this};var o=n.default.Master;n.default.Master=new o,n.default.Context.on("init",function(t){t.master&&t.master.isMaster?n.default.Master=t.master:n.default.Master=new o}),n.default.Context.on("close",function(t){t.master&&t.master.isMaster&&t.master.dispose()}),e.default=n.default.Master},function(t,e,i){i.r(e);var n=i(0);i(86),i(47),n.default.FrequencyEnvelope=function(){var t=n.default.defaults(arguments,["attack","decay","sustain","release"],n.default.Envelope);t=n.default.defaultArg(t,n.default.FrequencyEnvelope.defaults),n.default.ScaledEnvelope.call(this,t),this._octaves=t.octaves,this.baseFrequency=t.baseFrequency,this.octaves=t.octaves,this.exponent=t.exponent},n.default.extend(n.default.FrequencyEnvelope,n.default.Envelope),n.default.FrequencyEnvelope.defaults={baseFrequency:200,octaves:4,exponent:1},Object.defineProperty(n.default.FrequencyEnvelope.prototype,"baseFrequency",{get:function(){return this._scale.min},set:function(t){this._scale.min=this.toFrequency(t),this.octaves=this._octaves}}),Object.defineProperty(n.default.FrequencyEnvelope.prototype,"octaves",{get:function(){return this._octaves},set:function(t){this._octaves=t,this._scale.max=this.baseFrequency*Math.pow(2,t)}}),Object.defineProperty(n.default.FrequencyEnvelope.prototype,"exponent",{get:function(){return this._exp.value},set:function(t){this._exp.value=t}}),n.default.FrequencyEnvelope.prototype.dispose=function(){return n.default.ScaledEnvelope.prototype.dispose.call(this),this},e.default=n.default.FrequencyEnvelope},function(t,e,i){i.r(e);var n=i(0);i(26),i(61),n.default.ScaleExp=function(t,e,i){n.default.SignalBase.call(this),this._scale=this.output=new n.default.Scale(t,e),this._exp=this.input=new n.default.Pow(n.default.defaultArg(i,2)),this._exp.connect(this._scale)},n.default.extend(n.default.ScaleExp,n.default.SignalBase),Object.defineProperty(n.default.ScaleExp.prototype,"exponent",{get:function(){return this._exp.value},set:function(t){this._exp.value=t}}),Object.defineProperty(n.default.ScaleExp.prototype,"min",{get:function(){return this._scale.min},set:function(t){this._scale.min=t}}),Object.defineProperty(n.default.ScaleExp.prototype,"max",{get:function(){return this._scale.max},set:function(t){this._scale.max=t}}),n.default.ScaleExp.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._scale.dispose(),this._scale=null,this._exp.dispose(),this._exp=null,this},e.default=n.default.ScaleExp},function(t,e,i){i.r(e);var n=i(0);i(14),i(1),n.default.Compressor=function(){var t=n.default.defaults(arguments,["threshold","ratio"],n.default.Compressor);n.default.AudioNode.call(this),this._compressor=this.input=this.output=this.context.createDynamicsCompressor(),this.threshold=new n.default.Param({param:this._compressor.threshold,units:n.default.Type.Decibels,convert:!1}),this.attack=new n.default.Param(this._compressor.attack,n.default.Type.Time),this.release=new n.default.Param(this._compressor.release,n.default.Type.Time),this.knee=new n.default.Param({param:this._compressor.knee,units:n.default.Type.Decibels,convert:!1}),this.ratio=new n.default.Param({param:this._compressor.ratio,convert:!1}),this._readOnly(["knee","release","attack","ratio","threshold"]),this.set(t)},n.default.extend(n.default.Compressor,n.default.AudioNode),n.default.Compressor.defaults={ratio:12,threshold:-24,release:.25,attack:.003,knee:30},n.default.Compressor.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["knee","release","attack","ratio","threshold"]),this._compressor.disconnect(),this._compressor=null,this.attack.dispose(),this.attack=null,this.release.dispose(),this.release=null,this.threshold.dispose(),this.threshold=null,this.ratio.dispose(),this.ratio=null,this.knee.dispose(),this.knee=null,this},e.default=n.default.Compressor},function(t,e,i){var n=i(0);if(i(92),n.default.supported){!n.default.global.hasOwnProperty("AudioContext")&&n.default.global.hasOwnProperty("webkitAudioContext")&&(n.default.global.AudioContext=n.default.global.webkitAudioContext),AudioContext.prototype.close||(AudioContext.prototype.close=function(){return n.default.isFunction(this.suspend)&&this.suspend(),Promise.resolve()}),AudioContext.prototype.resume||(AudioContext.prototype.resume=function(){var t=this.createBuffer(1,1,this.sampleRate),e=this.createBufferSource();return e.buffer=t,e.connect(this.destination),e.start(0),Promise.resolve()}),!AudioContext.prototype.createGain&&AudioContext.prototype.createGainNode&&(AudioContext.prototype.createGain=AudioContext.prototype.createGainNode),!AudioContext.prototype.createDelay&&AudioContext.prototype.createDelayNode&&(AudioContext.prototype.createDelay=AudioContext.prototype.createDelayNode);var o=!1,a=new OfflineAudioContext(1,1,44100),s=new Uint32Array([1179011410,48,1163280727,544501094,16,131073,44100,176400,1048580,1635017060,8,0,0,0,0]).buffer;try{var r=a.decodeAudioData(s);r&&n.default.isFunction(r.then)&&(o=!0)}catch(t){o=!1}o||(AudioContext.prototype._native_decodeAudioData=AudioContext.prototype.decodeAudioData,AudioContext.prototype.decodeAudioData=function(t){return new Promise(function(e,i){this._native_decodeAudioData(t,e,i)}.bind(this))})}},function(t,e,i){i.r(e);var n=i(0);i(63),n.default.TransportTime=function(t,e){if(!(this instanceof n.default.TransportTime))return new n.default.TransportTime(t,e);n.default.Time.call(this,t,e)},n.default.extend(n.default.TransportTime,n.default.Time),n.default.TransportTime.prototype._now=function(){return n.default.Transport.seconds},e.default=n.default.TransportTime},function(t,e,i){i.r(e);var n=i(0);i(62),n.default.Frequency=function(t,e){if(!(this instanceof n.default.Frequency))return new n.default.Frequency(t,e);n.default.TimeBase.call(this,t,e)},n.default.extend(n.default.Frequency,n.default.TimeBase),n.default.Frequency.prototype._expressions=Object.assign({},n.default.TimeBase.prototype._expressions,{midi:{regexp:/^(\d+(?:\.\d+)?midi)/,method:function(t){return"midi"===this._defaultUnits?t:n.default.Frequency.mtof(t)}},note:{regexp:/^([a-g]{1}(?:b|#|x|bb)?)(-?[0-9]+)/i,method:function(t,e){var i=o[t.toLowerCase()]+12*(parseInt(e)+1);return"midi"===this._defaultUnits?i:n.default.Frequency.mtof(i)}},tr:{regexp:/^(\d+(?:\.\d+)?):(\d+(?:\.\d+)?):?(\d+(?:\.\d+)?)?/,method:function(t,e,i){var n=1;return t&&"0"!==t&&(n*=this._beatsToUnits(this._getTimeSignature()*parseFloat(t))),e&&"0"!==e&&(n*=this._beatsToUnits(parseFloat(e))),i&&"0"!==i&&(n*=this._beatsToUnits(parseFloat(i)/4)),n}}}),n.default.Frequency.prototype.transpose=function(t){return new this.constructor(this.valueOf()*n.default.intervalToFrequencyRatio(t))},n.default.Frequency.prototype.harmonize=function(t){return t.map(function(t){return this.transpose(t)}.bind(this))},n.default.Frequency.prototype.toMidi=function(){return n.default.Frequency.ftom(this.valueOf())},n.default.Frequency.prototype.toNote=function(){var t=this.toFrequency(),e=Math.log2(t/n.default.Frequency.A4),i=Math.round(12*e)+57,o=Math.floor(i/12);return o<0&&(i+=-12*o),a[i%12]+o.toString()},n.default.Frequency.prototype.toSeconds=function(){return 1/n.default.TimeBase.prototype.toSeconds.call(this)},n.default.Frequency.prototype.toFrequency=function(){return n.default.TimeBase.prototype.toFrequency.call(this)},n.default.Frequency.prototype.toTicks=function(){var t=this._beatsToUnits(1),e=this.valueOf()/t;return Math.floor(e*n.default.Transport.PPQ)},n.default.Frequency.prototype._noArg=function(){return 0},n.default.Frequency.prototype._frequencyToUnits=function(t){return t},n.default.Frequency.prototype._ticksToUnits=function(t){return 1/(60*t/(n.default.Transport.bpm.value*n.default.Transport.PPQ))},n.default.Frequency.prototype._beatsToUnits=function(t){return 1/n.default.TimeBase.prototype._beatsToUnits.call(this,t)},n.default.Frequency.prototype._secondsToUnits=function(t){return 1/t},n.default.Frequency.prototype._defaultUnits="hz";var o={cbb:-2,cb:-1,c:0,"c#":1,cx:2,dbb:0,db:1,d:2,"d#":3,dx:4,ebb:2,eb:3,e:4,"e#":5,ex:6,fbb:3,fb:4,f:5,"f#":6,fx:7,gbb:5,gb:6,g:7,"g#":8,gx:9,abb:7,ab:8,a:9,"a#":10,ax:11,bbb:9,bb:10,b:11,"b#":12,bx:13},a=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];n.default.Frequency.A4=440,n.default.Frequency.mtof=function(t){return n.default.Frequency.A4*Math.pow(2,(t-69)/12)},n.default.Frequency.ftom=function(t){return 69+Math.round(12*Math.log2(t/n.default.Frequency.A4))},e.default=n.default.Frequency},function(t,e,i){i.r(e);var n=i(0);i(2),i(61),i(4),i(1),n.default.Envelope=function(){var t=n.default.defaults(arguments,["attack","decay","sustain","release"],n.default.Envelope);n.default.AudioNode.call(this),this.attack=t.attack,this.decay=t.decay,this.sustain=t.sustain,this.release=t.release,this._attackCurve="linear",this._releaseCurve="exponential",this._sig=this.output=new n.default.Signal(0),this.attackCurve=t.attackCurve,this.releaseCurve=t.releaseCurve,this.decayCurve=t.decayCurve},n.default.extend(n.default.Envelope,n.default.AudioNode),n.default.Envelope.defaults={attack:.01,decay:.1,sustain:.5,release:1,attackCurve:"linear",decayCurve:"exponential",releaseCurve:"exponential"},Object.defineProperty(n.default.Envelope.prototype,"value",{get:function(){return this.getValueAtTime(this.now())}}),n.default.Envelope.prototype._getCurve=function(t,e){if(n.default.isString(t))return t;if(n.default.isArray(t))for(var i in n.default.Envelope.Type)if(n.default.Envelope.Type[i][e]===t)return i},n.default.Envelope.prototype._setCurve=function(t,e,i){if(n.default.Envelope.Type.hasOwnProperty(i)){var o=n.default.Envelope.Type[i];n.default.isObject(o)?this[t]=o[e]:this[t]=o}else{if(!n.default.isArray(i))throw new Error("Tone.Envelope: invalid curve: "+i);this[t]=i}},Object.defineProperty(n.default.Envelope.prototype,"attackCurve",{get:function(){return this._getCurve(this._attackCurve,"In")},set:function(t){this._setCurve("_attackCurve","In",t)}}),Object.defineProperty(n.default.Envelope.prototype,"releaseCurve",{get:function(){return this._getCurve(this._releaseCurve,"Out")},set:function(t){this._setCurve("_releaseCurve","Out",t)}}),Object.defineProperty(n.default.Envelope.prototype,"decayCurve",{get:function(){return this._decayCurve},set:function(t){if(!["linear","exponential"].includes(t))throw new Error("Tone.Envelope: invalid curve: "+t);this._decayCurve=t}}),n.default.Envelope.prototype.triggerAttack=function(t,e){this.log("triggerAttack",t,e),t=this.toSeconds(t);var i=this.toSeconds(this.attack),o=this.toSeconds(this.decay);e=n.default.defaultArg(e,1);var a=this.getValueAtTime(t);if(a>0&&(i=(1-a)/(1/i)),0===i)this._sig.setValueAtTime(e,t);else if("linear"===this._attackCurve)this._sig.linearRampTo(e,i,t);else if("exponential"===this._attackCurve)this._sig.targetRampTo(e,i,t);else if(i>0){this._sig.cancelAndHoldAtTime(t);for(var s=this._attackCurve,r=1;r<s.length;r++)if(s[r-1]<=a&&a<=s[r]){(s=this._attackCurve.slice(r))[0]=a;break}this._sig.setValueCurveAtTime(s,t,i,e)}if(o){var l=e*this.sustain,u=t+i;this.log("decay",u),"linear"===this._decayCurve?this._sig.linearRampTo(l,o,u+this.sampleTime):"exponential"===this._decayCurve&&this._sig.exponentialApproachValueAtTime(l,u,o)}return this},n.default.Envelope.prototype.triggerRelease=function(t){this.log("triggerRelease",t),t=this.toSeconds(t);var e=this.getValueAtTime(t);if(e>0){var i=this.toSeconds(this.release);if("linear"===this._releaseCurve)this._sig.linearRampTo(0,i,t);else if("exponential"===this._releaseCurve)this._sig.targetRampTo(0,i,t);else{var o=this._releaseCurve;n.default.isArray(o)&&(this._sig.cancelAndHoldAtTime(t),this._sig.setValueCurveAtTime(o,t,i,e))}}return this},n.default.Envelope.prototype.getValueAtTime=function(t){return this._sig.getValueAtTime(t)},n.default.Envelope.prototype.triggerAttackRelease=function(t,e,i){return e=this.toSeconds(e),this.triggerAttack(e,i),this.triggerRelease(e+this.toSeconds(t)),this},n.default.Envelope.prototype.cancel=function(t){return this._sig.cancelScheduledValues(t),this},n.default.Envelope.prototype.connect=n.default.SignalBase.prototype.connect,function(){var t,e,i=[];for(t=0;t<128;t++)i[t]=Math.sin(t/127*(Math.PI/2));var o=[];for(t=0;t<127;t++){e=t/127;var a=Math.sin(e*(2*Math.PI)*6.4-Math.PI/2)+1;o[t]=a/10+.83*e}o[127]=1;var s=[];for(t=0;t<128;t++)s[t]=Math.ceil(t/127*5)/5;var r=[];for(t=0;t<128;t++)e=t/127,r[t]=.5*(1-Math.cos(Math.PI*e));var l,u=[];for(t=0;t<128;t++){e=t/127;var d=4*Math.pow(e,3)+.2,f=Math.cos(d*Math.PI*2*e);u[t]=Math.abs(f*(1-e))}function h(t){for(var e=new Array(t.length),i=0;i<t.length;i++)e[i]=1-t[i];return e}n.default.Envelope.Type={linear:"linear",exponential:"exponential",bounce:{In:h(u),Out:u},cosine:{In:i,Out:(l=i,l.slice(0).reverse())},step:{In:s,Out:h(s)},ripple:{In:o,Out:h(o)},sine:{In:r,Out:h(r)}}}(),n.default.Envelope.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._sig.dispose(),this._sig=null,this._attackCurve=null,this._releaseCurve=null,this},e.default=n.default.Envelope},function(t,e,i){i.r(e);var n=i(0);if(i(23),i(10),i(19),i(7),i(28),i(3),i(2),i(20),n.default.supported&&!n.default.global.AudioContext.prototype.createStereoPanner){var o=function(t){this.context=t,this.pan=new n.default.Signal(0,n.default.Type.AudioRange);var e=new n.default.WaveShaper(function(t){return n.default.equalPowerScale((t+1)/2)},4096),i=new n.default.WaveShaper(function(t){return n.default.equalPowerScale(1-(t+1)/2)},4096),o=new n.default.Gain,a=new n.default.Gain,s=this.input=new n.default.Split;s._splitter.channelCountMode="explicit",(new n.default.Zero).fan(e,i);var r=this.output=new n.default.Merge;s.left.chain(o,r.left),s.right.chain(a,r.right),this.pan.chain(i,o.gain),this.pan.chain(e,a.gain)};o.prototype.disconnect=function(){this.output.disconnect.apply(this.output,arguments)},o.prototype.connect=function(){this.output.connect.apply(this.output,arguments)},AudioContext.prototype.createStereoPanner=function(){return new o(this)},n.default.Context.prototype.createStereoPanner=function(){return new o(this)}}i(22),i(1),n.default.Panner=function(){var t=n.default.defaults(arguments,["pan"],n.default.Panner);n.default.AudioNode.call(this),this._panner=this.input=this.output=this.context.createStereoPanner(),this.pan=this._panner.pan,this.pan.value=t.pan,this._readOnly("pan")},n.default.extend(n.default.Panner,n.default.AudioNode),n.default.Panner.defaults={pan:0},n.default.Panner.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable("pan"),this._panner.disconnect(),this._panner=null,this.pan=null,this},e.default=n.default.Panner},function(t,e,i){i.r(e);var n=i(0);i(6),i(17),i(5),i(3),n.default.FMOscillator=function(){var t=n.default.defaults(arguments,["frequency","type","modulationType"],n.default.FMOscillator);n.default.Source.call(this,t),this._carrier=new n.default.Oscillator(t.frequency,t.type),this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.detune=this._carrier.detune,this.detune.value=t.detune,this.modulationIndex=new n.default.Multiply(t.modulationIndex),this.modulationIndex.units=n.default.Type.Positive,this._modulator=new n.default.Oscillator(t.frequency,t.modulationType),this.harmonicity=new n.default.Multiply(t.harmonicity),this.harmonicity.units=n.default.Type.Positive,this._modulationNode=new n.default.Gain(0),this.frequency.connect(this._carrier.frequency),this.frequency.chain(this.harmonicity,this._modulator.frequency),this.frequency.chain(this.modulationIndex,this._modulationNode),this._modulator.connect(this._modulationNode.gain),this._modulationNode.connect(this._carrier.frequency),this._carrier.connect(this.output),this.detune.connect(this._modulator.detune),this.phase=t.phase,this._readOnly(["modulationIndex","frequency","detune","harmonicity"])},n.default.extend(n.default.FMOscillator,n.default.Source),n.default.FMOscillator.defaults={frequency:440,detune:0,phase:0,type:"sine",modulationIndex:2,modulationType:"square",harmonicity:1},n.default.FMOscillator.prototype._start=function(t){this._modulator.start(t),this._carrier.start(t)},n.default.FMOscillator.prototype._stop=function(t){this._modulator.stop(t),this._carrier.stop(t)},n.default.FMOscillator.prototype.restart=function(t){this._modulator.restart(t),this._carrier.restart(t)},Object.defineProperty(n.default.FMOscillator.prototype,"type",{get:function(){return this._carrier.type},set:function(t){this._carrier.type=t}}),Object.defineProperty(n.default.FMOscillator.prototype,"baseType",{get:function(){return this._carrier.baseType},set:function(t){this._carrier.baseType=t}}),Object.defineProperty(n.default.FMOscillator.prototype,"partialCount",{get:function(){return this._carrier.partialCount},set:function(t){this._carrier.partialCount=t}}),Object.defineProperty(n.default.FMOscillator.prototype,"modulationType",{get:function(){return this._modulator.type},set:function(t){this._modulator.type=t}}),Object.defineProperty(n.default.FMOscillator.prototype,"phase",{get:function(){return this._carrier.phase},set:function(t){this._carrier.phase=t,this._modulator.phase=t}}),Object.defineProperty(n.default.FMOscillator.prototype,"partials",{get:function(){return this._carrier.partials},set:function(t){this._carrier.partials=t}}),n.default.FMOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._writable(["modulationIndex","frequency","detune","harmonicity"]),this.frequency.dispose(),this.frequency=null,this.detune=null,this.harmonicity.dispose(),this.harmonicity=null,this._carrier.dispose(),this._carrier=null,this._modulator.dispose(),this._modulator=null,this._modulationNode.dispose(),this._modulationNode=null,this.modulationIndex.dispose(),this.modulationIndex=null,this},e.default=n.default.FMOscillator},function(t,e,i){i.r(e);var n=i(0);i(6),i(17),i(2),i(7),i(3),n.default.PulseOscillator=function(){var t=n.default.defaults(arguments,["frequency","width"],n.default.Oscillator);n.default.Source.call(this,t),this.width=new n.default.Signal(t.width,n.default.Type.NormalRange),this._widthGate=new n.default.Gain(0),this._sawtooth=new n.default.Oscillator({frequency:t.frequency,detune:t.detune,type:"sawtooth",phase:t.phase}),this.frequency=this._sawtooth.frequency,this.detune=this._sawtooth.detune,this._thresh=new n.default.WaveShaper(function(t){return t<0?-1:1}),this._sawtooth.chain(this._thresh,this.output),this.width.chain(this._widthGate,this._thresh),this._readOnly(["width","frequency","detune"])},n.default.extend(n.default.PulseOscillator,n.default.Source),n.default.PulseOscillator.defaults={frequency:440,detune:0,phase:0,width:.2},n.default.PulseOscillator.prototype._start=function(t){t=this.toSeconds(t),this._sawtooth.start(t),this._widthGate.gain.setValueAtTime(1,t)},n.default.PulseOscillator.prototype._stop=function(t){t=this.toSeconds(t),this._sawtooth.stop(t),this._widthGate.gain.setValueAtTime(0,t)},n.default.PulseOscillator.prototype.restart=function(t){this._sawtooth.restart(t),this._widthGate.gain.cancelScheduledValues(t),this._widthGate.gain.setValueAtTime(1,t)},Object.defineProperty(n.default.PulseOscillator.prototype,"phase",{get:function(){return this._sawtooth.phase},set:function(t){this._sawtooth.phase=t}}),Object.defineProperty(n.default.PulseOscillator.prototype,"type",{get:function(){return"pulse"}}),Object.defineProperty(n.default.PulseOscillator.prototype,"baseType",{get:function(){return"pulse"}}),Object.defineProperty(n.default.PulseOscillator.prototype,"partials",{get:function(){return[]}}),n.default.PulseOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._sawtooth.dispose(),this._sawtooth=null,this._writable(["width","frequency","detune"]),this.width.dispose(),this.width=null,this._widthGate.dispose(),this._widthGate=null,this._thresh.dispose(),this._thresh=null,this.frequency=null,this.detune=null,this},e.default=n.default.PulseOscillator},function(t,e,i){i.r(e);var n=i(0);i(16),i(4),i(34),n.default.Event=function(){var t=n.default.defaults(arguments,["callback","value"],n.default.Event);n.default.call(this),this._loop=t.loop,this.callback=t.callback,this.value=t.value,this._loopStart=this.toTicks(t.loopStart),this._loopEnd=this.toTicks(t.loopEnd),this._state=new n.default.TimelineState(n.default.State.Stopped),this._playbackRate=1,this._startOffset=0,this._probability=t.probability,this._humanize=t.humanize,this.mute=t.mute,this.playbackRate=t.playbackRate},n.default.extend(n.default.Event),n.default.Event.defaults={callback:n.default.noOp,loop:!1,loopEnd:"1m",loopStart:0,playbackRate:1,value:null,probability:1,mute:!1,humanize:!1},n.default.Event.prototype._rescheduleEvents=function(t){return t=n.default.defaultArg(t,-1),this._state.forEachFrom(t,function(t){var e;if(t.state===n.default.State.Started){n.default.isDefined(t.id)&&n.default.Transport.clear(t.id);var i=t.time+Math.round(this.startOffset/this._playbackRate);if(!0===this._loop||n.default.isNumber(this._loop)&&this._loop>1){e=1/0,n.default.isNumber(this._loop)&&(e=this._loop*this._getLoopDuration());var o=this._state.getAfter(i);null!==o&&(e=Math.min(e,o.time-i)),e!==1/0&&(this._state.setStateAtTime(n.default.State.Stopped,i+e+1),e=n.default.Ticks(e));var a=n.default.Ticks(this._getLoopDuration());t.id=n.default.Transport.scheduleRepeat(this._tick.bind(this),a,n.default.Ticks(i),e)}else t.id=n.default.Transport.schedule(this._tick.bind(this),n.default.Ticks(i))}}.bind(this)),this},Object.defineProperty(n.default.Event.prototype,"state",{get:function(){return this._state.getValueAtTime(n.default.Transport.ticks)}}),Object.defineProperty(n.default.Event.prototype,"startOffset",{get:function(){return this._startOffset},set:function(t){this._startOffset=t}}),Object.defineProperty(n.default.Event.prototype,"probability",{get:function(){return this._probability},set:function(t){this._probability=t}}),Object.defineProperty(n.default.Event.prototype,"humanize",{get:function(){return this._humanize},set:function(t){this._humanize=t}}),n.default.Event.prototype.start=function(t){return t=this.toTicks(t),this._state.getValueAtTime(t)===n.default.State.Stopped&&(this._state.add({state:n.default.State.Started,time:t,id:void 0}),this._rescheduleEvents(t)),this},n.default.Event.prototype.stop=function(t){if(this.cancel(t),t=this.toTicks(t),this._state.getValueAtTime(t)===n.default.State.Started){this._state.setStateAtTime(n.default.State.Stopped,t);var e=this._state.getBefore(t),i=t;null!==e&&(i=e.time),this._rescheduleEvents(i)}return this},n.default.Event.prototype.cancel=function(t){return t=n.default.defaultArg(t,-1/0),t=this.toTicks(t),this._state.forEachFrom(t,function(t){n.default.Transport.clear(t.id)}),this._state.cancel(t),this},n.default.Event.prototype._tick=function(t){var e=n.default.Transport.getTicksAtTime(t);if(!this.mute&&this._state.getValueAtTime(e)===n.default.State.Started){if(this.probability<1&&Math.random()>this.probability)return;if(this.humanize){var i=.02;n.default.isBoolean(this.humanize)||(i=this.toSeconds(this.humanize)),t+=(2*Math.random()-1)*i}this.callback(t,this.value)}},n.default.Event.prototype._getLoopDuration=function(){return Math.round((this._loopEnd-this._loopStart)/this._playbackRate)},Object.defineProperty(n.default.Event.prototype,"loop",{get:function(){return this._loop},set:function(t){this._loop=t,this._rescheduleEvents()}}),Object.defineProperty(n.default.Event.prototype,"playbackRate",{get:function(){return this._playbackRate},set:function(t){this._playbackRate=t,this._rescheduleEvents()}}),Object.defineProperty(n.default.Event.prototype,"loopEnd",{get:function(){return n.default.Ticks(this._loopEnd).toSeconds()},set:function(t){this._loopEnd=this.toTicks(t),this._loop&&this._rescheduleEvents()}}),Object.defineProperty(n.default.Event.prototype,"loopStart",{get:function(){return n.default.Ticks(this._loopStart).toSeconds()},set:function(t){this._loopStart=this.toTicks(t),this._loop&&this._rescheduleEvents()}}),Object.defineProperty(n.default.Event.prototype,"progress",{get:function(){if(this._loop){var t=n.default.Transport.ticks,e=this._state.get(t);if(null!==e&&e.state===n.default.State.Started){var i=this._getLoopDuration();return(t-e.time)%i/i}return 0}return 0}}),n.default.Event.prototype.dispose=function(){this.cancel(),this._state.dispose(),this._state=null,this.callback=null,this.value=null},e.default=n.default.Event},function(t,e,i){i.r(e);var n=i(0);i(2),i(13),i(29),i(10),i(3),i(1),n.default.MidSideMerge=function(){n.default.AudioNode.call(this),this.createInsOuts(2,0),this.mid=this.input[0]=new n.default.Gain,this._left=new n.default.Add,this._timesTwoLeft=new n.default.Multiply(Math.SQRT1_2),this.side=this.input[1]=new n.default.Gain,this._right=new n.default.Subtract,this._timesTwoRight=new n.default.Multiply(Math.SQRT1_2),this._merge=this.output=new n.default.Merge,this.mid.connect(this._left,0,0),this.side.connect(this._left,0,1),this.mid.connect(this._right,0,0),this.side.connect(this._right,0,1),this._left.connect(this._timesTwoLeft),this._right.connect(this._timesTwoRight),this._timesTwoLeft.connect(this._merge,0,0),this._timesTwoRight.connect(this._merge,0,1)},n.default.extend(n.default.MidSideMerge,n.default.AudioNode),n.default.MidSideMerge.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this.mid.dispose(),this.mid=null,this.side.dispose(),this.side=null,this._left.dispose(),this._left=null,this._timesTwoLeft.dispose(),this._timesTwoLeft=null,this._right.dispose(),this._right=null,this._timesTwoRight.dispose(),this._timesTwoRight=null,this._merge.dispose(),this._merge=null,this},e.default=n.default.MidSideMerge},function(t,e,i){i.r(e);var n=i(0);i(29),i(13),i(2),i(19),i(1),n.default.MidSideSplit=function(){n.default.AudioNode.call(this),this.createInsOuts(0,2),this._split=this.input=new n.default.Split,this._midAdd=new n.default.Add,this.mid=this.output[0]=new n.default.Multiply(Math.SQRT1_2),this._sideSubtract=new n.default.Subtract,this.side=this.output[1]=new n.default.Multiply(Math.SQRT1_2),this._split.connect(this._midAdd,0,0),this._split.connect(this._midAdd,1,1),this._split.connect(this._sideSubtract,0,0),this._split.connect(this._sideSubtract,1,1),this._midAdd.connect(this.mid),this._sideSubtract.connect(this.side)},n.default.extend(n.default.MidSideSplit,n.default.AudioNode),n.default.MidSideSplit.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this.mid.dispose(),this.mid=null,this.side.dispose(),this.side=null,this._midAdd.dispose(),this._midAdd=null,this._sideSubtract.dispose(),this._sideSubtract=null,this._split.dispose(),this._split=null,this},e.default=n.default.MidSideSplit},function(t,e,i){i.r(e);var n=i(0);i(2),i(9),i(1),i(59),n.default.LowpassCombFilter=function(){var t=n.default.defaults(arguments,["delayTime","resonance","dampening"],n.default.LowpassCombFilter);n.default.AudioNode.call(this),this._combFilter=this.output=new n.default.FeedbackCombFilter(t.delayTime,t.resonance),this.delayTime=this._combFilter.delayTime,this._lowpass=this.input=new n.default.Filter({frequency:t.dampening,type:"lowpass",Q:0,rolloff:-12}),this.dampening=this._lowpass.frequency,this.resonance=this._combFilter.resonance,this._lowpass.connect(this._combFilter),this._readOnly(["dampening","resonance","delayTime"])},n.default.extend(n.default.LowpassCombFilter,n.default.AudioNode),n.default.LowpassCombFilter.defaults={delayTime:.1,resonance:.5,dampening:3e3},n.default.LowpassCombFilter.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["dampening","resonance","delayTime"]),this._combFilter.dispose(),this._combFilter=null,this.resonance=null,this.delayTime=null,this._lowpass.dispose(),this._lowpass=null,this.dampening=null,this},e.default=n.default.LowpassCombFilter},function(t,e,i){i.r(e);var n=i(0);i(45),n.default.Ticks=function(t,e){if(!(this instanceof n.default.Ticks))return new n.default.Ticks(t,e);n.default.TransportTime.call(this,t,e)},n.default.extend(n.default.Ticks,n.default.TransportTime),n.default.Ticks.prototype._defaultUnits="i",n.default.Ticks.prototype._now=function(){return n.default.Transport.ticks},n.default.Ticks.prototype._beatsToUnits=function(t){return this._getPPQ()*t},n.default.Ticks.prototype._secondsToUnits=function(t){return Math.floor(t/(60/this._getBpm())*this._getPPQ())},n.default.Ticks.prototype._ticksToUnits=function(t){return t},n.default.Ticks.prototype.toTicks=function(){return this.valueOf()},n.default.Ticks.prototype.toSeconds=function(){return this.valueOf()/this._getPPQ()*(60/this._getBpm())},e.default=n.default.Ticks},function(t,e,i){i.r(e);var n=i(0);i(55),n.default.TransportEvent=function(t,e){e=n.default.defaultArg(e,n.default.TransportEvent.defaults),n.default.call(this),this.Transport=t,this.id=n.default.TransportEvent._eventId++,this.time=n.default.Ticks(e.time),this.callback=e.callback,this._once=e.once},n.default.extend(n.default.TransportEvent),n.default.TransportEvent.defaults={once:!1,callback:n.default.noOp},n.default.TransportEvent._eventId=0,n.default.TransportEvent.prototype.invoke=function(t){this.callback&&(this.callback(t),this._once&&this.Transport&&this.Transport.clear(this.id))},n.default.TransportEvent.prototype.dispose=function(){return n.default.prototype.dispose.call(this),this.Transport=null,this.callback=null,this.time=null,this},e.default=n.default.TransportEvent},function(t,e,i){i.r(e);var n=i(0);i(82),i(34),i(24),i(14),n.default.TickSource=function(){var t=n.default.defaults(arguments,["frequency"],n.default.TickSource);this.frequency=new n.default.TickSignal(t.frequency),this._readOnly("frequency"),this._state=new n.default.TimelineState(n.default.State.Stopped),this._state.setStateAtTime(n.default.State.Stopped,0),this._tickOffset=new n.default.Timeline,this.setTicksAtTime(0,0)},n.default.extend(n.default.TickSource),n.default.TickSource.defaults={frequency:1},Object.defineProperty(n.default.TickSource.prototype,"state",{get:function(){return this._state.getValueAtTime(this.now())}}),n.default.TickSource.prototype.start=function(t,e){return t=this.toSeconds(t),this._state.getValueAtTime(t)!==n.default.State.Started&&(this._state.setStateAtTime(n.default.State.Started,t),n.default.isDefined(e)&&this.setTicksAtTime(e,t)),this},n.default.TickSource.prototype.stop=function(t){if(t=this.toSeconds(t),this._state.getValueAtTime(t)===n.default.State.Stopped){var e=this._state.get(t);e.time>0&&(this._tickOffset.cancel(e.time),this._state.cancel(e.time))}return this._state.cancel(t),this._state.setStateAtTime(n.default.State.Stopped,t),this.setTicksAtTime(0,t),this},n.default.TickSource.prototype.pause=function(t){return t=this.toSeconds(t),this._state.getValueAtTime(t)===n.default.State.Started&&this._state.setStateAtTime(n.default.State.Paused,t),this},n.default.TickSource.prototype.cancel=function(t){return t=this.toSeconds(t),this._state.cancel(t),this._tickOffset.cancel(t),this},n.default.TickSource.prototype.getTicksAtTime=function(t){t=this.toSeconds(t);var e=this._state.getLastState(n.default.State.Stopped,t),i={state:n.default.State.Paused,time:t};this._state.add(i);var o=e,a=0;return this._state.forEachBetween(e.time,t+this.sampleTime,function(t){var e=o.time,i=this._tickOffset.get(t.time);i.time>=o.time&&(a=i.ticks,e=i.time),o.state===n.default.State.Started&&t.state!==n.default.State.Started&&(a+=this.frequency.getTicksAtTime(t.time)-this.frequency.getTicksAtTime(e)),o=t}.bind(this)),this._state.remove(i),a},Object.defineProperty(n.default.TickSource.prototype,"ticks",{get:function(){return this.getTicksAtTime(this.now())},set:function(t){this.setTicksAtTime(t,this.now())}}),Object.defineProperty(n.default.TickSource.prototype,"seconds",{get:function(){return this.getSecondsAtTime(this.now())},set:function(t){var e=this.now(),i=this.frequency.timeToTicks(t,e);this.setTicksAtTime(i,e)}}),n.default.TickSource.prototype.getSecondsAtTime=function(t){t=this.toSeconds(t);var e=this._state.getLastState(n.default.State.Stopped,t),i={state:n.default.State.Paused,time:t};this._state.add(i);var o=e,a=0;return this._state.forEachBetween(e.time,t+this.sampleTime,function(t){var e=o.time,i=this._tickOffset.get(t.time);i.time>=o.time&&(a=i.seconds,e=i.time),o.state===n.default.State.Started&&t.state!==n.default.State.Started&&(a+=t.time-e),o=t}.bind(this)),this._state.remove(i),a},n.default.TickSource.prototype.setTicksAtTime=function(t,e){return e=this.toSeconds(e),this._tickOffset.cancel(e),this._tickOffset.add({time:e,ticks:t,seconds:this.frequency.getDurationOfTicks(t,e)}),this},n.default.TickSource.prototype.getStateAtTime=function(t){return t=this.toSeconds(t),this._state.getValueAtTime(t)},n.default.TickSource.prototype.getTimeOfTick=function(t,e){e=n.default.defaultArg(e,this.now());var i=this._tickOffset.get(e),o=this._state.get(e),a=Math.max(i.time,o.time),s=this.frequency.getTicksAtTime(a)+t-i.ticks;return this.frequency.getTimeOfTick(s)},n.default.TickSource.prototype.forEachTickBetween=function(t,e,i){var o=this._state.get(t);if(this._state.forEachBetween(t,e,function(e){o.state===n.default.State.Started&&e.state!==n.default.State.Started&&this.forEachTickBetween(Math.max(o.time,t),e.time-this.sampleTime,i),o=e}.bind(this)),t=Math.max(o.time,t),o.state===n.default.State.Started&&this._state){var a=this.frequency.getTicksAtTime(t),s=(a-this.frequency.getTicksAtTime(o.time))%1;0!==s&&(s=1-s);for(var r=this.frequency.getTimeOfTick(a+s),l=null;r<e&&this._state;){try{i(r,Math.round(this.getTicksAtTime(r)))}catch(t){l=t;break}this._state&&(r+=this.frequency.getDurationOfTicks(1,r))}}if(l)throw l;return this},n.default.TickSource.prototype.dispose=function(){return n.default.Param.prototype.dispose.call(this),this._state.dispose(),this._state=null,this._tickOffset.dispose(),this._tickOffset=null,this._writable("frequency"),this.frequency.dispose(),this.frequency=null,this},e.default=n.default.TickSource},function(t,e,i){i.r(e);var n=i(0);i(87),i(13),i(2),i(4),i(18),i(1),n.default.Follower=function(){var t=n.default.defaults(arguments,["smoothing"],n.default.Follower);n.default.AudioNode.call(this),this.createInsOuts(1,1),this._abs=new n.default.Abs,this._filter=this.context.createBiquadFilter(),this._filter.type="lowpass",this._filter.frequency.value=0,this._filter.Q.value=0,this._sub=new n.default.Subtract,this._delay=new n.default.Delay(this.blockTime),this._smoothing=t.smoothing,n.default.connect(this.input,this._delay),n.default.connect(this.input,this._sub,0,1),this._sub.chain(this._abs,this._filter,this.output),this.smoothing=t.smoothing},n.default.extend(n.default.Follower,n.default.AudioNode),n.default.Follower.defaults={smoothing:.05},Object.defineProperty(n.default.Follower.prototype,"smoothing",{get:function(){return this._smoothing},set:function(t){this._smoothing=t,this._filter.frequency.value=.5*n.default.Time(t).toFrequency()}}),n.default.Follower.prototype.connect=n.default.SignalBase.prototype.connect,n.default.Follower.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._filter.disconnect(),this._filter=null,this._delay.dispose(),this._delay=null,this._sub.disconnect(),this._sub=null,this._abs.dispose(),this._abs=null,this},e.default=n.default.Follower},function(t,e,i){i.r(e);var n=i(0);i(42),i(2),i(14),i(18),i(3),i(1),n.default.FeedbackCombFilter=function(){var t=n.default.defaults(arguments,["delayTime","resonance"],n.default.FeedbackCombFilter);n.default.AudioNode.call(this),this._delay=this.input=this.output=new n.default.Delay(t.delayTime),this.delayTime=this._delay.delayTime,this._feedback=new n.default.Gain(t.resonance,n.default.Type.NormalRange),this.resonance=this._feedback.gain,this._delay.chain(this._feedback,this._delay),this._readOnly(["resonance","delayTime"])},n.default.extend(n.default.FeedbackCombFilter,n.default.AudioNode),n.default.FeedbackCombFilter.defaults={delayTime:.1,resonance:.5},n.default.FeedbackCombFilter.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["resonance","delayTime"]),this._delay.dispose(),this._delay=null,this.delayTime=null,this._feedback.dispose(),this._feedback=null,this.resonance=null,this},e.default=n.default.FeedbackCombFilter},function(t,e,i){i.r(e);var n=i(0);i(9),i(2),i(3),i(1),n.default.MultibandSplit=function(){var t=n.default.defaults(arguments,["lowFrequency","highFrequency"],n.default.MultibandSplit);n.default.AudioNode.call(this),this.input=new n.default.Gain,this.output=new Array(3),this.low=this.output[0]=new n.default.Filter(0,"lowpass"),this._lowMidFilter=new n.default.Filter(0,"highpass"),this.mid=this.output[1]=new n.default.Filter(0,"lowpass"),this.high=this.output[2]=new n.default.Filter(0,"highpass"),this.lowFrequency=new n.default.Signal(t.lowFrequency,n.default.Type.Frequency),this.highFrequency=new n.default.Signal(t.highFrequency,n.default.Type.Frequency),this.Q=new n.default.Signal(t.Q),this.input.fan(this.low,this.high),this.input.chain(this._lowMidFilter,this.mid),this.lowFrequency.connect(this.low.frequency),this.lowFrequency.connect(this._lowMidFilter.frequency),this.highFrequency.connect(this.mid.frequency),this.highFrequency.connect(this.high.frequency),this.Q.connect(this.low.Q),this.Q.connect(this._lowMidFilter.Q),this.Q.connect(this.mid.Q),this.Q.connect(this.high.Q),this._readOnly(["high","mid","low","highFrequency","lowFrequency"])},n.default.extend(n.default.MultibandSplit,n.default.AudioNode),n.default.MultibandSplit.defaults={lowFrequency:400,highFrequency:2500,Q:1},n.default.MultibandSplit.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["high","mid","low","highFrequency","lowFrequency"]),this.low.dispose(),this.low=null,this._lowMidFilter.dispose(),this._lowMidFilter=null,this.mid.dispose(),this.mid=null,this.high.dispose(),this.high=null,this.lowFrequency.dispose(),this.lowFrequency=null,this.highFrequency.dispose(),this.highFrequency=null,this.Q.dispose(),this.Q=null,this},e.default=n.default.MultibandSplit},function(t,e,i){i.r(e);var n=i(0);i(7),n.default.Pow=function(t){n.default.SignalBase.call(this),this._exp=n.default.defaultArg(t,1),this._expScaler=this.input=this.output=new n.default.WaveShaper(this._expFunc(this._exp),8192)},n.default.extend(n.default.Pow,n.default.SignalBase),Object.defineProperty(n.default.Pow.prototype,"value",{get:function(){return this._exp},set:function(t){this._exp=t,this._expScaler.setMap(this._expFunc(this._exp))}}),n.default.Pow.prototype._expFunc=function(t){return function(e){return Math.pow(Math.abs(e),t)}},n.default.Pow.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._expScaler.dispose(),this._expScaler=null,this},e.default=n.default.Pow},function(t,e,i){i.r(e);var n=i(0);n.default.TimeBase=function(t,e){if(!(this instanceof n.default.TimeBase))return new n.default.TimeBase(t,e);if(this._val=t,this._units=e,n.default.isUndef(this._units)&&n.default.isString(this._val)&&parseFloat(this._val)==this._val&&"+"!==this._val.charAt(0))this._val=parseFloat(this._val),this._units=this._defaultUnits;else if(t&&t.constructor===this.constructor)this._val=t._val,this._units=t._units;else if(t instanceof n.default.TimeBase)switch(this._defaultUnits){case"s":this._val=t.toSeconds();break;case"i":this._val=t.toTicks();break;case"hz":this._val=t.toFrequency();break;case"midi":this._val=t.toMidi();break;default:throw new Error("Unrecognized default units "+this._defaultUnits)}},n.default.extend(n.default.TimeBase),n.default.TimeBase.prototype._expressions={n:{regexp:/^(\d+)n(\.?)$/i,method:function(t,e){t=parseInt(t);var i="."===e?1.5:1;return 1===t?this._beatsToUnits(this._getTimeSignature())*i:this._beatsToUnits(4/t)*i}},t:{regexp:/^(\d+)t$/i,method:function(t){return t=parseInt(t),this._beatsToUnits(8/(3*parseInt(t)))}},m:{regexp:/^(\d+)m$/i,method:function(t){return this._beatsToUnits(parseInt(t)*this._getTimeSignature())}},i:{regexp:/^(\d+)i$/i,method:function(t){return this._ticksToUnits(parseInt(t))}},hz:{regexp:/^(\d+(?:\.\d+)?)hz$/i,method:function(t){return this._frequencyToUnits(parseFloat(t))}},tr:{regexp:/^(\d+(?:\.\d+)?):(\d+(?:\.\d+)?):?(\d+(?:\.\d+)?)?$/,method:function(t,e,i){var n=0;return t&&"0"!==t&&(n+=this._beatsToUnits(this._getTimeSignature()*parseFloat(t))),e&&"0"!==e&&(n+=this._beatsToUnits(parseFloat(e))),i&&"0"!==i&&(n+=this._beatsToUnits(parseFloat(i)/4)),n}},s:{regexp:/^(\d+(?:\.\d+)?)s$/,method:function(t){return this._secondsToUnits(parseFloat(t))}},samples:{regexp:/^(\d+)samples$/,method:function(t){return parseInt(t)/this.context.sampleRate}},default:{regexp:/^(\d+(?:\.\d+)?)$/,method:function(t){return this._expressions[this._defaultUnits].method.call(this,t)}}},n.default.TimeBase.prototype._defaultUnits="s",n.default.TimeBase.prototype._getBpm=function(){return n.default.Transport?n.default.Transport.bpm.value:120},n.default.TimeBase.prototype._getTimeSignature=function(){return n.default.Transport?n.default.Transport.timeSignature:4},n.default.TimeBase.prototype._getPPQ=function(){return n.default.Transport?n.default.Transport.PPQ:192},n.default.TimeBase.prototype._now=function(){return this.now()},n.default.TimeBase.prototype._frequencyToUnits=function(t){return 1/t},n.default.TimeBase.prototype._beatsToUnits=function(t){return 60/this._getBpm()*t},n.default.TimeBase.prototype._secondsToUnits=function(t){return t},n.default.TimeBase.prototype._ticksToUnits=function(t){return t*(this._beatsToUnits(1)/this._getPPQ())},n.default.TimeBase.prototype._noArg=function(){return this._now()},n.default.TimeBase.prototype.valueOf=function(){if(n.default.isUndef(this._val))return this._noArg();if(n.default.isString(this._val)&&n.default.isUndef(this._units)){for(var t in this._expressions)if(this._expressions[t].regexp.test(this._val.trim())){this._units=t;break}}else if(n.default.isObject(this._val)){var e=0;for(var i in this._val){var o=this._val[i];e+=new this.constructor(i).valueOf()*o}return e}if(n.default.isDefined(this._units)){var a=this._expressions[this._units],s=this._val.toString().trim().match(a.regexp);return s?a.method.apply(this,s.slice(1)):a.method.call(this,parseFloat(this._val))}return this._val},n.default.TimeBase.prototype.toSeconds=function(){return this.valueOf()},n.default.TimeBase.prototype.toFrequency=function(){return 1/this.toSeconds()},n.default.TimeBase.prototype.toSamples=function(){return this.toSeconds()*this.context.sampleRate},n.default.TimeBase.prototype.toMilliseconds=function(){return 1e3*this.toSeconds()},n.default.TimeBase.prototype.dispose=function(){this._val=null,this._units=null},e.default=n.default.TimeBase},function(t,e,i){i.r(e);var n=i(0);i(62),i(46),n.default.Time=function(t,e){if(!(this instanceof n.default.Time))return new n.default.Time(t,e);n.default.TimeBase.call(this,t,e)},n.default.extend(n.default.Time,n.default.TimeBase),n.default.Time.prototype._expressions=Object.assign({},n.default.TimeBase.prototype._expressions,{quantize:{regexp:/^@(.+)/,method:function(t){if(n.default.Transport){var e=new this.constructor(t);return this._secondsToUnits(n.default.Transport.nextSubdivision(e))}return 0}},now:{regexp:/^\+(.+)/,method:function(t){return this._now()+new this.constructor(t)}}}),n.default.Time.prototype.quantize=function(t,e){e=n.default.defaultArg(e,1);var i=new this.constructor(t),o=this.valueOf();return o+(Math.round(o/i)*i-o)*e},n.default.Time.prototype.toNotation=function(){for(var t=this.toSeconds(),e=["1m"],i=1;i<8;i++){var o=Math.pow(2,i);e.push(o+"n."),e.push(o+"n"),e.push(o+"t")}e.push("0");var a=e[0],s=n.default.Time(e[0]).toSeconds();return e.forEach(function(e){var i=n.default.Time(e).toSeconds();Math.abs(i-t)<Math.abs(s-t)&&(a=e,s=i)}),a},n.default.Time.prototype.toBarsBeatsSixteenths=function(){var t=this._beatsToUnits(1),e=this.valueOf()/t;e=parseFloat(e.toFixed(4));var i=Math.floor(e/this._getTimeSignature()),n=e%1*4;return e=Math.floor(e)%this._getTimeSignature(),(n=n.toString()).length>3&&(n=parseFloat(parseFloat(n).toFixed(3))),[i,e,n].join(":")},n.default.Time.prototype.toTicks=function(){var t=this._beatsToUnits(1),e=this.valueOf()/t;return Math.round(e*this._getPPQ())},n.default.Time.prototype.toSeconds=function(){return this.valueOf()},n.default.Time.prototype.toMidi=function(){return n.default.Frequency.ftom(this.toFrequency())},e.default=n.default.Time},function(t,e,i){i.r(e);var n=i(0);i(11),i(6),i(3),i(1),n.default.supported&&(OscillatorNode.prototype.setPeriodicWave||(OscillatorNode.prototype.setPeriodicWave=OscillatorNode.prototype.setWaveTable),AudioContext.prototype.createPeriodicWave||(AudioContext.prototype.createPeriodicWave=AudioContext.prototype.createWaveTable)),n.default.OscillatorNode=function(){var t=n.default.defaults(arguments,["frequency","type"],n.default.OscillatorNode);n.default.AudioNode.call(this,t),this.onended=t.onended,this._startTime=-1,this._stopTime=-1,this._gainNode=this.output=new n.default.Gain(0),this._oscillator=this.context.createOscillator(),n.default.connect(this._oscillator,this._gainNode),this.type=t.type,this.frequency=new n.default.Param({param:this._oscillator.frequency,units:n.default.Type.Frequency,value:t.frequency}),this.detune=new n.default.Param({param:this._oscillator.detune,units:n.default.Type.Cents,value:t.detune}),this._gain=1},n.default.extend(n.default.OscillatorNode,n.default.AudioNode),n.default.OscillatorNode.defaults={frequency:440,detune:0,type:"sine",onended:n.default.noOp},Object.defineProperty(n.default.OscillatorNode.prototype,"state",{get:function(){return this.getStateAtTime(this.now())}}),n.default.OscillatorNode.prototype.getStateAtTime=function(t){return t=this.toSeconds(t),-1!==this._startTime&&t>=this._startTime&&(-1===this._stopTime||t<=this._stopTime)?n.default.State.Started:n.default.State.Stopped},n.default.OscillatorNode.prototype.start=function(t){if(this.log("start",t),-1!==this._startTime)throw new Error("cannot call OscillatorNode.start more than once");return this._startTime=this.toSeconds(t),this._startTime=Math.max(this._startTime,this.context.currentTime),this._oscillator.start(this._startTime),this._gainNode.gain.setValueAtTime(1,this._startTime),this},n.default.OscillatorNode.prototype.setPeriodicWave=function(t){return this._oscillator.setPeriodicWave(t),this},n.default.OscillatorNode.prototype.stop=function(t){return this.log("stop",t),this.assert(-1!==this._startTime,"'start' must be called before 'stop'"),this.cancelStop(),this._stopTime=this.toSeconds(t),this._stopTime=Math.max(this._stopTime,this.context.currentTime),this._stopTime>this._startTime?(this._gainNode.gain.setValueAtTime(0,this._stopTime),this.context.clearTimeout(this._timeout),this._timeout=this.context.setTimeout(function(){this._oscillator.stop(this.now()),this.onended(),setTimeout(function(){this._oscillator&&(this._oscillator.disconnect(),this._gainNode.disconnect())}.bind(this),100)}.bind(this),this._stopTime-this.context.currentTime)):this._gainNode.gain.cancelScheduledValues(this._startTime),this},n.default.OscillatorNode.prototype.cancelStop=function(){return-1!==this._startTime&&(this._gainNode.gain.cancelScheduledValues(this._startTime+this.sampleTime),this.context.clearTimeout(this._timeout),this._stopTime=-1),this},Object.defineProperty(n.default.OscillatorNode.prototype,"type",{get:function(){return this._oscillator.type},set:function(t){this._oscillator.type=t}}),n.default.OscillatorNode.prototype.dispose=function(){return this._wasDisposed||(this._wasDisposed=!0,this.context.clearTimeout(this._timeout),n.default.AudioNode.prototype.dispose.call(this),this.onended=null,this._oscillator.disconnect(),this._oscillator=null,this._gainNode.dispose(),this._gainNode=null,this.frequency.dispose(),this.frequency=null,this.detune.dispose(),this.detune=null),this},e.default=n.default.OscillatorNode},function(t,e,i){i.r(e);var n=i(0);i(11),i(6),i(57),i(32),n.default.Player=function(t){var e;t instanceof n.default.Buffer&&t.loaded?(t=t.get(),e=n.default.Player.defaults):e=n.default.defaults(arguments,["url","onload"],n.default.Player),n.default.Source.call(this,e),this.autostart=e.autostart,this._buffer=new n.default.Buffer({url:e.url,onload:this._onload.bind(this,e.onload),reverse:e.reverse}),t instanceof AudioBuffer&&this._buffer.set(t),this._loop=e.loop,this._loopStart=e.loopStart,this._loopEnd=e.loopEnd,this._playbackRate=e.playbackRate,this._activeSources=[],this.fadeIn=e.fadeIn,this.fadeOut=e.fadeOut},n.default.extend(n.default.Player,n.default.Source),n.default.Player.defaults={onload:n.default.noOp,playbackRate:1,loop:!1,autostart:!1,loopStart:0,loopEnd:0,reverse:!1,fadeIn:0,fadeOut:0},n.default.Player.prototype.load=function(t,e){return this._buffer.load(t,this._onload.bind(this,e))},n.default.Player.prototype._onload=function(t){(t=n.default.defaultArg(t,n.default.noOp))(this),this.autostart&&this.start()},n.default.Player.prototype._onSourceEnd=function(t){var e=this._activeSources.indexOf(t);this._activeSources.splice(e,1),0!==this._activeSources.length||this._synced||this._state.setStateAtTime(n.default.State.Stopped,n.default.now())},n.default.Player.prototype._start=function(t,e,i){e=this._loop?n.default.defaultArg(e,this._loopStart):n.default.defaultArg(e,0),e=this.toSeconds(e),this._synced&&(e*=this._playbackRate);var o=n.default.defaultArg(i,Math.max(this._buffer.duration-e,0));o=this.toSeconds(o),o/=this._playbackRate,t=this.toSeconds(t);var a=new n.default.BufferSource({buffer:this._buffer,loop:this._loop,loopStart:this._loopStart,loopEnd:this._loopEnd,onended:this._onSourceEnd.bind(this),playbackRate:this._playbackRate,fadeIn:this.fadeIn,fadeOut:this.fadeOut}).connect(this.output);return this._loop||this._synced||this._state.setStateAtTime(n.default.State.Stopped,t+o),this._activeSources.push(a),this._loop&&n.default.isUndef(i)?a.start(t,e):a.start(t,e,o-this.toSeconds(this.fadeOut)),this},n.default.Player.prototype._stop=function(t){return t=this.toSeconds(t),this._activeSources.forEach(function(e){e.stop(t)}),this},n.default.Player.prototype.restart=function(t,e,i){return this._stop(t),this._start(t,e,i),this},n.default.Player.prototype.seek=function(t,e){return e=this.toSeconds(e),this._state.getValueAtTime(e)===n.default.State.Started&&(t=this.toSeconds(t),this._stop(e),this._start(e,t)),this},n.default.Player.prototype.setLoopPoints=function(t,e){return this.loopStart=t,this.loopEnd=e,this},Object.defineProperty(n.default.Player.prototype,"loopStart",{get:function(){return this._loopStart},set:function(t){this._loopStart=t,this._activeSources.forEach(function(e){e.loopStart=t})}}),Object.defineProperty(n.default.Player.prototype,"loopEnd",{get:function(){return this._loopEnd},set:function(t){this._loopEnd=t,this._activeSources.forEach(function(e){e.loopEnd=t})}}),Object.defineProperty(n.default.Player.prototype,"buffer",{get:function(){return this._buffer},set:function(t){this._buffer.set(t)}}),Object.defineProperty(n.default.Player.prototype,"loop",{get:function(){return this._loop},set:function(t){if(this._loop!==t&&(this._loop=t,this._activeSources.forEach(function(e){e.loop=t}),t)){var e=this._state.getNextState(n.default.State.Stopped,this.now());e&&this._state.cancel(e.time)}}}),Object.defineProperty(n.default.Player.prototype,"playbackRate",{get:function(){return this._playbackRate},set:function(t){this._playbackRate=t;var e=this.now(),i=this._state.getNextState(n.default.State.Stopped,e);i&&this._state.cancel(i.time),this._activeSources.forEach(function(i){i.cancelStop(),i.playbackRate.setValueAtTime(t,e)})}}),Object.defineProperty(n.default.Player.prototype,"reverse",{get:function(){return this._buffer.reverse},set:function(t){this._buffer.reverse=t}}),Object.defineProperty(n.default.Player.prototype,"loaded",{get:function(){return this._buffer.loaded}}),n.default.Player.prototype.dispose=function(){return this._activeSources.forEach(function(t){t.dispose()}),this._activeSources=null,n.default.Source.prototype.dispose.call(this),this._buffer.dispose(),this._buffer=null,this},e.default=n.default.Player},function(t,e,i){i.r(e);var n=i(0);i(31),i(41),i(37),i(2),i(9),i(25),n.default.MonoSynth=function(t){t=n.default.defaultArg(t,n.default.MonoSynth.defaults),n.default.Monophonic.call(this,t),this.oscillator=new n.default.OmniOscillator(t.oscillator),this.frequency=this.oscillator.frequency,this.detune=this.oscillator.detune,this.filter=new n.default.Filter(t.filter),this.filter.frequency.value=5e3,this.filterEnvelope=new n.default.FrequencyEnvelope(t.filterEnvelope),this.envelope=new n.default.AmplitudeEnvelope(t.envelope),this.oscillator.chain(this.filter,this.envelope,this.output),this.filterEnvelope.connect(this.filter.frequency),this._readOnly(["oscillator","frequency","detune","filter","filterEnvelope","envelope"])},n.default.extend(n.default.MonoSynth,n.default.Monophonic),n.default.MonoSynth.defaults={frequency:"C4",detune:0,oscillator:{type:"square"},filter:{Q:6,type:"lowpass",rolloff:-24},envelope:{attack:.005,decay:.1,sustain:.9,release:1},filterEnvelope:{attack:.06,decay:.2,sustain:.5,release:2,baseFrequency:200,octaves:7,exponent:2}},n.default.MonoSynth.prototype._triggerEnvelopeAttack=function(t,e){return t=this.toSeconds(t),this.envelope.triggerAttack(t,e),this.filterEnvelope.triggerAttack(t),this.oscillator.start(t),0===this.envelope.sustain&&this.oscillator.stop(t+this.envelope.attack+this.envelope.decay),this},n.default.MonoSynth.prototype._triggerEnvelopeRelease=function(t){return this.envelope.triggerRelease(t),this.filterEnvelope.triggerRelease(t),this.oscillator.stop(t+this.envelope.release),this},n.default.MonoSynth.prototype.dispose=function(){return n.default.Monophonic.prototype.dispose.call(this),this._writable(["oscillator","frequency","detune","filter","filterEnvelope","envelope"]),this.oscillator.dispose(),this.oscillator=null,this.envelope.dispose(),this.envelope=null,this.filterEnvelope.dispose(),this.filterEnvelope=null,this.filter.dispose(),this.filter=null,this.frequency=null,this.detune=null,this},e.default=n.default.MonoSynth},function(t,e,i){i.r(e);var n=i(0);i(6),i(17),i(5),i(3),n.default.FatOscillator=function(){var t=n.default.defaults(arguments,["frequency","type","spread"],n.default.FatOscillator);n.default.Source.call(this,t),this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this._oscillators=[],this._spread=t.spread,this._type=t.type,this._phase=t.phase,this._partials=t.partials,this._partialCount=t.partialCount,this.count=t.count,this._readOnly(["frequency","detune"])},n.default.extend(n.default.FatOscillator,n.default.Source),n.default.FatOscillator.defaults={frequency:440,detune:0,phase:0,spread:20,count:3,type:"sawtooth",partials:[],partialCount:0},n.default.FatOscillator.prototype._start=function(t){t=this.toSeconds(t),this._forEach(function(e){e.start(t)})},n.default.FatOscillator.prototype._stop=function(t){t=this.toSeconds(t),this._forEach(function(e){e.stop(t)})},n.default.FatOscillator.prototype.restart=function(t){t=this.toSeconds(t),this._forEach(function(e){e.restart(t)})},n.default.FatOscillator.prototype._forEach=function(t){for(var e=0;e<this._oscillators.length;e++)t.call(this,this._oscillators[e],e)},Object.defineProperty(n.default.FatOscillator.prototype,"type",{get:function(){return this._type},set:function(t){this._type=t,this._forEach(function(e){e.type=t})}}),Object.defineProperty(n.default.FatOscillator.prototype,"spread",{get:function(){return this._spread},set:function(t){if(this._spread=t,this._oscillators.length>1){var e=-t/2,i=t/(this._oscillators.length-1);this._forEach(function(t,n){t.detune.value=e+i*n})}}}),Object.defineProperty(n.default.FatOscillator.prototype,"count",{get:function(){return this._oscillators.length},set:function(t){if(t=Math.max(t,1),this._oscillators.length!==t){this._forEach(function(t){t.dispose()}),this._oscillators=[];for(var e=0;e<t;e++){var i=new n.default.Oscillator;this.type===n.default.Oscillator.Type.Custom?i.partials=this._partials:i.type=this._type,i.partialCount=this._partialCount,i.phase=this._phase+e/t*360,i.volume.value=-6-1.1*t,this.frequency.connect(i.frequency),this.detune.connect(i.detune),i.connect(this.output),this._oscillators[e]=i}this.spread=this._spread,this.state===n.default.State.Started&&this._forEach(function(t){t.start()})}}}),Object.defineProperty(n.default.FatOscillator.prototype,"phase",{get:function(){return this._phase},set:function(t){this._phase=t,this._forEach(function(e){e.phase=t})}}),Object.defineProperty(n.default.FatOscillator.prototype,"baseType",{get:function(){return this._oscillators[0].baseType},set:function(t){this._forEach(function(e){e.baseType=t}),this._type=this._oscillators[0].type}}),Object.defineProperty(n.default.FatOscillator.prototype,"partials",{get:function(){return this._oscillators[0].partials},set:function(t){this._partials=t,this._type=n.default.Oscillator.Type.Custom,this._forEach(function(e){e.partials=t})}}),Object.defineProperty(n.default.FatOscillator.prototype,"partialCount",{get:function(){return this._oscillators[0].partialCount},set:function(t){this._partialCount=t,this._forEach(function(e){e.partialCount=t}),this._type=this._oscillators[0].type}}),n.default.FatOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._writable(["frequency","detune"]),this.frequency.dispose(),this.frequency=null,this.detune.dispose(),this.detune=null,this._forEach(function(t){t.dispose()}),this._oscillators=null,this._partials=null,this},e.default=n.default.FatOscillator},function(t,e,i){i.r(e);var n=i(0);i(6),i(17),i(5),i(3),i(22),n.default.AMOscillator=function(){var t=n.default.defaults(arguments,["frequency","type","modulationType"],n.default.AMOscillator);n.default.Source.call(this,t),this._carrier=new n.default.Oscillator(t.frequency,t.type),this.frequency=this._carrier.frequency,this.detune=this._carrier.detune,this.detune.value=t.detune,this._modulator=new n.default.Oscillator(t.frequency,t.modulationType),this._modulationScale=new n.default.AudioToGain,this.harmonicity=new n.default.Multiply(t.harmonicity),this.harmonicity.units=n.default.Type.Positive,this._modulationNode=new n.default.Gain(0),this.frequency.chain(this.harmonicity,this._modulator.frequency),this.detune.connect(this._modulator.detune),this._modulator.chain(this._modulationScale,this._modulationNode.gain),this._carrier.chain(this._modulationNode,this.output),this.phase=t.phase,this._readOnly(["frequency","detune","harmonicity"])},n.default.extend(n.default.AMOscillator,n.default.Oscillator),n.default.AMOscillator.defaults={frequency:440,detune:0,phase:0,type:"sine",modulationType:"square",harmonicity:1},n.default.AMOscillator.prototype._start=function(t){this._modulator.start(t),this._carrier.start(t)},n.default.AMOscillator.prototype._stop=function(t){this._modulator.stop(t),this._carrier.stop(t)},n.default.AMOscillator.prototype.restart=function(t){this._modulator.restart(t),this._carrier.restart(t)},Object.defineProperty(n.default.AMOscillator.prototype,"type",{get:function(){return this._carrier.type},set:function(t){this._carrier.type=t}}),Object.defineProperty(n.default.AMOscillator.prototype,"baseType",{get:function(){return this._carrier.baseType},set:function(t){this._carrier.baseType=t}}),Object.defineProperty(n.default.AMOscillator.prototype,"partialCount",{get:function(){return this._carrier.partialCount},set:function(t){this._carrier.partialCount=t}}),Object.defineProperty(n.default.AMOscillator.prototype,"modulationType",{get:function(){return this._modulator.type},set:function(t){this._modulator.type=t}}),Object.defineProperty(n.default.AMOscillator.prototype,"phase",{get:function(){return this._carrier.phase},set:function(t){this._carrier.phase=t,this._modulator.phase=t}}),Object.defineProperty(n.default.AMOscillator.prototype,"partials",{get:function(){return this._carrier.partials},set:function(t){this._carrier.partials=t}}),n.default.AMOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._writable(["frequency","detune","harmonicity"]),this.frequency=null,this.detune=null,this.harmonicity.dispose(),this.harmonicity=null,this._carrier.dispose(),this._carrier=null,this._modulator.dispose(),this._modulator=null,this._modulationNode.dispose(),this._modulationNode=null,this._modulationScale.dispose(),this._modulationScale=null,this},e.default=n.default.AMOscillator},function(t,e,i){i.r(e);var n=i(0);i(6),i(50),i(17),i(5),n.default.PWMOscillator=function(){var t=n.default.defaults(arguments,["frequency","modulationFrequency"],n.default.PWMOscillator);n.default.Source.call(this,t),this._pulse=new n.default.PulseOscillator(t.modulationFrequency),this._pulse._sawtooth.type="sine",this._modulator=new n.default.Oscillator({frequency:t.frequency,detune:t.detune,phase:t.phase}),this._scale=new n.default.Multiply(2),this.frequency=this._modulator.frequency,this.detune=this._modulator.detune,this.modulationFrequency=this._pulse.frequency,this._modulator.chain(this._scale,this._pulse.width),this._pulse.connect(this.output),this._readOnly(["modulationFrequency","frequency","detune"])},n.default.extend(n.default.PWMOscillator,n.default.Source),n.default.PWMOscillator.defaults={frequency:440,detune:0,phase:0,modulationFrequency:.4},n.default.PWMOscillator.prototype._start=function(t){t=this.toSeconds(t),this._modulator.start(t),this._pulse.start(t)},n.default.PWMOscillator.prototype._stop=function(t){t=this.toSeconds(t),this._modulator.stop(t),this._pulse.stop(t)},n.default.PWMOscillator.prototype.restart=function(t){this._modulator.restart(t),this._pulse.restart(t)},Object.defineProperty(n.default.PWMOscillator.prototype,"type",{get:function(){return"pwm"}}),Object.defineProperty(n.default.PWMOscillator.prototype,"baseType",{get:function(){return"pwm"}}),Object.defineProperty(n.default.PWMOscillator.prototype,"partials",{get:function(){return[]}}),Object.defineProperty(n.default.PWMOscillator.prototype,"phase",{get:function(){return this._modulator.phase},set:function(t){this._modulator.phase=t}}),n.default.PWMOscillator.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this._pulse.dispose(),this._pulse=null,this._scale.dispose(),this._scale=null,this._modulator.dispose(),this._modulator=null,this._writable(["modulationFrequency","frequency","detune"]),this.frequency=null,this.detune=null,this.modulationFrequency=null,this},e.default=n.default.PWMOscillator},function(t,e,i){i.r(e);var n=i(0);i(51),i(4),i(16),n.default.Part=function(){var t=n.default.defaults(arguments,["callback","events"],n.default.Part);n.default.Event.call(this,t),this._events=[];for(var e=0;e<t.events.length;e++)Array.isArray(t.events[e])?this.add(t.events[e][0],t.events[e][1]):this.add(t.events[e])},n.default.extend(n.default.Part,n.default.Event),n.default.Part.defaults={callback:n.default.noOp,loop:!1,loopEnd:"1m",loopStart:0,playbackRate:1,probability:1,humanize:!1,mute:!1,events:[]},n.default.Part.prototype.start=function(t,e){var i=this.toTicks(t);return this._state.getValueAtTime(i)!==n.default.State.Started&&(e=this._loop?n.default.defaultArg(e,this._loopStart):n.default.defaultArg(e,0),e=this.toTicks(e),this._state.add({state:n.default.State.Started,time:i,offset:e}),this._forEach(function(t){this._startNote(t,i,e)})),this},n.default.Part.prototype._startNote=function(t,e,i){e-=i,this._loop?t.startOffset>=this._loopStart&&t.startOffset<this._loopEnd?(t.startOffset<i&&(e+=this._getLoopDuration()),t.start(n.default.Ticks(e))):t.startOffset<this._loopStart&&t.startOffset>=i&&(t.loop=!1,t.start(n.default.Ticks(e))):t.startOffset>=i&&t.start(n.default.Ticks(e))},Object.defineProperty(n.default.Part.prototype,"startOffset",{get:function(){return this._startOffset},set:function(t){this._startOffset=t,this._forEach(function(t){t.startOffset+=this._startOffset})}}),n.default.Part.prototype.stop=function(t){var e=this.toTicks(t);return this._state.cancel(e),this._state.setStateAtTime(n.default.State.Stopped,e),this._forEach(function(e){e.stop(t)}),this},n.default.Part.prototype.at=function(t,e){t=n.default.TransportTime(t);for(var i=n.default.Ticks(1).toSeconds(),o=0;o<this._events.length;o++){var a=this._events[o];if(Math.abs(t.toTicks()-a.startOffset)<i)return n.default.isDefined(e)&&(a.value=e),a}return n.default.isDefined(e)?(this.add(t,e),this._events[this._events.length-1]):null},n.default.Part.prototype.add=function(t,e){var i;return t.hasOwnProperty("time")&&(t=(e=t).time),t=this.toTicks(t),e instanceof n.default.Event?(i=e).callback=this._tick.bind(this):i=new n.default.Event({callback:this._tick.bind(this),value:e}),i.startOffset=t,i.set({loopEnd:this.loopEnd,loopStart:this.loopStart,loop:this.loop,humanize:this.humanize,playbackRate:this.playbackRate,probability:this.probability}),this._events.push(i),this._restartEvent(i),this},n.default.Part.prototype._restartEvent=function(t){this._state.forEach(function(e){e.state===n.default.State.Started?this._startNote(t,e.time,e.offset):t.stop(n.default.Ticks(e.time))}.bind(this))},n.default.Part.prototype.remove=function(t,e){t.hasOwnProperty("time")&&(t=(e=t).time),t=this.toTicks(t);for(var i=this._events.length-1;i>=0;i--){var o=this._events[i];o.startOffset===t&&(n.default.isUndef(e)||n.default.isDefined(e)&&o.value===e)&&(this._events.splice(i,1),o.dispose())}return this},n.default.Part.prototype.removeAll=function(){return this._forEach(function(t){t.dispose()}),this._events=[],this},n.default.Part.prototype.cancel=function(t){return this._forEach(function(e){e.cancel(t)}),this._state.cancel(this.toTicks(t)),this},n.default.Part.prototype._forEach=function(t,e){if(this._events){e=n.default.defaultArg(e,this);for(var i=this._events.length-1;i>=0;i--){var o=this._events[i];o instanceof n.default.Part?o._forEach(t,e):t.call(e,o)}}return this},n.default.Part.prototype._setAll=function(t,e){this._forEach(function(i){i[t]=e})},n.default.Part.prototype._tick=function(t,e){this.mute||this.callback(t,e)},n.default.Part.prototype._testLoopBoundries=function(t){this._loop&&(t.startOffset<this._loopStart||t.startOffset>=this._loopEnd)?t.cancel(0):t.state===n.default.State.Stopped&&this._restartEvent(t)},Object.defineProperty(n.default.Part.prototype,"probability",{get:function(){return this._probability},set:function(t){this._probability=t,this._setAll("probability",t)}}),Object.defineProperty(n.default.Part.prototype,"humanize",{get:function(){return this._humanize},set:function(t){this._humanize=t,this._setAll("humanize",t)}}),Object.defineProperty(n.default.Part.prototype,"loop",{get:function(){return this._loop},set:function(t){this._loop=t,this._forEach(function(e){e._loopStart=this._loopStart,e._loopEnd=this._loopEnd,e.loop=t,this._testLoopBoundries(e)})}}),Object.defineProperty(n.default.Part.prototype,"loopEnd",{get:function(){return n.default.Ticks(this._loopEnd).toSeconds()},set:function(t){this._loopEnd=this.toTicks(t),this._loop&&this._forEach(function(e){e.loopEnd=t,this._testLoopBoundries(e)})}}),Object.defineProperty(n.default.Part.prototype,"loopStart",{get:function(){return n.default.Ticks(this._loopStart).toSeconds()},set:function(t){this._loopStart=this.toTicks(t),this._loop&&this._forEach(function(t){t.loopStart=this.loopStart,this._testLoopBoundries(t)})}}),Object.defineProperty(n.default.Part.prototype,"playbackRate",{get:function(){return this._playbackRate},set:function(t){this._playbackRate=t,this._setAll("playbackRate",t)}}),Object.defineProperty(n.default.Part.prototype,"length",{get:function(){return this._events.length}}),n.default.Part.prototype.dispose=function(){return n.default.Event.prototype.dispose.call(this),this.removeAll(),this.callback=null,this._events=null,this},e.default=n.default.Part},function(t,e,i){i.r(e);var n=i(0);i(51),n.default.Loop=function(){var t=n.default.defaults(arguments,["callback","interval"],n.default.Loop);n.default.call(this),this._event=new n.default.Event({callback:this._tick.bind(this),loop:!0,loopEnd:t.interval,playbackRate:t.playbackRate,probability:t.probability}),this.callback=t.callback,this.iterations=t.iterations},n.default.extend(n.default.Loop),n.default.Loop.defaults={interval:"4n",callback:n.default.noOp,playbackRate:1,iterations:1/0,probability:!0,mute:!1},n.default.Loop.prototype.start=function(t){return this._event.start(t),this},n.default.Loop.prototype.stop=function(t){return this._event.stop(t),this},n.default.Loop.prototype.cancel=function(t){return this._event.cancel(t),this},n.default.Loop.prototype._tick=function(t){this.callback(t)},Object.defineProperty(n.default.Loop.prototype,"state",{get:function(){return this._event.state}}),Object.defineProperty(n.default.Loop.prototype,"progress",{get:function(){return this._event.progress}}),Object.defineProperty(n.default.Loop.prototype,"interval",{get:function(){return this._event.loopEnd},set:function(t){this._event.loopEnd=t}}),Object.defineProperty(n.default.Loop.prototype,"playbackRate",{get:function(){return this._event.playbackRate},set:function(t){this._event.playbackRate=t}}),Object.defineProperty(n.default.Loop.prototype,"humanize",{get:function(){return this._event.humanize},set:function(t){this._event.humanize=t}}),Object.defineProperty(n.default.Loop.prototype,"probability",{get:function(){return this._event.probability},set:function(t){this._event.probability=t}}),Object.defineProperty(n.default.Loop.prototype,"mute",{get:function(){return this._event.mute},set:function(t){this._event.mute=t}}),Object.defineProperty(n.default.Loop.prototype,"iterations",{get:function(){return!0===this._event.loop?1/0:this._event.loop},set:function(t){this._event.loop=t===1/0||t}}),n.default.Loop.prototype.dispose=function(){this._event.dispose(),this._event=null,this.callback=null},e.default=n.default.Loop},function(t,e,i){i.r(e);var n=i(0);i(15),i(33),n.default.StereoXFeedbackEffect=function(){var t=n.default.defaults(arguments,["feedback"],n.default.FeedbackEffect);n.default.StereoEffect.call(this,t),this.feedback=new n.default.Signal(t.feedback,n.default.Type.NormalRange),this._feedbackLR=new n.default.Gain,this._feedbackRL=new n.default.Gain,this.effectReturnL.chain(this._feedbackLR,this.effectSendR),this.effectReturnR.chain(this._feedbackRL,this.effectSendL),this.feedback.fan(this._feedbackLR.gain,this._feedbackRL.gain),this._readOnly(["feedback"])},n.default.extend(n.default.StereoXFeedbackEffect,n.default.StereoEffect),n.default.StereoXFeedbackEffect.prototype.dispose=function(){return n.default.StereoEffect.prototype.dispose.call(this),this._writable(["feedback"]),this.feedback.dispose(),this.feedback=null,this._feedbackLR.dispose(),this._feedbackLR=null,this._feedbackRL.dispose(),this._feedbackRL=null,this},e.default=n.default.StereoXFeedbackEffect},function(t,e,i){i.r(e);var n=i(0);i(8),i(53),i(52),n.default.MidSideEffect=function(){n.default.Effect.apply(this,arguments),this._midSideSplit=new n.default.MidSideSplit,this._midSideMerge=new n.default.MidSideMerge,this.midSend=this._midSideSplit.mid,this.sideSend=this._midSideSplit.side,this.midReturn=this._midSideMerge.mid,this.sideReturn=this._midSideMerge.side,this.effectSend.connect(this._midSideSplit),this._midSideMerge.connect(this.effectReturn)},n.default.extend(n.default.MidSideEffect,n.default.Effect),n.default.MidSideEffect.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._midSideSplit.dispose(),this._midSideSplit=null,this._midSideMerge.dispose(),this._midSideMerge=null,this.midSend=null,this.sideSend=null,this.midReturn=null,this.sideReturn=null,this},e.default=n.default.MidSideEffect},function(t,e,i){i.r(e);var n=i(0);i(11),i(8),n.default.Convolver=function(){var t=n.default.defaults(arguments,["url","onload"],n.default.Convolver);n.default.Effect.call(this,t),this._convolver=this.context.createConvolver(),this._buffer=new n.default.Buffer(t.url,function(e){this.buffer=e.get(),t.onload()}.bind(this)),this._buffer.loaded&&(this.buffer=this._buffer),this.normalize=t.normalize,this.connectEffect(this._convolver)},n.default.extend(n.default.Convolver,n.default.Effect),n.default.Convolver.defaults={onload:n.default.noOp,normalize:!0},Object.defineProperty(n.default.Convolver.prototype,"buffer",{get:function(){return this._buffer.length?this._buffer:null},set:function(t){this._buffer.set(t),this._convolver.buffer&&(this.effectSend.disconnect(),this._convolver.disconnect(),this._convolver=this.context.createConvolver(),this.connectEffect(this._convolver)),this._convolver.buffer=this._buffer.get()}}),Object.defineProperty(n.default.Convolver.prototype,"normalize",{get:function(){return this._convolver.normalize},set:function(t){this._convolver.normalize=t}}),n.default.Convolver.prototype.load=function(t,e){return this._buffer.load(t,function(t){this.buffer=t,e&&e()}.bind(this))},n.default.Convolver.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._buffer.dispose(),this._buffer=null,this._convolver.disconnect(),this._convolver=null,this},e.default=n.default.Convolver},function(t,e,i){i.r(e);var n=i(0);i(7),i(5),i(13),n.default.Modulo=function(t){n.default.SignalBase.call(this),this.createInsOuts(1,0),this._shaper=new n.default.WaveShaper(Math.pow(2,16)),this._multiply=new n.default.Multiply,this._subtract=this.output=new n.default.Subtract,this._modSignal=new n.default.Signal(t),n.default.connect(this.input,this._shaper),n.default.connect(this.input,this._subtract),this._modSignal.connect(this._multiply,0,0),this._shaper.connect(this._multiply,0,1),this._multiply.connect(this._subtract,0,1),this._setWaveShaper(t)},n.default.extend(n.default.Modulo,n.default.SignalBase),n.default.Modulo.prototype._setWaveShaper=function(t){this._shaper.setMap(function(e){return Math.floor((e+1e-4)/t)})},Object.defineProperty(n.default.Modulo.prototype,"value",{get:function(){return this._modSignal.value},set:function(t){this._modSignal.value=t,this._setWaveShaper(t)}}),n.default.Modulo.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._shaper.dispose(),this._shaper=null,this._multiply.dispose(),this._multiply=null,this._subtract.dispose(),this._subtract=null,this._modSignal.dispose(),this._modSignal=null,this},e.default=n.default.Modulo},function(t,e,i){i.r(e);var n=i(0);i(20),i(92),n.default.OfflineContext=function(t,e,i){var o=new OfflineAudioContext(t,e*i,i);n.default.Context.call(this,{context:o,clockSource:"offline",lookAhead:0,updateInterval:128/i}),this._duration=e,this._currentTime=0},n.default.extend(n.default.OfflineContext,n.default.Context),n.default.OfflineContext.prototype.now=function(){return this._currentTime},n.default.OfflineContext.prototype.resume=function(){return Promise.resolve()},n.default.OfflineContext.prototype.render=function(){for(;this._duration-this._currentTime>=0;)this.emit("tick"),this._currentTime+=.005;return this._context.startRendering()},n.default.OfflineContext.prototype.close=function(){return this._context=null,Promise.resolve()},e.default=n.default.OfflineContext},function(t,e,i){i.r(e);var n=i(0);i(16),i(11),i(76),i(40),n.default.Offline=function(t,e){var i=n.default.context.sampleRate,o=n.default.context,a=new n.default.OfflineContext(2,e,i);n.default.context=a;var s=t(n.default.Transport),r=null;return r=s&&n.default.isFunction(s.then)?s.then(function(){return a.render()}):a.render(),n.default.context=o,r.then(function(t){return new n.default.Buffer(t)})},e.default=n.default.Offline},function(t,e,i){i.r(e);var n=i(0);i(11),n.default.Buffers=function(t){var e=Array.prototype.slice.call(arguments);e.shift();var i=n.default.defaults(e,["onload","baseUrl"],n.default.Buffers);for(var o in n.default.call(this),this._buffers={},this.baseUrl=i.baseUrl,this._loadingCount=0,t)this._loadingCount++,this.add(o,t[o],this._bufferLoaded.bind(this,i.onload))},n.default.extend(n.default.Buffers),n.default.Buffers.defaults={onload:n.default.noOp,baseUrl:""},n.default.Buffers.prototype.has=function(t){return this._buffers.hasOwnProperty(t)},n.default.Buffers.prototype.get=function(t){if(this.has(t))return this._buffers[t];throw new Error("Tone.Buffers: no buffer named "+t)},n.default.Buffers.prototype._bufferLoaded=function(t){this._loadingCount--,0===this._loadingCount&&t&&t(this)},Object.defineProperty(n.default.Buffers.prototype,"loaded",{get:function(){var t=!0;for(var e in this._buffers){var i=this.get(e);t=t&&i.loaded}return t}}),n.default.Buffers.prototype.add=function(t,e,i){return i=n.default.defaultArg(i,n.default.noOp),e instanceof n.default.Buffer?(this._buffers[t]=e,i(this)):e instanceof AudioBuffer?(this._buffers[t]=new n.default.Buffer(e),i(this)):n.default.isString(e)&&(this._buffers[t]=new n.default.Buffer(this.baseUrl+e,i)),this},n.default.Buffers.prototype.dispose=function(){for(var t in n.default.prototype.dispose.call(this),this._buffers)this._buffers[t].dispose();return this._buffers=null,this},e.default=n.default.Buffers},function(t,e,i){i.r(e);var n=i(0);n.default.CtrlPattern=function(){var t=n.default.defaults(arguments,["values","type"],n.default.CtrlPattern);n.default.call(this),this.values=t.values,this.index=0,this._type=null,this._shuffled=null,this._direction=null,this.type=t.type},n.default.extend(n.default.CtrlPattern),n.default.CtrlPattern.Type={Up:"up",Down:"down",UpDown:"upDown",DownUp:"downUp",AlternateUp:"alternateUp",AlternateDown:"alternateDown",Random:"random",RandomWalk:"randomWalk",RandomOnce:"randomOnce"},n.default.CtrlPattern.defaults={type:n.default.CtrlPattern.Type.Up,values:[]},Object.defineProperty(n.default.CtrlPattern.prototype,"value",{get:function(){if(0!==this.values.length){if(1===this.values.length)return this.values[0];this.index=Math.min(this.index,this.values.length-1);var t=this.values[this.index];return this.type===n.default.CtrlPattern.Type.RandomOnce&&(this.values.length!==this._shuffled.length&&this._shuffleValues(),t=this.values[this._shuffled[this.index]]),t}}}),Object.defineProperty(n.default.CtrlPattern.prototype,"type",{get:function(){return this._type},set:function(t){this._type=t,this._shuffled=null,this._type===n.default.CtrlPattern.Type.Up||this._type===n.default.CtrlPattern.Type.UpDown||this._type===n.default.CtrlPattern.Type.RandomOnce||this._type===n.default.CtrlPattern.Type.AlternateUp?this.index=0:this._type!==n.default.CtrlPattern.Type.Down&&this._type!==n.default.CtrlPattern.Type.DownUp&&this._type!==n.default.CtrlPattern.Type.AlternateDown||(this.index=this.values.length-1),this._type===n.default.CtrlPattern.Type.UpDown||this._type===n.default.CtrlPattern.Type.AlternateUp?this._direction=n.default.CtrlPattern.Type.Up:this._type!==n.default.CtrlPattern.Type.DownUp&&this._type!==n.default.CtrlPattern.Type.AlternateDown||(this._direction=n.default.CtrlPattern.Type.Down),this._type===n.default.CtrlPattern.Type.RandomOnce?this._shuffleValues():this._type===n.default.CtrlPattern.Type.Random&&(this.index=Math.floor(Math.random()*this.values.length))}}),n.default.CtrlPattern.prototype.next=function(){var t=this.type;return t===n.default.CtrlPattern.Type.Up?(this.index++,this.index>=this.values.length&&(this.index=0)):t===n.default.CtrlPattern.Type.Down?(this.index--,this.index<0&&(this.index=this.values.length-1)):t===n.default.CtrlPattern.Type.UpDown||t===n.default.CtrlPattern.Type.DownUp?(this._direction===n.default.CtrlPattern.Type.Up?this.index++:this.index--,this.index<0?(this.index=1,this._direction=n.default.CtrlPattern.Type.Up):this.index>=this.values.length&&(this.index=this.values.length-2,this._direction=n.default.CtrlPattern.Type.Down)):t===n.default.CtrlPattern.Type.Random?this.index=Math.floor(Math.random()*this.values.length):t===n.default.CtrlPattern.Type.RandomWalk?Math.random()<.5?(this.index--,this.index=Math.max(this.index,0)):(this.index++,this.index=Math.min(this.index,this.values.length-1)):t===n.default.CtrlPattern.Type.RandomOnce?(this.index++,this.index>=this.values.length&&(this.index=0,this._shuffleValues())):t===n.default.CtrlPattern.Type.AlternateUp?(this._direction===n.default.CtrlPattern.Type.Up?(this.index+=2,this._direction=n.default.CtrlPattern.Type.Down):(this.index-=1,this._direction=n.default.CtrlPattern.Type.Up),this.index>=this.values.length&&(this.index=0,this._direction=n.default.CtrlPattern.Type.Up)):t===n.default.CtrlPattern.Type.AlternateDown&&(this._direction===n.default.CtrlPattern.Type.Up?(this.index+=1,this._direction=n.default.CtrlPattern.Type.Down):(this.index-=2,this._direction=n.default.CtrlPattern.Type.Up),this.index<0&&(this.index=this.values.length-1,this._direction=n.default.CtrlPattern.Type.Down)),this.value},n.default.CtrlPattern.prototype._shuffleValues=function(){var t=[];this._shuffled=[];for(var e=0;e<this.values.length;e++)t[e]=e;for(;t.length>0;){var i=t.splice(Math.floor(t.length*Math.random()),1);this._shuffled.push(i[0])}},n.default.CtrlPattern.prototype.dispose=function(){this._shuffled=null,this.values=null},e.default=n.default.CtrlPattern},function(t,e,i){i.r(e);var n=i(0);i(56),i(55),n.default.TransportRepeatEvent=function(t,e){n.default.TransportEvent.call(this,t,e),e=n.default.defaultArg(e,n.default.TransportRepeatEvent.defaults),this.duration=n.default.Ticks(e.duration),this._interval=n.default.Ticks(e.interval),this._currentId=-1,this._nextId=-1,this._nextTick=this.time,this._boundRestart=this._restart.bind(this),this.Transport.on("start loopStart",this._boundRestart),this._restart()},n.default.extend(n.default.TransportRepeatEvent,n.default.TransportEvent),n.default.TransportRepeatEvent.defaults={duration:1/0,interval:1},n.default.TransportRepeatEvent.prototype.invoke=function(t){this._createEvents(t),n.default.TransportEvent.prototype.invoke.call(this,t)},n.default.TransportRepeatEvent.prototype._createEvents=function(t){var e=this.Transport.getTicksAtTime(t);e>=this.time&&e>=this._nextTick&&this._nextTick+this._interval<this.time+this.duration&&(this._nextTick+=this._interval,this._currentId=this._nextId,this._nextId=this.Transport.scheduleOnce(this.invoke.bind(this),n.default.Ticks(this._nextTick)))},n.default.TransportRepeatEvent.prototype._restart=function(t){this.Transport.clear(this._currentId),this.Transport.clear(this._nextId),this._nextTick=this.time;var e=this.Transport.getTicksAtTime(t);e>this.time&&(this._nextTick=this.time+Math.ceil((e-this.time)/this._interval)*this._interval),this._currentId=this.Transport.scheduleOnce(this.invoke.bind(this),n.default.Ticks(this._nextTick)),this._nextTick+=this._interval,this._nextId=this.Transport.scheduleOnce(this.invoke.bind(this),n.default.Ticks(this._nextTick))},n.default.TransportRepeatEvent.prototype.dispose=function(){return this.Transport.clear(this._currentId),this.Transport.clear(this._nextId),this.Transport.off("start loopStart",this._boundRestart),this._boundCreateEvents=null,n.default.TransportEvent.prototype.dispose.call(this),this.duration=null,this._interval=null,this},e.default=n.default.TransportRepeatEvent},function(t,e,i){i.r(e);var n=i(0);i(4),n.default.IntervalTimeline=function(){n.default.call(this),this._root=null,this._length=0},n.default.extend(n.default.IntervalTimeline),n.default.IntervalTimeline.prototype.add=function(t){if(n.default.isUndef(t.time)||n.default.isUndef(t.duration))throw new Error("Tone.IntervalTimeline: events must have time and duration parameters");t.time=t.time.valueOf();var e=new o(t.time,t.time+t.duration,t);for(null===this._root?this._root=e:this._root.insert(e),this._length++;null!==e;)e.updateHeight(),e.updateMax(),this._rebalance(e),e=e.parent;return this},n.default.IntervalTimeline.prototype.remove=function(t){if(null!==this._root){var e=[];this._root.search(t.time,e);for(var i=0;i<e.length;i++){var n=e[i];if(n.event===t){this._removeNode(n),this._length--;break}}}return this},Object.defineProperty(n.default.IntervalTimeline.prototype,"length",{get:function(){return this._length}}),n.default.IntervalTimeline.prototype.cancel=function(t){return this.forEachFrom(t,function(t){this.remove(t)}.bind(this)),this},n.default.IntervalTimeline.prototype._setRoot=function(t){this._root=t,null!==this._root&&(this._root.parent=null)},n.default.IntervalTimeline.prototype._replaceNodeInParent=function(t,e){null!==t.parent?(t.isLeftChild()?t.parent.left=e:t.parent.right=e,this._rebalance(t.parent)):this._setRoot(e)},n.default.IntervalTimeline.prototype._removeNode=function(t){if(null===t.left&&null===t.right)this._replaceNodeInParent(t,null);else if(null===t.right)this._replaceNodeInParent(t,t.left);else if(null===t.left)this._replaceNodeInParent(t,t.right);else{var e,i;if(t.getBalance()>0)if(null===t.left.right)(e=t.left).right=t.right,i=e;else{for(e=t.left.right;null!==e.right;)e=e.right;e.parent.right=e.left,i=e.parent,e.left=t.left,e.right=t.right}else if(null===t.right.left)(e=t.right).left=t.left,i=e;else{for(e=t.right.left;null!==e.left;)e=e.left;e.parent.left=e.right,i=e.parent,e.left=t.left,e.right=t.right}null!==t.parent?t.isLeftChild()?t.parent.left=e:t.parent.right=e:this._setRoot(e),this._rebalance(i)}t.dispose()},n.default.IntervalTimeline.prototype._rotateLeft=function(t){var e=t.parent,i=t.isLeftChild(),n=t.right;t.right=n.left,n.left=t,null!==e?i?e.left=n:e.right=n:this._setRoot(n)},n.default.IntervalTimeline.prototype._rotateRight=function(t){var e=t.parent,i=t.isLeftChild(),n=t.left;t.left=n.right,n.right=t,null!==e?i?e.left=n:e.right=n:this._setRoot(n)},n.default.IntervalTimeline.prototype._rebalance=function(t){var e=t.getBalance();e>1?t.left.getBalance()<0?this._rotateLeft(t.left):this._rotateRight(t):e<-1&&(t.right.getBalance()>0?this._rotateRight(t.right):this._rotateLeft(t))},n.default.IntervalTimeline.prototype.get=function(t){if(null!==this._root){var e=[];if(this._root.search(t,e),e.length>0){for(var i=e[0],n=1;n<e.length;n++)e[n].low>i.low&&(i=e[n]);return i.event}}return null},n.default.IntervalTimeline.prototype.forEach=function(t){if(null!==this._root){var e=[];this._root.traverse(function(t){e.push(t)});for(var i=0;i<e.length;i++){var n=e[i].event;n&&t(n)}}return this},n.default.IntervalTimeline.prototype.forEachAtTime=function(t,e){if(null!==this._root){var i=[];this._root.search(t,i);for(var n=i.length-1;n>=0;n--){var o=i[n].event;o&&e(o)}}return this},n.default.IntervalTimeline.prototype.forEachFrom=function(t,e){if(null!==this._root){var i=[];this._root.searchAfter(t,i);for(var n=i.length-1;n>=0;n--)e(i[n].event)}return this},n.default.IntervalTimeline.prototype.dispose=function(){var t=[];null!==this._root&&this._root.traverse(function(e){t.push(e)});for(var e=0;e<t.length;e++)t[e].dispose();return t=null,this._root=null,this};var o=function(t,e,i){this.event=i,this.low=t,this.high=e,this.max=this.high,this._left=null,this._right=null,this.parent=null,this.height=0};o.prototype.insert=function(t){t.low<=this.low?null===this.left?this.left=t:this.left.insert(t):null===this.right?this.right=t:this.right.insert(t)},o.prototype.search=function(t,e){t>this.max||(null!==this.left&&this.left.search(t,e),this.low<=t&&this.high>t&&e.push(this),this.low>t||null!==this.right&&this.right.search(t,e))},o.prototype.searchAfter=function(t,e){this.low>=t&&(e.push(this),null!==this.left&&this.left.searchAfter(t,e)),null!==this.right&&this.right.searchAfter(t,e)},o.prototype.traverse=function(t){t(this),null!==this.left&&this.left.traverse(t),null!==this.right&&this.right.traverse(t)},o.prototype.updateHeight=function(){null!==this.left&&null!==this.right?this.height=Math.max(this.left.height,this.right.height)+1:null!==this.right?this.height=this.right.height+1:null!==this.left?this.height=this.left.height+1:this.height=0},o.prototype.updateMax=function(){this.max=this.high,null!==this.left&&(this.max=Math.max(this.max,this.left.max)),null!==this.right&&(this.max=Math.max(this.max,this.right.max))},o.prototype.getBalance=function(){var t=0;return null!==this.left&&null!==this.right?t=this.left.height-this.right.height:null!==this.left?t=this.left.height+1:null!==this.right&&(t=-(this.right.height+1)),t},o.prototype.isLeftChild=function(){return null!==this.parent&&this.parent.left===this},Object.defineProperty(o.prototype,"left",{get:function(){return this._left},set:function(t){this._left=t,null!==t&&(t.parent=this),this.updateHeight(),this.updateMax()}}),Object.defineProperty(o.prototype,"right",{get:function(){return this._right},set:function(t){this._right=t,null!==t&&(t.parent=this),this.updateHeight(),this.updateMax()}}),o.prototype.dispose=function(){this.parent=null,this._left=null,this._right=null,this.event=null},e.default=n.default.IntervalTimeline},function(t,e,i){i.r(e);var n=i(0);function o(t){return function(e,i){i=this.toSeconds(i),t.apply(this,arguments);var n=this._events.get(i),o=this._events.previousEvent(n),a=this._getTicksUntilEvent(o,i);return n.ticks=Math.max(a,0),this}}i(2),n.default.TickSignal=function(t){t=n.default.defaultArg(t,1),n.default.Signal.call(this,{units:n.default.Type.Ticks,value:t}),this._events.memory=1/0,this.cancelScheduledValues(0),this._events.add({type:n.default.Param.AutomationType.SetValue,time:0,value:t})},n.default.extend(n.default.TickSignal,n.default.Signal),n.default.TickSignal.prototype.setValueAtTime=o(n.default.Signal.prototype.setValueAtTime),n.default.TickSignal.prototype.linearRampToValueAtTime=o(n.default.Signal.prototype.linearRampToValueAtTime),n.default.TickSignal.prototype.setTargetAtTime=function(t,e,i){e=this.toSeconds(e),this.setRampPoint(e),t=this._fromUnits(t);for(var n=this._events.get(e),o=Math.round(Math.max(1/i,1)),a=0;a<=o;a++){var s=i*a+e,r=this._exponentialApproach(n.time,n.value,t,i,s);this.linearRampToValueAtTime(this._toUnits(r),s)}return this},n.default.TickSignal.prototype.exponentialRampToValueAtTime=function(t,e){e=this.toSeconds(e),t=this._fromUnits(t);for(var i=this._events.get(e),n=Math.round(Math.max(10*(e-i.time),1)),o=(e-i.time)/n,a=0;a<=n;a++){var s=o*a+i.time,r=this._exponentialInterpolate(i.time,i.value,e,t,s);this.linearRampToValueAtTime(this._toUnits(r),s)}return this},n.default.TickSignal.prototype._getTicksUntilEvent=function(t,e){if(null===t)t={ticks:0,time:0};else if(n.default.isUndef(t.ticks)){var i=this._events.previousEvent(t);t.ticks=this._getTicksUntilEvent(i,t.time)}var o=this.getValueAtTime(t.time),a=this.getValueAtTime(e);return this._events.get(e).time===e&&this._events.get(e).type===n.default.Param.AutomationType.SetValue&&(a=this.getValueAtTime(e-this.sampleTime)),.5*(e-t.time)*(o+a)+t.ticks},n.default.TickSignal.prototype.getTicksAtTime=function(t){t=this.toSeconds(t);var e=this._events.get(t);return Math.max(this._getTicksUntilEvent(e,t),0)},n.default.TickSignal.prototype.getDurationOfTicks=function(t,e){e=this.toSeconds(e);var i=this.getTicksAtTime(e);return this.getTimeOfTick(i+t)-e},n.default.TickSignal.prototype.getTimeOfTick=function(t){var e=this._events.get(t,"ticks"),i=this._events.getAfter(t,"ticks");if(e&&e.ticks===t)return e.time;if(e&&i&&i.type===n.default.Param.AutomationType.Linear&&e.value!==i.value){var o=this.getValueAtTime(e.time),a=(this.getValueAtTime(i.time)-o)/(i.time-e.time),s=Math.sqrt(Math.pow(o,2)-2*a*(e.ticks-t)),r=(-o+s)/a;return(r>0?r:(-o-s)/a)+e.time}return e?0===e.value?1/0:e.time+(t-e.ticks)/e.value:t/this._initialValue},n.default.TickSignal.prototype.ticksToTime=function(t,e){return e=this.toSeconds(e),new n.default.Time(this.getDurationOfTicks(t,e))},n.default.TickSignal.prototype.timeToTicks=function(t,e){e=this.toSeconds(e),t=this.toSeconds(t);var i=this.getTicksAtTime(e),o=this.getTicksAtTime(e+t);return new n.default.Ticks(o-i)},e.default=n.default.TickSignal},function(t,e,i){i.r(e);var n=i(0);i(57),i(34),i(35),i(20),n.default.Clock=function(){var t=n.default.defaults(arguments,["callback","frequency"],n.default.Clock);n.default.Emitter.call(this),this.callback=t.callback,this._nextTick=0,this._tickSource=new n.default.TickSource(t.frequency),this._lastUpdate=0,this.frequency=this._tickSource.frequency,this._readOnly("frequency"),this._state=new n.default.TimelineState(n.default.State.Stopped),this._state.setStateAtTime(n.default.State.Stopped,0),this._boundLoop=this._loop.bind(this),this.context.on("tick",this._boundLoop)},n.default.extend(n.default.Clock,n.default.Emitter),n.default.Clock.defaults={callback:n.default.noOp,frequency:1},Object.defineProperty(n.default.Clock.prototype,"state",{get:function(){return this._state.getValueAtTime(this.now())}}),n.default.Clock.prototype.start=function(t,e){return this.context.resume(),t=this.toSeconds(t),this._state.getValueAtTime(t)!==n.default.State.Started&&(this._state.setStateAtTime(n.default.State.Started,t),this._tickSource.start(t,e),t<this._lastUpdate&&this.emit("start",t,e)),this},n.default.Clock.prototype.stop=function(t){return t=this.toSeconds(t),this._state.cancel(t),this._state.setStateAtTime(n.default.State.Stopped,t),this._tickSource.stop(t),t<this._lastUpdate&&this.emit("stop",t),this},n.default.Clock.prototype.pause=function(t){return t=this.toSeconds(t),this._state.getValueAtTime(t)===n.default.State.Started&&(this._state.setStateAtTime(n.default.State.Paused,t),this._tickSource.pause(t),t<this._lastUpdate&&this.emit("pause",t)),this},Object.defineProperty(n.default.Clock.prototype,"ticks",{get:function(){return Math.ceil(this.getTicksAtTime(this.now()))},set:function(t){this._tickSource.ticks=t}}),Object.defineProperty(n.default.Clock.prototype,"seconds",{get:function(){return this._tickSource.seconds},set:function(t){this._tickSource.seconds=t}}),n.default.Clock.prototype.getSecondsAtTime=function(t){return this._tickSource.getSecondsAtTime(t)},n.default.Clock.prototype.setTicksAtTime=function(t,e){return this._tickSource.setTicksAtTime(t,e),this},n.default.Clock.prototype.getTicksAtTime=function(t){return this._tickSource.getTicksAtTime(t)},n.default.Clock.prototype.nextTickTime=function(t,e){e=this.toSeconds(e);var i=this.getTicksAtTime(e);return this._tickSource.getTimeOfTick(i+t,e)},n.default.Clock.prototype._loop=function(){var t=this._lastUpdate,e=this.now();this._lastUpdate=e,t!==e&&(this._state.forEachBetween(t,e,function(t){switch(t.state){case n.default.State.Started:var e=this._tickSource.getTicksAtTime(t.time);this.emit("start",t.time,e);break;case n.default.State.Stopped:0!==t.time&&this.emit("stop",t.time);break;case n.default.State.Paused:this.emit("pause",t.time)}}.bind(this)),this._tickSource.forEachTickBetween(t,e,function(t,e){this.callback(t,e)}.bind(this)))},n.default.Clock.prototype.getStateAtTime=function(t){return t=this.toSeconds(t),this._state.getValueAtTime(t)},n.default.Clock.prototype.dispose=function(){n.default.Emitter.prototype.dispose.call(this),this.context.off("tick",this._boundLoop),this._writable("frequency"),this._tickSource.dispose(),this._tickSource=null,this.frequency=null,this._boundLoop=null,this._nextTick=1/0,this.callback=null,this._state.dispose(),this._state=null},e.default=n.default.Clock},function(t,e,i){i.r(e);var n=i(0);i(2),i(5),i(7),n.default.GreaterThanZero=function(){n.default.SignalBase.call(this),this._thresh=this.output=new n.default.WaveShaper(function(t){return t<=0?0:1},127),this._scale=this.input=new n.default.Multiply(1e4),this._scale.connect(this._thresh)},n.default.extend(n.default.GreaterThanZero,n.default.SignalBase),n.default.GreaterThanZero.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._scale.dispose(),this._scale=null,this._thresh.dispose(),this._thresh=null,this},e.default=n.default.GreaterThanZero},function(t,e,i){i.r(e);var n=i(0);i(84),i(13),i(2),n.default.GreaterThan=function(t){n.default.Signal.call(this),this.createInsOuts(2,0),this._param=this.input[0]=new n.default.Subtract(t),this.input[1]=this._param.input[1],this._gtz=this.output=new n.default.GreaterThanZero,this._param.connect(this._gtz)},n.default.extend(n.default.GreaterThan,n.default.Signal),n.default.GreaterThan.prototype.dispose=function(){return n.default.Signal.prototype.dispose.call(this),this._gtz.dispose(),this._gtz=null,this},e.default=n.default.GreaterThan},function(t,e,i){i.r(e);var n=i(0);i(47),i(26),n.default.ScaledEnvelope=function(){var t=n.default.defaults(arguments,["attack","decay","sustain","release"],n.default.Envelope);n.default.Envelope.call(this,t),t=n.default.defaultArg(t,n.default.ScaledEnvelope.defaults),this._exp=this.output=new n.default.Pow(t.exponent),this._scale=this.output=new n.default.Scale(t.min,t.max),this._sig.chain(this._exp,this._scale)},n.default.extend(n.default.ScaledEnvelope,n.default.Envelope),n.default.ScaledEnvelope.defaults={min:0,max:1,exponent:1},Object.defineProperty(n.default.ScaledEnvelope.prototype,"min",{get:function(){return this._scale.min},set:function(t){this._scale.min=t}}),Object.defineProperty(n.default.ScaledEnvelope.prototype,"max",{get:function(){return this._scale.max},set:function(t){this._scale.max=t}}),Object.defineProperty(n.default.ScaledEnvelope.prototype,"exponent",{get:function(){return this._exp.value},set:function(t){this._exp.value=t}}),n.default.ScaledEnvelope.prototype.dispose=function(){return n.default.Envelope.prototype.dispose.call(this),this._scale.dispose(),this._scale=null,this._exp.dispose(),this._exp=null,this},e.default=n.default.ScaledEnvelope},function(t,e,i){i.r(e);var n=i(0);i(7),i(30),n.default.Abs=function(){n.default.SignalBase.call(this),this._abs=this.input=this.output=new n.default.WaveShaper(function(t){return Math.abs(t)<.001?0:Math.abs(t)},1024)},n.default.extend(n.default.Abs,n.default.SignalBase),n.default.Abs.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._abs.dispose(),this._abs=null,this},e.default=n.default.Abs},function(t,e,i){i.r(e);var n=i(0);i(3),i(1),n.default.Solo=function(){var t=n.default.defaults(arguments,["solo"],n.default.Solo);n.default.AudioNode.call(this),this.input=this.output=new n.default.Gain,this._soloBind=this._soloed.bind(this),this.context.on("solo",this._soloBind),this.solo=t.solo},n.default.extend(n.default.Solo,n.default.AudioNode),n.default.Solo.defaults={solo:!1},Object.defineProperty(n.default.Solo.prototype,"solo",{get:function(){return this._isSoloed()},set:function(t){t?this._addSolo():this._removeSolo(),this.context.emit("solo",this)}}),Object.defineProperty(n.default.Solo.prototype,"muted",{get:function(){return 0===this.input.gain.value}}),n.default.Solo.prototype._addSolo=function(){n.default.isArray(this.context._currentSolo)||(this.context._currentSolo=[]),this._isSoloed()||this.context._currentSolo.push(this)},n.default.Solo.prototype._removeSolo=function(){if(this._isSoloed()){var t=this.context._currentSolo.indexOf(this);this.context._currentSolo.splice(t,1)}},n.default.Solo.prototype._isSoloed=function(){return!!n.default.isArray(this.context._currentSolo)&&0!==this.context._currentSolo.length&&-1!==this.context._currentSolo.indexOf(this)},n.default.Solo.prototype._noSolos=function(){return!n.default.isArray(this.context._currentSolo)||0===this.context._currentSolo.length},n.default.Solo.prototype._soloed=function(){this._isSoloed()?this.input.gain.value=1:this._noSolos()?this.input.gain.value=1:this.input.gain.value=0},n.default.Solo.prototype.dispose=function(){return this.context.off("solo",this._soloBind),this._removeSolo(),this._soloBind=null,n.default.AudioNode.prototype.dispose.call(this),this},e.default=n.default.Solo},function(t,e,i){i.r(e);var n=i(0);i(7),n.default.EqualPowerGain=function(){n.default.SignalBase.call(this),this._eqPower=this.input=this.output=new n.default.WaveShaper(function(t){return Math.abs(t)<.001?0:n.default.equalPowerScale(t)}.bind(this),4096)},n.default.extend(n.default.EqualPowerGain,n.default.SignalBase),n.default.EqualPowerGain.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._eqPower.dispose(),this._eqPower=null,this},e.default=n.default.EqualPowerGain},function(t,e,i){i.r(e);var n=i(0);i(5),i(2),n.default.Negate=function(){n.default.SignalBase.call(this),this._multiply=this.input=this.output=new n.default.Multiply(-1)},n.default.extend(n.default.Negate,n.default.SignalBase),n.default.Negate.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._multiply.dispose(),this._multiply=null,this},e.default=n.default.Negate},function(t,e,i){i.r(e);var n=i(0);i(48),i(27),i(1),n.default.PanVol=function(){var t=n.default.defaults(arguments,["pan","volume"],n.default.PanVol);n.default.AudioNode.call(this),this._panner=this.input=new n.default.Panner(t.pan),this.pan=this._panner.pan,this._volume=this.output=new n.default.Volume(t.volume),this.volume=this._volume.volume,this._panner.connect(this._volume),this.mute=t.mute,this._readOnly(["pan","volume"])},n.default.extend(n.default.PanVol,n.default.AudioNode),n.default.PanVol.defaults={pan:0,volume:0,mute:!1},Object.defineProperty(n.default.PanVol.prototype,"mute",{get:function(){return this._volume.mute},set:function(t){this._volume.mute=t}}),n.default.PanVol.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["pan","volume"]),this._panner.dispose(),this._panner=null,this.pan=null,this._volume.dispose(),this._volume=null,this.volume=null,this},e.default=n.default.PanVol},function(t,e,i){var n=i(0);if(n.default.supported){!n.default.global.hasOwnProperty("OfflineAudioContext")&&n.default.global.hasOwnProperty("webkitOfflineAudioContext")&&(n.default.global.OfflineAudioContext=n.default.global.webkitOfflineAudioContext);var o=new OfflineAudioContext(1,1,44100).startRendering();o&&n.default.isFunction(o.then)||(OfflineAudioContext.prototype._native_startRendering=OfflineAudioContext.prototype.startRendering,OfflineAudioContext.prototype.startRendering=function(){return new Promise(function(t){this.oncomplete=function(e){t(e.renderedBuffer)},this._native_startRendering()}.bind(this))})}},function(t,e,i){e.a="13.8.25"},function(t,e,i){i.r(e);var n=i(0);i(46),n.default.Midi=function(t,e){if(!(this instanceof n.default.Midi))return new n.default.Midi(t,e);n.default.Frequency.call(this,t,e)},n.default.extend(n.default.Midi,n.default.Frequency),n.default.Midi.prototype._defaultUnits="midi",n.default.Midi.prototype._frequencyToUnits=function(t){return n.default.Frequency.ftom(n.default.Frequency.prototype._frequencyToUnits.call(this,t))},n.default.Midi.prototype._ticksToUnits=function(t){return n.default.Frequency.ftom(n.default.Frequency.prototype._ticksToUnits.call(this,t))},n.default.Midi.prototype._beatsToUnits=function(t){return n.default.Frequency.ftom(n.default.Frequency.prototype._beatsToUnits.call(this,t))},n.default.Midi.prototype._secondsToUnits=function(t){return n.default.Frequency.ftom(n.default.Frequency.prototype._secondsToUnits.call(this,t))},n.default.Midi.prototype.toMidi=function(){return this.valueOf()},n.default.Midi.prototype.toFrequency=function(){return n.default.Frequency.mtof(this.toMidi())},n.default.Midi.prototype.transpose=function(t){return new this.constructor(this.toMidi()+t)},e.default=n.default.Midi},function(t,e,i){i.r(e);var n=i(0);i(27),i(1),n.default.UserMedia=function(){var t=n.default.defaults(arguments,["volume"],n.default.UserMedia);n.default.AudioNode.call(this),this._mediaStream=null,this._stream=null,this._device=null,this._volume=this.output=new n.default.Volume(t.volume),this.volume=this._volume.volume,this._readOnly("volume"),this.mute=t.mute},n.default.extend(n.default.UserMedia,n.default.AudioNode),n.default.UserMedia.defaults={volume:0,mute:!1},n.default.UserMedia.prototype.open=function(t){return this.state===n.default.State.Started&&this.close(),n.default.UserMedia.enumerateDevices().then(function(e){var i;if(n.default.isNumber(t))i=e[t];else if(!(i=e.find(function(e){return e.label===t||e.deviceId===t}))&&e.length>0)i=e[0];else if(!i&&n.default.isDefined(t))throw new Error("Tone.UserMedia: no matching device: "+t);this._device=i;var o={audio:{echoCancellation:!1,sampleRate:this.context.sampleRate,noiseSuppression:!1,mozNoiseSuppression:!1}};return i&&(o.audio.deviceId=i.deviceId),navigator.mediaDevices.getUserMedia(o).then(function(t){return this._stream||(this._stream=t,this._mediaStream=this.context.createMediaStreamSource(t),n.default.connect(this._mediaStream,this.output)),this}.bind(this))}.bind(this))},n.default.UserMedia.prototype.close=function(){return this._stream&&(this._stream.getAudioTracks().forEach(function(t){t.stop()}),this._stream=null,this._mediaStream.disconnect(),this._mediaStream=null),this._device=null,this},n.default.UserMedia.enumerateDevices=function(){return navigator.mediaDevices.enumerateDevices().then(function(t){return t.filter(function(t){return"audioinput"===t.kind})})},Object.defineProperty(n.default.UserMedia.prototype,"state",{get:function(){return this._stream&&this._stream.active?n.default.State.Started:n.default.State.Stopped}}),Object.defineProperty(n.default.UserMedia.prototype,"deviceId",{get:function(){return this._device?this._device.deviceId:null}}),Object.defineProperty(n.default.UserMedia.prototype,"groupId",{get:function(){return this._device?this._device.groupId:null}}),Object.defineProperty(n.default.UserMedia.prototype,"label",{get:function(){return this._device?this._device.label:null}}),Object.defineProperty(n.default.UserMedia.prototype,"mute",{get:function(){return this._volume.mute},set:function(t){this._volume.mute=t}}),n.default.UserMedia.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this.close(),this._writable("volume"),this._volume.dispose(),this._volume=null,this.volume=null,this},Object.defineProperty(n.default.UserMedia,"supported",{get:function(){return n.default.isDefined(navigator.mediaDevices)&&n.default.isFunction(navigator.mediaDevices.getUserMedia)}}),e.default=n.default.UserMedia},function(t,e,i){i.r(e);var n=i(0);i(65),i(27),i(1),n.default.Players=function(t){var e=Array.prototype.slice.call(arguments);e.shift();var i=n.default.defaults(e,["onload"],n.default.Players);for(var o in n.default.AudioNode.call(this,i),this._volume=this.output=new n.default.Volume(i.volume),this.volume=this._volume.volume,this._readOnly("volume"),this._volume.output.output.channelCount=2,this._volume.output.output.channelCountMode="explicit",this.mute=i.mute,this._players={},this._loadingCount=0,this._fadeIn=i.fadeIn,this._fadeOut=i.fadeOut,t)this._loadingCount++,this.add(o,t[o],this._bufferLoaded.bind(this,i.onload))},n.default.extend(n.default.Players,n.default.AudioNode),n.default.Players.defaults={volume:0,mute:!1,onload:n.default.noOp,fadeIn:0,fadeOut:0},n.default.Players.prototype._bufferLoaded=function(t){this._loadingCount--,0===this._loadingCount&&t&&t(this)},Object.defineProperty(n.default.Players.prototype,"mute",{get:function(){return this._volume.mute},set:function(t){this._volume.mute=t}}),Object.defineProperty(n.default.Players.prototype,"fadeIn",{get:function(){return this._fadeIn},set:function(t){this._fadeIn=t,this._forEach(function(e){e.fadeIn=t})}}),Object.defineProperty(n.default.Players.prototype,"fadeOut",{get:function(){return this._fadeOut},set:function(t){this._fadeOut=t,this._forEach(function(e){e.fadeOut=t})}}),Object.defineProperty(n.default.Players.prototype,"state",{get:function(){var t=!1;return this._forEach(function(e){t=t||e.state===n.default.State.Started}),t?n.default.State.Started:n.default.State.Stopped}}),n.default.Players.prototype.has=function(t){return this._players.hasOwnProperty(t)},n.default.Players.prototype.get=function(t){if(this.has(t))return this._players[t];throw new Error("Tone.Players: no player named "+t)},n.default.Players.prototype._forEach=function(t){for(var e in this._players)t(this._players[e],e);return this},Object.defineProperty(n.default.Players.prototype,"loaded",{get:function(){var t=!0;return this._forEach(function(e){t=t&&e.loaded}),t}}),n.default.Players.prototype.add=function(t,e,i){return this._players[t]=new n.default.Player(e,i).connect(this.output),this._players[t].fadeIn=this._fadeIn,this._players[t].fadeOut=this._fadeOut,this},n.default.Players.prototype.stopAll=function(t){this._forEach(function(e){e.stop(t)})},n.default.Players.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._volume.dispose(),this._volume=null,this._writable("volume"),this.volume=null,this.output=null,this._forEach(function(t){t.dispose()}),this._players=null,this},e.default=n.default.Players},function(t,e,i){i.r(e);var n=i(0);i(6),i(11),i(32),n.default.GrainPlayer=function(){var t=n.default.defaults(arguments,["url","onload"],n.default.GrainPlayer);n.default.Source.call(this,t),this.buffer=new n.default.Buffer(t.url,t.onload.bind(void 0,this)),this._clock=new n.default.Clock(this._tick.bind(this),t.grainSize),this._loopStart=0,this._loopEnd=0,this._activeSources=[],this._playbackRate=t.playbackRate,this._grainSize=t.grainSize,this._overlap=t.overlap,this.detune=t.detune,this.overlap=t.overlap,this.loop=t.loop,this.playbackRate=t.playbackRate,this.grainSize=t.grainSize,this.loopStart=t.loopStart,this.loopEnd=t.loopEnd,this.reverse=t.reverse,this._clock.on("stop",this._onstop.bind(this))},n.default.extend(n.default.GrainPlayer,n.default.Source),n.default.GrainPlayer.defaults={onload:n.default.noOp,overlap:.1,grainSize:.2,playbackRate:1,detune:0,loop:!1,loopStart:0,loopEnd:0,reverse:!1},n.default.GrainPlayer.prototype._start=function(t,e,i){e=n.default.defaultArg(e,0),e=this.toSeconds(e),t=this.toSeconds(t),this._offset=e,this._clock.start(t),i&&this.stop(t+this.toSeconds(i))},n.default.GrainPlayer.prototype._stop=function(t){this._clock.stop(t)},n.default.GrainPlayer.prototype._onstop=function(t){this._activeSources.forEach(function(e){e.fadeOut=0,e.stop(t)})},n.default.GrainPlayer.prototype._tick=function(t){if(!this.loop&&this._offset>this.buffer.duration)this.stop(t);else{var e=this._offset<this._overlap?0:this._overlap,i=new n.default.BufferSource({buffer:this.buffer,fadeIn:e,fadeOut:this._overlap,loop:this.loop,loopStart:this._loopStart,loopEnd:this._loopEnd,playbackRate:n.default.intervalToFrequencyRatio(this.detune/100)}).connect(this.output);i.start(t,this._offset),this._offset+=this.grainSize,i.stop(t+this.grainSize/this.playbackRate),this._activeSources.push(i),i.onended=function(){var t=this._activeSources.indexOf(i);-1!==t&&this._activeSources.splice(t,1)}.bind(this)}},Object.defineProperty(n.default.GrainPlayer.prototype,"playbackRate",{get:function(){return this._playbackRate},set:function(t){this._playbackRate=t,this.grainSize=this._grainSize}}),Object.defineProperty(n.default.GrainPlayer.prototype,"loopStart",{get:function(){return this._loopStart},set:function(t){this._loopStart=this.toSeconds(t)}}),Object.defineProperty(n.default.GrainPlayer.prototype,"loopEnd",{get:function(){return this._loopEnd},set:function(t){this._loopEnd=this.toSeconds(t)}}),Object.defineProperty(n.default.GrainPlayer.prototype,"reverse",{get:function(){return this.buffer.reverse},set:function(t){this.buffer.reverse=t}}),Object.defineProperty(n.default.GrainPlayer.prototype,"grainSize",{get:function(){return this._grainSize},set:function(t){this._grainSize=this.toSeconds(t),this._clock.frequency.value=this._playbackRate/this._grainSize}}),Object.defineProperty(n.default.GrainPlayer.prototype,"overlap",{get:function(){return this._overlap},set:function(t){this._overlap=this.toSeconds(t)}}),Object.defineProperty(n.default.GrainPlayer.prototype,"loaded",{get:function(){return this.buffer.loaded}}),n.default.GrainPlayer.prototype.dispose=function(){return n.default.Source.prototype.dispose.call(this),this.buffer.dispose(),this.buffer=null,this._clock.dispose(),this._clock=null,this._activeSources.forEach(function(t){t.dispose()}),this._activeSources=null,this},e.default=n.default.GrainPlayer},function(t,e,i){i.r(e);var n=i(0);i(16),i(2),i(45),n.default.TransportTimelineSignal=function(){n.default.Signal.apply(this,arguments),this.output=this._outputSig=new n.default.Signal(this._initialValue),this._lastVal=this.value,this._synced=n.default.Transport.scheduleRepeat(this._onTick.bind(this),"1i"),this._bindAnchorValue=this._anchorValue.bind(this),n.default.Transport.on("start stop pause",this._bindAnchorValue),this._events.memory=1/0},n.default.extend(n.default.TransportTimelineSignal,n.default.Signal),n.default.TransportTimelineSignal.prototype._onTick=function(t){var e=this.getValueAtTime(n.default.Transport.seconds);this._lastVal!==e&&(this._lastVal=e,this._outputSig.linearRampToValueAtTime(e,t))},n.default.TransportTimelineSignal.prototype._anchorValue=function(t){var e=this.getValueAtTime(n.default.Transport.seconds);return this._lastVal=e,this._outputSig.cancelScheduledValues(t),this._outputSig.setValueAtTime(e,t),this},n.default.TransportTimelineSignal.prototype.getValueAtTime=function(t){return t=n.default.TransportTime(t),n.default.Signal.prototype.getValueAtTime.call(this,t)},n.default.TransportTimelineSignal.prototype.setValueAtTime=function(t,e){return e=n.default.TransportTime(e),n.default.Signal.prototype.setValueAtTime.call(this,t,e),this},n.default.TransportTimelineSignal.prototype.linearRampToValueAtTime=function(t,e){return e=n.default.TransportTime(e),n.default.Signal.prototype.linearRampToValueAtTime.call(this,t,e),this},n.default.TransportTimelineSignal.prototype.exponentialRampToValueAtTime=function(t,e){return e=n.default.TransportTime(e),n.default.Signal.prototype.exponentialRampToValueAtTime.call(this,t,e),this},n.default.TransportTimelineSignal.prototype.setTargetAtTime=function(t,e,i){return e=n.default.TransportTime(e),n.default.Signal.prototype.setTargetAtTime.call(this,t,e,i),this},n.default.TransportTimelineSignal.prototype.cancelScheduledValues=function(t){return t=n.default.TransportTime(t),n.default.Signal.prototype.cancelScheduledValues.call(this,t),this},n.default.TransportTimelineSignal.prototype.setValueCurveAtTime=function(t,e,i,o){return e=n.default.TransportTime(e),i=n.default.TransportTime(i),n.default.Signal.prototype.setValueCurveAtTime.call(this,t,e,i,o),this},n.default.TransportTimelineSignal.prototype.cancelAndHoldAtTime=function(t){return n.default.Signal.prototype.cancelAndHoldAtTime.call(this,n.default.TransportTime(t))},n.default.TransportTimelineSignal.prototype.dispose=function(){n.default.Transport.clear(this._synced),n.default.Transport.off("start stop pause",this._syncedCallback),this._events.cancel(0),n.default.Signal.prototype.dispose.call(this),this._outputSig.dispose(),this._outputSig=null},e.default=n.default.TransportTimelineSignal},function(t,e,i){i.r(e);var n=i(0);i(29),i(5),n.default.Normalize=function(t,e){n.default.SignalBase.call(this),this._inputMin=n.default.defaultArg(t,0),this._inputMax=n.default.defaultArg(e,1),this._sub=this.input=new n.default.Add(0),this._div=this.output=new n.default.Multiply(1),this._sub.connect(this._div),this._setRange()},n.default.extend(n.default.Normalize,n.default.SignalBase),Object.defineProperty(n.default.Normalize.prototype,"min",{get:function(){return this._inputMin},set:function(t){this._inputMin=t,this._setRange()}}),Object.defineProperty(n.default.Normalize.prototype,"max",{get:function(){return this._inputMax},set:function(t){this._inputMax=t,this._setRange()}}),n.default.Normalize.prototype._setRange=function(){this._sub.value=-this._inputMin,this._div.value=1/(this._inputMax-this._inputMin)},n.default.Normalize.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._sub.dispose(),this._sub=null,this._div.dispose(),this._div=null,this},e.default=n.default.Normalize},function(t,e,i){i.r(e);var n=i(0);i(7),i(2),n.default.GainToAudio=function(){n.default.SignalBase.call(this),this._norm=this.input=this.output=new n.default.WaveShaper(function(t){return 2*Math.abs(t)-1})},n.default.extend(n.default.GainToAudio,n.default.SignalBase),n.default.GainToAudio.prototype.dispose=function(){return n.default.SignalBase.prototype.dispose.call(this),this._norm.dispose(),this._norm=null,this},e.default=n.default.GainToAudio},function(t,e,i){i.r(e);var n=i(0);i(21),i(78),i(32),n.default.Sampler=function(t){var e=Array.prototype.slice.call(arguments);e.shift();var i=n.default.defaults(e,["onload","baseUrl"],n.default.Sampler);n.default.Instrument.call(this,i);var o={};for(var a in t)if(n.default.isNote(a))o[n.default.Frequency(a).toMidi()]=t[a];else{if(isNaN(parseFloat(a)))throw new Error("Tone.Sampler: url keys must be the note's pitch");o[a]=t[a]}this._buffers=new n.default.Buffers(o,i.onload,i.baseUrl),this._activeSources={},this.attack=i.attack,this.release=i.release,this.curve=i.curve},n.default.extend(n.default.Sampler,n.default.Instrument),n.default.Sampler.defaults={attack:0,release:.1,onload:n.default.noOp,baseUrl:"",curve:"exponential"},n.default.Sampler.prototype._findClosest=function(t){for(var e=0;e<96;){if(this._buffers.has(t+e))return-e;if(this._buffers.has(t-e))return e;e++}throw new Error("No available buffers for note: "+t)},n.default.Sampler.prototype.triggerAttack=function(t,e,i){this.log("triggerAttack",t,e,i),Array.isArray(t)||(t=[t]);for(var o=0;o<t.length;o++){var a=n.default.Frequency(t[o]).toMidi(),s=this._findClosest(a),r=a-s,l=this._buffers.get(r),u=n.default.intervalToFrequencyRatio(s),d=new n.default.BufferSource({buffer:l,playbackRate:u,fadeIn:this.attack,fadeOut:this.release,curve:this.curve}).connect(this.output);d.start(e,0,l.duration/u,i),n.default.isArray(this._activeSources[a])||(this._activeSources[a]=[]),this._activeSources[a].push(d),d.onended=function(){if(this._activeSources&&this._activeSources[a]){var t=this._activeSources[a].indexOf(d);-1!==t&&this._activeSources[a].splice(t,1)}}.bind(this)}return this},n.default.Sampler.prototype.triggerRelease=function(t,e){this.log("triggerRelease",t,e),Array.isArray(t)||(t=[t]);for(var i=0;i<t.length;i++){var o=n.default.Frequency(t[i]).toMidi();this._activeSources[o]&&this._activeSources[o].length&&(e=this.toSeconds(e),this._activeSources[o].forEach(function(t){t.stop(e)}),this._activeSources[o]=[])}return this},n.default.Sampler.prototype.releaseAll=function(t){for(var e in t=this.toSeconds(t),this._activeSources)for(var i=this._activeSources[e];i.length;)i.shift().stop(t);return this},n.default.Sampler.prototype.sync=function(){return this._syncMethod("triggerAttack",1),this._syncMethod("triggerRelease",1),this},n.default.Sampler.prototype.triggerAttackRelease=function(t,e,i,o){if(i=this.toSeconds(i),this.triggerAttack(t,i,o),n.default.isArray(e)&&n.default.isArray(t))for(var a=0;a<t.length;a++){var s=e[Math.min(a,e.length-1)];this.triggerRelease(t[a],i+this.toSeconds(s))}else this.triggerRelease(t,i+this.toSeconds(e));return this},n.default.Sampler.prototype.add=function(t,e,i){if(n.default.isNote(t)){var o=n.default.Frequency(t).toMidi();this._buffers.add(o,e,i)}else{if(isNaN(parseFloat(t)))throw new Error("Tone.Sampler: note must be the note's pitch. Instead got "+t);this._buffers.add(t,e,i)}},Object.defineProperty(n.default.Sampler.prototype,"loaded",{get:function(){return this._buffers.loaded}}),n.default.Sampler.prototype.dispose=function(){for(var t in n.default.Instrument.prototype.dispose.call(this),this._buffers.dispose(),this._buffers=null,this._activeSources)this._activeSources[t].forEach(function(t){t.dispose()});return this._activeSources=null,this},e.default=n.default.Sampler},function(t,e,i){i.r(e);var n=i(0);i(38),i(6),n.default.PolySynth=function(){var t=n.default.defaults(arguments,["polyphony","voice"],n.default.PolySynth);n.default.Instrument.call(this,t),(t=n.default.defaultArg(t,n.default.Instrument.defaults)).polyphony=Math.min(n.default.PolySynth.MAX_POLYPHONY,t.polyphony),this.voices=new Array(t.polyphony),this.assert(t.polyphony>0,"polyphony must be greater than 0"),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this._readOnly("detune");for(var e=0;e<t.polyphony;e++){var i=new t.voice(arguments[2],arguments[3]);if(!(i instanceof n.default.Monophonic))throw new Error("Synth constructor must be instance of Tone.Monophonic");this.voices[e]=i,i.index=e,i.connect(this.output),i.hasOwnProperty("detune")&&this.detune.connect(i.detune)}},n.default.extend(n.default.PolySynth,n.default.Instrument),n.default.PolySynth.defaults={polyphony:4,volume:0,detune:0,voice:n.default.Synth},n.default.PolySynth.prototype._getClosestVoice=function(t,e){var i=this.voices.find(function(i){if(Math.abs(i.frequency.getValueAtTime(t)-n.default.Frequency(e))<1e-4&&i.getLevelAtTime(t)>1e-5)return i});return i||this.voices.slice().sort(function(e,i){var n=e.getLevelAtTime(t+this.blockTime),o=i.getLevelAtTime(t+this.blockTime);return n<1e-5&&(n=0),o<1e-5&&(o=0),n-o}.bind(this))[0]},n.default.PolySynth.prototype.triggerAttack=function(t,e,i){return Array.isArray(t)||(t=[t]),e=this.toSeconds(e),t.forEach(function(t){var n=this._getClosestVoice(e,t);n.triggerAttack(t,e,i),this.log("triggerAttack",n.index,t)}.bind(this)),this},n.default.PolySynth.prototype.triggerRelease=function(t,e){return Array.isArray(t)||(t=[t]),e=this.toSeconds(e),t.forEach(function(t){var i=this._getClosestVoice(e,t);this.log("triggerRelease",i.index,t),i.triggerRelease(e)}.bind(this)),this},n.default.PolySynth.prototype.triggerAttackRelease=function(t,e,i,o){if(i=this.toSeconds(i),this.triggerAttack(t,i,o),n.default.isArray(e)&&n.default.isArray(t))for(var a=0;a<t.length;a++){var s=e[Math.min(a,e.length-1)];this.triggerRelease(t[a],i+this.toSeconds(s))}else this.triggerRelease(t,i+this.toSeconds(e));return this},n.default.PolySynth.prototype.sync=function(){return this._syncMethod("triggerAttack",1),this._syncMethod("triggerRelease",1),this},n.default.PolySynth.prototype.set=function(t,e,i){for(var n=0;n<this.voices.length;n++)this.voices[n].set(t,e,i);return this},n.default.PolySynth.prototype.get=function(t){return this.voices[0].get(t)},n.default.PolySynth.prototype.releaseAll=function(t){return t=this.toSeconds(t),this.voices.forEach(function(e){e.triggerRelease(t)}),this},n.default.PolySynth.prototype.dispose=function(){return n.default.Instrument.prototype.dispose.call(this),this.voices.forEach(function(t){t.dispose()}),this._writable("detune"),this.detune.dispose(),this.detune=null,this.voices=null,this},n.default.PolySynth.MAX_POLYPHONY=20,e.default=n.default.PolySynth},function(t,e,i){i.r(e);var n=i(0);i(21),i(39),i(54),n.default.PluckSynth=function(t){t=n.default.defaultArg(t,n.default.PluckSynth.defaults),n.default.Instrument.call(this,t),this._noise=new n.default.Noise("pink"),this.attackNoise=t.attackNoise,this._lfcf=new n.default.LowpassCombFilter({resonance:t.resonance,dampening:t.dampening}),this.resonance=this._lfcf.resonance,this.dampening=this._lfcf.dampening,this._noise.connect(this._lfcf),this._lfcf.connect(this.output),this._readOnly(["resonance","dampening"])},n.default.extend(n.default.PluckSynth,n.default.Instrument),n.default.PluckSynth.defaults={attackNoise:1,dampening:4e3,resonance:.7},n.default.PluckSynth.prototype.triggerAttack=function(t,e){t=this.toFrequency(t),e=this.toSeconds(e);var i=1/t;return this._lfcf.delayTime.setValueAtTime(i,e),this._noise.start(e),this._noise.stop(e+i*this.attackNoise),this},n.default.PluckSynth.prototype.dispose=function(){return n.default.Instrument.prototype.dispose.call(this),this._noise.dispose(),this._lfcf.dispose(),this._noise=null,this._lfcf=null,this._writable(["resonance","dampening"]),this.dampening=null,this.resonance=null,this},e.default=n.default.PluckSynth},function(t,e,i){i.r(e);var n=i(0);i(31),i(41),i(39),i(2),i(9),i(21),n.default.NoiseSynth=function(t){t=n.default.defaultArg(t,n.default.NoiseSynth.defaults),n.default.Instrument.call(this,t),this.noise=new n.default.Noise(t.noise),this.envelope=new n.default.AmplitudeEnvelope(t.envelope),this.noise.chain(this.envelope,this.output),this._readOnly(["noise","envelope"])},n.default.extend(n.default.NoiseSynth,n.default.Instrument),n.default.NoiseSynth.defaults={noise:{type:"white"},envelope:{attack:.005,decay:.1,sustain:0}},n.default.NoiseSynth.prototype.triggerAttack=function(t,e){return t=this.toSeconds(t),this.envelope.triggerAttack(t,e),this.noise.start(t),0===this.envelope.sustain&&this.noise.stop(t+this.envelope.attack+this.envelope.decay),this},n.default.NoiseSynth.prototype.triggerRelease=function(t){return t=this.toSeconds(t),this.envelope.triggerRelease(t),this.noise.stop(t+this.envelope.release),this},n.default.NoiseSynth.prototype.sync=function(){return this._syncMethod("triggerAttack",0),this._syncMethod("triggerRelease",0),this},n.default.NoiseSynth.prototype.triggerAttackRelease=function(t,e,i){return e=this.toSeconds(e),t=this.toSeconds(t),this.triggerAttack(e,i),this.triggerRelease(e+t),this},n.default.NoiseSynth.prototype.dispose=function(){return n.default.Instrument.prototype.dispose.call(this),this._writable(["noise","envelope"]),this.noise.dispose(),this.noise=null,this.envelope.dispose(),this.envelope=null,this},e.default=n.default.NoiseSynth},function(t,e,i){i.r(e);var n=i(0),o=(i(21),i(49),i(9),i(41),i(31),i(3),i(26),i(5),[1,1.483,1.932,2.546,2.63,3.897]);n.default.MetalSynth=function(t){t=n.default.defaultArg(t,n.default.MetalSynth.defaults),n.default.Instrument.call(this,t),this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this._oscillators=[],this._freqMultipliers=[],this._amplitue=new n.default.Gain(0).connect(this.output),this._highpass=new n.default.Filter({type:"highpass",Q:-3.0102999566398125}).connect(this._amplitue),this._octaves=t.octaves,this._filterFreqScaler=new n.default.Scale(t.resonance,7e3),this.envelope=new n.default.Envelope({attack:t.envelope.attack,attackCurve:"linear",decay:t.envelope.decay,sustain:0,release:t.envelope.release}).chain(this._filterFreqScaler,this._highpass.frequency),this.envelope.connect(this._amplitue.gain);for(var e=0;e<o.length;e++){var i=new n.default.FMOscillator({type:"square",modulationType:"square",harmonicity:t.harmonicity,modulationIndex:t.modulationIndex});i.connect(this._highpass),this._oscillators[e]=i;var a=new n.default.Multiply(o[e]);this._freqMultipliers[e]=a,this.frequency.chain(a,i.frequency)}this.octaves=t.octaves},n.default.extend(n.default.MetalSynth,n.default.Instrument),n.default.MetalSynth.defaults={frequency:200,envelope:{attack:.001,decay:1.4,release:.2},harmonicity:5.1,modulationIndex:32,resonance:4e3,octaves:1.5},n.default.MetalSynth.prototype.triggerAttack=function(t,e){return t=this.toSeconds(t),e=n.default.defaultArg(e,1),this.envelope.triggerAttack(t,e),this._oscillators.forEach(function(e){e.start(t)}),0===this.envelope.sustain&&this._oscillators.forEach(function(e){e.stop(t+this.envelope.attack+this.envelope.decay)}.bind(this)),this},n.default.MetalSynth.prototype.triggerRelease=function(t){return t=this.toSeconds(t),this.envelope.triggerRelease(t),this._oscillators.forEach(function(e){e.stop(t+this.envelope.release)}.bind(this)),this},n.default.MetalSynth.prototype.sync=function(){return this._syncMethod("triggerAttack",0),this._syncMethod("triggerRelease",0),this},n.default.MetalSynth.prototype.triggerAttackRelease=function(t,e,i){return e=this.toSeconds(e),t=this.toSeconds(t),this.triggerAttack(e,i),this.triggerRelease(e+t),this},Object.defineProperty(n.default.MetalSynth.prototype,"modulationIndex",{get:function(){return this._oscillators[0].modulationIndex.value},set:function(t){for(var e=0;e<this._oscillators.length;e++)this._oscillators[e].modulationIndex.value=t}}),Object.defineProperty(n.default.MetalSynth.prototype,"harmonicity",{get:function(){return this._oscillators[0].harmonicity.value},set:function(t){for(var e=0;e<this._oscillators.length;e++)this._oscillators[e].harmonicity.value=t}}),Object.defineProperty(n.default.MetalSynth.prototype,"resonance",{get:function(){return this._filterFreqScaler.min},set:function(t){this._filterFreqScaler.min=t,this.octaves=this._octaves}}),Object.defineProperty(n.default.MetalSynth.prototype,"octaves",{get:function(){return this._octaves},set:function(t){this._octaves=t,this._filterFreqScaler.max=this._filterFreqScaler.min*Math.pow(2,t)}}),n.default.MetalSynth.prototype.dispose=function(){n.default.Instrument.prototype.dispose.call(this);for(var t=0;t<this._oscillators.length;t++)this._oscillators[t].dispose(),this._freqMultipliers[t].dispose();this._oscillators=null,this._freqMultipliers=null,this.frequency.dispose(),this.frequency=null,this._filterFreqScaler.dispose(),this._filterFreqScaler=null,this._amplitue.dispose(),this._amplitue=null,this.envelope.dispose(),this.envelope=null,this._highpass.dispose(),this._highpass=null},e.default=n.default.MetalSynth},function(t,e,i){i.r(e);var n=i(0);i(37),i(21),i(31),n.default.MembraneSynth=function(t){t=n.default.defaultArg(t,n.default.MembraneSynth.defaults),n.default.Instrument.call(this,t),this.oscillator=new n.default.OmniOscillator(t.oscillator),this.envelope=new n.default.AmplitudeEnvelope(t.envelope),this.octaves=t.octaves,this.pitchDecay=t.pitchDecay,this.oscillator.chain(this.envelope,this.output),this._readOnly(["oscillator","envelope"])},n.default.extend(n.default.MembraneSynth,n.default.Instrument),n.default.MembraneSynth.defaults={pitchDecay:.05,octaves:10,oscillator:{type:"sine"},envelope:{attack:.001,decay:.4,sustain:.01,release:1.4,attackCurve:"exponential"}},n.default.MembraneSynth.prototype.triggerAttack=function(t,e,i){e=this.toSeconds(e);var n=(t=this.toFrequency(t))*this.octaves;return this.oscillator.frequency.setValueAtTime(n,e),this.oscillator.frequency.exponentialRampToValueAtTime(t,e+this.toSeconds(this.pitchDecay)),this.envelope.triggerAttack(e,i),this.oscillator.start(e),0===this.envelope.sustain&&this.oscillator.stop(e+this.envelope.attack+this.envelope.decay),this},n.default.MembraneSynth.prototype.triggerRelease=function(t){return t=this.toSeconds(t),this.envelope.triggerRelease(t),this.oscillator.stop(t+this.envelope.release),this},n.default.MembraneSynth.prototype.dispose=function(){return n.default.Instrument.prototype.dispose.call(this),this._writable(["oscillator","envelope"]),this.oscillator.dispose(),this.oscillator=null,this.envelope.dispose(),this.envelope=null,this},e.default=n.default.MembraneSynth},function(t,e,i){i.r(e);var n=i(0);i(38),i(2),i(5),i(25),n.default.FMSynth=function(t){t=n.default.defaultArg(t,n.default.FMSynth.defaults),n.default.Monophonic.call(this,t),this._carrier=new n.default.Synth(t.carrier),this._carrier.volume.value=-10,this.oscillator=this._carrier.oscillator,this.envelope=this._carrier.envelope.set(t.envelope),this._modulator=new n.default.Synth(t.modulator),this._modulator.volume.value=-10,this.modulation=this._modulator.oscillator.set(t.modulation),this.modulationEnvelope=this._modulator.envelope.set(t.modulationEnvelope),this.frequency=new n.default.Signal(440,n.default.Type.Frequency),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this.harmonicity=new n.default.Multiply(t.harmonicity),this.harmonicity.units=n.default.Type.Positive,this.modulationIndex=new n.default.Multiply(t.modulationIndex),this.modulationIndex.units=n.default.Type.Positive,this._modulationNode=new n.default.Gain(0),this.frequency.connect(this._carrier.frequency),this.frequency.chain(this.harmonicity,this._modulator.frequency),this.frequency.chain(this.modulationIndex,this._modulationNode),this.detune.fan(this._carrier.detune,this._modulator.detune),this._modulator.connect(this._modulationNode.gain),this._modulationNode.connect(this._carrier.frequency),this._carrier.connect(this.output),this._readOnly(["frequency","harmonicity","modulationIndex","oscillator","envelope","modulation","modulationEnvelope","detune"])},n.default.extend(n.default.FMSynth,n.default.Monophonic),n.default.FMSynth.defaults={harmonicity:3,modulationIndex:10,detune:0,oscillator:{type:"sine"},envelope:{attack:.01,decay:.01,sustain:1,release:.5},modulation:{type:"square"},modulationEnvelope:{attack:.5,decay:0,sustain:1,release:.5}},n.default.FMSynth.prototype._triggerEnvelopeAttack=function(t,e){return t=this.toSeconds(t),this._carrier._triggerEnvelopeAttack(t,e),this._modulator._triggerEnvelopeAttack(t),this},n.default.FMSynth.prototype._triggerEnvelopeRelease=function(t){return t=this.toSeconds(t),this._carrier._triggerEnvelopeRelease(t),this._modulator._triggerEnvelopeRelease(t),this},n.default.FMSynth.prototype.dispose=function(){return n.default.Monophonic.prototype.dispose.call(this),this._writable(["frequency","harmonicity","modulationIndex","oscillator","envelope","modulation","modulationEnvelope","detune"]),this._carrier.dispose(),this._carrier=null,this._modulator.dispose(),this._modulator=null,this.frequency.dispose(),this.frequency=null,this.detune.dispose(),this.detune=null,this.modulationIndex.dispose(),this.modulationIndex=null,this.harmonicity.dispose(),this.harmonicity=null,this._modulationNode.dispose(),this._modulationNode=null,this.oscillator=null,this.envelope=null,this.modulationEnvelope=null,this.modulation=null,this},e.default=n.default.FMSynth},function(t,e,i){i.r(e);var n=i(0);i(66),i(12),i(2),i(5),i(25),i(14),n.default.DuoSynth=function(t){t=n.default.defaultArg(t,n.default.DuoSynth.defaults),n.default.Monophonic.call(this,t),this.voice0=new n.default.MonoSynth(t.voice0),this.voice0.volume.value=-10,this.voice1=new n.default.MonoSynth(t.voice1),this.voice1.volume.value=-10,this._vibrato=new n.default.LFO(t.vibratoRate,-50,50),this._vibrato.start(),this.vibratoRate=this._vibrato.frequency,this._vibratoGain=new n.default.Gain(t.vibratoAmount,n.default.Type.Positive),this.vibratoAmount=this._vibratoGain.gain,this.frequency=new n.default.Signal(440,n.default.Type.Frequency),this.harmonicity=new n.default.Multiply(t.harmonicity),this.harmonicity.units=n.default.Type.Positive,this.frequency.connect(this.voice0.frequency),this.frequency.chain(this.harmonicity,this.voice1.frequency),this._vibrato.connect(this._vibratoGain),this._vibratoGain.fan(this.voice0.detune,this.voice1.detune),this.voice0.connect(this.output),this.voice1.connect(this.output),this._readOnly(["voice0","voice1","frequency","vibratoAmount","vibratoRate"])},n.default.extend(n.default.DuoSynth,n.default.Monophonic),n.default.DuoSynth.defaults={vibratoAmount:.5,vibratoRate:5,harmonicity:1.5,voice0:{volume:-10,portamento:0,oscillator:{type:"sine"},filterEnvelope:{attack:.01,decay:0,sustain:1,release:.5},envelope:{attack:.01,decay:0,sustain:1,release:.5}},voice1:{volume:-10,portamento:0,oscillator:{type:"sine"},filterEnvelope:{attack:.01,decay:0,sustain:1,release:.5},envelope:{attack:.01,decay:0,sustain:1,release:.5}}},n.default.DuoSynth.prototype._triggerEnvelopeAttack=function(t,e){return t=this.toSeconds(t),this.voice0._triggerEnvelopeAttack(t,e),this.voice1._triggerEnvelopeAttack(t,e),this},n.default.DuoSynth.prototype._triggerEnvelopeRelease=function(t){return this.voice0._triggerEnvelopeRelease(t),this.voice1._triggerEnvelopeRelease(t),this},n.default.DuoSynth.prototype.getLevelAtTime=function(t){return(this.voice0.getLevelAtTime(t)+this.voice1.getLevelAtTime(t))/2},n.default.DuoSynth.prototype.dispose=function(){return n.default.Monophonic.prototype.dispose.call(this),this._writable(["voice0","voice1","frequency","vibratoAmount","vibratoRate"]),this.voice0.dispose(),this.voice0=null,this.voice1.dispose(),this.voice1=null,this.frequency.dispose(),this.frequency=null,this._vibratoGain.dispose(),this._vibratoGain=null,this._vibrato=null,this.harmonicity.dispose(),this.harmonicity=null,this.vibratoAmount.dispose(),this.vibratoAmount=null,this.vibratoRate=null,this},e.default=n.default.DuoSynth},function(t,e,i){i.r(e);var n=i(0);i(38),i(2),i(5),i(25),i(22),i(3),n.default.AMSynth=function(t){t=n.default.defaultArg(t,n.default.AMSynth.defaults),n.default.Monophonic.call(this,t),this._carrier=new n.default.Synth,this._carrier.volume.value=-10,this.oscillator=this._carrier.oscillator.set(t.oscillator),this.envelope=this._carrier.envelope.set(t.envelope),this._modulator=new n.default.Synth,this._modulator.volume.value=-10,this.modulation=this._modulator.oscillator.set(t.modulation),this.modulationEnvelope=this._modulator.envelope.set(t.modulationEnvelope),this.frequency=new n.default.Signal(440,n.default.Type.Frequency),this.detune=new n.default.Signal(t.detune,n.default.Type.Cents),this.harmonicity=new n.default.Multiply(t.harmonicity),this.harmonicity.units=n.default.Type.Positive,this._modulationScale=new n.default.AudioToGain,this._modulationNode=new n.default.Gain,this.frequency.connect(this._carrier.frequency),this.frequency.chain(this.harmonicity,this._modulator.frequency),this.detune.fan(this._carrier.detune,this._modulator.detune),this._modulator.chain(this._modulationScale,this._modulationNode.gain),this._carrier.chain(this._modulationNode,this.output),this._readOnly(["frequency","harmonicity","oscillator","envelope","modulation","modulationEnvelope","detune"])},n.default.extend(n.default.AMSynth,n.default.Monophonic),n.default.AMSynth.defaults={harmonicity:3,detune:0,oscillator:{type:"sine"},envelope:{attack:.01,decay:.01,sustain:1,release:.5},modulation:{type:"square"},modulationEnvelope:{attack:.5,decay:0,sustain:1,release:.5}},n.default.AMSynth.prototype._triggerEnvelopeAttack=function(t,e){return t=this.toSeconds(t),this._carrier._triggerEnvelopeAttack(t,e),this._modulator._triggerEnvelopeAttack(t),this},n.default.AMSynth.prototype._triggerEnvelopeRelease=function(t){return this._carrier._triggerEnvelopeRelease(t),this._modulator._triggerEnvelopeRelease(t),this},n.default.AMSynth.prototype.dispose=function(){return n.default.Monophonic.prototype.dispose.call(this),this._writable(["frequency","harmonicity","oscillator","envelope","modulation","modulationEnvelope","detune"]),this._carrier.dispose(),this._carrier=null,this._modulator.dispose(),this._modulator=null,this.frequency.dispose(),this.frequency=null,this.detune.dispose(),this.detune=null,this.harmonicity.dispose(),this.harmonicity=null,this._modulationScale.dispose(),this._modulationScale=null,this._modulationNode.dispose(),this._modulationNode=null,this.oscillator=null,this.envelope=null,this.modulationEnvelope=null,this.modulation=null,this},e.default=n.default.AMSynth},function(t,e,i){i.r(e);var n=i(0);i(70),i(16),n.default.Sequence=function(){var t=n.default.defaults(arguments,["callback","events","subdivision"],n.default.Sequence),e=t.events;if(delete t.events,n.default.Part.call(this,t),this._subdivision=this.toTicks(t.subdivision),n.default.isUndef(t.loopEnd)&&n.default.isDefined(e)&&(this._loopEnd=e.length*this._subdivision),this._loop=!0,n.default.isDefined(e))for(var i=0;i<e.length;i++)this.add(i,e[i])},n.default.extend(n.default.Sequence,n.default.Part),n.default.Sequence.defaults={subdivision:"4n"},Object.defineProperty(n.default.Sequence.prototype,"subdivision",{get:function(){return n.default.Ticks(this._subdivision).toSeconds()}}),n.default.Sequence.prototype.at=function(t,e){return n.default.isArray(e)&&this.remove(t),n.default.Part.prototype.at.call(this,this._indexTime(t),e)},n.default.Sequence.prototype.add=function(t,e){if(null===e)return this;if(n.default.isArray(e)){var i=Math.round(this._subdivision/e.length);e=new n.default.Sequence(this._tick.bind(this),e,n.default.Ticks(i))}return n.default.Part.prototype.add.call(this,this._indexTime(t),e),this},n.default.Sequence.prototype.remove=function(t,e){return n.default.Part.prototype.remove.call(this,this._indexTime(t),e),this},n.default.Sequence.prototype._indexTime=function(t){return t instanceof n.default.TransportTime?t:n.default.Ticks(t*this._subdivision+this.startOffset).toSeconds()},n.default.Sequence.prototype.dispose=function(){return n.default.Part.prototype.dispose.call(this),this},e.default=n.default.Sequence},function(t,e,i){i.r(e);var n=i(0);i(71),i(79),n.default.Pattern=function(){var t=n.default.defaults(arguments,["callback","values","pattern"],n.default.Pattern);n.default.Loop.call(this,t),this._pattern=new n.default.CtrlPattern({values:t.values,type:t.pattern,index:t.index})},n.default.extend(n.default.Pattern,n.default.Loop),n.default.Pattern.defaults={pattern:n.default.CtrlPattern.Type.Up,callback:n.default.noOp,values:[]},n.default.Pattern.prototype._tick=function(t){this.callback(t,this._pattern.value),this._pattern.next()},Object.defineProperty(n.default.Pattern.prototype,"index",{get:function(){return this._pattern.index},set:function(t){this._pattern.index=t}}),Object.defineProperty(n.default.Pattern.prototype,"values",{get:function(){return this._pattern.values},set:function(t){this._pattern.values=t}}),Object.defineProperty(n.default.Pattern.prototype,"value",{get:function(){return this._pattern.value}}),Object.defineProperty(n.default.Pattern.prototype,"pattern",{get:function(){return this._pattern.type},set:function(t){this._pattern.type=t}}),n.default.Pattern.prototype.dispose=function(){n.default.Loop.prototype.dispose.call(this),this._pattern.dispose(),this._pattern=null},e.default=n.default.Pattern},function(t,e,i){i.r(e);var n=i(0);i(8),i(18),i(12),n.default.Vibrato=function(){var t=n.default.defaults(arguments,["frequency","depth"],n.default.Vibrato);n.default.Effect.call(this,t),this._delayNode=new n.default.Delay(0,t.maxDelay),this._lfo=new n.default.LFO({type:t.type,min:0,max:t.maxDelay,frequency:t.frequency,phase:-90}).start().connect(this._delayNode.delayTime),this.frequency=this._lfo.frequency,this.depth=this._lfo.amplitude,this.depth.value=t.depth,this._readOnly(["frequency","depth"]),this.effectSend.chain(this._delayNode,this.effectReturn)},n.default.extend(n.default.Vibrato,n.default.Effect),n.default.Vibrato.defaults={maxDelay:.005,frequency:5,depth:.1,type:"sine"},Object.defineProperty(n.default.Vibrato.prototype,"type",{get:function(){return this._lfo.type},set:function(t){this._lfo.type=t}}),n.default.Vibrato.prototype.dispose=function(){n.default.Effect.prototype.dispose.call(this),this._delayNode.dispose(),this._delayNode=null,this._lfo.dispose(),this._lfo=null,this._writable(["frequency","depth"]),this.frequency=null,this.depth=null},e.default=n.default.Vibrato},function(t,e,i){i.r(e);var n=i(0);i(12),i(15),n.default.Tremolo=function(){var t=n.default.defaults(arguments,["frequency","depth"],n.default.Tremolo);n.default.StereoEffect.call(this,t),this._lfoL=new n.default.LFO({phase:t.spread,min:1,max:0}),this._lfoR=new n.default.LFO({phase:t.spread,min:1,max:0}),this._amplitudeL=new n.default.Gain,this._amplitudeR=new n.default.Gain,this.frequency=new n.default.Signal(t.frequency,n.default.Type.Frequency),this.depth=new n.default.Signal(t.depth,n.default.Type.NormalRange),this._readOnly(["frequency","depth"]),this.effectSendL.chain(this._amplitudeL,this.effectReturnL),this.effectSendR.chain(this._amplitudeR,this.effectReturnR),this._lfoL.connect(this._amplitudeL.gain),this._lfoR.connect(this._amplitudeR.gain),this.frequency.fan(this._lfoL.frequency,this._lfoR.frequency),this.depth.fan(this._lfoR.amplitude,this._lfoL.amplitude),this.type=t.type,this.spread=t.spread},n.default.extend(n.default.Tremolo,n.default.StereoEffect),n.default.Tremolo.defaults={frequency:10,type:"sine",depth:.5,spread:180},n.default.Tremolo.prototype.start=function(t){return this._lfoL.start(t),this._lfoR.start(t),this},n.default.Tremolo.prototype.stop=function(t){return this._lfoL.stop(t),this._lfoR.stop(t),this},n.default.Tremolo.prototype.sync=function(t){return this._lfoL.sync(t),this._lfoR.sync(t),n.default.Transport.syncSignal(this.frequency),this},n.default.Tremolo.prototype.unsync=function(){return this._lfoL.unsync(),this._lfoR.unsync(),n.default.Transport.unsyncSignal(this.frequency),this},Object.defineProperty(n.default.Tremolo.prototype,"type",{get:function(){return this._lfoL.type},set:function(t){this._lfoL.type=t,this._lfoR.type=t}}),Object.defineProperty(n.default.Tremolo.prototype,"spread",{get:function(){return this._lfoR.phase-this._lfoL.phase},set:function(t){this._lfoL.phase=90-t/2,this._lfoR.phase=t/2+90}}),n.default.Tremolo.prototype.dispose=function(){return n.default.StereoEffect.prototype.dispose.call(this),this._writable(["frequency","depth"]),this._lfoL.dispose(),this._lfoL=null,this._lfoR.dispose(),this._lfoR=null,this._amplitudeL.dispose(),this._amplitudeL=null,this._amplitudeR.dispose(),this._amplitudeR=null,this.frequency=null,this.depth=null,this},e.default=n.default.Tremolo},function(t,e,i){i.r(e);var n=i(0);i(73),i(2),i(5),i(13),n.default.StereoWidener=function(){var t=n.default.defaults(arguments,["width"],n.default.StereoWidener);n.default.MidSideEffect.call(this,t),this.width=new n.default.Signal(t.width,n.default.Type.NormalRange),this._readOnly(["width"]),this._twoTimesWidthMid=new n.default.Multiply(2),this._twoTimesWidthSide=new n.default.Multiply(2),this._midMult=new n.default.Multiply,this._twoTimesWidthMid.connect(this._midMult,0,1),this.midSend.chain(this._midMult,this.midReturn),this._oneMinusWidth=new n.default.Subtract,this._oneMinusWidth.connect(this._twoTimesWidthMid),n.default.connect(this.context.getConstant(1),this._oneMinusWidth,0,0),this.width.connect(this._oneMinusWidth,0,1),this._sideMult=new n.default.Multiply,this.width.connect(this._twoTimesWidthSide),this._twoTimesWidthSide.connect(this._sideMult,0,1),this.sideSend.chain(this._sideMult,this.sideReturn)},n.default.extend(n.default.StereoWidener,n.default.MidSideEffect),n.default.StereoWidener.defaults={width:.5},n.default.StereoWidener.prototype.dispose=function(){return n.default.MidSideEffect.prototype.dispose.call(this),this._writable(["width"]),this.width.dispose(),this.width=null,this._midMult.dispose(),this._midMult=null,this._sideMult.dispose(),this._sideMult=null,this._twoTimesWidthMid.dispose(),this._twoTimesWidthMid=null,this._twoTimesWidthSide.dispose(),this._twoTimesWidthSide=null,this._oneMinusWidth.dispose(),this._oneMinusWidth=null,this},e.default=n.default.StereoWidener},function(t,e,i){i.r(e);var n=i(0);i(15),i(33),i(3),n.default.StereoFeedbackEffect=function(){var t=n.default.defaults(arguments,["feedback"],n.default.FeedbackEffect);n.default.StereoEffect.call(this,t),this.feedback=new n.default.Signal(t.feedback,n.default.Type.NormalRange),this._feedbackL=new n.default.Gain,this._feedbackR=new n.default.Gain,this.effectReturnL.chain(this._feedbackL,this.effectSendL),this.effectReturnR.chain(this._feedbackR,this.effectSendR),this.feedback.fan(this._feedbackL.gain,this._feedbackR.gain),this._readOnly(["feedback"])},n.default.extend(n.default.StereoFeedbackEffect,n.default.StereoEffect),n.default.StereoFeedbackEffect.prototype.dispose=function(){return n.default.StereoEffect.prototype.dispose.call(this),this._writable(["feedback"]),this.feedback.dispose(),this.feedback=null,this._feedbackL.dispose(),this._feedbackL=null,this._feedbackR.dispose(),this._feedbackR=null,this},e.default=n.default.StereoFeedbackEffect},function(t,e,i){i.r(e);var n=i(0);i(77),i(9),i(10),i(39),i(3),i(74),n.default.Reverb=function(){var t=n.default.defaults(arguments,["decay"],n.default.Reverb);n.default.Effect.call(this,t),this._convolver=this.context.createConvolver(),this.decay=t.decay,this.preDelay=t.preDelay,this.connectEffect(this._convolver)},n.default.extend(n.default.Reverb,n.default.Effect),n.default.Reverb.defaults={decay:1.5,preDelay:.01},n.default.Reverb.prototype.generate=function(){return n.default.Offline(function(){var t=new n.default.Noise,e=new n.default.Noise,i=new n.default.Merge;t.connect(i.left),e.connect(i.right);var o=(new n.default.Gain).toMaster();i.connect(o),t.start(0),e.start(0),o.gain.setValueAtTime(0,0),o.gain.setValueAtTime(1,this.preDelay),o.gain.exponentialApproachValueAtTime(0,this.preDelay,this.decay+this.preDelay)}.bind(this),this.decay+this.preDelay).then(function(t){return this._convolver.buffer=t.get(),this}.bind(this))},n.default.Reverb.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._convolver.disconnect(),this._convolver=null,this},e.default=n.default.Reverb},function(t,e,i){i.r(e);var n=i(0);i(12),i(23),i(2),i(33),i(18),n.default.PitchShift=function(){var t=n.default.defaults(arguments,["pitch"],n.default.PitchShift);n.default.FeedbackEffect.call(this,t),this._frequency=new n.default.Signal(0),this._delayA=new n.default.Delay(0,1),this._lfoA=new n.default.LFO({min:0,max:.1,type:"sawtooth"}).connect(this._delayA.delayTime),this._delayB=new n.default.Delay(0,1),this._lfoB=new n.default.LFO({min:0,max:.1,type:"sawtooth",phase:180}).connect(this._delayB.delayTime),this._crossFade=new n.default.CrossFade,this._crossFadeLFO=new n.default.LFO({min:0,max:1,type:"triangle",phase:90}).connect(this._crossFade.fade),this._feedbackDelay=new n.default.Delay(t.delayTime),this.delayTime=this._feedbackDelay.delayTime,this._readOnly("delayTime"),this._pitch=t.pitch,this._windowSize=t.windowSize,this._delayA.connect(this._crossFade.a),this._delayB.connect(this._crossFade.b),this._frequency.fan(this._lfoA.frequency,this._lfoB.frequency,this._crossFadeLFO.frequency),this.effectSend.fan(this._delayA,this._delayB),this._crossFade.chain(this._feedbackDelay,this.effectReturn);var e=this.now();this._lfoA.start(e),this._lfoB.start(e),this._crossFadeLFO.start(e),this.windowSize=this._windowSize},n.default.extend(n.default.PitchShift,n.default.FeedbackEffect),n.default.PitchShift.defaults={pitch:0,windowSize:.1,delayTime:0,feedback:0},Object.defineProperty(n.default.PitchShift.prototype,"pitch",{get:function(){return this._pitch},set:function(t){this._pitch=t;var e=0;t<0?(this._lfoA.min=0,this._lfoA.max=this._windowSize,this._lfoB.min=0,this._lfoB.max=this._windowSize,e=n.default.intervalToFrequencyRatio(t-1)+1):(this._lfoA.min=this._windowSize,this._lfoA.max=0,this._lfoB.min=this._windowSize,this._lfoB.max=0,e=n.default.intervalToFrequencyRatio(t)-1),this._frequency.value=e*(1.2/this._windowSize)}}),Object.defineProperty(n.default.PitchShift.prototype,"windowSize",{get:function(){return this._windowSize},set:function(t){this._windowSize=this.toSeconds(t),this.pitch=this._pitch}}),n.default.PitchShift.prototype.dispose=function(){return n.default.FeedbackEffect.prototype.dispose.call(this),this._frequency.dispose(),this._frequency=null,this._delayA.disconnect(),this._delayA=null,this._delayB.disconnect(),this._delayB=null,this._lfoA.dispose(),this._lfoA=null,this._lfoB.dispose(),this._lfoB=null,this._crossFade.dispose(),this._crossFade=null,this._crossFadeLFO.dispose(),this._crossFadeLFO=null,this._writable("delayTime"),this._feedbackDelay.dispose(),this._feedbackDelay=null,this.delayTime=null,this},e.default=n.default.PitchShift},function(t,e,i){i.r(e);var n=i(0);i(72),i(2),i(18),n.default.PingPongDelay=function(){var t=n.default.defaults(arguments,["delayTime","feedback"],n.default.PingPongDelay);n.default.StereoXFeedbackEffect.call(this,t),this._leftDelay=new n.default.Delay(0,t.maxDelayTime),this._rightDelay=new n.default.Delay(0,t.maxDelayTime),this._rightPreDelay=new n.default.Delay(0,t.maxDelayTime),this.delayTime=new n.default.Signal(t.delayTime,n.default.Type.Time),this.effectSendL.chain(this._leftDelay,this.effectReturnL),this.effectSendR.chain(this._rightPreDelay,this._rightDelay,this.effectReturnR),this.delayTime.fan(this._leftDelay.delayTime,this._rightDelay.delayTime,this._rightPreDelay.delayTime),this._feedbackLR.disconnect(),this._feedbackLR.connect(this._rightDelay),this._readOnly(["delayTime"])},n.default.extend(n.default.PingPongDelay,n.default.StereoXFeedbackEffect),n.default.PingPongDelay.defaults={delayTime:.25,maxDelayTime:1},n.default.PingPongDelay.prototype.dispose=function(){return n.default.StereoXFeedbackEffect.prototype.dispose.call(this),this._leftDelay.dispose(),this._leftDelay=null,this._rightDelay.dispose(),this._rightDelay=null,this._rightPreDelay.dispose(),this._rightPreDelay=null,this._writable(["delayTime"]),this.delayTime.dispose(),this.delayTime=null,this},e.default=n.default.PingPongDelay},function(t,e,i){i.r(e);var n=i(0);i(12),i(9),i(15),n.default.Phaser=function(){var t=n.default.defaults(arguments,["frequency","octaves","baseFrequency"],n.default.Phaser);n.default.StereoEffect.call(this,t),this._lfoL=new n.default.LFO(t.frequency,0,1),this._lfoR=new n.default.LFO(t.frequency,0,1),this._lfoR.phase=180,this._baseFrequency=t.baseFrequency,this._octaves=t.octaves,this.Q=new n.default.Signal(t.Q,n.default.Type.Positive),this._filtersL=this._makeFilters(t.stages,this._lfoL,this.Q),this._filtersR=this._makeFilters(t.stages,this._lfoR,this.Q),this.frequency=this._lfoL.frequency,this.frequency.value=t.frequency,this.effectSendL.connect(this._filtersL[0]),this.effectSendR.connect(this._filtersR[0]),n.default.connect(this._filtersL[t.stages-1],this.effectReturnL),n.default.connect(this._filtersR[t.stages-1],this.effectReturnR),this._lfoL.frequency.connect(this._lfoR.frequency),this.baseFrequency=t.baseFrequency,this.octaves=t.octaves,this._lfoL.start(),this._lfoR.start(),this._readOnly(["frequency","Q"])},n.default.extend(n.default.Phaser,n.default.StereoEffect),n.default.Phaser.defaults={frequency:.5,octaves:3,stages:10,Q:10,baseFrequency:350},n.default.Phaser.prototype._makeFilters=function(t,e,i){for(var o=new Array(t),a=0;a<t;a++){var s=this.context.createBiquadFilter();s.type="allpass",i.connect(s.Q),e.connect(s.frequency),o[a]=s}return n.default.connectSeries.apply(n.default,o),o},Object.defineProperty(n.default.Phaser.prototype,"octaves",{get:function(){return this._octaves},set:function(t){this._octaves=t;var e=this._baseFrequency*Math.pow(2,t);this._lfoL.max=e,this._lfoR.max=e}}),Object.defineProperty(n.default.Phaser.prototype,"baseFrequency",{get:function(){return this._baseFrequency},set:function(t){this._baseFrequency=t,this._lfoL.min=t,this._lfoR.min=t,this.octaves=this._octaves}}),n.default.Phaser.prototype.dispose=function(){n.default.StereoEffect.prototype.dispose.call(this),this._writable(["frequency","Q"]),this.Q.dispose(),this.Q=null,this._lfoL.dispose(),this._lfoL=null,this._lfoR.dispose(),this._lfoR=null;for(var t=0;t<this._filtersL.length;t++)this._filtersL[t].disconnect(),this._filtersL[t]=null;this._filtersL=null;for(var e=0;e<this._filtersR.length;e++)this._filtersR[e].disconnect(),this._filtersR[e]=null;return this._filtersR=null,this.frequency=null,this},e.default=n.default.Phaser},function(t,e,i){i.r(e);var n=i(0),o=(i(59),i(15),i(26),[.06748,.06404,.08212,.09004]),a=[.773,.802,.753,.733],s=[347,113,37];n.default.JCReverb=function(){var t=n.default.defaults(arguments,["roomSize"],n.default.JCReverb);n.default.StereoEffect.call(this,t),this.roomSize=new n.default.Signal(t.roomSize,n.default.Type.NormalRange),this._scaleRoomSize=new n.default.Scale(-.733,.197),this._allpassFilters=[],this._feedbackCombFilters=[];for(var e=0;e<s.length;e++){var i=this.context.createBiquadFilter();i.type="allpass",i.frequency.value=s[e],this._allpassFilters.push(i)}for(var r=0;r<o.length;r++){var l=new n.default.FeedbackCombFilter(o[r],.1);this._scaleRoomSize.connect(l.resonance),l.resonance.value=a[r],n.default.connect(this._allpassFilters[this._allpassFilters.length-1],l),r<o.length/2?l.connect(this.effectReturnL):l.connect(this.effectReturnR),this._feedbackCombFilters.push(l)}this.roomSize.connect(this._scaleRoomSize),n.default.connectSeries.apply(n.default,this._allpassFilters),this.effectSendL.connect(this._allpassFilters[0]),this.effectSendR.connect(this._allpassFilters[0]),this._readOnly(["roomSize"])},n.default.extend(n.default.JCReverb,n.default.StereoEffect),n.default.JCReverb.defaults={roomSize:.5},n.default.JCReverb.prototype.dispose=function(){n.default.StereoEffect.prototype.dispose.call(this);for(var t=0;t<this._allpassFilters.length;t++)this._allpassFilters[t].disconnect(),this._allpassFilters[t]=null;this._allpassFilters=null;for(var e=0;e<this._feedbackCombFilters.length;e++)this._feedbackCombFilters[e].dispose(),this._feedbackCombFilters[e]=null;return this._feedbackCombFilters=null,this._writable(["roomSize"]),this.roomSize.dispose(),this.roomSize=null,this._scaleRoomSize.dispose(),this._scaleRoomSize=null,this},e.default=n.default.JCReverb},function(t,e,i){i.r(e);var n=i(0),o=(i(54),i(15),i(2),i(19),i(10),i(42),[1557/44100,1617/44100,1491/44100,1422/44100,1277/44100,1356/44100,1188/44100,1116/44100]),a=[225,556,441,341];n.default.Freeverb=function(){var t=n.default.defaults(arguments,["roomSize","dampening"],n.default.Freeverb);n.default.StereoEffect.call(this,t),this.roomSize=new n.default.Signal(t.roomSize,n.default.Type.NormalRange),this.dampening=new n.default.Signal(t.dampening,n.default.Type.Frequency),this._combFilters=[],this._allpassFiltersL=[],this._allpassFiltersR=[];for(var e=0;e<a.length;e++){var i=this.context.createBiquadFilter();i.type="allpass",i.frequency.value=a[e],this._allpassFiltersL.push(i)}for(var s=0;s<a.length;s++){var r=this.context.createBiquadFilter();r.type="allpass",r.frequency.value=a[s],this._allpassFiltersR.push(r)}for(var l=0;l<o.length;l++){var u=new n.default.LowpassCombFilter(o[l]);l<o.length/2?this.effectSendL.chain(u,this._allpassFiltersL[0]):this.effectSendR.chain(u,this._allpassFiltersR[0]),this.roomSize.connect(u.resonance),this.dampening.connect(u.dampening),this._combFilters.push(u)}n.default.connectSeries.apply(n.default,this._allpassFiltersL),n.default.connectSeries.apply(n.default,this._allpassFiltersR),n.default.connect(this._allpassFiltersL[this._allpassFiltersL.length-1],this.effectReturnL),n.default.connect(this._allpassFiltersR[this._allpassFiltersR.length-1],this.effectReturnR),this._readOnly(["roomSize","dampening"])},n.default.extend(n.default.Freeverb,n.default.StereoEffect),n.default.Freeverb.defaults={roomSize:.7,dampening:3e3},n.default.Freeverb.prototype.dispose=function(){n.default.StereoEffect.prototype.dispose.call(this);for(var t=0;t<this._allpassFiltersL.length;t++)this._allpassFiltersL[t].disconnect(),this._allpassFiltersL[t]=null;this._allpassFiltersL=null;for(var e=0;e<this._allpassFiltersR.length;e++)this._allpassFiltersR[e].disconnect(),this._allpassFiltersR[e]=null;this._allpassFiltersR=null;for(var i=0;i<this._combFilters.length;i++)this._combFilters[i].dispose(),this._combFilters[i]=null;return this._combFilters=null,this._writable(["roomSize","dampening"]),this.roomSize.dispose(),this.roomSize=null,this.dampening.dispose(),this.dampening=null,this},e.default=n.default.Freeverb},function(t,e,i){i.r(e);var n=i(0);i(33),i(2),i(18),n.default.FeedbackDelay=function(){var t=n.default.defaults(arguments,["delayTime","feedback"],n.default.FeedbackDelay);n.default.FeedbackEffect.call(this,t),this._delayNode=new n.default.Delay(t.delayTime,t.maxDelay),this.delayTime=this._delayNode.delayTime,this.connectEffect(this._delayNode),this._readOnly(["delayTime"])},n.default.extend(n.default.FeedbackDelay,n.default.FeedbackEffect),n.default.FeedbackDelay.defaults={delayTime:.25,maxDelay:1},n.default.FeedbackDelay.prototype.dispose=function(){return n.default.FeedbackEffect.prototype.dispose.call(this),this._delayNode.dispose(),this._delayNode=null,this._writable(["delayTime"]),this.delayTime=null,this},e.default=n.default.FeedbackDelay},function(t,e,i){i.r(e);var n=i(0);i(8),i(7),n.default.Distortion=function(){var t=n.default.defaults(arguments,["distortion"],n.default.Distortion);n.default.Effect.call(this,t),this._shaper=new n.default.WaveShaper(4096),this._distortion=t.distortion,this.connectEffect(this._shaper),this.distortion=t.distortion,this.oversample=t.oversample},n.default.extend(n.default.Distortion,n.default.Effect),n.default.Distortion.defaults={distortion:.4,oversample:"none"},Object.defineProperty(n.default.Distortion.prototype,"distortion",{get:function(){return this._distortion},set:function(t){this._distortion=t;var e=100*t,i=Math.PI/180;this._shaper.setMap(function(t){return Math.abs(t)<.001?0:(3+e)*t*20*i/(Math.PI+e*Math.abs(t))})}}),Object.defineProperty(n.default.Distortion.prototype,"oversample",{get:function(){return this._shaper.oversample},set:function(t){this._shaper.oversample=t}}),n.default.Distortion.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._shaper.dispose(),this._shaper=null,this},e.default=n.default.Distortion},function(t,e,i){i.r(e);var n=i(0);i(12),i(15),i(18),n.default.Chorus=function(){var t=n.default.defaults(arguments,["frequency","delayTime","depth"],n.default.Chorus);n.default.StereoEffect.call(this,t),this._depth=t.depth,this._delayTime=t.delayTime/1e3,this._lfoL=new n.default.LFO({frequency:t.frequency,min:0,max:1}),this._lfoR=new n.default.LFO({frequency:t.frequency,min:0,max:1,phase:180}),this._delayNodeL=new n.default.Delay,this._delayNodeR=new n.default.Delay,this.frequency=this._lfoL.frequency,this.effectSendL.chain(this._delayNodeL,this.effectReturnL),this.effectSendR.chain(this._delayNodeR,this.effectReturnR),this.effectSendL.connect(this.effectReturnL),this.effectSendR.connect(this.effectReturnR),this._lfoL.connect(this._delayNodeL.delayTime),this._lfoR.connect(this._delayNodeR.delayTime),this._lfoL.start(),this._lfoR.start(),this._lfoL.frequency.connect(this._lfoR.frequency),this.depth=this._depth,this.frequency.value=t.frequency,this.type=t.type,this._readOnly(["frequency"]),this.spread=t.spread},n.default.extend(n.default.Chorus,n.default.StereoEffect),n.default.Chorus.defaults={frequency:1.5,delayTime:3.5,depth:.7,type:"sine",spread:180},Object.defineProperty(n.default.Chorus.prototype,"depth",{get:function(){return this._depth},set:function(t){this._depth=t;var e=this._delayTime*t;this._lfoL.min=Math.max(this._delayTime-e,0),this._lfoL.max=this._delayTime+e,this._lfoR.min=Math.max(this._delayTime-e,0),this._lfoR.max=this._delayTime+e}}),Object.defineProperty(n.default.Chorus.prototype,"delayTime",{get:function(){return 1e3*this._delayTime},set:function(t){this._delayTime=t/1e3,this.depth=this._depth}}),Object.defineProperty(n.default.Chorus.prototype,"type",{get:function(){return this._lfoL.type},set:function(t){this._lfoL.type=t,this._lfoR.type=t}}),Object.defineProperty(n.default.Chorus.prototype,"spread",{get:function(){return this._lfoR.phase-this._lfoL.phase},set:function(t){this._lfoL.phase=90-t/2,this._lfoR.phase=t/2+90}}),n.default.Chorus.prototype.dispose=function(){return n.default.StereoEffect.prototype.dispose.call(this),this._lfoL.dispose(),this._lfoL=null,this._lfoR.dispose(),this._lfoR=null,this._delayNodeL.dispose(),this._delayNodeL=null,this._delayNodeR.dispose(),this._delayNodeR=null,this._writable("frequency"),this.frequency=null,this},e.default=n.default.Chorus},function(t,e,i){i.r(e);var n=i(0);i(8),i(7),n.default.Chebyshev=function(){var t=n.default.defaults(arguments,["order"],n.default.Chebyshev);n.default.Effect.call(this,t),this._shaper=new n.default.WaveShaper(4096),this._order=t.order,this.connectEffect(this._shaper),this.order=t.order,this.oversample=t.oversample},n.default.extend(n.default.Chebyshev,n.default.Effect),n.default.Chebyshev.defaults={order:1,oversample:"none"},n.default.Chebyshev.prototype._getCoefficient=function(t,e,i){return i.hasOwnProperty(e)?i[e]:(i[e]=0===e?0:1===e?t:2*t*this._getCoefficient(t,e-1,i)-this._getCoefficient(t,e-2,i),i[e])},Object.defineProperty(n.default.Chebyshev.prototype,"order",{get:function(){return this._order},set:function(t){this._order=t;for(var e=new Array(4096),i=e.length,n=0;n<i;++n){var o=2*n/i-1;e[n]=0===o?0:this._getCoefficient(o,t,{})}this._shaper.curve=e}}),Object.defineProperty(n.default.Chebyshev.prototype,"oversample",{get:function(){return this._shaper.oversample},set:function(t){this._shaper.oversample=t}}),n.default.Chebyshev.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._shaper.dispose(),this._shaper=null,this},e.default=n.default.Chebyshev},function(t,e,i){i.r(e);var n=i(0);i(8),i(13),i(75),n.default.BitCrusher=function(){var t=n.default.defaults(arguments,["bits"],n.default.BitCrusher);n.default.Effect.call(this,t);var e=1/Math.pow(2,t.bits-1);this._subtract=new n.default.Subtract,this._modulo=new n.default.Modulo(e),this._bits=t.bits,this.effectSend.fan(this._subtract,this._modulo),this._modulo.connect(this._subtract,0,1),this._subtract.connect(this.effectReturn)},n.default.extend(n.default.BitCrusher,n.default.Effect),n.default.BitCrusher.defaults={bits:4},Object.defineProperty(n.default.BitCrusher.prototype,"bits",{get:function(){return this._bits},set:function(t){this._bits=t;var e=1/Math.pow(2,t-1);this._modulo.value=e}}),n.default.BitCrusher.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._subtract.dispose(),this._subtract=null,this._modulo.dispose(),this._modulo=null,this},e.default=n.default.BitCrusher},function(t,e,i){i.r(e);var n=i(0);i(58),i(42),i(8),i(9),n.default.AutoWah=function(){var t=n.default.defaults(arguments,["baseFrequency","octaves","sensitivity"],n.default.AutoWah);n.default.Effect.call(this,t),this.follower=new n.default.Follower(t.follower),this._sweepRange=new n.default.ScaleExp(0,1,.5),this._baseFrequency=t.baseFrequency,this._octaves=t.octaves,this._inputBoost=new n.default.Gain,this._bandpass=new n.default.Filter({rolloff:-48,frequency:0,Q:t.Q}),this._peaking=new n.default.Filter(0,"peaking"),this._peaking.gain.value=t.gain,this.gain=this._peaking.gain,this.Q=this._bandpass.Q,this.effectSend.chain(this._inputBoost,this.follower,this._sweepRange),this._sweepRange.connect(this._bandpass.frequency),this._sweepRange.connect(this._peaking.frequency),this.effectSend.chain(this._bandpass,this._peaking,this.effectReturn),this._setSweepRange(),this.sensitivity=t.sensitivity,this._readOnly(["gain","Q"])},n.default.extend(n.default.AutoWah,n.default.Effect),n.default.AutoWah.defaults={baseFrequency:100,octaves:6,sensitivity:0,Q:2,gain:2,follower:{attack:.3,release:.5}},Object.defineProperty(n.default.AutoWah.prototype,"octaves",{get:function(){return this._octaves},set:function(t){this._octaves=t,this._setSweepRange()}}),Object.defineProperty(n.default.AutoWah.prototype,"baseFrequency",{get:function(){return this._baseFrequency},set:function(t){this._baseFrequency=t,this._setSweepRange()}}),Object.defineProperty(n.default.AutoWah.prototype,"sensitivity",{get:function(){return n.default.gainToDb(1/this._inputBoost.gain.value)},set:function(t){this._inputBoost.gain.value=1/n.default.dbToGain(t)}}),n.default.AutoWah.prototype._setSweepRange=function(){this._sweepRange.min=this._baseFrequency,this._sweepRange.max=Math.min(this._baseFrequency*Math.pow(2,this._octaves),this.context.sampleRate/2)},n.default.AutoWah.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this.follower.dispose(),this.follower=null,this._sweepRange.dispose(),this._sweepRange=null,this._bandpass.dispose(),this._bandpass=null,this._peaking.dispose(),this._peaking=null,this._inputBoost.dispose(),this._inputBoost=null,this._writable(["gain","Q"]),this.gain=null,this.Q=null,this},e.default=n.default.AutoWah},function(t,e,i){i.r(e);var n=i(0);i(8),i(12),i(48),n.default.AutoPanner=function(){var t=n.default.defaults(arguments,["frequency"],n.default.AutoPanner);n.default.Effect.call(this,t),this._lfo=new n.default.LFO({frequency:t.frequency,amplitude:t.depth,min:-1,max:1}),this.depth=this._lfo.amplitude,this._panner=new n.default.Panner,this.frequency=this._lfo.frequency,this.connectEffect(this._panner),this._lfo.connect(this._panner.pan),this.type=t.type,this._readOnly(["depth","frequency"])},n.default.extend(n.default.AutoPanner,n.default.Effect),n.default.AutoPanner.defaults={frequency:1,type:"sine",depth:1},n.default.AutoPanner.prototype.start=function(t){return this._lfo.start(t),this},n.default.AutoPanner.prototype.stop=function(t){return this._lfo.stop(t),this},n.default.AutoPanner.prototype.sync=function(t){return this._lfo.sync(t),this},n.default.AutoPanner.prototype.unsync=function(){return this._lfo.unsync(),this},Object.defineProperty(n.default.AutoPanner.prototype,"type",{get:function(){return this._lfo.type},set:function(t){this._lfo.type=t}}),n.default.AutoPanner.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._lfo.dispose(),this._lfo=null,this._panner.dispose(),this._panner=null,this._writable(["depth","frequency"]),this.frequency=null,this.depth=null,this},e.default=n.default.AutoPanner},function(t,e,i){i.r(e);var n=i(0);i(8),i(12),i(9),n.default.AutoFilter=function(){var t=n.default.defaults(arguments,["frequency","baseFrequency","octaves"],n.default.AutoFilter);n.default.Effect.call(this,t),this._lfo=new n.default.LFO({frequency:t.frequency,amplitude:t.depth}),this.depth=this._lfo.amplitude,this.frequency=this._lfo.frequency,this.filter=new n.default.Filter(t.filter),this._octaves=0,this.connectEffect(this.filter),this._lfo.connect(this.filter.frequency),this.type=t.type,this._readOnly(["frequency","depth"]),this.octaves=t.octaves,this.baseFrequency=t.baseFrequency},n.default.extend(n.default.AutoFilter,n.default.Effect),n.default.AutoFilter.defaults={frequency:1,type:"sine",depth:1,baseFrequency:200,octaves:2.6,filter:{type:"lowpass",rolloff:-12,Q:1}},n.default.AutoFilter.prototype.start=function(t){return this._lfo.start(t),this},n.default.AutoFilter.prototype.stop=function(t){return this._lfo.stop(t),this},n.default.AutoFilter.prototype.sync=function(t){return this._lfo.sync(t),this},n.default.AutoFilter.prototype.unsync=function(){return this._lfo.unsync(),this},Object.defineProperty(n.default.AutoFilter.prototype,"type",{get:function(){return this._lfo.type},set:function(t){this._lfo.type=t}}),Object.defineProperty(n.default.AutoFilter.prototype,"baseFrequency",{get:function(){return this._lfo.min},set:function(t){this._lfo.min=this.toFrequency(t),this.octaves=this._octaves}}),Object.defineProperty(n.default.AutoFilter.prototype,"octaves",{get:function(){return this._octaves},set:function(t){this._octaves=t,this._lfo.max=this.baseFrequency*Math.pow(2,t)}}),n.default.AutoFilter.prototype.dispose=function(){return n.default.Effect.prototype.dispose.call(this),this._lfo.dispose(),this._lfo=null,this.filter.dispose(),this.filter=null,this._writable(["frequency","depth"]),this.frequency=null,this.depth=null,this},e.default=n.default.AutoFilter},function(t,e,i){i.r(e);var n=i(0);i(23),i(10),i(19),i(2),i(22),i(28),n.default.Listener=function(){n.default.call(this),this._orientation=[0,0,0,0,0,0],this._position=[0,0,0],n.default.getContext(function(){this.set(o.defaults)}.bind(this))},n.default.extend(n.default.Listener),n.default.Listener.defaults={positionX:0,positionY:0,positionZ:0,forwardX:0,forwardY:0,forwardZ:1,upX:0,upY:1,upZ:0},n.default.Listener.prototype.isListener=!0,n.default.Listener.prototype._rampTimeConstant=.01,n.default.Listener.prototype.setPosition=function(t,e,i){if(this.context.rawContext.listener.positionX){var n=this.now();this.context.rawContext.listener.positionX.setTargetAtTime(t,n,this._rampTimeConstant),this.context.rawContext.listener.positionY.setTargetAtTime(e,n,this._rampTimeConstant),this.context.rawContext.listener.positionZ.setTargetAtTime(i,n,this._rampTimeConstant)}else this.context.rawContext.listener.setPosition(t,e,i);return this._position=Array.prototype.slice.call(arguments),this},n.default.Listener.prototype.setOrientation=function(t,e,i,n,o,a){if(this.context.rawContext.listener.forwardX){var s=this.now();this.context.rawContext.listener.forwardX.setTargetAtTime(t,s,this._rampTimeConstant),this.context.rawContext.listener.forwardY.setTargetAtTime(e,s,this._rampTimeConstant),this.context.rawContext.listener.forwardZ.setTargetAtTime(i,s,this._rampTimeConstant),this.context.rawContext.listener.upX.setTargetAtTime(n,s,this._rampTimeConstant),this.context.rawContext.listener.upY.setTargetAtTime(o,s,this._rampTimeConstant),this.context.rawContext.listener.upZ.setTargetAtTime(a,s,this._rampTimeConstant)}else this.context.rawContext.listener.setOrientation(t,e,i,n,o,a);return this._orientation=Array.prototype.slice.call(arguments),this},Object.defineProperty(n.default.Listener.prototype,"positionX",{set:function(t){this._position[0]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[0]}}),Object.defineProperty(n.default.Listener.prototype,"positionY",{set:function(t){this._position[1]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[1]}}),Object.defineProperty(n.default.Listener.prototype,"positionZ",{set:function(t){this._position[2]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[2]}}),Object.defineProperty(n.default.Listener.prototype,"forwardX",{set:function(t){this._orientation[0]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[0]}}),Object.defineProperty(n.default.Listener.prototype,"forwardY",{set:function(t){this._orientation[1]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[1]}}),Object.defineProperty(n.default.Listener.prototype,"forwardZ",{set:function(t){this._orientation[2]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[2]}}),Object.defineProperty(n.default.Listener.prototype,"upX",{set:function(t){this._orientation[3]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[3]}}),Object.defineProperty(n.default.Listener.prototype,"upY",{set:function(t){this._orientation[4]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[4]}}),Object.defineProperty(n.default.Listener.prototype,"upZ",{set:function(t){this._orientation[5]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[5]}}),n.default.Listener.prototype.dispose=function(){return this._orientation=null,this._position=null,this};var o=n.default.Listener;n.default.Listener=new o,n.default.Context.on("init",function(t){t.listener&&t.listener.isListener?n.default.Listener=t.listener:n.default.Listener=new o}),e.default=n.default.Listener},function(t,e,i){i.r(e);var n=i(0);i(24),n.default.Draw=function(){n.default.call(this),this._events=new n.default.Timeline,this.expiration=.25,this.anticipation=.008,this._boundDrawLoop=this._drawLoop.bind(this)},n.default.extend(n.default.Draw),n.default.Draw.prototype.schedule=function(t,e){return this._events.add({callback:t,time:this.toSeconds(e)}),1===this._events.length&&requestAnimationFrame(this._boundDrawLoop),this},n.default.Draw.prototype.cancel=function(t){return this._events.cancel(this.toSeconds(t)),this},n.default.Draw.prototype._drawLoop=function(){for(var t=n.default.context.currentTime;this._events.length&&this._events.peek().time-this.anticipation<=t;){var e=this._events.shift();t-e.time<=this.expiration&&e.callback()}this._events.length>0&&requestAnimationFrame(this._boundDrawLoop)},n.default.Draw=new n.default.Draw,e.default=n.default.Draw},function(t,e,i){i.r(e);var n=i(0),o=(i(3),{});n.default.prototype.send=function(t,e){o.hasOwnProperty(t)||(o[t]=this.context.createGain()),e=n.default.defaultArg(e,0);var i=new n.default.Gain(e,n.default.Type.Decibels);return this.connect(i),i.connect(o[t]),i},n.default.prototype.receive=function(t,e){return o.hasOwnProperty(t)||(o[t]=this.context.createGain()),n.default.connect(o[t],this,0,e),this},n.default.Context.on("init",function(t){t.buses?o=t.buses:(o={},t.buses=o)}),e.default=n.default},function(t,e,i){i.r(e);var n=i(0);i(4),n.default.CtrlRandom=function(){var t=n.default.defaults(arguments,["min","max"],n.default.CtrlRandom);n.default.call(this),this.min=t.min,this.max=t.max,this.integer=t.integer},n.default.extend(n.default.CtrlRandom),n.default.CtrlRandom.defaults={min:0,max:1,integer:!1},Object.defineProperty(n.default.CtrlRandom.prototype,"value",{get:function(){var t=this.toSeconds(this.min),e=this.toSeconds(this.max),i=Math.random(),n=i*t+(1-i)*e;return this.integer&&(n=Math.floor(n)),n}}),e.default=n.default.CtrlRandom},function(t,e,i){i.r(e);var n=i(0);n.default.CtrlMarkov=function(t,e){n.default.call(this),this.values=n.default.defaultArg(t,{}),this.value=n.default.defaultArg(e,Object.keys(this.values)[0])},n.default.extend(n.default.CtrlMarkov),n.default.CtrlMarkov.prototype.next=function(){if(this.values.hasOwnProperty(this.value)){var t=this.values[this.value];if(n.default.isArray(t))for(var e=this._getProbDistribution(t),i=Math.random(),o=0,a=0;a<e.length;a++){var s=e[a];if(i>o&&i<o+s){var r=t[a];n.default.isObject(r)?this.value=r.value:this.value=r}o+=s}else this.value=t}return this.value},n.default.CtrlMarkov.prototype._getProbDistribution=function(t){for(var e=[],i=0,o=!1,a=0;a<t.length;a++){var s=t[a];n.default.isObject(s)?(o=!0,e[a]=s.probability):e[a]=1/t.length,i+=e[a]}if(o)for(var r=0;r<e.length;r++)e[r]=e[r]/i;return e},n.default.CtrlMarkov.prototype.dispose=function(){this.values=null},e.default=n.default.CtrlMarkov},function(t,e,i){i.r(e);var n=i(0);i(4),n.default.CtrlInterpolate=function(){var t=n.default.defaults(arguments,["values","index"],n.default.CtrlInterpolate);n.default.call(this),this.values=t.values,this.index=t.index},n.default.extend(n.default.CtrlInterpolate),n.default.CtrlInterpolate.defaults={index:0,values:[]},Object.defineProperty(n.default.CtrlInterpolate.prototype,"value",{get:function(){var t=this.index;t=Math.min(t,this.values.length-1);var e=Math.floor(t),i=this.values[e],n=this.values[Math.ceil(t)];return this._interpolate(t-e,i,n)}}),n.default.CtrlInterpolate.prototype._interpolate=function(t,e,i){if(n.default.isArray(e)){for(var o=[],a=0;a<e.length;a++)o[a]=this._interpolate(t,e[a],i[a]);return o}if(n.default.isObject(e)){var s={};for(var r in e)s[r]=this._interpolate(t,e[r],i[r]);return s}return(1-t)*(e=this._toNumber(e))+t*(i=this._toNumber(i))},n.default.CtrlInterpolate.prototype._toNumber=function(t){return n.default.isNumber(t)?t:this.toSeconds(t)},n.default.CtrlInterpolate.prototype.dispose=function(){this.values=null},e.default=n.default.CtrlInterpolate},function(t,e,i){i.r(e);var n=i(0);i(36),i(1),n.default.Waveform=function(){var t=n.default.defaults(arguments,["size"],n.default.Waveform);t.type=n.default.Analyser.Type.Waveform,n.default.AudioNode.call(this),this._analyser=this.input=this.output=new n.default.Analyser(t)},n.default.extend(n.default.Waveform,n.default.AudioNode),n.default.Waveform.defaults={size:1024},n.default.Waveform.prototype.getValue=function(){return this._analyser.getValue()},Object.defineProperty(n.default.Waveform.prototype,"size",{get:function(){return this._analyser.size},set:function(t){this._analyser.size=t}}),n.default.Waveform.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this._analyser.dispose(),this._analyser=null},e.default=n.default.Waveform},function(t,e,i){i.r(e);var n=i(0);i(23),i(10),i(19),i(2),i(22),i(28),i(1),n.default.Panner3D=function(){var t=n.default.defaults(arguments,["positionX","positionY","positionZ"],n.default.Panner3D);n.default.AudioNode.call(this),this._panner=this.input=this.output=this.context.createPanner(),this._panner.panningModel=t.panningModel,this._panner.maxDistance=t.maxDistance,this._panner.distanceModel=t.distanceModel,this._panner.coneOuterGain=t.coneOuterGain,this._panner.coneOuterAngle=t.coneOuterAngle,this._panner.coneInnerAngle=t.coneInnerAngle,this._panner.refDistance=t.refDistance,this._panner.rolloffFactor=t.rolloffFactor,this._orientation=[t.orientationX,t.orientationY,t.orientationZ],this._position=[t.positionX,t.positionY,t.positionZ],this.orientationX=t.orientationX,this.orientationY=t.orientationY,this.orientationZ=t.orientationZ,this.positionX=t.positionX,this.positionY=t.positionY,this.positionZ=t.positionZ},n.default.extend(n.default.Panner3D,n.default.AudioNode),n.default.Panner3D.defaults={positionX:0,positionY:0,positionZ:0,orientationX:0,orientationY:0,orientationZ:0,panningModel:"equalpower",maxDistance:1e4,distanceModel:"inverse",coneOuterGain:0,coneOuterAngle:360,coneInnerAngle:360,refDistance:1,rolloffFactor:1},n.default.Panner3D.prototype._rampTimeConstant=.01,n.default.Panner3D.prototype.setPosition=function(t,e,i){if(this._panner.positionX){var n=this.now();this._panner.positionX.setTargetAtTime(t,n,this._rampTimeConstant),this._panner.positionY.setTargetAtTime(e,n,this._rampTimeConstant),this._panner.positionZ.setTargetAtTime(i,n,this._rampTimeConstant)}else this._panner.setPosition(t,e,i);return this._position=Array.prototype.slice.call(arguments),this},n.default.Panner3D.prototype.setOrientation=function(t,e,i){if(this._panner.orientationX){var n=this.now();this._panner.orientationX.setTargetAtTime(t,n,this._rampTimeConstant),this._panner.orientationY.setTargetAtTime(e,n,this._rampTimeConstant),this._panner.orientationZ.setTargetAtTime(i,n,this._rampTimeConstant)}else this._panner.setOrientation(t,e,i);return this._orientation=Array.prototype.slice.call(arguments),this},Object.defineProperty(n.default.Panner3D.prototype,"positionX",{set:function(t){this._position[0]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[0]}}),Object.defineProperty(n.default.Panner3D.prototype,"positionY",{set:function(t){this._position[1]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[1]}}),Object.defineProperty(n.default.Panner3D.prototype,"positionZ",{set:function(t){this._position[2]=t,this.setPosition.apply(this,this._position)},get:function(){return this._position[2]}}),Object.defineProperty(n.default.Panner3D.prototype,"orientationX",{set:function(t){this._orientation[0]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[0]}}),Object.defineProperty(n.default.Panner3D.prototype,"orientationY",{set:function(t){this._orientation[1]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[1]}}),Object.defineProperty(n.default.Panner3D.prototype,"orientationZ",{set:function(t){this._orientation[2]=t,this.setOrientation.apply(this,this._orientation)},get:function(){return this._orientation[2]}}),n.default.Panner3D._aliasProperty=function(t){Object.defineProperty(n.default.Panner3D.prototype,t,{set:function(e){this._panner[t]=e},get:function(){return this._panner[t]}})},n.default.Panner3D._aliasProperty("panningModel"),n.default.Panner3D._aliasProperty("refDistance"),n.default.Panner3D._aliasProperty("rolloffFactor"),n.default.Panner3D._aliasProperty("distanceModel"),n.default.Panner3D._aliasProperty("coneInnerAngle"),n.default.Panner3D._aliasProperty("coneOuterAngle"),n.default.Panner3D._aliasProperty("coneOuterGain"),n.default.Panner3D._aliasProperty("maxDistance"),n.default.Panner3D.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._panner.disconnect(),this._panner=null,this._orientation=null,this._position=null,this},e.default=n.default.Panner3D},function(t,e,i){i.r(e);var n=i(0);i(60),i(43),i(1),n.default.MultibandCompressor=function(t){n.default.AudioNode.call(this),t=n.default.defaultArg(arguments,n.default.MultibandCompressor.defaults),this._splitter=this.input=new n.default.MultibandSplit({lowFrequency:t.lowFrequency,highFrequency:t.highFrequency}),this.lowFrequency=this._splitter.lowFrequency,this.highFrequency=this._splitter.highFrequency,this.output=new n.default.Gain,this.low=new n.default.Compressor(t.low),this.mid=new n.default.Compressor(t.mid),this.high=new n.default.Compressor(t.high),this._splitter.low.chain(this.low,this.output),this._splitter.mid.chain(this.mid,this.output),this._splitter.high.chain(this.high,this.output),this._readOnly(["high","mid","low","highFrequency","lowFrequency"])},n.default.extend(n.default.MultibandCompressor,n.default.AudioNode),n.default.MultibandCompressor.defaults={low:n.default.Compressor.defaults,mid:n.default.Compressor.defaults,high:n.default.Compressor.defaults,lowFrequency:250,highFrequency:2e3},n.default.MultibandCompressor.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._splitter.dispose(),this._writable(["high","mid","low","highFrequency","lowFrequency"]),this.low.dispose(),this.mid.dispose(),this.high.dispose(),this._splitter=null,this.low=null,this.mid=null,this.high=null,this.lowFrequency=null,this.highFrequency=null,this},e.default=n.default.MultibandCompressor},function(t,e,i){i.r(e);var n=i(0);i(10),i(1),n.default.Mono=function(){n.default.AudioNode.call(this),this.createInsOuts(1,0),this._merge=this.output=new n.default.Merge,n.default.connect(this.input,this._merge,0,0),n.default.connect(this.input,this._merge,0,1)},n.default.extend(n.default.Mono,n.default.AudioNode),n.default.Mono.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._merge.dispose(),this._merge=null,this},e.default=n.default.Mono},function(t,e,i){i.r(e);var n=i(0);i(53),i(52),i(43),i(1),n.default.MidSideCompressor=function(t){n.default.AudioNode.call(this),t=n.default.defaultArg(t,n.default.MidSideCompressor.defaults),this._midSideSplit=this.input=new n.default.MidSideSplit,this._midSideMerge=this.output=new n.default.MidSideMerge,this.mid=new n.default.Compressor(t.mid),this.side=new n.default.Compressor(t.side),this._midSideSplit.mid.chain(this.mid,this._midSideMerge.mid),this._midSideSplit.side.chain(this.side,this._midSideMerge.side),this._readOnly(["mid","side"])},n.default.extend(n.default.MidSideCompressor,n.default.AudioNode),n.default.MidSideCompressor.defaults={mid:{ratio:3,threshold:-24,release:.03,attack:.02,knee:16},side:{ratio:6,threshold:-30,release:.25,attack:.03,knee:10}},n.default.MidSideCompressor.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["mid","side"]),this.mid.dispose(),this.mid=null,this.side.dispose(),this.side=null,this._midSideSplit.dispose(),this._midSideSplit=null,this._midSideMerge.dispose(),this._midSideMerge=null,this},e.default=n.default.MidSideCompressor},function(t,e,i){i.r(e);var n=i(0);i(36),i(1),n.default.Meter=function(){var t=n.default.defaults(arguments,["smoothing"],n.default.Meter);n.default.AudioNode.call(this),this.smoothing=t.smoothing,this._rms=0,this.input=this.output=this._analyser=new n.default.Analyser("waveform",256)},n.default.extend(n.default.Meter,n.default.AudioNode),n.default.Meter.defaults={smoothing:.8},n.default.Meter.prototype.getLevel=function(){for(var t=this._analyser.getValue(),e=0,i=0;i<t.length;i++){var o=t[i];e+=o*o}var a=Math.sqrt(e/t.length);return this._rms=Math.max(a,this._rms*this.smoothing),n.default.gainToDb(this._rms)},n.default.Meter.prototype.getValue=function(){return this._analyser.getValue()[0]},n.default.Meter.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._analyser.dispose(),this._analyser=null,this},e.default=n.default.Meter},function(t,e,i){i.r(e);var n=i(0);i(43),i(1),n.default.Limiter=function(){var t=n.default.defaults(arguments,["threshold"],n.default.Limiter);n.default.AudioNode.call(this),this._compressor=this.input=this.output=new n.default.Compressor({attack:.001,decay:.001,threshold:t.threshold}),this.threshold=this._compressor.threshold,this._readOnly("threshold")},n.default.extend(n.default.Limiter,n.default.AudioNode),n.default.Limiter.defaults={threshold:-12},n.default.Limiter.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._compressor.dispose(),this._compressor=null,this._writable("threshold"),this.threshold=null,this},e.default=n.default.Limiter},function(t,e,i){i.r(e);var n=i(0);i(58),i(85),i(1),n.default.Gate=function(){var t=n.default.defaults(arguments,["threshold","smoothing"],n.default.Gate);n.default.AudioNode.call(this),this.createInsOuts(1,1),this._follower=new n.default.Follower(t.smoothing),this._gt=new n.default.GreaterThan(n.default.dbToGain(t.threshold)),n.default.connect(this.input,this.output),n.default.connectSeries(this.input,this._follower,this._gt,this.output.gain)},n.default.extend(n.default.Gate,n.default.AudioNode),n.default.Gate.defaults={smoothing:.1,threshold:-40},Object.defineProperty(n.default.Gate.prototype,"threshold",{get:function(){return n.default.gainToDb(this._gt.value)},set:function(t){this._gt.value=n.default.dbToGain(t)}}),Object.defineProperty(n.default.Gate.prototype,"smoothing",{get:function(){return this._follower.smoothing},set:function(t){this._follower.smoothing=t}}),n.default.Gate.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._follower.dispose(),this._gt.dispose(),this._follower=null,this._gt=null,this},e.default=n.default.Gate},function(t,e,i){i.r(e);var n=i(0);i(36),i(1),n.default.FFT=function(){var t=n.default.defaults(arguments,["size"],n.default.FFT);t.type=n.default.Analyser.Type.FFT,n.default.AudioNode.call(this),this._analyser=this.input=this.output=new n.default.Analyser(t)},n.default.extend(n.default.FFT,n.default.AudioNode),n.default.FFT.defaults={size:1024},n.default.FFT.prototype.getValue=function(){return this._analyser.getValue()},Object.defineProperty(n.default.FFT.prototype,"size",{get:function(){return this._analyser.size},set:function(t){this._analyser.size=t}}),n.default.FFT.prototype.dispose=function(){n.default.AudioNode.prototype.dispose.call(this),this._analyser.dispose(),this._analyser=null},e.default=n.default.FFT},function(t,e,i){i.r(e);var n=i(0);i(60),i(3),i(1),n.default.EQ3=function(){var t=n.default.defaults(arguments,["low","mid","high"],n.default.EQ3);n.default.AudioNode.call(this),this.output=new n.default.Gain,this._multibandSplit=this.input=new n.default.MultibandSplit({lowFrequency:t.lowFrequency,highFrequency:t.highFrequency}),this._lowGain=new n.default.Gain(t.low,n.default.Type.Decibels),this._midGain=new n.default.Gain(t.mid,n.default.Type.Decibels),this._highGain=new n.default.Gain(t.high,n.default.Type.Decibels),this.low=this._lowGain.gain,this.mid=this._midGain.gain,this.high=this._highGain.gain,this.Q=this._multibandSplit.Q,this.lowFrequency=this._multibandSplit.lowFrequency,this.highFrequency=this._multibandSplit.highFrequency,this._multibandSplit.low.chain(this._lowGain,this.output),this._multibandSplit.mid.chain(this._midGain,this.output),this._multibandSplit.high.chain(this._highGain,this.output),this._readOnly(["low","mid","high","lowFrequency","highFrequency"])},n.default.extend(n.default.EQ3,n.default.AudioNode),n.default.EQ3.defaults={low:0,mid:0,high:0,lowFrequency:400,highFrequency:2500},n.default.EQ3.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["low","mid","high","lowFrequency","highFrequency"]),this._multibandSplit.dispose(),this._multibandSplit=null,this.lowFrequency=null,this.highFrequency=null,this._lowGain.dispose(),this._lowGain=null,this._midGain.dispose(),this._midGain=null,this._highGain.dispose(),this._highGain=null,this.low=null,this.mid=null,this.high=null,this.Q=null,this},e.default=n.default.EQ3},function(t,e,i){i.r(e);var n=i(0);i(91),i(88),i(1),n.default.Channel=function(){var t=n.default.defaults(arguments,["volume","pan"],n.default.PanVol);n.default.AudioNode.call(this,t),this._solo=this.input=new n.default.Solo(t.solo),this._panVol=this.output=new n.default.PanVol({pan:t.pan,volume:t.volume,mute:t.mute}),this.pan=this._panVol.pan,this.volume=this._panVol.volume,this._solo.connect(this._panVol),this._readOnly(["pan","volume"])},n.default.extend(n.default.Channel,n.default.AudioNode),n.default.Channel.defaults={pan:0,volume:0,mute:!1,solo:!1},Object.defineProperty(n.default.Channel.prototype,"solo",{get:function(){return this._solo.solo},set:function(t){this._solo.solo=t}}),Object.defineProperty(n.default.Channel.prototype,"muted",{get:function(){return this._solo.muted||this.mute}}),Object.defineProperty(n.default.Channel.prototype,"mute",{get:function(){return this._panVol.mute},set:function(t){this._panVol.mute=t}}),n.default.Channel.prototype.dispose=function(){return n.default.AudioNode.prototype.dispose.call(this),this._writable(["pan","volume"]),this._panVol.dispose(),this._panVol=null,this.pan=null,this.volume=null,this._solo.dispose(),this._solo=null,this},e.default=n.default.Channel},function(t,e){var i;i=function(){return this}();try{i=i||Function("return this")()||(0,eval)("this")}catch(t){"object"==typeof window&&(i=window)}t.exports=i},function(t,e,i){i(31),i(36),i(146),i(43),i(23),i(47),i(145),i(59),i(144),i(9),i(58),i(41),i(143),i(12),i(142),i(54),i(10),i(141),i(140),i(52),i(53),i(139),i(138),i(60),i(48),i(137),i(91),i(86),i(88),i(19),i(27),i(136),i(135),i(134),i(79),i(133),i(1),i(11),i(78),i(132),i(83),i(20),i(18),i(131),i(35),i(3),i(81),i(130),i(40),i(77),i(76),i(14),i(24),i(34),i(16),i(56),i(80),i(129),i(128),i(127),i(126),i(125),i(124),i(74),i(123),i(8),i(122),i(33),i(121),i(120),i(73),i(119),i(118),i(117),i(116),i(15),i(115),i(114),i(72),i(113),i(112),i(51),i(71),i(70),i(111),i(110),i(109),i(108),i(107),i(21),i(106),i(105),i(25),i(66),i(104),i(103),i(102),i(101),i(38),i(87),i(29),i(22),i(89),i(100),i(85),i(84),i(75),i(5),i(90),i(99),i(61),i(26),i(42),i(2),i(30),i(13),i(82),i(98),i(7),i(28),i(68),i(32),i(67),i(49),i(97),i(39),i(37),i(17),i(64),i(65),i(96),i(50),i(69),i(6),i(57),i(95),i(46),i(94),i(55),i(63),i(62),i(45),i(4),t.exports=i(0).default}])}),wt=(St=Tt)&&St.__esModule&&Object.prototype.hasOwnProperty.call(St,"default")?St.default:St;Tt.Tone;function xt(t,e){return{subscribe:At(t,e).subscribe}}function At(e,i=t){let n;const o=[];function a(t){if(r(e,t)){if(e=t,!n)return;o.forEach(t=>t[1]()),o.forEach(t=>t[0](e))}}return{set:a,update:function(t){a(t(e))},subscribe:function(s,r=t){const l=[s,r];return o.push(l),1===o.length&&(n=i(a)||t),s(e),()=>{const t=o.indexOf(l);-1!==t&&o.splice(t,1),0===o.length&&(n(),n=null)}}}}const kt=xt([0,0],t=>window.addEventListener("mousemove",({clientX:e,clientY:i})=>t([e,i]))),Ot=xt(null,t=>window.addEventListener("mouseup",e=>t(e))),Pt=xt(0,t=>window.addEventListener("mousewheel",e=>t(ft(Pt)+e.deltaY))),Mt=({instrument:t,pattern:e=[]})=>()=>{wt.context.resume();const[i,n]=e;t.triggerAttackRelease(i,n)},Et=(Mt({instrument:(new wt.Synth).toMaster(),pattern:["C2","8n"]}),Mt({instrument:(new wt.Synth).toMaster(),pattern:["F2","16n"]}),Mt({instrument:(new wt.Synth).toMaster(),pattern:["C3","8n"]})),Ft=Mt({instrument:(new wt.Synth).toMaster(),pattern:["A3","8n"]}),qt=(Mt({instrument:(new wt.MembraneSynth).toMaster(),pattern:["D1","16n"]}),Mt({instrument:(new wt.PluckSynth).toMaster(),pattern:["C5","2n"]}),new wt.Filter({type:"bandpass",Q:12}).toMaster()),Ct=(new wt.Noise("pink").connect(qt),["A2","B2","C2","D6","E6","F6","G6"].reverse());let Rt;kt.subscribe(([t,e])=>{const i=Math.floor(e/window.innerHeight*7);Rt===Ct[i]||i<0||i>Ct.length-1||(Rt=Ct[i],qt.frequency.linearRampToValueAtTime(`${Ct[i]}`,wt.context.currentTime))});window.location.host;function $t(i){var n,o,s,r,l,u,d,f,h,c,p,y,_,m,v,T;return{c(){n=w("div"),(o=w("h1")).textContent="EarthRock",s=k(),(r=w("h2")).textContent="The Uncollectable Card Game",l=k(),u=w("div"),(d=w("button")).textContent="CARDS",f=k(),(h=w("button")).textContent="CHAT",c=k(),(p=w("button")).textContent="WEAVE",y=k(),(_=w("div")).textContent="We don't use cookies or store anything about you server side.",M(o,"class","title svelte-3f2bkm"),M(r,"class","desc svelte-3f2bkm"),M(d,"class","svelte-3f2bkm"),M(h,"class","svelte-3f2bkm"),M(p,"class","svelte-3f2bkm"),M(u,"class","menu svelte-3f2bkm"),M(_,"class","notice svelte-3f2bkm"),M(n,"class","intro svelte-3f2bkm"),T=[P(d,"mouseenter",i.mouseOver),P(d,"click",i.design),P(h,"mouseenter",i.mouseOver),P(h,"click",i.discord),P(p,"mouseenter",i.mouseOver),P(p,"click",i.develop)]},m(t,e){b(t,n,e),g(n,o),g(n,s),g(n,r),g(n,l),g(n,u),g(u,d),g(u,f),g(u,h),g(u,c),g(u,p),g(n,y),g(n,_),v=!0},p:t,i(t){v||(m&&m.end(1),v=!0)},o(t){m=st(n,gt,{delay:100,duration:1e3,x:0,y:4e3,opacity:0,easing:e}),v=!1},d(t){t&&(S(n),m&&m.end()),a(T)}}}function Nt(t){const e=L(),i=()=>{Ft()};return{mouseOver:()=>{Et()},design:()=>{e("design"),i()},discord:()=>{window.open("https://discord.gg/HnvRaKS","_blank"),i()},develop:()=>{e("develop"),i()}}}class jt extends _t{constructor(t){super(),yt(this,t,Nt,$t,r,[])}}const Bt=At(window.location.pathname.slice(1));function Dt(t){var e,i;return{c(){(e=w("div")).textContent="X",M(e,"class","svelte-1t2wqnu"),i=[P(e,"click",t.end),P(e,"mouseenter",Et)]},m(t,i){b(t,e,i)},d(t){t&&S(e),a(i)}}}function Lt(e){var i,n,o,a,s,r=e.audo_playing?">":"!>",l=!1!==e.$path&&""!==e.$path&&Dt(e);return{c(){i=w("div"),n=w("div"),o=A(r),a=k(),l&&l.c(),M(n,"class","svelte-1t2wqnu"),M(i,"class","tools svelte-1t2wqnu"),s=P(n,"click",e.toggle)},m(t,e){b(t,i,e),g(i,n),g(n,o),g(i,a),l&&l.m(i,null)},p(t,e){t.audo_playing&&r!==(r=e.audo_playing?">":"!>")&&E(o,r),!1!==e.$path&&""!==e.$path?l||((l=Dt(e)).c(),l.m(i,null)):l&&(l.d(1),l=null)},i:t,o:t,d(t){t&&S(i),l&&l.d(),s()}}}function It(t,e,i){let n;l(t,Bt,t=>{i("$path",n=t)});const o=L(),a=new Audio("/music/earthrock-final-theme.mp3");a.loop=!0,a.volume=.5;let s=!1;return{audo_playing:s,toggle:()=>{s?a.pause():a.play(),i("audo_playing",s=!s)},end:()=>{o("end"),Ft()},$path:n}}Bt.subscribe(t=>{window.location.pathname!==t&&window.history.pushState({page:1},"",`/${t}`)});class Vt extends _t{constructor(t){super(),yt(this,t,It,Lt,r,[])}}const Ut=new Promise(t=>{const e=new Image;e.src="/sheets/default.png",e.onload=(()=>{const i=document.createElement("canvas");i.width=e.width,i.height=e.height;const n=i.getContext("2d");n.drawImage(e,0,0),t({ctx:n,canvas:i})})}),Gt=new Map,zt=(t,e)=>Math.floor(Math.random()*(Math.abs(t)+Math.abs(e))-Math.abs(t));var Wt=async({width:t,height:e,data:i,random:n=!1})=>{const{canvas:o}=await Ut,a=`${t}:${e}:${i}`;if(!n&&Gt.has(a))return Gt.get(a);const s=document.createElement("canvas"),r=s.getContext("2d");if(s.width=16*t,s.height=16*e,n){let i,n,a,s;for(let l=0;l<t;l++)for(let t=0;t<e;t++)i=16*l,n=16*t,a=17*zt(0,32),s=17*zt(0,32),r.drawImage(o,a,s,16,16,i,n,16,16)}else if(i.length>0){let e,n;i.split(" ").forEach((i,a)=>{e=a%t,n=Math.floor(a/t);const s=parseInt(i,10),l=s%32,u=Math.floor(s/32),d=16*e,f=16*n,h=17*l,c=17*u;r.drawImage(o,h,c,16,16,d,f,16,16)})}const l=s.toDataURL("image/png");return n||Gt.set(KeyboardEvent,l),l};function Qt(e){var i;return{c(){M(i=w("img"),"class","tileset svelte-1weudl2"),M(i,"alt","tileset image")},m(t,n){b(t,i,n),e.img_binding(i)},p:t,i:t,o:t,d(t){t&&S(i),e.img_binding(null)}}}function Xt(t,e,i){let n,{data:o="",width:a=10,height:s=7,spacing:r=0,random:l=!1}=e;var u;return u=(async()=>{n.src=await Wt({width:a,height:s,data:o,random:l}),i("image",n)}),D().$$.on_mount.push(u),t.$set=(t=>{"data"in t&&i("data",o=t.data),"width"in t&&i("width",a=t.width),"height"in t&&i("height",s=t.height),"spacing"in t&&i("spacing",r=t.spacing),"random"in t&&i("random",l=t.random)}),{data:o,width:a,height:s,spacing:r,random:l,image:n,img_binding:function(t){V[t?"unshift":"push"](()=>{i("image",n=t)})}}}class Ht extends _t{constructor(t){super(),yt(this,t,Xt,Qt,r,["data","width","height","spacing","random"])}}const Zt=xt([window.innerWidth,window.innerHeight],t=>{window.addEventListener("resize",()=>{t([window.innerWidth,window.innerHeight])})}),Yt=At(1);function Jt(t){var e,i;const n=t.$$slots.default,o=u(n,t,null);return{c(){e=w("div"),o&&o.c(),M(e,"class","spatial svelte-1aitebw"),M(e,"style",t.style),F(e,"transition",t.transition)},l(t){o&&o.l(div_nodes)},m(t,n){b(t,e,n),o&&o.m(e,null),i=!0},p(t,a){o&&o.p&&t.$$scope&&o.p(f(n,a,t,null),d(n,a,null)),i&&!t.style||M(e,"style",a.style),t.transition&&F(e,"transition",a.transition)},i(t){i||(nt(o,t),i=!0)},o(t){ot(o,t),i=!1},d(t){t&&S(e),o&&o.d(t)}}}function Kt(t,e,i){let n;l(t,Yt,t=>{i("$scaling",n=t)});let o,a,s,r,u,{position:d=[0,0],anchor:f=[50,50],bias:h=[50,50],area:c=[1,1],scale:p=1,rotate:y=0,autoscale:_=!0,zIndex:m=0,transition:v=!0}=e,{$$slots:g={},$$scope:b}=e;return t.$set=(t=>{"position"in t&&i("position",d=t.position),"anchor"in t&&i("anchor",f=t.anchor),"bias"in t&&i("bias",h=t.bias),"area"in t&&i("area",c=t.area),"scale"in t&&i("scale",p=t.scale),"rotate"in t&&i("rotate",y=t.rotate),"autoscale"in t&&i("autoscale",_=t.autoscale),"zIndex"in t&&i("zIndex",m=t.zIndex),"transition"in t&&i("transition",v=t.transition),"$$scope"in t&&i("$$scope",b=t.$$scope)}),t.$$.update=((t={anchor:1,bias:1,area:1,autoscale:1,scale:1,$scaling:1,position:1,offset:1,rotate:1,tru_scale:1,zIndex:1,tru_zIndex:1,transform:1})=>{t.anchor&&i("anchor",f=[f[0]<=50?`left: ${f[0]}%;`:`right: ${100-f[0]}%;`,f[1]<=50?`top: ${f[1]}%;`:`bottom: ${100-f[1]}%;`].join(" ")),(t.bias||t.area||t.anchor)&&i("offset",o=[.01*h[0]*c[0]/2*(f[0]<=50?-1:1),.01*h[1]*c[1]/2*(f[1]<=50?-1:1)]),(t.autoscale||t.scale||t.$scaling)&&i("tru_scale",a=_?p*n:p),(t.position||t.offset||t.rotate||t.tru_scale)&&i("transform",s=`transform: translate(${d[0]+o[0]}px, ${d[1]+o[1]}px) rotate(${y}deg) scale(${a});`),(t.scale||t.zIndex)&&i("tru_zIndex",r=`z-index: ${Math.max(1,Math.round(100*p+m))};`),(t.tru_zIndex||t.anchor||t.transform)&&i("style",u=[r,f,s].join(" "))}),{position:d,anchor:f,bias:h,area:c,scale:p,rotate:y,autoscale:_,zIndex:m,transition:v,style:u,$$slots:g,$$scope:b}}Zt.subscribe(([t,e])=>{const i=t>e?e:t;Yt.set(i/1e3)});class te extends _t{constructor(t){super(),yt(this,t,Kt,Jt,r,["position","anchor","bias","area","scale","rotate","autoscale","zIndex","transition"])}}function ee(e){var i,n,o;return{c(){(i=w("div")).textContent="Still Ruff",M(i,"class","design svelte-31mij8")},m(t,e){b(t,i,e),o=!0},p:t,i(t){o||(n&&n.end(1),o=!0)},o(t){n=st(i,vt,{duration:100}),o=!1},d(t){t&&(S(i),n&&n.end())}}}function ie(t){var e,i=new te({props:{bias:[50,50],anchor:[50,50],area:[-1e3,50],$$slots:{default:[ee]},$$scope:{ctx:t}}});return{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},p(t,e){var n={};t.$$scope&&(n.$$scope={changed:t,ctx:e}),i.$set(n)},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}class ne extends _t{constructor(t){super(),yt(this,t,null,ie,r,[])}}for(var oe=bt(function(t){var e="undefined"!=typeof crypto&&crypto.getRandomValues&&crypto.getRandomValues.bind(crypto)||"undefined"!=typeof msCrypto&&"function"==typeof window.msCrypto.getRandomValues&&msCrypto.getRandomValues.bind(msCrypto);if(e){var i=new Uint8Array(16);t.exports=function(){return e(i),i}}else{var n=new Array(16);t.exports=function(){for(var t,e=0;e<16;e++)0==(3&e)&&(t=4294967296*Math.random()),n[e]=t>>>((3&e)<<3)&255;return n}}}),ae=[],se=0;se<256;++se)ae[se]=(se+256).toString(16).substr(1);var re=function(t,e){var i=e||0,n=ae;return[n[t[i++]],n[t[i++]],n[t[i++]],n[t[i++]],"-",n[t[i++]],n[t[i++]],"-",n[t[i++]],n[t[i++]],"-",n[t[i++]],n[t[i++]],"-",n[t[i++]],n[t[i++]],n[t[i++]],n[t[i++]],n[t[i++]],n[t[i++]]].join("")};var le=function(t,e,i){var n=e&&i||0;"string"==typeof t&&(e="binary"===t?new Array(16):null,t=null);var o=(t=t||{}).random||(t.rng||oe)();if(o[6]=15&o[6]|64,o[8]=63&o[8]|128,e)for(var a=0;a<16;++a)e[n+a]=o[a];return e||re(o)};const ue=t=>{let e=0;for(var i=0;i<t.length;i++)e=t.charCodeAt(i)+((e<<5)-e);var n="#";for(i=0;i<3;i++)n+=("00"+(e>>8*i&255).toString(16)).substr(-2);return n},de=["groovy","cat","bird","dog","poop","cool","not","okay","great","terrible","wat","goblin","life","ferret","gregert","robert","zilla","red","shirt","pants","blue","luna","ember","embear","lunatic","boring","under","near","near","quaint","potato","egg","bacon","narwhal","lamp","stairs","king"],fe=t=>Array.from(new Array(t)).map(()=>Math.floor(Math.random()*de.length)).map(t=>de[t]).join(" ");var he=({id:t=`/${le()}`,value:e=fe(2),value_overwrite:i=!1,type:n=" ",name:o,...a}=!1)=>(o=void 0===o?`${n.slice(1).split(" ").shift()} ${fe(2)}`:o,{...a,id:"/"===t[0]?t:`/${t}`,name:At(o),type:n,value:i?e:At(e)}),ce=Object.freeze({stitch:({value:t={[fe(2)]:`"${fe(2)}"`},type:e="",...i}=!1)=>he({...i,type:`${e} stitch`,value:Object.entries(t).reduce((t,[e,i])=>(t[e]=At(i),t),{})}),hole:he,json:({type:t="",...e}=!1)=>{const i=At(),n=i.set;return i.set=(t=>{try{n(JSON.parse(t))}catch(t){n("! ErRoR ! - BAD JSON")}}),i.set("null"),he({...e,type:`${t} json`,value:i,value_overwrite:!0})}}),pe=({holes:t={example:{name:"example",type:" stitch",value:{[fe(1)]:fe(2),[fe(1)]:fe(2)}}},type:e="",threads:i={},name:n=`\\/\\/eave ${fe(2)}`,...o}=!1)=>{let a;const s=he({...o,name:n,holes:At(Object.entries(t).reduce((t,[e,i])=>{const o=i.type.slice(1).split(" ").pop();return ce[o]?(t[e]=ce[o](i),t):console.error(`!UnKoWn TyPe> ${o} - ${n}|${n}`)},{})),type:`${e} weave`,threads:xt(i,t=>{a=t}),give_thread:At(),take_thread:At()});return s.give_thread.subscribe(t=>{if(!t)return;const[e,i]=t,[n,o]=[1===e.split("|").length,1===i.split("|").length],r=n||o;if(!r&&e.slice(-1)===i.slice(-1))return;if(r&&"/"===e[0]&&"/"===i[0])return;const l=ft(s.threads);l[e]&&delete l[l[e]],l[i]&&delete l[l[i]],l[e]=i,l[i]=e,a(l)}),s};const ye=At(1);setInterval(()=>{ye.set(ft(ye)+1)},100);const _e=At(!1),me=At(!1),ve=At(!1);me.subscribe(t=>{const e=ft(_e),i=ft(me);e&&i&&ve.set([e,i])}),Ot.subscribe(()=>{requestAnimationFrame(()=>{const t=ft(_e),e=ft(me);!1!==t&&_e.set(!1),!1!==e&&me.set(!1)})});const{Object:ge}=rt;function be(t,e,i){const n=ge.create(t);return n.x=e[i][0],n.y=e[i][1],n.x_id=e[i][2],n.y_id=e[i][3],n}function Se(t){var e,i,n,o,a,s;return{c(){M(e=x("line"),"stroke",i=t.get_color(t.$first,t.$position)),M(e,"x1",n=t.first_rec.x+t.first_rec.width/2),M(e,"y1",o=t.first_rec.y+t.first_rec.height/2),M(e,"x2",a=t.$position[0]),M(e,"y2",s=t.$position[1]),M(e,"class","line svelte-1amtju9")},m(t,i){b(t,e,i)},p(t,r){(t.$first||t.$position)&&i!==(i=r.get_color(r.$first,r.$position))&&M(e,"stroke",i),t.first_rec&&n!==(n=r.first_rec.x+r.first_rec.width/2)&&M(e,"x1",n),t.first_rec&&o!==(o=r.first_rec.y+r.first_rec.height/2)&&M(e,"y1",o),t.$position&&a!==(a=r.$position[0])&&M(e,"x2",a),t.$position&&s!==(s=r.$position[1])&&M(e,"y2",s)},d(t){t&&S(e)}}}function Te(t){var e,i,n,o,a,s;return{c(){M(e=x("line"),"stroke",i="url(#"+(t.x.x<t.y.x?"linear":"linear-other")+")"),M(e,"x1",n=t.x.x+t.x.width/2),M(e,"y1",o=t.x.y+t.x.height/2),M(e,"x2",a=t.y.x+t.y.width/2),M(e,"y2",s=t.y.y+t.y.height/2),M(e,"class","line svelte-1amtju9")},m(t,i){b(t,e,i)},p(t,r){t.rects&&i!==(i="url(#"+(r.x.x<r.y.x?"linear":"linear-other")+")")&&M(e,"stroke",i),t.rects&&n!==(n=r.x.x+r.x.width/2)&&M(e,"x1",n),t.rects&&o!==(o=r.x.y+r.x.height/2)&&M(e,"y1",o),t.rects&&a!==(a=r.y.x+r.y.width/2)&&M(e,"x2",a),t.rects&&s!==(s=r.y.y+r.y.height/2)&&M(e,"y2",s)},d(t){t&&S(e)}}}function we(t){var e,i,n,o,a;return{c(){M(e=x("line"),"stroke","gray"),M(e,"x1",i=t.x.x+t.x.width/2),M(e,"y1",n=t.x.y+t.x.height/2),M(e,"x2",o=t.y.x+t.y.width/2),M(e,"y2",a=t.y.y+t.y.height/2),M(e,"class","line svelte-1amtju9")},m(t,i){b(t,e,i)},p(t,s){t.rects&&i!==(i=s.x.x+s.x.width/2)&&M(e,"x1",i),t.rects&&n!==(n=s.x.y+s.x.height/2)&&M(e,"y1",n),t.rects&&o!==(o=s.y.x+s.y.width/2)&&M(e,"x2",o),t.rects&&a!==(a=s.y.y+s.y.height/2)&&M(e,"y2",a)},d(t){t&&S(e)}}}function xe(t){var e;function i(t){return 1===t.x_id.split("|").length||1===t.y_id.split("|")?we:"e"===t.x_id.slice(-1)?Te:void 0}var n=i(t),o=n&&n(t);return{c(){o&&o.c(),e=O()},m(t,i){o&&o.m(t,i),b(t,e,i)},p(t,a){n===(n=i(a))&&o?o.p(t,a):(o&&o.d(1),(o=n&&n(a))&&(o.c(),o.m(e.parentNode,e)))},d(t){o&&o.d(t),t&&S(e)}}}function Ae(e){for(var i,n,o,a,s,r,l,u,d,f,h,c=e.$first&&Se(e),p=e.rects,y=[],_=0;_<p.length;_+=1)y[_]=xe(be(e,p,_));return{c(){i=x("svg"),n=x("defs"),o=x("linearGradient"),a=x("stop"),s=x("stop"),r=x("linearGradient"),l=x("stop"),u=x("stop"),c&&c.c(),d=O();for(var t=0;t<y.length;t+=1)y[t].c();M(a,"offset","30%"),M(a,"stop-color","#F00"),M(s,"offset","70%"),M(s,"stop-color","#00F"),M(o,"id","linear"),M(o,"x1","0%"),M(o,"y1","0%"),M(o,"x2","100%"),M(o,"y2","0%"),M(l,"offset","30%"),M(l,"stop-color","#00F"),M(u,"offset","70%"),M(u,"stop-color","#F00"),M(r,"id","linear-other"),M(r,"x1","0%"),M(r,"y1","0%"),M(r,"x2","100%"),M(r,"y2","0%"),M(i,"width",f=e.$size[0]),M(i,"height",h=e.$size[1]),M(i,"class","threads svelte-1amtju9")},m(t,e){b(t,i,e),g(i,n),g(n,o),g(o,a),g(o,s),g(n,r),g(r,l),g(r,u),c&&c.m(i,null),g(i,d);for(var f=0;f<y.length;f+=1)y[f].m(i,null)},p(t,e){if(e.$first?c?c.p(t,e):((c=Se(e)).c(),c.m(i,d)):c&&(c.d(1),c=null),t.rects){p=e.rects;for(var n=0;n<p.length;n+=1){const o=be(e,p,n);y[n]?y[n].p(t,o):(y[n]=xe(o),y[n].c(),y[n].m(i,null))}for(;n<y.length;n+=1)y[n].d(1);y.length=p.length}t.$size&&f!==(f=e.$size[0])&&M(i,"width",f),t.$size&&h!==(h=e.$size[1])&&M(i,"height",h)},i:t,o:t,d(t){t&&S(i),c&&c.d(),T(y,t)}}}function ke(e,i,n){let o,a,s,r,u,d=t;l(e,kt,t=>{n("$position",o=t)}),l(e,ye,t=>{n("$Tick",a=t)}),l(e,_e,t=>{n("$first",r=t)}),l(e,Zt,t=>{n("$size",u=t)}),e.$$.on_destroy.push(()=>d());let{weave:f}=i;let h,c,p;return e.$set=(t=>{"weave"in t&&n("weave",f=t.weave)}),e.$$.update=((t={$Tick:1,weave:1,$threads:1,$first:1})=>{(t.$Tick||t.weave)&&(h=f.threads,d(),d=h.subscribe(t=>{n("$threads",s=t)}),n("threads",h)),t.$threads&&n("rects",c=Object.entries(s).map(([t,e])=>[document.getElementById(t).getBoundingClientRect(),document.getElementById(e).getBoundingClientRect(),t,e])),t.$first&&n("first_rec",p=r?(t=>document.getElementById(t).getBoundingClientRect())(r):[0,0])}),{weave:f,get_color:t=>{const e=document.getElementById(t).getBoundingClientRect();return 1===t.split("|").length?"gray":"e"!==t.slice(-1)?`url(#${e.x<o[0]?"linear-other":"linear"})`:`url(#${e.x<o[0]?"linear":"linear-other"})`},$position:o,threads:h,rects:c,first_rec:p,$first:r,$size:u}}class Oe extends _t{constructor(t){super(),yt(this,t,ke,Ae,r,["weave"])}}var Pe={aliceblue:[240,248,255],antiquewhite:[250,235,215],aqua:[0,255,255],aquamarine:[127,255,212],azure:[240,255,255],beige:[245,245,220],bisque:[255,228,196],black:[0,0,0],blanchedalmond:[255,235,205],blue:[0,0,255],blueviolet:[138,43,226],brown:[165,42,42],burlywood:[222,184,135],cadetblue:[95,158,160],chartreuse:[127,255,0],chocolate:[210,105,30],coral:[255,127,80],cornflowerblue:[100,149,237],cornsilk:[255,248,220],crimson:[220,20,60],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgoldenrod:[184,134,11],darkgray:[169,169,169],darkgreen:[0,100,0],darkgrey:[169,169,169],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkseagreen:[143,188,143],darkslateblue:[72,61,139],darkslategray:[47,79,79],darkslategrey:[47,79,79],darkturquoise:[0,206,209],darkviolet:[148,0,211],deeppink:[255,20,147],deepskyblue:[0,191,255],dimgray:[105,105,105],dimgrey:[105,105,105],dodgerblue:[30,144,255],firebrick:[178,34,34],floralwhite:[255,250,240],forestgreen:[34,139,34],fuchsia:[255,0,255],gainsboro:[220,220,220],ghostwhite:[248,248,255],gold:[255,215,0],goldenrod:[218,165,32],gray:[128,128,128],green:[0,128,0],greenyellow:[173,255,47],grey:[128,128,128],honeydew:[240,255,240],hotpink:[255,105,180],indianred:[205,92,92],indigo:[75,0,130],ivory:[255,255,240],khaki:[240,230,140],lavender:[230,230,250],lavenderblush:[255,240,245],lawngreen:[124,252,0],lemonchiffon:[255,250,205],lightblue:[173,216,230],lightcoral:[240,128,128],lightcyan:[224,255,255],lightgoldenrodyellow:[250,250,210],lightgray:[211,211,211],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightsalmon:[255,160,122],lightseagreen:[32,178,170],lightskyblue:[135,206,250],lightslategray:[119,136,153],lightslategrey:[119,136,153],lightsteelblue:[176,196,222],lightyellow:[255,255,224],lime:[0,255,0],limegreen:[50,205,50],linen:[250,240,230],magenta:[255,0,255],maroon:[128,0,0],mediumaquamarine:[102,205,170],mediumblue:[0,0,205],mediumorchid:[186,85,211],mediumpurple:[147,112,219],mediumseagreen:[60,179,113],mediumslateblue:[123,104,238],mediumspringgreen:[0,250,154],mediumturquoise:[72,209,204],mediumvioletred:[199,21,133],midnightblue:[25,25,112],mintcream:[245,255,250],mistyrose:[255,228,225],moccasin:[255,228,181],navajowhite:[255,222,173],navy:[0,0,128],oldlace:[253,245,230],olive:[128,128,0],olivedrab:[107,142,35],orange:[255,165,0],orangered:[255,69,0],orchid:[218,112,214],palegoldenrod:[238,232,170],palegreen:[152,251,152],paleturquoise:[175,238,238],palevioletred:[219,112,147],papayawhip:[255,239,213],peachpuff:[255,218,185],peru:[205,133,63],pink:[255,192,203],plum:[221,160,221],powderblue:[176,224,230],purple:[128,0,128],rebeccapurple:[102,51,153],red:[255,0,0],rosybrown:[188,143,143],royalblue:[65,105,225],saddlebrown:[139,69,19],salmon:[250,128,114],sandybrown:[244,164,96],seagreen:[46,139,87],seashell:[255,245,238],sienna:[160,82,45],silver:[192,192,192],skyblue:[135,206,235],slateblue:[106,90,205],slategray:[112,128,144],slategrey:[112,128,144],snow:[255,250,250],springgreen:[0,255,127],steelblue:[70,130,180],tan:[210,180,140],teal:[0,128,128],thistle:[216,191,216],tomato:[255,99,71],turquoise:[64,224,208],violet:[238,130,238],wheat:[245,222,179],white:[255,255,255],whitesmoke:[245,245,245],yellow:[255,255,0],yellowgreen:[154,205,50]},Me=bt(function(t){var e=Array.prototype.concat,i=Array.prototype.slice,n=t.exports=function(t){for(var n,o=[],a=0,s=t.length;a<s;a++){var r=t[a];(n=r)&&"string"!=typeof n&&(n instanceof Array||Array.isArray(n)||n.length>=0&&(n.splice instanceof Function||Object.getOwnPropertyDescriptor(n,n.length-1)&&"String"!==n.constructor.name))?o=e.call(o,i.call(r)):o.push(r)}return o};n.wrap=function(t){return function(){return t(n(arguments))}}}),Ee=bt(function(t){var e={};for(var i in Pe)Pe.hasOwnProperty(i)&&(e[Pe[i]]=i);var n=t.exports={to:{},get:{}};function o(t,e,i){return Math.min(Math.max(e,t),i)}function a(t){var e=t.toString(16).toUpperCase();return e.length<2?"0"+e:e}n.get=function(t){var e,i;switch(t.substring(0,3).toLowerCase()){case"hsl":e=n.get.hsl(t),i="hsl";break;case"hwb":e=n.get.hwb(t),i="hwb";break;default:e=n.get.rgb(t),i="rgb"}return e?{model:i,value:e}:null},n.get.rgb=function(t){if(!t)return null;var e,i,n,a=[0,0,0,1];if(e=t.match(/^#([a-f0-9]{6})([a-f0-9]{2})?$/i)){for(n=e[2],e=e[1],i=0;i<3;i++){var s=2*i;a[i]=parseInt(e.slice(s,s+2),16)}n&&(a[3]=Math.round(parseInt(n,16)/255*100)/100)}else if(e=t.match(/^#([a-f0-9]{3,4})$/i)){for(n=(e=e[1])[3],i=0;i<3;i++)a[i]=parseInt(e[i]+e[i],16);n&&(a[3]=Math.round(parseInt(n+n,16)/255*100)/100)}else if(e=t.match(/^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/)){for(i=0;i<3;i++)a[i]=parseInt(e[i+1],0);e[4]&&(a[3]=parseFloat(e[4]))}else{if(!(e=t.match(/^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/)))return(e=t.match(/(\D+)/))?"transparent"===e[1]?[0,0,0,0]:(a=Pe[e[1]])?(a[3]=1,a):null:null;for(i=0;i<3;i++)a[i]=Math.round(2.55*parseFloat(e[i+1]));e[4]&&(a[3]=parseFloat(e[4]))}for(i=0;i<3;i++)a[i]=o(a[i],0,255);return a[3]=o(a[3],0,1),a},n.get.hsl=function(t){if(!t)return null;var e=t.match(/^hsla?\(\s*([+-]?(?:\d*\.)?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/);if(e){var i=parseFloat(e[4]);return[(parseFloat(e[1])+360)%360,o(parseFloat(e[2]),0,100),o(parseFloat(e[3]),0,100),o(isNaN(i)?1:i,0,1)]}return null},n.get.hwb=function(t){if(!t)return null;var e=t.match(/^hwb\(\s*([+-]?\d*[\.]?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/);if(e){var i=parseFloat(e[4]);return[(parseFloat(e[1])%360+360)%360,o(parseFloat(e[2]),0,100),o(parseFloat(e[3]),0,100),o(isNaN(i)?1:i,0,1)]}return null},n.to.hex=function(){var t=Me(arguments);return"#"+a(t[0])+a(t[1])+a(t[2])+(t[3]<1?a(Math.round(255*t[3])):"")},n.to.rgb=function(){var t=Me(arguments);return t.length<4||1===t[3]?"rgb("+Math.round(t[0])+", "+Math.round(t[1])+", "+Math.round(t[2])+")":"rgba("+Math.round(t[0])+", "+Math.round(t[1])+", "+Math.round(t[2])+", "+t[3]+")"},n.to.rgb.percent=function(){var t=Me(arguments),e=Math.round(t[0]/255*100),i=Math.round(t[1]/255*100),n=Math.round(t[2]/255*100);return t.length<4||1===t[3]?"rgb("+e+"%, "+i+"%, "+n+"%)":"rgba("+e+"%, "+i+"%, "+n+"%, "+t[3]+")"},n.to.hsl=function(){var t=Me(arguments);return t.length<4||1===t[3]?"hsl("+t[0]+", "+t[1]+"%, "+t[2]+"%)":"hsla("+t[0]+", "+t[1]+"%, "+t[2]+"%, "+t[3]+")"},n.to.hwb=function(){var t=Me(arguments),e="";return t.length>=4&&1!==t[3]&&(e=", "+t[3]),"hwb("+t[0]+", "+t[1]+"%, "+t[2]+"%"+e+")"},n.to.keyword=function(t){return e[t.slice(0,3)]}}),Fe=(Ee.to,Ee.get,bt(function(t){var e={};for(var i in Pe)Pe.hasOwnProperty(i)&&(e[Pe[i]]=i);var n=t.exports={rgb:{channels:3,labels:"rgb"},hsl:{channels:3,labels:"hsl"},hsv:{channels:3,labels:"hsv"},hwb:{channels:3,labels:"hwb"},cmyk:{channels:4,labels:"cmyk"},xyz:{channels:3,labels:"xyz"},lab:{channels:3,labels:"lab"},lch:{channels:3,labels:"lch"},hex:{channels:1,labels:["hex"]},keyword:{channels:1,labels:["keyword"]},ansi16:{channels:1,labels:["ansi16"]},ansi256:{channels:1,labels:["ansi256"]},hcg:{channels:3,labels:["h","c","g"]},apple:{channels:3,labels:["r16","g16","b16"]},gray:{channels:1,labels:["gray"]}};for(var o in n)if(n.hasOwnProperty(o)){if(!("channels"in n[o]))throw new Error("missing channels property: "+o);if(!("labels"in n[o]))throw new Error("missing channel labels property: "+o);if(n[o].labels.length!==n[o].channels)throw new Error("channel and label counts mismatch: "+o);var a=n[o].channels,s=n[o].labels;delete n[o].channels,delete n[o].labels,Object.defineProperty(n[o],"channels",{value:a}),Object.defineProperty(n[o],"labels",{value:s})}n.rgb.hsl=function(t){var e,i,n=t[0]/255,o=t[1]/255,a=t[2]/255,s=Math.min(n,o,a),r=Math.max(n,o,a),l=r-s;return r===s?e=0:n===r?e=(o-a)/l:o===r?e=2+(a-n)/l:a===r&&(e=4+(n-o)/l),(e=Math.min(60*e,360))<0&&(e+=360),i=(s+r)/2,[e,100*(r===s?0:i<=.5?l/(r+s):l/(2-r-s)),100*i]},n.rgb.hsv=function(t){var e,i,n,o,a,s=t[0]/255,r=t[1]/255,l=t[2]/255,u=Math.max(s,r,l),d=u-Math.min(s,r,l),f=function(t){return(u-t)/6/d+.5};return 0===d?o=a=0:(a=d/u,e=f(s),i=f(r),n=f(l),s===u?o=n-i:r===u?o=1/3+e-n:l===u&&(o=2/3+i-e),o<0?o+=1:o>1&&(o-=1)),[360*o,100*a,100*u]},n.rgb.hwb=function(t){var e=t[0],i=t[1],o=t[2];return[n.rgb.hsl(t)[0],100*(1/255*Math.min(e,Math.min(i,o))),100*(o=1-1/255*Math.max(e,Math.max(i,o)))]},n.rgb.cmyk=function(t){var e,i=t[0]/255,n=t[1]/255,o=t[2]/255;return[100*((1-i-(e=Math.min(1-i,1-n,1-o)))/(1-e)||0),100*((1-n-e)/(1-e)||0),100*((1-o-e)/(1-e)||0),100*e]},n.rgb.keyword=function(t){var i=e[t];if(i)return i;var n,o,a,s=1/0;for(var r in Pe)if(Pe.hasOwnProperty(r)){var l=Pe[r],u=(o=t,a=l,Math.pow(o[0]-a[0],2)+Math.pow(o[1]-a[1],2)+Math.pow(o[2]-a[2],2));u<s&&(s=u,n=r)}return n},n.keyword.rgb=function(t){return Pe[t]},n.rgb.xyz=function(t){var e=t[0]/255,i=t[1]/255,n=t[2]/255;return[100*(.4124*(e=e>.04045?Math.pow((e+.055)/1.055,2.4):e/12.92)+.3576*(i=i>.04045?Math.pow((i+.055)/1.055,2.4):i/12.92)+.1805*(n=n>.04045?Math.pow((n+.055)/1.055,2.4):n/12.92)),100*(.2126*e+.7152*i+.0722*n),100*(.0193*e+.1192*i+.9505*n)]},n.rgb.lab=function(t){var e=n.rgb.xyz(t),i=e[0],o=e[1],a=e[2];return o/=100,a/=108.883,i=(i/=95.047)>.008856?Math.pow(i,1/3):7.787*i+16/116,[116*(o=o>.008856?Math.pow(o,1/3):7.787*o+16/116)-16,500*(i-o),200*(o-(a=a>.008856?Math.pow(a,1/3):7.787*a+16/116))]},n.hsl.rgb=function(t){var e,i,n,o,a,s=t[0]/360,r=t[1]/100,l=t[2]/100;if(0===r)return[a=255*l,a,a];e=2*l-(i=l<.5?l*(1+r):l+r-l*r),o=[0,0,0];for(var u=0;u<3;u++)(n=s+1/3*-(u-1))<0&&n++,n>1&&n--,a=6*n<1?e+6*(i-e)*n:2*n<1?i:3*n<2?e+(i-e)*(2/3-n)*6:e,o[u]=255*a;return o},n.hsl.hsv=function(t){var e=t[0],i=t[1]/100,n=t[2]/100,o=i,a=Math.max(n,.01);return i*=(n*=2)<=1?n:2-n,o*=a<=1?a:2-a,[e,100*(0===n?2*o/(a+o):2*i/(n+i)),100*((n+i)/2)]},n.hsv.rgb=function(t){var e=t[0]/60,i=t[1]/100,n=t[2]/100,o=Math.floor(e)%6,a=e-Math.floor(e),s=255*n*(1-i),r=255*n*(1-i*a),l=255*n*(1-i*(1-a));switch(n*=255,o){case 0:return[n,l,s];case 1:return[r,n,s];case 2:return[s,n,l];case 3:return[s,r,n];case 4:return[l,s,n];case 5:return[n,s,r]}},n.hsv.hsl=function(t){var e,i,n,o=t[0],a=t[1]/100,s=t[2]/100,r=Math.max(s,.01);return n=(2-a)*s,i=a*r,[o,100*(i=(i/=(e=(2-a)*r)<=1?e:2-e)||0),100*(n/=2)]},n.hwb.rgb=function(t){var e,i,n,o,a,s,r,l=t[0]/360,u=t[1]/100,d=t[2]/100,f=u+d;switch(f>1&&(u/=f,d/=f),n=6*l-(e=Math.floor(6*l)),0!=(1&e)&&(n=1-n),o=u+n*((i=1-d)-u),e){default:case 6:case 0:a=i,s=o,r=u;break;case 1:a=o,s=i,r=u;break;case 2:a=u,s=i,r=o;break;case 3:a=u,s=o,r=i;break;case 4:a=o,s=u,r=i;break;case 5:a=i,s=u,r=o}return[255*a,255*s,255*r]},n.cmyk.rgb=function(t){var e=t[0]/100,i=t[1]/100,n=t[2]/100,o=t[3]/100;return[255*(1-Math.min(1,e*(1-o)+o)),255*(1-Math.min(1,i*(1-o)+o)),255*(1-Math.min(1,n*(1-o)+o))]},n.xyz.rgb=function(t){var e,i,n,o=t[0]/100,a=t[1]/100,s=t[2]/100;return i=-.9689*o+1.8758*a+.0415*s,n=.0557*o+-.204*a+1.057*s,e=(e=3.2406*o+-1.5372*a+-.4986*s)>.0031308?1.055*Math.pow(e,1/2.4)-.055:12.92*e,i=i>.0031308?1.055*Math.pow(i,1/2.4)-.055:12.92*i,n=n>.0031308?1.055*Math.pow(n,1/2.4)-.055:12.92*n,[255*(e=Math.min(Math.max(0,e),1)),255*(i=Math.min(Math.max(0,i),1)),255*(n=Math.min(Math.max(0,n),1))]},n.xyz.lab=function(t){var e=t[0],i=t[1],n=t[2];return i/=100,n/=108.883,e=(e/=95.047)>.008856?Math.pow(e,1/3):7.787*e+16/116,[116*(i=i>.008856?Math.pow(i,1/3):7.787*i+16/116)-16,500*(e-i),200*(i-(n=n>.008856?Math.pow(n,1/3):7.787*n+16/116))]},n.lab.xyz=function(t){var e,i,n,o=t[0];e=t[1]/500+(i=(o+16)/116),n=i-t[2]/200;var a=Math.pow(i,3),s=Math.pow(e,3),r=Math.pow(n,3);return i=a>.008856?a:(i-16/116)/7.787,e=s>.008856?s:(e-16/116)/7.787,n=r>.008856?r:(n-16/116)/7.787,[e*=95.047,i*=100,n*=108.883]},n.lab.lch=function(t){var e,i=t[0],n=t[1],o=t[2];return(e=360*Math.atan2(o,n)/2/Math.PI)<0&&(e+=360),[i,Math.sqrt(n*n+o*o),e]},n.lch.lab=function(t){var e,i=t[0],n=t[1];return e=t[2]/360*2*Math.PI,[i,n*Math.cos(e),n*Math.sin(e)]},n.rgb.ansi16=function(t){var e=t[0],i=t[1],o=t[2],a=1 in arguments?arguments[1]:n.rgb.hsv(t)[2];if(0===(a=Math.round(a/50)))return 30;var s=30+(Math.round(o/255)<<2|Math.round(i/255)<<1|Math.round(e/255));return 2===a&&(s+=60),s},n.hsv.ansi16=function(t){return n.rgb.ansi16(n.hsv.rgb(t),t[2])},n.rgb.ansi256=function(t){var e=t[0],i=t[1],n=t[2];return e===i&&i===n?e<8?16:e>248?231:Math.round((e-8)/247*24)+232:16+36*Math.round(e/255*5)+6*Math.round(i/255*5)+Math.round(n/255*5)},n.ansi16.rgb=function(t){var e=t%10;if(0===e||7===e)return t>50&&(e+=3.5),[e=e/10.5*255,e,e];var i=.5*(1+~~(t>50));return[(1&e)*i*255,(e>>1&1)*i*255,(e>>2&1)*i*255]},n.ansi256.rgb=function(t){if(t>=232){var e=10*(t-232)+8;return[e,e,e]}var i;return t-=16,[Math.floor(t/36)/5*255,Math.floor((i=t%36)/6)/5*255,i%6/5*255]},n.rgb.hex=function(t){var e=(((255&Math.round(t[0]))<<16)+((255&Math.round(t[1]))<<8)+(255&Math.round(t[2]))).toString(16).toUpperCase();return"000000".substring(e.length)+e},n.hex.rgb=function(t){var e=t.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);if(!e)return[0,0,0];var i=e[0];3===e[0].length&&(i=i.split("").map(function(t){return t+t}).join(""));var n=parseInt(i,16);return[n>>16&255,n>>8&255,255&n]},n.rgb.hcg=function(t){var e,i=t[0]/255,n=t[1]/255,o=t[2]/255,a=Math.max(Math.max(i,n),o),s=Math.min(Math.min(i,n),o),r=a-s;return e=r<=0?0:a===i?(n-o)/r%6:a===n?2+(o-i)/r:4+(i-n)/r+4,e/=6,[360*(e%=1),100*r,100*(r<1?s/(1-r):0)]},n.hsl.hcg=function(t){var e=t[1]/100,i=t[2]/100,n=1,o=0;return(n=i<.5?2*e*i:2*e*(1-i))<1&&(o=(i-.5*n)/(1-n)),[t[0],100*n,100*o]},n.hsv.hcg=function(t){var e=t[1]/100,i=t[2]/100,n=e*i,o=0;return n<1&&(o=(i-n)/(1-n)),[t[0],100*n,100*o]},n.hcg.rgb=function(t){var e=t[0]/360,i=t[1]/100,n=t[2]/100;if(0===i)return[255*n,255*n,255*n];var o,a=[0,0,0],s=e%1*6,r=s%1,l=1-r;switch(Math.floor(s)){case 0:a[0]=1,a[1]=r,a[2]=0;break;case 1:a[0]=l,a[1]=1,a[2]=0;break;case 2:a[0]=0,a[1]=1,a[2]=r;break;case 3:a[0]=0,a[1]=l,a[2]=1;break;case 4:a[0]=r,a[1]=0,a[2]=1;break;default:a[0]=1,a[1]=0,a[2]=l}return o=(1-i)*n,[255*(i*a[0]+o),255*(i*a[1]+o),255*(i*a[2]+o)]},n.hcg.hsv=function(t){var e=t[1]/100,i=e+t[2]/100*(1-e),n=0;return i>0&&(n=e/i),[t[0],100*n,100*i]},n.hcg.hsl=function(t){var e=t[1]/100,i=t[2]/100*(1-e)+.5*e,n=0;return i>0&&i<.5?n=e/(2*i):i>=.5&&i<1&&(n=e/(2*(1-i))),[t[0],100*n,100*i]},n.hcg.hwb=function(t){var e=t[1]/100,i=e+t[2]/100*(1-e);return[t[0],100*(i-e),100*(1-i)]},n.hwb.hcg=function(t){var e=t[1]/100,i=1-t[2]/100,n=i-e,o=0;return n<1&&(o=(i-n)/(1-n)),[t[0],100*n,100*o]},n.apple.rgb=function(t){return[t[0]/65535*255,t[1]/65535*255,t[2]/65535*255]},n.rgb.apple=function(t){return[t[0]/255*65535,t[1]/255*65535,t[2]/255*65535]},n.gray.rgb=function(t){return[t[0]/100*255,t[0]/100*255,t[0]/100*255]},n.gray.hsl=n.gray.hsv=function(t){return[0,0,t[0]]},n.gray.hwb=function(t){return[0,100,t[0]]},n.gray.cmyk=function(t){return[0,0,0,t[0]]},n.gray.lab=function(t){return[t[0],0,0]},n.gray.hex=function(t){var e=255&Math.round(t[0]/100*255),i=((e<<16)+(e<<8)+e).toString(16).toUpperCase();return"000000".substring(i.length)+i},n.rgb.gray=function(t){return[(t[0]+t[1]+t[2])/3/255*100]}}));Fe.rgb,Fe.hsl,Fe.hsv,Fe.hwb,Fe.cmyk,Fe.xyz,Fe.lab,Fe.lch,Fe.hex,Fe.keyword,Fe.ansi16,Fe.ansi256,Fe.hcg,Fe.apple,Fe.gray;function qe(t){var e=function(){for(var t={},e=Object.keys(Fe),i=e.length,n=0;n<i;n++)t[e[n]]={distance:-1,parent:null};return t}(),i=[t];for(e[t].distance=0;i.length;)for(var n=i.pop(),o=Object.keys(Fe[n]),a=o.length,s=0;s<a;s++){var r=o[s],l=e[r];-1===l.distance&&(l.distance=e[n].distance+1,l.parent=n,i.unshift(r))}return e}function Ce(t,e){return function(i){return e(t(i))}}function Re(t,e){for(var i=[e[t].parent,t],n=Fe[e[t].parent][t],o=e[t].parent;e[o].parent;)i.unshift(e[o].parent),n=Ce(Fe[e[o].parent][o],n),o=e[o].parent;return n.conversion=i,n}var $e={};Object.keys(Fe).forEach(function(t){$e[t]={},Object.defineProperty($e[t],"channels",{value:Fe[t].channels}),Object.defineProperty($e[t],"labels",{value:Fe[t].labels});var e=function(t){for(var e=qe(t),i={},n=Object.keys(e),o=n.length,a=0;a<o;a++){var s=n[a];null!==e[s].parent&&(i[s]=Re(s,e))}return i}(t);Object.keys(e).forEach(function(i){var n=e[i];$e[t][i]=function(t){var e=function(e){if(null==e)return e;arguments.length>1&&(e=Array.prototype.slice.call(arguments));var i=t(e);if("object"==typeof i)for(var n=i.length,o=0;o<n;o++)i[o]=Math.round(i[o]);return i};return"conversion"in t&&(e.conversion=t.conversion),e}(n),$e[t][i].raw=function(t){var e=function(e){return null==e?e:(arguments.length>1&&(e=Array.prototype.slice.call(arguments)),t(e))};return"conversion"in t&&(e.conversion=t.conversion),e}(n)})});var Ne=$e,je=[].slice,Be=["keyword","gray","hex"],De={};Object.keys(Ne).forEach(function(t){De[je.call(Ne[t].labels).sort().join("")]=t});var Le={};function Ie(t,e){if(!(this instanceof Ie))return new Ie(t,e);if(e&&e in Be&&(e=null),e&&!(e in Ne))throw new Error("Unknown model: "+e);var i,n;if(null==t)this.model="rgb",this.color=[0,0,0],this.valpha=1;else if(t instanceof Ie)this.model=t.model,this.color=t.color.slice(),this.valpha=t.valpha;else if("string"==typeof t){var o=Ee.get(t);if(null===o)throw new Error("Unable to parse color from string: "+t);this.model=o.model,n=Ne[this.model].channels,this.color=o.value.slice(0,n),this.valpha="number"==typeof o.value[n]?o.value[n]:1}else if(t.length){this.model=e||"rgb",n=Ne[this.model].channels;var a=je.call(t,0,n);this.color=Ge(a,n),this.valpha="number"==typeof t[n]?t[n]:1}else if("number"==typeof t)t&=16777215,this.model="rgb",this.color=[t>>16&255,t>>8&255,255&t],this.valpha=1;else{this.valpha=1;var s=Object.keys(t);"alpha"in t&&(s.splice(s.indexOf("alpha"),1),this.valpha="number"==typeof t.alpha?t.alpha:0);var r=s.sort().join("");if(!(r in De))throw new Error("Unable to parse color from object: "+JSON.stringify(t));this.model=De[r];var l=Ne[this.model].labels,u=[];for(i=0;i<l.length;i++)u.push(t[l[i]]);this.color=Ge(u)}if(Le[this.model])for(n=Ne[this.model].channels,i=0;i<n;i++){var d=Le[this.model][i];d&&(this.color[i]=d(this.color[i]))}this.valpha=Math.max(0,Math.min(1,this.valpha)),Object.freeze&&Object.freeze(this)}function Ve(t,e,i){return(t=Array.isArray(t)?t:[t]).forEach(function(t){(Le[t]||(Le[t]=[]))[e]=i}),t=t[0],function(n){var o;return arguments.length?(i&&(n=i(n)),(o=this[t]()).color[e]=n,o):(o=this[t]().color[e],i&&(o=i(o)),o)}}function Ue(t){return function(e){return Math.max(0,Math.min(t,e))}}function Ge(t,e){for(var i=0;i<e;i++)"number"!=typeof t[i]&&(t[i]=0);return t}Ie.prototype={toString:function(){return this.string()},toJSON:function(){return this[this.model]()},string:function(t){var e=this.model in Ee.to?this:this.rgb(),i=1===(e=e.round("number"==typeof t?t:1)).valpha?e.color:e.color.concat(this.valpha);return Ee.to[e.model](i)},percentString:function(t){var e=this.rgb().round("number"==typeof t?t:1),i=1===e.valpha?e.color:e.color.concat(this.valpha);return Ee.to.rgb.percent(i)},array:function(){return 1===this.valpha?this.color.slice():this.color.concat(this.valpha)},object:function(){for(var t={},e=Ne[this.model].channels,i=Ne[this.model].labels,n=0;n<e;n++)t[i[n]]=this.color[n];return 1!==this.valpha&&(t.alpha=this.valpha),t},unitArray:function(){var t=this.rgb().color;return t[0]/=255,t[1]/=255,t[2]/=255,1!==this.valpha&&t.push(this.valpha),t},unitObject:function(){var t=this.rgb().object();return t.r/=255,t.g/=255,t.b/=255,1!==this.valpha&&(t.alpha=this.valpha),t},round:function(t){return t=Math.max(t||0,0),new Ie(this.color.map(function(t){return function(e){return function(t,e){return Number(t.toFixed(e))}(e,t)}}(t)).concat(this.valpha),this.model)},alpha:function(t){return arguments.length?new Ie(this.color.concat(Math.max(0,Math.min(1,t))),this.model):this.valpha},red:Ve("rgb",0,Ue(255)),green:Ve("rgb",1,Ue(255)),blue:Ve("rgb",2,Ue(255)),hue:Ve(["hsl","hsv","hsl","hwb","hcg"],0,function(t){return(t%360+360)%360}),saturationl:Ve("hsl",1,Ue(100)),lightness:Ve("hsl",2,Ue(100)),saturationv:Ve("hsv",1,Ue(100)),value:Ve("hsv",2,Ue(100)),chroma:Ve("hcg",1,Ue(100)),gray:Ve("hcg",2,Ue(100)),white:Ve("hwb",1,Ue(100)),wblack:Ve("hwb",2,Ue(100)),cyan:Ve("cmyk",0,Ue(100)),magenta:Ve("cmyk",1,Ue(100)),yellow:Ve("cmyk",2,Ue(100)),black:Ve("cmyk",3,Ue(100)),x:Ve("xyz",0,Ue(100)),y:Ve("xyz",1,Ue(100)),z:Ve("xyz",2,Ue(100)),l:Ve("lab",0,Ue(100)),a:Ve("lab",1),b:Ve("lab",2),keyword:function(t){return arguments.length?new Ie(t):Ne[this.model].keyword(this.color)},hex:function(t){return arguments.length?new Ie(t):Ee.to.hex(this.rgb().round().color)},rgbNumber:function(){var t=this.rgb().color;return(255&t[0])<<16|(255&t[1])<<8|255&t[2]},luminosity:function(){for(var t=this.rgb().color,e=[],i=0;i<t.length;i++){var n=t[i]/255;e[i]=n<=.03928?n/12.92:Math.pow((n+.055)/1.055,2.4)}return.2126*e[0]+.7152*e[1]+.0722*e[2]},contrast:function(t){var e=this.luminosity(),i=t.luminosity();return e>i?(e+.05)/(i+.05):(i+.05)/(e+.05)},level:function(t){var e=this.contrast(t);return e>=7.1?"AAA":e>=4.5?"AA":""},isDark:function(){var t=this.rgb().color;return(299*t[0]+587*t[1]+114*t[2])/1e3<128},isLight:function(){return!this.isDark()},negate:function(){for(var t=this.rgb(),e=0;e<3;e++)t.color[e]=255-t.color[e];return t},lighten:function(t){var e=this.hsl();return e.color[2]+=e.color[2]*t,e},darken:function(t){var e=this.hsl();return e.color[2]-=e.color[2]*t,e},saturate:function(t){var e=this.hsl();return e.color[1]+=e.color[1]*t,e},desaturate:function(t){var e=this.hsl();return e.color[1]-=e.color[1]*t,e},whiten:function(t){var e=this.hwb();return e.color[1]+=e.color[1]*t,e},blacken:function(t){var e=this.hwb();return e.color[2]+=e.color[2]*t,e},grayscale:function(){var t=this.rgb().color,e=.3*t[0]+.59*t[1]+.11*t[2];return Ie.rgb(e,e,e)},fade:function(t){return this.alpha(this.valpha-this.valpha*t)},opaquer:function(t){return this.alpha(this.valpha+this.valpha*t)},rotate:function(t){var e=this.hsl(),i=e.color[0];return i=(i=(i+t)%360)<0?360+i:i,e.color[0]=i,e},mix:function(t,e){if(!t||!t.rgb)throw new Error('Argument to "mix" was not a Color instance, but rather an instance of '+typeof t);var i=t.rgb(),n=this.rgb(),o=void 0===e?.5:e,a=2*o-1,s=i.alpha()-n.alpha(),r=((a*s==-1?a:(a+s)/(1+a*s))+1)/2,l=1-r;return Ie.rgb(r*i.red()+l*n.red(),r*i.green()+l*n.green(),r*i.blue()+l*n.blue(),i.alpha()*o+n.alpha()*(1-o))}},Object.keys(Ne).forEach(function(t){if(-1===Be.indexOf(t)){var e=Ne[t].channels;Ie.prototype[t]=function(){if(this.model===t)return new Ie(this);if(arguments.length)return new Ie(arguments,t);var i,n="number"==typeof arguments[e]?e:this.valpha;return new Ie((i=Ne[this.model][t].raw(this.color),Array.isArray(i)?i:[i]).concat(n),t)},Ie[t]=function(i){return"number"==typeof i&&(i=Ge(je.call(arguments),e)),new Ie(i,t)}}});var ze=Ie,We=(t,e)=>{const i={update:e=>{let i=ze(ue(e));i.isDark()&&(i=i.whiten(.5)),t.style.backgroundColor=i.negate().fade(.5).toString()}};return i.update(e),i};const Qe=function(e,i,n){const o=!Array.isArray(e),r=o?[e]:e,l=i.length<2,u=[],d=xt(n,e=>{let n=!1;const d=[];let f=0,h=t;const c=()=>{if(f)return;h();const n=i(o?d[0]:d,e);l?e(n):h=s(n)?n:t},p=r.map((t,e)=>t.subscribe(t=>{d[e]=t,f&=~(1<<e),n&&c()},()=>{a(u),f|=1<<e}));return n=!0,c(),function(){a(p),h()}});return{subscribe(e,i=t){u.push(i);const n=d.subscribe(e,i);return()=>{const t=u.indexOf(i);-1!==t&&u.splice(t,1),n()}}}}(Pt,t=>Math.min(3,Math.max(-.5,.01*t))),Xe=(...t)=>t.reduce((t,e)=>(e.forEach((e,i)=>{i>t.length-1&&t.push(e),t[i]+=e}),t),[]);function He(t){var e,i,n,o,s;return{c(){e=w("div"),i=w("div"),M(n=w("input"),"type","text"),M(n,"class","edit svelte-1vpy6cw"),M(n,"placeholder","Name It!"),M(e,"class","nameit svelte-1vpy6cw"),s=[P(n,"input",t.input_input_handler),P(e,"mousedown",t.drag)]},m(a,s){b(a,e,s),g(e,i),g(i,n),n.value=t.$name,o=We.call(null,i,t.$name)||{}},p(t,e){t.$name&&n.value!==e.$name&&(n.value=e.$name),"function"==typeof o.update&&t.$name&&o.update.call(null,e.$name)},d(t){t&&S(e),o&&"function"==typeof o.destroy&&o.destroy(),a(s)}}}function Ze(t){var e,i,n,o,a=t.has_name&&He(t);const s=t.$$slots.default,r=u(s,t,null);return{c(){a&&a.c(),e=k(),i=w("div"),r&&r.c(),M(i,"class","hole svelte-1vpy6cw"),o=P(i,"mousedown",t.drag)},l(t){r&&r.l(div_nodes)},m(t,o){a&&a.m(t,o),b(t,e,o),b(t,i,o),r&&r.m(i,null),n=!0},p(t,i){i.has_name?a?a.p(t,i):((a=He(i)).c(),a.m(e.parentNode,e)):a&&(a.d(1),a=null),r&&r.p&&t.$$scope&&r.p(f(s,i,t,null),d(s,i,null))},i(t){n||(nt(r,t),n=!0)},o(t){ot(r,t),n=!1},d(t){a&&a.d(t),t&&(S(e),S(i)),r&&r.d(t),o()}}}function Ye(t){var e,i=new te({props:{anchor:[0,0],position:t.tru_position,transition:!t.dragging,scale:t.tru_scale,$$slots:{default:[Ze]},$$scope:{ctx:t}}});return{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},p(t,e){var n={};t.tru_position&&(n.position=e.tru_position),t.dragging&&(n.transition=!e.dragging),t.tru_scale&&(n.scale=e.tru_scale),(t.$$scope||t.has_name||t.$name)&&(n.$$scope={changed:t,ctx:e}),i.$set(n)},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function Je(e,i,n){let o,a,s,r,u=t;l(e,kt,t=>{n("$Mouse",o=t)}),l(e,Yt,t=>{n("$Scaling",a=t)}),l(e,Qe,t=>{n("$zoom",s=t)}),e.$$.on_destroy.push(()=>u());let{position:d=[0,0],has_name:f=!0,hole:h}=i,c=!1;let p,y,_,{$$slots:m={},$$scope:v}=i;return e.$set=(t=>{"position"in t&&n("position",d=t.position),"has_name"in t&&n("has_name",f=t.has_name),"hole"in t&&n("hole",h=t.hole),"$$scope"in t&&n("$$scope",v=t.$$scope)}),e.$$.update=((t={hole:1,$Scaling:1,dragging:1,$Mouse:1,position:1,$zoom:1})=>{t.hole&&(p=h.name,u(),u=p.subscribe(t=>{n("$name",r=t)}),n("name",p)),(t.$Scaling||t.dragging||t.$Mouse||t.position)&&n("tru_position",y=Xe([-50*a,-25*a],c?o:d)),(t.dragging||t.$zoom)&&n("tru_scale",_=(c?1.168:1)+s)}),{position:d,has_name:f,hole:h,dragging:c,drag:t=>{if(c||t.target.classList.contains("port")||"INPUT"===t.target.tagName)return;n("dragging",c=!0);const e=()=>{n("dragging",c=!1),n("position",d=o),window.removeEventListener("mouseup",e)};window.addEventListener("mouseup",e)},name:p,tru_position:y,tru_scale:_,$name:r,input_input_handler:function(){p.set(this.value)},$$slots:m,$$scope:v}}class Ke extends _t{constructor(t){super(),yt(this,t,Je,Ye,r,["position","has_name","hole"])}}const{Object:ti}=rt;function ei(t,e,i){const n=ti.create(t);return n.type=e[i][0],n.fn=e[i][1],n}function ii(t){var e,i=new Ke({props:{position:t.position,has_name:!1,hole:t.hole,$$slots:{default:[ai]},$$scope:{ctx:t}}});return{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},p(t,e){var n={};t.position&&(n.position=e.position),t.hole&&(n.hole=e.hole),(t.$$scope||t.arr_types)&&(n.$$scope={changed:t,ctx:e}),i.$set(n)},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function ni(t){var e,i,n,o,a,s=t.type;function r(){return t.mouseup_handler(t)}return{c(){e=w("div"),i=A(s),n=k(),M(e,"class","type svelte-1uv4scf"),a=P(e,"mouseup",r)},m(a,s){b(a,e,s),g(e,i),g(e,n),o=We.call(null,e,t.type)||{}},p(e,n){t=n,e.arr_types&&s!==(s=t.type)&&E(i,s),"function"==typeof o.update&&e.arr_types&&o.update.call(null,t.type)},d(t){t&&S(e),o&&"function"==typeof o.destroy&&o.destroy(),a()}}}function oi(t,e){var i,n,o="hole"!==e.type&&ni(e);return{key:t,first:null,c(){i=O(),o&&o.c(),n=O(),this.first=i},m(t,e){b(t,i,e),o&&o.m(t,e),b(t,n,e)},p(t,e){"hole"!==e.type?o?o.p(t,e):((o=ni(e)).c(),o.m(n.parentNode,n)):o&&(o.d(1),o=null)},d(t){t&&S(i),o&&o.d(t),t&&S(n)}}}function ai(t){var e,i,n,o=[],a=new Map,s=t.arr_types;const r=t=>t.type;for(var l=0;l<s.length;l+=1){let e=ei(t,s,l),i=r(e);a.set(i,o[l]=oi(i,e))}return{c(){for(e=w("div"),(i=w("div")).textContent="SPAWN A ...",n=k(),l=0;l<o.length;l+=1)o[l].c();M(i,"class","title svelte-1uv4scf"),M(e,"class","prompt")},m(t,a){for(b(t,e,a),g(e,i),g(e,n),l=0;l<o.length;l+=1)o[l].m(e,null)},p(t,i){const n=i.arr_types;o=dt(o,t,r,1,i,n,a,e,lt,oi,null,ei)},d(t){for(t&&S(e),l=0;l<o.length;l+=1)o[l].d()}}}function si(t){var e,i,n,o=t.picking&&ii(t);return{c(){e=w("div"),o&&o.c(),M(e,"class","picker svelte-1uv4scf"),F(e,"picking",t.picking),n=[P(window,"mouseup",t.nopick),P(e,"mousedown",t.pick)]},m(t,n){b(t,e,n),o&&o.m(e,null),i=!0},p(t,i){i.picking?o?(o.p(t,i),nt(o,1)):((o=ii(i)).c(),nt(o,1),o.m(e,null)):o&&(et(),ot(o,1,1,()=>{o=null}),it()),t.picking&&F(e,"picking",i.picking)},i(t){i||(nt(o),i=!0)},o(t){ot(o),i=!1},d(t){t&&S(e),o&&o.d(),a(n)}}}function ri(t,e,i){let n;l(t,Yt,t=>{i("$Scaling",n=t)});let{weave:o}=e;const a=he();let s=!1;const r=t=>{o.holes.update(e=>{const i=ce[t]();return e[i.id]=i,e})};var u;u=ve.subscribe(t=>{t&&o.give_thread.set(t)}),D().$$.on_destroy.push(u);let d,f=[0,0];return t.$set=(t=>{"weave"in t&&i("weave",o=t.weave)}),i("arr_types",d=Object.entries(ce)),{weave:o,hole:a,picking:s,pick:t=>{i("position",f=[t.x,t.y+40*n]),i("picking",s=!0)},nopick:()=>{i("picking",s=!1)},create:r,position:f,arr_types:d,mouseup_handler:function({type:t}){return r(t)}}}class li extends _t{constructor(t){super(),yt(this,t,ri,si,r,["weave"])}}function ui(e){var i,n;return{c(){M(i=w("div"),"class","port svelte-1idyrw9"),M(i,"id",e.address),F(i,"writable",e.writable),F(i,"name",e.name),n=[P(i,"mousedown",e.mousedown),P(i,"mouseup",e.mouseup)]},m(t,e){b(t,i,e)},p(t,e){t.address&&M(i,"id",e.address),t.writable&&F(i,"writable",e.writable),t.name&&F(i,"name",e.name)},i:t,o:t,d(t){t&&S(i),a(n)}}}function di(t,e,i){let{writable:n=!1,name:o=!1,address:a=""}=e;return t.$set=(t=>{"writable"in t&&i("writable",n=t.writable),"name"in t&&i("name",o=t.name),"address"in t&&i("address",a=t.address)}),{writable:n,name:o,address:a,mousedown:()=>{_e.set(a)},mouseup:()=>{me.set(a)}}}class fi extends _t{constructor(t){super(),yt(this,t,di,ui,r,["writable","name","address"])}}function hi(t){var e,i,n,o,a,s,r,l,u,d,f,h=new fi({props:{writable:!0,address:`${t.address(t.name)}|write`}}),c=new fi({props:{address:`${t.address(t.name)}|read`}});return{c(){e=w("div"),h.$$.fragment.c(),i=k(),n=w("div"),o=w("div"),a=A(t.name),s=k(),r=w("input"),u=k(),c.$$.fragment.c(),M(o,"class","name svelte-1u78qvq"),M(r,"type","text"),M(r,"class","edit svelte-1u78qvq"),M(r,"placeholder","JSON plz"),M(n,"class","vbox svelte-1u78qvq"),M(e,"class","channel svelte-1u78qvq"),f=P(r,"input",t.input_input_handler)},m(f,p){b(f,e,p),ht(h,e,null),g(e,i),g(e,n),g(n,o),g(o,a),g(n,s),g(n,r),r.value=t.$chan,l=We.call(null,n,t.$chan)||{},g(e,u),ht(c,e,null),d=!0},p(t,e){var i={};(t.address||t.name)&&(i.address=`${e.address(e.name)}|write`),h.$set(i),d&&!t.name||E(a,e.name),t.$chan&&r.value!==e.$chan&&(r.value=e.$chan),"function"==typeof l.update&&t.$chan&&l.update.call(null,e.$chan);var n={};(t.address||t.name)&&(n.address=`${e.address(e.name)}|read`),c.$set(n)},i(t){d||(nt(h.$$.fragment,t),nt(c.$$.fragment,t),d=!0)},o(t){ot(h.$$.fragment,t),ot(c.$$.fragment,t),d=!1},d(t){t&&S(e),ct(h),l&&"function"==typeof l.destroy&&l.destroy(),ct(c),f()}}}function ci(t,e,i){let n,{hole:o,chan:a,name:s}=e;l(t,a,t=>{i("$chan",n=t)});return t.$set=(t=>{"hole"in t&&i("hole",o=t.hole),"chan"in t&&i("chan",a=t.chan),"name"in t&&i("name",s=t.name)}),{hole:o,chan:a,name:s,address:t=>`${o.id}|chan|${t}`,$chan:n,input_input_handler:function(){a.set(this.value)}}}class pi extends _t{constructor(t){super(),yt(this,t,ci,hi,r,["hole","chan","name"])}}function yi(t,e,i){const n=Object.create(t);return n.chan_name=e[i][0],n.chan=e[i][1],n}function _i(t){var e;return{c(){(e=w("div")).textContent="/\\/\\",M(e,"class","no-stitches svelte-1w40fld")},m(t,i){b(t,e,i)},d(t){t&&S(e)}}}function mi(t,e){var i,n,o=new pi({props:{chan:e.chan,hole:e.hole,name:e.chan_name}});return{key:t,first:null,c(){i=O(),o.$$.fragment.c(),this.first=i},m(t,e){b(t,i,e),ht(o,t,e),n=!0},p(t,e){var i={};t.$value&&(i.chan=e.chan),t.hole&&(i.hole=e.hole),t.$value&&(i.name=e.chan_name),o.$set(i)},i(t){n||(nt(o.$$.fragment,t),n=!0)},o(t){ot(o.$$.fragment,t),n=!1},d(t){t&&S(i),ct(o,t)}}}function vi(t){var e,i,n,o,s,r=[],l=new Map,u=Object.entries(t.$value);const d=t=>t.chan_name;for(var f=0;f<u.length;f+=1){let e=yi(t,u,f),i=d(e);l.set(i,r[f]=mi(i,e))}var h=null;return u.length||(h=_i()).c(),{c(){for(e=w("div"),f=0;f<r.length;f+=1)r[f].c();i=k(),M(n=w("input"),"type","text"),M(n,"class","add_channel svelte-1w40fld"),M(n,"placeholder","STITCH IT!"),M(e,"class","board svelte-1w40fld"),s=[P(n,"input",t.input_input_handler),P(n,"keypress",t.check_add),P(n,"blur",t.blur_handler)]},m(a,s){for(b(a,e,s),f=0;f<r.length;f+=1)r[f].m(e,null);h&&h.m(e,null),g(e,i),g(e,n),n.value=t.weave_add,o=!0},p(t,o){const a=Object.entries(o.$value);et(),r=dt(r,t,d,1,o,a,l,e,ut,mi,i,yi),it(),a.length?h&&(h.d(1),h=null):h||((h=_i()).c(),h.m(e,i)),t.weave_add&&n.value!==o.weave_add&&(n.value=o.weave_add)},i(t){if(!o){for(var e=0;e<u.length;e+=1)nt(r[e]);o=!0}},o(t){for(f=0;f<r.length;f+=1)ot(r[f]);o=!1},d(t){for(t&&S(e),f=0;f<r.length;f+=1)r[f].d();h&&h.d(),a(s)}}}function gi(e,i,n){let o,a=t;e.$$.on_destroy.push(()=>a());let{hole:s}=i,r="";let l,u;return e.$set=(t=>{"hole"in t&&n("hole",s=t.hole)}),e.$$.update=((t={hole:1})=>{t.hole&&(l=s.value,a(),a=l.subscribe(t=>{n("$value",o=t)}),n("value",l)),t.hole&&(u=s.name)}),{hole:s,weave_add:r,check_add:({which:t})=>{if(13!==t)return;const e=o;"-"===r[0]?delete e[r.slice(1)]:e[r]=At(fe(2)),l.set(e),n("weave_add",r="")},value:l,$value:o,input_input_handler:function(){r=this.value,n("weave_add",r)},blur_handler:function(){n("weave_add",r="")}}}class bi extends _t{constructor(t){super(),yt(this,t,gi,vi,r,["hole"])}}const Si=At({delay:250,duration:300});function Ti(e){var i,n,o,a,s;return{c(){(i=w("div")).textContent="\\/\\/",o=k(),(a=w("div")).textContent="JSON IT!",M(i,"class","doit svelte-1w9bmph"),M(a,"class","doit svelte-1w9bmph")},m(t,e){b(t,i,e),b(t,o,e),b(t,a,e)},i(t){n||X(()=>{(n=at(i,gt,Si)).start()}),s||X(()=>{(s=at(a,gt,Si)).start()})},o:t,d(t){t&&(S(i),S(o),S(a))}}}function wi(t){var e,i,n,o,a,s,r,l,u,d,f=new fi({props:{writable:!0,address:`${t.hole.id}|write`}}),h=null===t.$value&&Ti(),c=new fi({props:{address:`${t.hole.id}|read`}});return{c(){e=w("div"),f.$$.fragment.c(),i=k(),n=w("div"),o=w("div"),a=w("div"),s=A(t.$value),r=k(),h&&h.c(),u=k(),c.$$.fragment.c(),M(a,"class","flex svelte-1w9bmph"),M(o,"class","value_add svelte-1w9bmph"),M(n,"class","JSON svelte-1w9bmph"),F(n,"error",t.error),M(e,"class","box svelte-1w9bmph")},m(p,y){b(p,e,y),ht(f,e,null),g(e,i),g(e,n),g(n,o),g(o,a),g(a,s),g(o,r),h&&h.m(o,null),l=We.call(null,n,t.try_json(t.$value))||{},g(e,u),ht(c,e,null),d=!0},p(t,e){var i={};t.hole&&(i.address=`${e.hole.id}|write`),f.$set(i),d&&!t.$value||E(s,e.$value),null===e.$value?h?nt(h,1):((h=Ti()).c(),nt(h,1),h.m(o,null)):h&&(h.d(1),h=null),"function"==typeof l.update&&t.$value&&l.update.call(null,e.try_json(e.$value)),t.error&&F(n,"error",e.error);var a={};t.hole&&(a.address=`${e.hole.id}|read`),c.$set(a)},i(t){d||(nt(f.$$.fragment,t),nt(h),nt(c.$$.fragment,t),d=!0)},o(t){ot(f.$$.fragment,t),ot(c.$$.fragment,t),d=!1},d(t){t&&S(e),ct(f),h&&h.d(),l&&"function"==typeof l.destroy&&l.destroy(),ct(c)}}}function xi(e,i,n){let o,a=t;e.$$.on_destroy.push(()=>a());let{hole:s}=i;let r,l;return e.$set=(t=>{"hole"in t&&n("hole",s=t.hole)}),e.$$.update=((t={hole:1,$value:1})=>{t.hole&&(r=s.value,a(),a=r.subscribe(t=>{n("$value",o=t)}),n("value",r)),t.$value&&n("error",l=void 0===o)}),{hole:s,try_json:t=>{try{return JSON.stringify(t)}catch(t){return"! ErRoR !"}},value:r,error:l,$value:o}}class Ai extends _t{constructor(t){super(),yt(this,t,xi,wi,r,["hole"])}}function ki(t,e,i){const n=Object.create(t);return n.id=e[i][0],n.hole=e[i][1],n}function Oi(t){var e,i,n=t.get_type(t.hole);function o(t){return{props:{hole:t.hole}}}if(n)var a=new n(o(t));return{c(){a&&a.$$.fragment.c(),e=k()},m(t,n){a&&ht(a,t,n),b(t,e,n),i=!0},p(t,i){var s={};if(t.$holes&&(s.hole=i.hole),n!==(n=i.get_type(i.hole))){if(a){et();const t=a;ot(t.$$.fragment,1,0,()=>{ct(t,1)}),it()}n?((a=new n(o(i))).$$.fragment.c(),nt(a.$$.fragment,1),ht(a,e.parentNode,e)):a=null}else n&&a.$set(s)},i(t){i||(a&&nt(a.$$.fragment,t),i=!0)},o(t){a&&ot(a.$$.fragment,t),i=!1},d(t){a&&ct(a,t),t&&S(e)}}}function Pi(t){var e,i=new Ke({props:{hole:t.hole,position:[window.innerWidth/2,window.innerHeight/2],$$slots:{default:[Oi]},$$scope:{ctx:t}}});return{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},p(t,e){var n={};t.$holes&&(n.hole=e.hole),(t.$$scope||t.$holes)&&(n.$$scope={changed:t,ctx:e}),i.$set(n)},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function Mi(t){for(var e,i,n,o,a=new li({props:{weave:t.weave}}),s=new Oe({props:{weave:t.weave}}),r=Object.entries(t.$holes),l=[],u=0;u<r.length;u+=1)l[u]=Pi(ki(t,r,u));const d=t=>ot(l[t],1,1,()=>{l[t]=null});return{c(){a.$$.fragment.c(),e=k(),s.$$.fragment.c(),i=k();for(var t=0;t<l.length;t+=1)l[t].c();n=O()},m(t,r){ht(a,t,r),b(t,e,r),ht(s,t,r),b(t,i,r);for(var u=0;u<l.length;u+=1)l[u].m(t,r);b(t,n,r),o=!0},p(t,e){var i={};t.weave&&(i.weave=e.weave),a.$set(i);var o={};if(t.weave&&(o.weave=e.weave),s.$set(o),t.$holes||t.get_type){r=Object.entries(e.$holes);for(var u=0;u<r.length;u+=1){const i=ki(e,r,u);l[u]?(l[u].p(t,i),nt(l[u],1)):(l[u]=Pi(i),l[u].c(),nt(l[u],1),l[u].m(n.parentNode,n))}for(et(),u=r.length;u<l.length;u+=1)d(u);it()}},i(t){if(!o){nt(a.$$.fragment,t),nt(s.$$.fragment,t);for(var e=0;e<r.length;e+=1)nt(l[e]);o=!0}},o(t){ot(a.$$.fragment,t),ot(s.$$.fragment,t),l=l.filter(Boolean);for(let t=0;t<l.length;t+=1)ot(l[t]);o=!1},d(t){ct(a,t),t&&S(e),ct(s,t),t&&S(i),T(l,t),t&&S(n)}}}function Ei(t,e,i){let n;const o=pe(),a=o.holes;l(t,a,t=>{i("$holes",n=t)});const s={stitch:bi,json:Ai};return{weave:o,holes:a,get_type:t=>{const e=t.type.slice(1).split(" ");let i;for(;i=e.pop();)if(s[i])return s[i];return!1},$holes:n}}class Fi extends _t{constructor(t){super(),yt(this,t,Ei,Mi,r,[])}}function qi(t){var e,i=new jt({});return i.$on("start",t.goto("start")),i.$on("design",t.goto("cards")),i.$on("develop",t.goto("weave")),{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function Ci(t){var e,i=new Fi({});return i.$on("end",t.goto("")),{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function Ri(t){var e,i=new ne({});return i.$on("end",t.goto("")),{c(){i.$$.fragment.c()},m(t,n){ht(i,t,n),e=!0},i(t){e||(nt(i.$$.fragment,t),e=!0)},o(t){ot(i.$$.fragment,t),e=!1},d(t){ct(i,t)}}}function $i(t){var e,i,n,o,a,s,r=[Ri,Ci,qi],l=[];function u(t){return t.designing?0:t.weaving?1:2}e=u(t),i=l[e]=r[e](t);var d=new Vt({props:{root:t.root}});d.$on("end",t.goto(""));var f=new Ht({props:{random:!0}});return{c(){i.c(),n=k(),d.$$.fragment.c(),o=k(),a=w("div"),f.$$.fragment.c(),M(a,"class","background svelte-4esgp2")},m(t,i){l[e].m(t,i),b(t,n,i),ht(d,t,i),b(t,o,i),b(t,a,i),ht(f,a,null),s=!0},p(t,o){var a=e;(e=u(o))!==a&&(et(),ot(l[a],1,1,()=>{l[a]=null}),it(),(i=l[e])||(i=l[e]=r[e](o)).c(),nt(i,1),i.m(n.parentNode,n));var s={};t.root&&(s.root=o.root),d.$set(s)},i(t){s||(nt(i),nt(d.$$.fragment,t),nt(f.$$.fragment,t),s=!0)},o(t){ot(i),ot(d.$$.fragment,t),ot(f.$$.fragment,t),s=!1},d(t){l[e].d(t),t&&S(n),ct(d,t),t&&(S(o),S(a)),ct(f)}}}function Ni(t,e,i){let n;l(t,Bt,t=>{i("$path",n=t)});let o,a,s;return t.$$.update=((t={$path:1})=>{t.$path,t.$path&&i("designing",o="cards"===n),t.$path&&i("weaving",a="weave"===n),t.$path&&i("root",s="/"===n||""===n),t.$path}),{goto:t=>()=>Bt.set(t),designing:o,weaving:a,root:s}}return new class extends _t{constructor(t){super(),yt(this,t,Ni,$i,r,[])}}({target:document.body,props:{name:"stage"}})}();
+var app = (function (Tone, uuid, twgl, expr, Color) {
+    'use strict';
+
+    Tone = Tone && Tone.hasOwnProperty('default') ? Tone['default'] : Tone;
+    uuid = uuid && uuid.hasOwnProperty('default') ? uuid['default'] : uuid;
+    expr = expr && expr.hasOwnProperty('default') ? expr['default'] : expr;
+    Color = Color && Color.hasOwnProperty('default') ? Color['default'] : Color;
+
+    function noop() { }
+    const identity = x => x;
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
+    function is_promise(value) {
+        return value && typeof value === 'object' && typeof value.then === 'function';
+    }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function validate_store(store, name) {
+        if (!store || typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, callback) {
+        const unsub = store.subscribe(callback);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
+    function create_slot(definition, ctx, fn) {
+        if (definition) {
+            const slot_ctx = get_slot_context(definition, ctx, fn);
+            return definition[0](slot_ctx);
+        }
+    }
+    function get_slot_context(definition, ctx, fn) {
+        return definition[1]
+            ? assign({}, assign(ctx.$$scope.ctx, definition[1](fn ? fn(ctx) : {})))
+            : ctx.$$scope.ctx;
+    }
+    function get_slot_changes(definition, ctx, changed, fn) {
+        return definition[1]
+            ? assign({}, assign(ctx.$$scope.changed || {}, definition[1](fn ? fn(changed) : {})))
+            : ctx.$$scope.changed || {};
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    let running = false;
+    function run_tasks() {
+        tasks.forEach(task => {
+            if (!task[0](now())) {
+                tasks.delete(task);
+                task[1]();
+            }
+        });
+        running = tasks.size > 0;
+        if (running)
+            raf(run_tasks);
+    }
+    function loop(fn) {
+        let task;
+        if (!running) {
+            running = true;
+            raf(run_tasks);
+        }
+        return {
+            promise: new Promise(fulfil => {
+                tasks.add(task = [fn, fulfil]);
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_input_value(input, value) {
+        if (value != null || input.value) {
+            input.value = value;
+        }
+    }
+    function toggle_class(element, name, toggle) {
+        element.classList[toggle ? 'add' : 'remove'](name);
+    }
+    function custom_event(type, detail) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, false, false, detail);
+        return e;
+    }
+
+    let stylesheet;
+    let active = 0;
+    let current_rules = {};
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        if (!current_rules[name]) {
+            if (!stylesheet) {
+                const style = element('style');
+                document.head.appendChild(style);
+                stylesheet = style.sheet;
+            }
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        node.style.animation = (node.style.animation || '')
+            .split(', ')
+            .filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        )
+            .join(', ');
+        if (name && !--active)
+            clear_rules();
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            let i = stylesheet.cssRules.length;
+            while (i--)
+                stylesheet.deleteRule(i);
+            current_rules = {};
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+    function get_current_component() {
+        if (!current_component)
+            throw new Error(`Function called outside component initialization`);
+        return current_component;
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    function flush() {
+        const seen_callbacks = new Set();
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            while (dirty_components.length) {
+                const component = dirty_components.shift();
+                set_current_component(component);
+                update(component.$$);
+            }
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    callback();
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update($$.dirty);
+            run_all($$.before_update);
+            $$.fragment && $$.fragment.p($$.dirty, $$.ctx);
+            $$.dirty = null;
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_out_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = true;
+        let animation_name;
+        const group = outros;
+        group.r += 1;
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            add_render_callback(() => dispatch(node, false, 'start'));
+            loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(0, 1);
+                        dispatch(node, false, 'end');
+                        if (!--group.r) {
+                            // this will result in `end()` being called,
+                            // so we don't need to clean up here
+                            run_all(group.c);
+                        }
+                        return false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(1 - t, t);
+                    }
+                }
+                return running;
+            });
+        }
+        if (is_function(config)) {
+            wait().then(() => {
+                // @ts-ignore
+                config = config();
+                go();
+            });
+        }
+        else {
+            go();
+        }
+        return {
+            end(reset) {
+                if (reset && config.tick) {
+                    config.tick(1, 0);
+                }
+                if (running) {
+                    if (animation_name)
+                        delete_rule(node, animation_name);
+                    running = false;
+                }
+            }
+        };
+    }
+
+    function handle_promise(promise, info) {
+        const token = info.token = {};
+        function update(type, index, key, value) {
+            if (info.token !== token)
+                return;
+            info.resolved = key && { [key]: value };
+            const child_ctx = assign(assign({}, info.ctx), info.resolved);
+            const block = type && (info.current = type)(child_ctx);
+            let needs_flush = false;
+            if (info.block) {
+                if (info.blocks) {
+                    info.blocks.forEach((block, i) => {
+                        if (i !== index && block) {
+                            group_outros();
+                            transition_out(block, 1, 1, () => {
+                                info.blocks[i] = null;
+                            });
+                            check_outros();
+                        }
+                    });
+                }
+                else {
+                    info.block.d(1);
+                }
+                block.c();
+                transition_in(block, 1);
+                block.m(info.mount(), info.anchor);
+                needs_flush = true;
+            }
+            info.block = block;
+            if (info.blocks)
+                info.blocks[index] = block;
+            if (needs_flush) {
+                flush();
+            }
+        }
+        if (is_promise(promise)) {
+            const current_component = get_current_component();
+            promise.then(value => {
+                set_current_component(current_component);
+                update(info.then, 1, info.value, value);
+                set_current_component(null);
+            }, error => {
+                set_current_component(current_component);
+                update(info.catch, 2, info.error, error);
+                set_current_component(null);
+            });
+            // if we previously had a then/catch block, destroy it
+            if (info.current !== info.pending) {
+                update(info.pending, 0);
+                return true;
+            }
+        }
+        else {
+            if (info.current !== info.then) {
+                update(info.then, 1, info.value, promise);
+                return true;
+            }
+            info.resolved = { [info.value]: promise };
+        }
+    }
+
+    const globals = (typeof window !== 'undefined' ? window : global);
+
+    function destroy_block(block, lookup) {
+        block.d(1);
+        lookup.delete(block.key);
+    }
+    function outro_and_destroy_block(block, lookup) {
+        transition_out(block, 1, 1, () => {
+            lookup.delete(block.key);
+        });
+    }
+    function update_keyed_each(old_blocks, changed, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+        let o = old_blocks.length;
+        let n = list.length;
+        let i = o;
+        const old_indexes = {};
+        while (i--)
+            old_indexes[old_blocks[i].key] = i;
+        const new_blocks = [];
+        const new_lookup = new Map();
+        const deltas = new Map();
+        i = n;
+        while (i--) {
+            const child_ctx = get_context(ctx, list, i);
+            const key = get_key(child_ctx);
+            let block = lookup.get(key);
+            if (!block) {
+                block = create_each_block(key, child_ctx);
+                block.c();
+            }
+            else if (dynamic) {
+                block.p(changed, child_ctx);
+            }
+            new_lookup.set(key, new_blocks[i] = block);
+            if (key in old_indexes)
+                deltas.set(key, Math.abs(i - old_indexes[key]));
+        }
+        const will_move = new Set();
+        const did_move = new Set();
+        function insert(block) {
+            transition_in(block, 1);
+            block.m(node, next);
+            lookup.set(block.key, block);
+            next = block.first;
+            n--;
+        }
+        while (o && n) {
+            const new_block = new_blocks[n - 1];
+            const old_block = old_blocks[o - 1];
+            const new_key = new_block.key;
+            const old_key = old_block.key;
+            if (new_block === old_block) {
+                // do nothing
+                next = new_block.first;
+                o--;
+                n--;
+            }
+            else if (!new_lookup.has(old_key)) {
+                // remove old block
+                destroy(old_block, lookup);
+                o--;
+            }
+            else if (!lookup.has(new_key) || will_move.has(new_key)) {
+                insert(new_block);
+            }
+            else if (did_move.has(old_key)) {
+                o--;
+            }
+            else if (deltas.get(new_key) > deltas.get(old_key)) {
+                did_move.add(new_key);
+                insert(new_block);
+            }
+            else {
+                will_move.add(old_key);
+                o--;
+            }
+        }
+        while (o--) {
+            const old_block = old_blocks[o];
+            if (!new_lookup.has(old_block.key))
+                destroy(old_block, lookup);
+        }
+        while (n)
+            insert(new_blocks[n - 1]);
+        return new_blocks;
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function mount_component(component, target, anchor) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        // onMount happens before the initial afterUpdate
+        add_render_callback(() => {
+            const new_on_destroy = on_mount.map(run).filter(is_function);
+            if (on_destroy) {
+                on_destroy.push(...new_on_destroy);
+            }
+            else {
+                // Edge case - component was destroyed immediately,
+                // most likely as a result of a binding initialising
+                run_all(new_on_destroy);
+            }
+            component.$$.on_mount = [];
+        });
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = {};
+        }
+    }
+    function make_dirty(component, key) {
+        if (!component.$$.dirty) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty = blank_object();
+        }
+        component.$$.dirty[key] = true;
+    }
+    function init(component, options, instance, create_fragment, not_equal, props) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const prop_values = options.props || {};
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // everything else
+            callbacks: blank_object(),
+            dirty: null
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, prop_values, (key, ret, value = ret) => {
+                if ($$.ctx && not_equal($$.ctx[key], $$.ctx[key] = value)) {
+                    if ($$.bound[key])
+                        $$.bound[key](value);
+                    if (ready)
+                        make_dirty(component, key);
+                }
+                return ret;
+            })
+            : prop_values;
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(children(options.target));
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set() {
+            // overridden by instance, if it has props
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, detail));
+    }
+    function append_dev(target, node) {
+        dispatch_dev("SvelteDOMInsert", { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev("SvelteDOMInsert", { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev("SvelteDOMRemove", { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ["capture"] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev("SvelteDOMAddEventListener", { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev("SvelteDOMRemoveEventListener", { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev("SvelteDOMRemoveAttribute", { node, attribute });
+        else
+            dispatch_dev("SvelteDOMSetAttribute", { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev("SvelteDOMSetData", { node: text, data });
+        text.data = data;
+    }
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error(`'target' is a required option`);
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+            };
+        }
+    }
+
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function unwrapExports (x) {
+    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+    }
+
+    function createCommonjsModule(fn, module) {
+    	return module = { exports: {} }, fn(module, module.exports), module.exports;
+    }
+
+    var internal = createCommonjsModule(function (module, exports) {
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+    function noop() { }
+    const identity = x => x;
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
+    function is_promise(value) {
+        return value && typeof value === 'object' && typeof value.then === 'function';
+    }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function not_equal(a, b) {
+        return a != a ? b == b : a !== b;
+    }
+    function validate_store(store, name) {
+        if (!store || typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, callback) {
+        const unsub = store.subscribe(callback);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function get_store_value(store) {
+        let value;
+        subscribe(store, _ => value = _)();
+        return value;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
+    function create_slot(definition, ctx, fn) {
+        if (definition) {
+            const slot_ctx = get_slot_context(definition, ctx, fn);
+            return definition[0](slot_ctx);
+        }
+    }
+    function get_slot_context(definition, ctx, fn) {
+        return definition[1]
+            ? assign({}, assign(ctx.$$scope.ctx, definition[1](fn ? fn(ctx) : {})))
+            : ctx.$$scope.ctx;
+    }
+    function get_slot_changes(definition, ctx, changed, fn) {
+        return definition[1]
+            ? assign({}, assign(ctx.$$scope.changed || {}, definition[1](fn ? fn(changed) : {})))
+            : ctx.$$scope.changed || {};
+    }
+    function exclude_internal_props(props) {
+        const result = {};
+        for (const k in props)
+            if (k[0] !== '$')
+                result[k] = props[k];
+        return result;
+    }
+    function once(fn) {
+        let ran = false;
+        return function (...args) {
+            if (ran)
+                return;
+            ran = true;
+            fn.call(this, ...args);
+        };
+    }
+    function null_to_empty(value) {
+        return value == null ? '' : value;
+    }
+    function set_store_value(store, ret, value = ret) {
+        store.set(value);
+        return ret;
+    }
+    const has_prop = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+
+    const is_client = typeof window !== 'undefined';
+    exports.now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    exports.raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+    // used internally for testing
+    function set_now(fn) {
+        exports.now = fn;
+    }
+    function set_raf(fn) {
+        exports.raf = fn;
+    }
+
+    const tasks = new Set();
+    let running = false;
+    function run_tasks() {
+        tasks.forEach(task => {
+            if (!task[0](exports.now())) {
+                tasks.delete(task);
+                task[1]();
+            }
+        });
+        running = tasks.size > 0;
+        if (running)
+            exports.raf(run_tasks);
+    }
+    function clear_loops() {
+        // for testing...
+        tasks.forEach(task => tasks.delete(task));
+        running = false;
+    }
+    function loop(fn) {
+        let task;
+        if (!running) {
+            running = true;
+            exports.raf(run_tasks);
+        }
+        return {
+            promise: new Promise(fulfil => {
+                tasks.add(task = [fn, fulfil]);
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function element_is(name, is) {
+        return document.createElement(name, { is });
+    }
+    function object_without_properties(obj, exclude) {
+        // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
+        const target = {};
+        for (const k in obj) {
+            if (has_prop(obj, k)
+                // @ts-ignore
+                && exclude.indexOf(k) === -1) {
+                // @ts-ignore
+                target[k] = obj[k];
+            }
+        }
+        return target;
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function prevent_default(fn) {
+        return function (event) {
+            event.preventDefault();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
+    function stop_propagation(fn) {
+        return function (event) {
+            event.stopPropagation();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
+    function self(fn) {
+        return function (event) {
+            // @ts-ignore
+            if (event.target === this)
+                fn.call(this, event);
+        };
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function set_attributes(node, attributes) {
+        // @ts-ignore
+        const descriptors = Object.getOwnPropertyDescriptors(node.__proto__);
+        for (const key in attributes) {
+            if (attributes[key] == null) {
+                node.removeAttribute(key);
+            }
+            else if (key === 'style') {
+                node.style.cssText = attributes[key];
+            }
+            else if (descriptors[key] && descriptors[key].set) {
+                node[key] = attributes[key];
+            }
+            else {
+                attr(node, key, attributes[key]);
+            }
+        }
+    }
+    function set_svg_attributes(node, attributes) {
+        for (const key in attributes) {
+            attr(node, key, attributes[key]);
+        }
+    }
+    function set_custom_element_data(node, prop, value) {
+        if (prop in node) {
+            node[prop] = value;
+        }
+        else {
+            attr(node, prop, value);
+        }
+    }
+    function xlink_attr(node, attribute, value) {
+        node.setAttributeNS('http://www.w3.org/1999/xlink', attribute, value);
+    }
+    function get_binding_group_value(group) {
+        const value = [];
+        for (let i = 0; i < group.length; i += 1) {
+            if (group[i].checked)
+                value.push(group[i].__value);
+        }
+        return value;
+    }
+    function to_number(value) {
+        return value === '' ? undefined : +value;
+    }
+    function time_ranges_to_array(ranges) {
+        const array = [];
+        for (let i = 0; i < ranges.length; i += 1) {
+            array.push({ start: ranges.start(i), end: ranges.end(i) });
+        }
+        return array;
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function claim_element(nodes, name, attributes, svg) {
+        for (let i = 0; i < nodes.length; i += 1) {
+            const node = nodes[i];
+            if (node.nodeName === name) {
+                for (let j = 0; j < node.attributes.length; j += 1) {
+                    const attribute = node.attributes[j];
+                    if (!attributes[attribute.name])
+                        node.removeAttribute(attribute.name);
+                }
+                return nodes.splice(i, 1)[0]; // TODO strip unwanted attributes
+            }
+        }
+        return svg ? svg_element(name) : element(name);
+    }
+    function claim_text(nodes, data) {
+        for (let i = 0; i < nodes.length; i += 1) {
+            const node = nodes[i];
+            if (node.nodeType === 3) {
+                node.data = '' + data;
+                return nodes.splice(i, 1)[0];
+            }
+        }
+        return text(data);
+    }
+    function claim_space(nodes) {
+        return claim_text(nodes, ' ');
+    }
+    function set_data(text, data) {
+        data = '' + data;
+        if (text.data !== data)
+            text.data = data;
+    }
+    function set_input_value(input, value) {
+        if (value != null || input.value) {
+            input.value = value;
+        }
+    }
+    function set_input_type(input, type) {
+        try {
+            input.type = type;
+        }
+        catch (e) {
+            // do nothing
+        }
+    }
+    function set_style(node, key, value, important) {
+        node.style.setProperty(key, value, important ? 'important' : '');
+    }
+    function select_option(select, value) {
+        for (let i = 0; i < select.options.length; i += 1) {
+            const option = select.options[i];
+            if (option.__value === value) {
+                option.selected = true;
+                return;
+            }
+        }
+    }
+    function select_options(select, value) {
+        for (let i = 0; i < select.options.length; i += 1) {
+            const option = select.options[i];
+            option.selected = ~value.indexOf(option.__value);
+        }
+    }
+    function select_value(select) {
+        const selected_option = select.querySelector(':checked') || select.options[0];
+        return selected_option && selected_option.__value;
+    }
+    function select_multiple_value(select) {
+        return [].map.call(select.querySelectorAll(':checked'), option => option.__value);
+    }
+    function add_resize_listener(element, fn) {
+        if (getComputedStyle(element).position === 'static') {
+            element.style.position = 'relative';
+        }
+        const object = document.createElement('object');
+        object.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+        object.type = 'text/html';
+        object.tabIndex = -1;
+        let win;
+        object.onload = () => {
+            win = object.contentDocument.defaultView;
+            win.addEventListener('resize', fn);
+        };
+        if (/Trident/.test(navigator.userAgent)) {
+            element.appendChild(object);
+            object.data = 'about:blank';
+        }
+        else {
+            object.data = 'about:blank';
+            element.appendChild(object);
+        }
+        return {
+            cancel: () => {
+                win && win.removeEventListener && win.removeEventListener('resize', fn);
+                element.removeChild(object);
+            }
+        };
+    }
+    function toggle_class(element, name, toggle) {
+        element.classList[toggle ? 'add' : 'remove'](name);
+    }
+    function custom_event(type, detail) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, false, false, detail);
+        return e;
+    }
+    class HtmlTag {
+        constructor(html, anchor = null) {
+            this.e = element('div');
+            this.a = anchor;
+            this.u(html);
+        }
+        m(target, anchor = null) {
+            for (let i = 0; i < this.n.length; i += 1) {
+                insert(target, this.n[i], anchor);
+            }
+            this.t = target;
+        }
+        u(html) {
+            this.e.innerHTML = html;
+            this.n = Array.from(this.e.childNodes);
+        }
+        p(html) {
+            this.d();
+            this.u(html);
+            this.m(this.t, this.a);
+        }
+        d() {
+            this.n.forEach(detach);
+        }
+    }
+
+    let stylesheet;
+    let active = 0;
+    let current_rules = {};
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        if (!current_rules[name]) {
+            if (!stylesheet) {
+                const style = element('style');
+                document.head.appendChild(style);
+                stylesheet = style.sheet;
+            }
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        node.style.animation = (node.style.animation || '')
+            .split(', ')
+            .filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        )
+            .join(', ');
+        if (name && !--active)
+            clear_rules();
+    }
+    function clear_rules() {
+        exports.raf(() => {
+            if (active)
+                return;
+            let i = stylesheet.cssRules.length;
+            while (i--)
+                stylesheet.deleteRule(i);
+            current_rules = {};
+        });
+    }
+
+    function create_animation(node, from, fn, params) {
+        if (!from)
+            return noop;
+        const to = node.getBoundingClientRect();
+        if (from.left === to.left && from.right === to.right && from.top === to.top && from.bottom === to.bottom)
+            return noop;
+        const { delay = 0, duration = 300, easing = identity, 
+        // @ts-ignore todo: should this be separated from destructuring? Or start/end added to public api and documentation?
+        start: start_time = exports.now() + delay, 
+        // @ts-ignore todo:
+        end = start_time + duration, tick = noop, css } = fn(node, { from, to }, params);
+        let running = true;
+        let started = false;
+        let name;
+        function start() {
+            if (css) {
+                name = create_rule(node, 0, 1, duration, delay, easing, css);
+            }
+            if (!delay) {
+                started = true;
+            }
+        }
+        function stop() {
+            if (css)
+                delete_rule(node, name);
+            running = false;
+        }
+        loop(now => {
+            if (!started && now >= start_time) {
+                started = true;
+            }
+            if (started && now >= end) {
+                tick(1, 0);
+                stop();
+            }
+            if (!running) {
+                return false;
+            }
+            if (started) {
+                const p = now - start_time;
+                const t = 0 + 1 * easing(p / duration);
+                tick(t, 1 - t);
+            }
+            return true;
+        });
+        start();
+        tick(0, 1);
+        return stop;
+    }
+    function fix_position(node) {
+        const style = getComputedStyle(node);
+        if (style.position !== 'absolute' && style.position !== 'fixed') {
+            const { width, height } = style;
+            const a = node.getBoundingClientRect();
+            node.style.position = 'absolute';
+            node.style.width = width;
+            node.style.height = height;
+            add_transform(node, a);
+        }
+    }
+    function add_transform(node, a) {
+        const b = node.getBoundingClientRect();
+        if (a.left !== b.left || a.top !== b.top) {
+            const style = getComputedStyle(node);
+            const transform = style.transform === 'none' ? '' : style.transform;
+            node.style.transform = `${transform} translate(${a.left - b.left}px, ${a.top - b.top}px)`;
+        }
+    }
+
+    function set_current_component(component) {
+        exports.current_component = component;
+    }
+    function get_current_component() {
+        if (!exports.current_component)
+            throw new Error(`Function called outside component initialization`);
+        return exports.current_component;
+    }
+    function beforeUpdate(fn) {
+        get_current_component().$$.before_update.push(fn);
+    }
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
+    }
+    function afterUpdate(fn) {
+        get_current_component().$$.after_update.push(fn);
+    }
+    function onDestroy(fn) {
+        get_current_component().$$.on_destroy.push(fn);
+    }
+    function createEventDispatcher() {
+        const component = get_current_component();
+        return (type, detail) => {
+            const callbacks = component.$$.callbacks[type];
+            if (callbacks) {
+                // TODO are there situations where events could be dispatched
+                // in a server (non-DOM) environment?
+                const event = custom_event(type, detail);
+                callbacks.slice().forEach(fn => {
+                    fn.call(component, event);
+                });
+            }
+        };
+    }
+    function setContext(key, context) {
+        get_current_component().$$.context.set(key, context);
+    }
+    function getContext(key) {
+        return get_current_component().$$.context.get(key);
+    }
+    // TODO figure out if we still want to support
+    // shorthand events, or if we want to implement
+    // a real bubbling mechanism
+    function bubble(component, event) {
+        const callbacks = component.$$.callbacks[event.type];
+        if (callbacks) {
+            callbacks.slice().forEach(fn => fn(event));
+        }
+    }
+
+    const dirty_components = [];
+    const intros = { enabled: false };
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function tick() {
+        schedule_update();
+        return resolved_promise;
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    function add_flush_callback(fn) {
+        flush_callbacks.push(fn);
+    }
+    function flush() {
+        const seen_callbacks = new Set();
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            while (dirty_components.length) {
+                const component = dirty_components.shift();
+                set_current_component(component);
+                update(component.$$);
+            }
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    callback();
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update($$.dirty);
+            run_all($$.before_update);
+            $$.fragment && $$.fragment.p($$.dirty, $$.ctx);
+            $$.dirty = null;
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = exports.now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_out_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = true;
+        let animation_name;
+        const group = outros;
+        group.r += 1;
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
+            const start_time = exports.now() + delay;
+            const end_time = start_time + duration;
+            add_render_callback(() => dispatch(node, false, 'start'));
+            loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(0, 1);
+                        dispatch(node, false, 'end');
+                        if (!--group.r) {
+                            // this will result in `end()` being called,
+                            // so we don't need to clean up here
+                            run_all(group.c);
+                        }
+                        return false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(1 - t, t);
+                    }
+                }
+                return running;
+            });
+        }
+        if (is_function(config)) {
+            wait().then(() => {
+                // @ts-ignore
+                config = config();
+                go();
+            });
+        }
+        else {
+            go();
+        }
+        return {
+            end(reset) {
+                if (reset && config.tick) {
+                    config.tick(1, 0);
+                }
+                if (running) {
+                    if (animation_name)
+                        delete_rule(node, animation_name);
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = program.b - t;
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: exports.now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
+    }
+
+    function handle_promise(promise, info) {
+        const token = info.token = {};
+        function update(type, index, key, value) {
+            if (info.token !== token)
+                return;
+            info.resolved = key && { [key]: value };
+            const child_ctx = assign(assign({}, info.ctx), info.resolved);
+            const block = type && (info.current = type)(child_ctx);
+            let needs_flush = false;
+            if (info.block) {
+                if (info.blocks) {
+                    info.blocks.forEach((block, i) => {
+                        if (i !== index && block) {
+                            group_outros();
+                            transition_out(block, 1, 1, () => {
+                                info.blocks[i] = null;
+                            });
+                            check_outros();
+                        }
+                    });
+                }
+                else {
+                    info.block.d(1);
+                }
+                block.c();
+                transition_in(block, 1);
+                block.m(info.mount(), info.anchor);
+                needs_flush = true;
+            }
+            info.block = block;
+            if (info.blocks)
+                info.blocks[index] = block;
+            if (needs_flush) {
+                flush();
+            }
+        }
+        if (is_promise(promise)) {
+            const current_component = get_current_component();
+            promise.then(value => {
+                set_current_component(current_component);
+                update(info.then, 1, info.value, value);
+                set_current_component(null);
+            }, error => {
+                set_current_component(current_component);
+                update(info.catch, 2, info.error, error);
+                set_current_component(null);
+            });
+            // if we previously had a then/catch block, destroy it
+            if (info.current !== info.pending) {
+                update(info.pending, 0);
+                return true;
+            }
+        }
+        else {
+            if (info.current !== info.then) {
+                update(info.then, 1, info.value, promise);
+                return true;
+            }
+            info.resolved = { [info.value]: promise };
+        }
+    }
+
+    const globals = (typeof window !== 'undefined' ? window : commonjsGlobal);
+
+    function destroy_block(block, lookup) {
+        block.d(1);
+        lookup.delete(block.key);
+    }
+    function outro_and_destroy_block(block, lookup) {
+        transition_out(block, 1, 1, () => {
+            lookup.delete(block.key);
+        });
+    }
+    function fix_and_destroy_block(block, lookup) {
+        block.f();
+        destroy_block(block, lookup);
+    }
+    function fix_and_outro_and_destroy_block(block, lookup) {
+        block.f();
+        outro_and_destroy_block(block, lookup);
+    }
+    function update_keyed_each(old_blocks, changed, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+        let o = old_blocks.length;
+        let n = list.length;
+        let i = o;
+        const old_indexes = {};
+        while (i--)
+            old_indexes[old_blocks[i].key] = i;
+        const new_blocks = [];
+        const new_lookup = new Map();
+        const deltas = new Map();
+        i = n;
+        while (i--) {
+            const child_ctx = get_context(ctx, list, i);
+            const key = get_key(child_ctx);
+            let block = lookup.get(key);
+            if (!block) {
+                block = create_each_block(key, child_ctx);
+                block.c();
+            }
+            else if (dynamic) {
+                block.p(changed, child_ctx);
+            }
+            new_lookup.set(key, new_blocks[i] = block);
+            if (key in old_indexes)
+                deltas.set(key, Math.abs(i - old_indexes[key]));
+        }
+        const will_move = new Set();
+        const did_move = new Set();
+        function insert(block) {
+            transition_in(block, 1);
+            block.m(node, next);
+            lookup.set(block.key, block);
+            next = block.first;
+            n--;
+        }
+        while (o && n) {
+            const new_block = new_blocks[n - 1];
+            const old_block = old_blocks[o - 1];
+            const new_key = new_block.key;
+            const old_key = old_block.key;
+            if (new_block === old_block) {
+                // do nothing
+                next = new_block.first;
+                o--;
+                n--;
+            }
+            else if (!new_lookup.has(old_key)) {
+                // remove old block
+                destroy(old_block, lookup);
+                o--;
+            }
+            else if (!lookup.has(new_key) || will_move.has(new_key)) {
+                insert(new_block);
+            }
+            else if (did_move.has(old_key)) {
+                o--;
+            }
+            else if (deltas.get(new_key) > deltas.get(old_key)) {
+                did_move.add(new_key);
+                insert(new_block);
+            }
+            else {
+                will_move.add(old_key);
+                o--;
+            }
+        }
+        while (o--) {
+            const old_block = old_blocks[o];
+            if (!new_lookup.has(old_block.key))
+                destroy(old_block, lookup);
+        }
+        while (n)
+            insert(new_blocks[n - 1]);
+        return new_blocks;
+    }
+    function measure(blocks) {
+        const rects = {};
+        let i = blocks.length;
+        while (i--)
+            rects[blocks[i].key] = blocks[i].node.getBoundingClientRect();
+        return rects;
+    }
+
+    function get_spread_update(levels, updates) {
+        const update = {};
+        const to_null_out = {};
+        const accounted_for = { $$scope: 1 };
+        let i = levels.length;
+        while (i--) {
+            const o = levels[i];
+            const n = updates[i];
+            if (n) {
+                for (const key in o) {
+                    if (!(key in n))
+                        to_null_out[key] = 1;
+                }
+                for (const key in n) {
+                    if (!accounted_for[key]) {
+                        update[key] = n[key];
+                        accounted_for[key] = 1;
+                    }
+                }
+                levels[i] = n;
+            }
+            else {
+                for (const key in o) {
+                    accounted_for[key] = 1;
+                }
+            }
+        }
+        for (const key in to_null_out) {
+            if (!(key in update))
+                update[key] = undefined;
+        }
+        return update;
+    }
+    function get_spread_object(spread_props) {
+        return typeof spread_props === 'object' && spread_props !== null ? spread_props : {};
+    }
+
+    // source: https://html.spec.whatwg.org/multipage/indices.html
+    const boolean_attributes = new Set([
+        'allowfullscreen',
+        'allowpaymentrequest',
+        'async',
+        'autofocus',
+        'autoplay',
+        'checked',
+        'controls',
+        'default',
+        'defer',
+        'disabled',
+        'formnovalidate',
+        'hidden',
+        'ismap',
+        'loop',
+        'multiple',
+        'muted',
+        'nomodule',
+        'novalidate',
+        'open',
+        'playsinline',
+        'readonly',
+        'required',
+        'reversed',
+        'selected'
+    ]);
+
+    const invalid_attribute_name_character = /[\s'">/=\u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{1FFFE}\u{1FFFF}\u{2FFFE}\u{2FFFF}\u{3FFFE}\u{3FFFF}\u{4FFFE}\u{4FFFF}\u{5FFFE}\u{5FFFF}\u{6FFFE}\u{6FFFF}\u{7FFFE}\u{7FFFF}\u{8FFFE}\u{8FFFF}\u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u{CFFFF}\u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u{10FFFE}\u{10FFFF}]/u;
+    // https://html.spec.whatwg.org/multipage/syntax.html#attributes-2
+    // https://infra.spec.whatwg.org/#noncharacter
+    function spread(args, classes_to_add) {
+        const attributes = Object.assign({}, ...args);
+        if (classes_to_add) {
+            if (attributes.class == null) {
+                attributes.class = classes_to_add;
+            }
+            else {
+                attributes.class += ' ' + classes_to_add;
+            }
+        }
+        let str = '';
+        Object.keys(attributes).forEach(name => {
+            if (invalid_attribute_name_character.test(name))
+                return;
+            const value = attributes[name];
+            if (value === true)
+                str += " " + name;
+            else if (boolean_attributes.has(name.toLowerCase())) {
+                if (value)
+                    str += " " + name;
+            }
+            else if (value != null) {
+                str += " " + name + "=" + JSON.stringify(String(value)
+                    .replace(/"/g, '&#34;')
+                    .replace(/'/g, '&#39;'));
+            }
+        });
+        return str;
+    }
+    const escaped = {
+        '"': '&quot;',
+        "'": '&#39;',
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;'
+    };
+    function escape(html) {
+        return String(html).replace(/["'&<>]/g, match => escaped[match]);
+    }
+    function each(items, fn) {
+        let str = '';
+        for (let i = 0; i < items.length; i += 1) {
+            str += fn(items[i], i);
+        }
+        return str;
+    }
+    const missing_component = {
+        $$render: () => ''
+    };
+    function validate_component(component, name) {
+        if (!component || !component.$$render) {
+            if (name === 'svelte:component')
+                name += ' this={...}';
+            throw new Error(`<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
+        }
+        return component;
+    }
+    function debug(file, line, column, values) {
+        console.log(`{@debug} ${file ? file + ' ' : ''}(${line}:${column})`); // eslint-disable-line no-console
+        console.log(values); // eslint-disable-line no-console
+        return '';
+    }
+    let on_destroy;
+    function create_ssr_component(fn) {
+        function $$render(result, props, bindings, slots) {
+            const parent_component = exports.current_component;
+            const $$ = {
+                on_destroy,
+                context: new Map(parent_component ? parent_component.$$.context : []),
+                // these will be immediately discarded
+                on_mount: [],
+                before_update: [],
+                after_update: [],
+                callbacks: blank_object()
+            };
+            set_current_component({ $$ });
+            const html = fn(result, props, bindings, slots);
+            set_current_component(parent_component);
+            return html;
+        }
+        return {
+            render: (props = {}, options = {}) => {
+                on_destroy = [];
+                const result = { head: '', css: new Set() };
+                const html = $$render(result, props, {}, options);
+                run_all(on_destroy);
+                return {
+                    html,
+                    css: {
+                        code: Array.from(result.css).map(css => css.code).join('\n'),
+                        map: null // TODO
+                    },
+                    head: result.head
+                };
+            },
+            $$render
+        };
+    }
+    function add_attribute(name, value, boolean) {
+        if (value == null || (boolean && !value))
+            return '';
+        return ` ${name}${value === true ? '' : `=${typeof value === 'string' ? JSON.stringify(escape(value)) : `"${value}"`}`}`;
+    }
+    function add_classes(classes) {
+        return classes ? ` class="${classes}"` : ``;
+    }
+
+    function bind(component, name, callback) {
+        if (has_prop(component.$$.props, name)) {
+            name = component.$$.props[name] || name;
+            component.$$.bound[name] = callback;
+            callback(component.$$.ctx[name]);
+        }
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function claim_component(block, parent_nodes) {
+        block && block.l(parent_nodes);
+    }
+    function mount_component(component, target, anchor) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        // onMount happens before the initial afterUpdate
+        add_render_callback(() => {
+            const new_on_destroy = on_mount.map(run).filter(is_function);
+            if (on_destroy) {
+                on_destroy.push(...new_on_destroy);
+            }
+            else {
+                // Edge case - component was destroyed immediately,
+                // most likely as a result of a binding initialising
+                run_all(new_on_destroy);
+            }
+            component.$$.on_mount = [];
+        });
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = {};
+        }
+    }
+    function make_dirty(component, key) {
+        if (!component.$$.dirty) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty = blank_object();
+        }
+        component.$$.dirty[key] = true;
+    }
+    function init(component, options, instance, create_fragment, not_equal, props) {
+        const parent_component = exports.current_component;
+        set_current_component(component);
+        const prop_values = options.props || {};
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // everything else
+            callbacks: blank_object(),
+            dirty: null
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, prop_values, (key, ret, value = ret) => {
+                if ($$.ctx && not_equal($$.ctx[key], $$.ctx[key] = value)) {
+                    if ($$.bound[key])
+                        $$.bound[key](value);
+                    if (ready)
+                        make_dirty(component, key);
+                }
+                return ret;
+            })
+            : prop_values;
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(children(options.target));
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    if (typeof HTMLElement === 'function') {
+        exports.SvelteElement = class extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+            }
+            connectedCallback() {
+                // @ts-ignore todo: improve typings
+                for (const key in this.$$.slotted) {
+                    // @ts-ignore todo: improve typings
+                    this.appendChild(this.$$.slotted[key]);
+                }
+            }
+            attributeChangedCallback(attr, _oldValue, newValue) {
+                this[attr] = newValue;
+            }
+            $destroy() {
+                destroy_component(this, 1);
+                this.$destroy = noop;
+            }
+            $on(type, callback) {
+                // TODO should this delegate to addEventListener?
+                const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+                callbacks.push(callback);
+                return () => {
+                    const index = callbacks.indexOf(callback);
+                    if (index !== -1)
+                        callbacks.splice(index, 1);
+                };
+            }
+            $set() {
+                // overridden by instance, if it has props
+            }
+        };
+    }
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set() {
+            // overridden by instance, if it has props
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, detail));
+    }
+    function append_dev(target, node) {
+        dispatch_dev("SvelteDOMInsert", { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev("SvelteDOMInsert", { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev("SvelteDOMRemove", { node });
+        detach(node);
+    }
+    function detach_between_dev(before, after) {
+        while (before.nextSibling && before.nextSibling !== after) {
+            detach_dev(before.nextSibling);
+        }
+    }
+    function detach_before_dev(after) {
+        while (after.previousSibling) {
+            detach_dev(after.previousSibling);
+        }
+    }
+    function detach_after_dev(before) {
+        while (before.nextSibling) {
+            detach_dev(before.nextSibling);
+        }
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ["capture"] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev("SvelteDOMAddEventListener", { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev("SvelteDOMRemoveEventListener", { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev("SvelteDOMRemoveAttribute", { node, attribute });
+        else
+            dispatch_dev("SvelteDOMSetAttribute", { node, attribute, value });
+    }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev("SvelteDOMSetProperty", { node, property, value });
+    }
+    function dataset_dev(node, property, value) {
+        node.dataset[property] = value;
+        dispatch_dev("SvelteDOMSetDataset", { node, property, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev("SvelteDOMSetData", { node: text, data });
+        text.data = data;
+    }
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error(`'target' is a required option`);
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+            };
+        }
+    }
+    function loop_guard(timeout) {
+        const start = Date.now();
+        return () => {
+            if (Date.now() - start > timeout) {
+                throw new Error(`Infinite loop detected`);
+            }
+        };
+    }
+
+    exports.HtmlTag = HtmlTag;
+    exports.SvelteComponent = SvelteComponent;
+    exports.SvelteComponentDev = SvelteComponentDev;
+    exports.add_attribute = add_attribute;
+    exports.add_classes = add_classes;
+    exports.add_flush_callback = add_flush_callback;
+    exports.add_location = add_location;
+    exports.add_render_callback = add_render_callback;
+    exports.add_resize_listener = add_resize_listener;
+    exports.add_transform = add_transform;
+    exports.afterUpdate = afterUpdate;
+    exports.append = append;
+    exports.append_dev = append_dev;
+    exports.assign = assign;
+    exports.attr = attr;
+    exports.attr_dev = attr_dev;
+    exports.beforeUpdate = beforeUpdate;
+    exports.bind = bind;
+    exports.binding_callbacks = binding_callbacks;
+    exports.blank_object = blank_object;
+    exports.bubble = bubble;
+    exports.check_outros = check_outros;
+    exports.children = children;
+    exports.claim_component = claim_component;
+    exports.claim_element = claim_element;
+    exports.claim_space = claim_space;
+    exports.claim_text = claim_text;
+    exports.clear_loops = clear_loops;
+    exports.component_subscribe = component_subscribe;
+    exports.createEventDispatcher = createEventDispatcher;
+    exports.create_animation = create_animation;
+    exports.create_bidirectional_transition = create_bidirectional_transition;
+    exports.create_component = create_component;
+    exports.create_in_transition = create_in_transition;
+    exports.create_out_transition = create_out_transition;
+    exports.create_slot = create_slot;
+    exports.create_ssr_component = create_ssr_component;
+    exports.custom_event = custom_event;
+    exports.dataset_dev = dataset_dev;
+    exports.debug = debug;
+    exports.destroy_block = destroy_block;
+    exports.destroy_component = destroy_component;
+    exports.destroy_each = destroy_each;
+    exports.detach = detach;
+    exports.detach_after_dev = detach_after_dev;
+    exports.detach_before_dev = detach_before_dev;
+    exports.detach_between_dev = detach_between_dev;
+    exports.detach_dev = detach_dev;
+    exports.dirty_components = dirty_components;
+    exports.dispatch_dev = dispatch_dev;
+    exports.each = each;
+    exports.element = element;
+    exports.element_is = element_is;
+    exports.empty = empty;
+    exports.escape = escape;
+    exports.escaped = escaped;
+    exports.exclude_internal_props = exclude_internal_props;
+    exports.fix_and_destroy_block = fix_and_destroy_block;
+    exports.fix_and_outro_and_destroy_block = fix_and_outro_and_destroy_block;
+    exports.fix_position = fix_position;
+    exports.flush = flush;
+    exports.getContext = getContext;
+    exports.get_binding_group_value = get_binding_group_value;
+    exports.get_current_component = get_current_component;
+    exports.get_slot_changes = get_slot_changes;
+    exports.get_slot_context = get_slot_context;
+    exports.get_spread_object = get_spread_object;
+    exports.get_spread_update = get_spread_update;
+    exports.get_store_value = get_store_value;
+    exports.globals = globals;
+    exports.group_outros = group_outros;
+    exports.handle_promise = handle_promise;
+    exports.has_prop = has_prop;
+    exports.identity = identity;
+    exports.init = init;
+    exports.insert = insert;
+    exports.insert_dev = insert_dev;
+    exports.intros = intros;
+    exports.invalid_attribute_name_character = invalid_attribute_name_character;
+    exports.is_client = is_client;
+    exports.is_function = is_function;
+    exports.is_promise = is_promise;
+    exports.listen = listen;
+    exports.listen_dev = listen_dev;
+    exports.loop = loop;
+    exports.loop_guard = loop_guard;
+    exports.measure = measure;
+    exports.missing_component = missing_component;
+    exports.mount_component = mount_component;
+    exports.noop = noop;
+    exports.not_equal = not_equal;
+    exports.null_to_empty = null_to_empty;
+    exports.object_without_properties = object_without_properties;
+    exports.onDestroy = onDestroy;
+    exports.onMount = onMount;
+    exports.once = once;
+    exports.outro_and_destroy_block = outro_and_destroy_block;
+    exports.prevent_default = prevent_default;
+    exports.prop_dev = prop_dev;
+    exports.run = run;
+    exports.run_all = run_all;
+    exports.safe_not_equal = safe_not_equal;
+    exports.schedule_update = schedule_update;
+    exports.select_multiple_value = select_multiple_value;
+    exports.select_option = select_option;
+    exports.select_options = select_options;
+    exports.select_value = select_value;
+    exports.self = self;
+    exports.setContext = setContext;
+    exports.set_attributes = set_attributes;
+    exports.set_current_component = set_current_component;
+    exports.set_custom_element_data = set_custom_element_data;
+    exports.set_data = set_data;
+    exports.set_data_dev = set_data_dev;
+    exports.set_input_type = set_input_type;
+    exports.set_input_value = set_input_value;
+    exports.set_now = set_now;
+    exports.set_raf = set_raf;
+    exports.set_store_value = set_store_value;
+    exports.set_style = set_style;
+    exports.set_svg_attributes = set_svg_attributes;
+    exports.space = space;
+    exports.spread = spread;
+    exports.stop_propagation = stop_propagation;
+    exports.subscribe = subscribe;
+    exports.svg_element = svg_element;
+    exports.text = text;
+    exports.tick = tick;
+    exports.time_ranges_to_array = time_ranges_to_array;
+    exports.to_number = to_number;
+    exports.toggle_class = toggle_class;
+    exports.transition_in = transition_in;
+    exports.transition_out = transition_out;
+    exports.update_keyed_each = update_keyed_each;
+    exports.validate_component = validate_component;
+    exports.validate_store = validate_store;
+    exports.xlink_attr = xlink_attr;
+    });
+
+    unwrapExports(internal);
+    var internal_1 = internal.now;
+    var internal_2 = internal.raf;
+    var internal_3 = internal.current_component;
+    var internal_4 = internal.SvelteElement;
+    var internal_5 = internal.HtmlTag;
+    var internal_6 = internal.SvelteComponent;
+    var internal_7 = internal.SvelteComponentDev;
+    var internal_8 = internal.add_attribute;
+    var internal_9 = internal.add_classes;
+    var internal_10 = internal.add_flush_callback;
+    var internal_11 = internal.add_location;
+    var internal_12 = internal.add_render_callback;
+    var internal_13 = internal.add_resize_listener;
+    var internal_14 = internal.add_transform;
+    var internal_15 = internal.afterUpdate;
+    var internal_16 = internal.append;
+    var internal_17 = internal.append_dev;
+    var internal_18 = internal.assign;
+    var internal_19 = internal.attr;
+    var internal_20 = internal.attr_dev;
+    var internal_21 = internal.beforeUpdate;
+    var internal_22 = internal.bind;
+    var internal_23 = internal.binding_callbacks;
+    var internal_24 = internal.blank_object;
+    var internal_25 = internal.bubble;
+    var internal_26 = internal.check_outros;
+    var internal_27 = internal.children;
+    var internal_28 = internal.claim_component;
+    var internal_29 = internal.claim_element;
+    var internal_30 = internal.claim_space;
+    var internal_31 = internal.claim_text;
+    var internal_32 = internal.clear_loops;
+    var internal_33 = internal.component_subscribe;
+    var internal_34 = internal.createEventDispatcher;
+    var internal_35 = internal.create_animation;
+    var internal_36 = internal.create_bidirectional_transition;
+    var internal_37 = internal.create_component;
+    var internal_38 = internal.create_in_transition;
+    var internal_39 = internal.create_out_transition;
+    var internal_40 = internal.create_slot;
+    var internal_41 = internal.create_ssr_component;
+    var internal_42 = internal.custom_event;
+    var internal_43 = internal.dataset_dev;
+    var internal_44 = internal.debug;
+    var internal_45 = internal.destroy_block;
+    var internal_46 = internal.destroy_component;
+    var internal_47 = internal.destroy_each;
+    var internal_48 = internal.detach;
+    var internal_49 = internal.detach_after_dev;
+    var internal_50 = internal.detach_before_dev;
+    var internal_51 = internal.detach_between_dev;
+    var internal_52 = internal.detach_dev;
+    var internal_53 = internal.dirty_components;
+    var internal_54 = internal.dispatch_dev;
+    var internal_55 = internal.each;
+    var internal_56 = internal.element;
+    var internal_57 = internal.element_is;
+    var internal_58 = internal.empty;
+    var internal_59 = internal.escape;
+    var internal_60 = internal.escaped;
+    var internal_61 = internal.exclude_internal_props;
+    var internal_62 = internal.fix_and_destroy_block;
+    var internal_63 = internal.fix_and_outro_and_destroy_block;
+    var internal_64 = internal.fix_position;
+    var internal_65 = internal.flush;
+    var internal_66 = internal.getContext;
+    var internal_67 = internal.get_binding_group_value;
+    var internal_68 = internal.get_current_component;
+    var internal_69 = internal.get_slot_changes;
+    var internal_70 = internal.get_slot_context;
+    var internal_71 = internal.get_spread_object;
+    var internal_72 = internal.get_spread_update;
+    var internal_73 = internal.get_store_value;
+    var internal_74 = internal.globals;
+    var internal_75 = internal.group_outros;
+    var internal_76 = internal.handle_promise;
+    var internal_77 = internal.has_prop;
+    var internal_78 = internal.identity;
+    var internal_79 = internal.init;
+    var internal_80 = internal.insert;
+    var internal_81 = internal.insert_dev;
+    var internal_82 = internal.intros;
+    var internal_83 = internal.invalid_attribute_name_character;
+    var internal_84 = internal.is_client;
+    var internal_85 = internal.is_function;
+    var internal_86 = internal.is_promise;
+    var internal_87 = internal.listen;
+    var internal_88 = internal.listen_dev;
+    var internal_89 = internal.loop;
+    var internal_90 = internal.loop_guard;
+    var internal_91 = internal.measure;
+    var internal_92 = internal.missing_component;
+    var internal_93 = internal.mount_component;
+    var internal_94 = internal.noop;
+    var internal_95 = internal.not_equal;
+    var internal_96 = internal.null_to_empty;
+    var internal_97 = internal.object_without_properties;
+    var internal_98 = internal.onDestroy;
+    var internal_99 = internal.onMount;
+    var internal_100 = internal.once;
+    var internal_101 = internal.outro_and_destroy_block;
+    var internal_102 = internal.prevent_default;
+    var internal_103 = internal.prop_dev;
+    var internal_104 = internal.run;
+    var internal_105 = internal.run_all;
+    var internal_106 = internal.safe_not_equal;
+    var internal_107 = internal.schedule_update;
+    var internal_108 = internal.select_multiple_value;
+    var internal_109 = internal.select_option;
+    var internal_110 = internal.select_options;
+    var internal_111 = internal.select_value;
+    var internal_112 = internal.self;
+    var internal_113 = internal.setContext;
+    var internal_114 = internal.set_attributes;
+    var internal_115 = internal.set_current_component;
+    var internal_116 = internal.set_custom_element_data;
+    var internal_117 = internal.set_data;
+    var internal_118 = internal.set_data_dev;
+    var internal_119 = internal.set_input_type;
+    var internal_120 = internal.set_input_value;
+    var internal_121 = internal.set_now;
+    var internal_122 = internal.set_raf;
+    var internal_123 = internal.set_store_value;
+    var internal_124 = internal.set_style;
+    var internal_125 = internal.set_svg_attributes;
+    var internal_126 = internal.space;
+    var internal_127 = internal.spread;
+    var internal_128 = internal.stop_propagation;
+    var internal_129 = internal.subscribe;
+    var internal_130 = internal.svg_element;
+    var internal_131 = internal.text;
+    var internal_132 = internal.tick;
+    var internal_133 = internal.time_ranges_to_array;
+    var internal_134 = internal.to_number;
+    var internal_135 = internal.toggle_class;
+    var internal_136 = internal.transition_in;
+    var internal_137 = internal.transition_out;
+    var internal_138 = internal.update_keyed_each;
+    var internal_139 = internal.validate_component;
+    var internal_140 = internal.validate_store;
+    var internal_141 = internal.xlink_attr;
+
+    var easing = createCommonjsModule(function (module, exports) {
+
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+
+
+    /*
+    Adapted from https://github.com/mattdesl
+    Distributed under MIT License https://github.com/mattdesl/eases/blob/master/LICENSE.md
+    */
+    function backInOut(t) {
+        const s = 1.70158 * 1.525;
+        if ((t *= 2) < 1)
+            return 0.5 * (t * t * ((s + 1) * t - s));
+        return 0.5 * ((t -= 2) * t * ((s + 1) * t + s) + 2);
+    }
+    function backIn(t) {
+        const s = 1.70158;
+        return t * t * ((s + 1) * t - s);
+    }
+    function backOut(t) {
+        const s = 1.70158;
+        return --t * t * ((s + 1) * t + s) + 1;
+    }
+    function bounceOut(t) {
+        const a = 4.0 / 11.0;
+        const b = 8.0 / 11.0;
+        const c = 9.0 / 10.0;
+        const ca = 4356.0 / 361.0;
+        const cb = 35442.0 / 1805.0;
+        const cc = 16061.0 / 1805.0;
+        const t2 = t * t;
+        return t < a
+            ? 7.5625 * t2
+            : t < b
+                ? 9.075 * t2 - 9.9 * t + 3.4
+                : t < c
+                    ? ca * t2 - cb * t + cc
+                    : 10.8 * t * t - 20.52 * t + 10.72;
+    }
+    function bounceInOut(t) {
+        return t < 0.5
+            ? 0.5 * (1.0 - bounceOut(1.0 - t * 2.0))
+            : 0.5 * bounceOut(t * 2.0 - 1.0) + 0.5;
+    }
+    function bounceIn(t) {
+        return 1.0 - bounceOut(1.0 - t);
+    }
+    function circInOut(t) {
+        if ((t *= 2) < 1)
+            return -0.5 * (Math.sqrt(1 - t * t) - 1);
+        return 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1);
+    }
+    function circIn(t) {
+        return 1.0 - Math.sqrt(1.0 - t * t);
+    }
+    function circOut(t) {
+        return Math.sqrt(1 - --t * t);
+    }
+    function cubicInOut(t) {
+        return t < 0.5 ? 4.0 * t * t * t : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
+    }
+    function cubicIn(t) {
+        return t * t * t;
+    }
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+    function elasticInOut(t) {
+        return t < 0.5
+            ? 0.5 *
+                Math.sin(((+13.0 * Math.PI) / 2) * 2.0 * t) *
+                Math.pow(2.0, 10.0 * (2.0 * t - 1.0))
+            : 0.5 *
+                Math.sin(((-13.0 * Math.PI) / 2) * (2.0 * t - 1.0 + 1.0)) *
+                Math.pow(2.0, -10.0 * (2.0 * t - 1.0)) +
+                1.0;
+    }
+    function elasticIn(t) {
+        return Math.sin((13.0 * t * Math.PI) / 2) * Math.pow(2.0, 10.0 * (t - 1.0));
+    }
+    function elasticOut(t) {
+        return (Math.sin((-13.0 * (t + 1.0) * Math.PI) / 2) * Math.pow(2.0, -10.0 * t) + 1.0);
+    }
+    function expoInOut(t) {
+        return t === 0.0 || t === 1.0
+            ? t
+            : t < 0.5
+                ? +0.5 * Math.pow(2.0, 20.0 * t - 10.0)
+                : -0.5 * Math.pow(2.0, 10.0 - t * 20.0) + 1.0;
+    }
+    function expoIn(t) {
+        return t === 0.0 ? t : Math.pow(2.0, 10.0 * (t - 1.0));
+    }
+    function expoOut(t) {
+        return t === 1.0 ? t : 1.0 - Math.pow(2.0, -10.0 * t);
+    }
+    function quadInOut(t) {
+        t /= 0.5;
+        if (t < 1)
+            return 0.5 * t * t;
+        t--;
+        return -0.5 * (t * (t - 2) - 1);
+    }
+    function quadIn(t) {
+        return t * t;
+    }
+    function quadOut(t) {
+        return -t * (t - 2.0);
+    }
+    function quartInOut(t) {
+        return t < 0.5
+            ? +8.0 * Math.pow(t, 4.0)
+            : -8.0 * Math.pow(t - 1.0, 4.0) + 1.0;
+    }
+    function quartIn(t) {
+        return Math.pow(t, 4.0);
+    }
+    function quartOut(t) {
+        return Math.pow(t - 1.0, 3.0) * (1.0 - t) + 1.0;
+    }
+    function quintInOut(t) {
+        if ((t *= 2) < 1)
+            return 0.5 * t * t * t * t * t;
+        return 0.5 * ((t -= 2) * t * t * t * t + 2);
+    }
+    function quintIn(t) {
+        return t * t * t * t * t;
+    }
+    function quintOut(t) {
+        return --t * t * t * t * t + 1;
+    }
+    function sineInOut(t) {
+        return -0.5 * (Math.cos(Math.PI * t) - 1);
+    }
+    function sineIn(t) {
+        const v = Math.cos(t * Math.PI * 0.5);
+        if (Math.abs(v) < 1e-14)
+            return 1;
+        else
+            return 1 - v;
+    }
+    function sineOut(t) {
+        return Math.sin((t * Math.PI) / 2);
+    }
+
+    Object.defineProperty(exports, 'linear', {
+    	enumerable: true,
+    	get: function () {
+    		return internal.identity;
+    	}
+    });
+    exports.backIn = backIn;
+    exports.backInOut = backInOut;
+    exports.backOut = backOut;
+    exports.bounceIn = bounceIn;
+    exports.bounceInOut = bounceInOut;
+    exports.bounceOut = bounceOut;
+    exports.circIn = circIn;
+    exports.circInOut = circInOut;
+    exports.circOut = circOut;
+    exports.cubicIn = cubicIn;
+    exports.cubicInOut = cubicInOut;
+    exports.cubicOut = cubicOut;
+    exports.elasticIn = elasticIn;
+    exports.elasticInOut = elasticInOut;
+    exports.elasticOut = elasticOut;
+    exports.expoIn = expoIn;
+    exports.expoInOut = expoInOut;
+    exports.expoOut = expoOut;
+    exports.quadIn = quadIn;
+    exports.quadInOut = quadInOut;
+    exports.quadOut = quadOut;
+    exports.quartIn = quartIn;
+    exports.quartInOut = quartInOut;
+    exports.quartOut = quartOut;
+    exports.quintIn = quintIn;
+    exports.quintInOut = quintInOut;
+    exports.quintOut = quintOut;
+    exports.sineIn = sineIn;
+    exports.sineInOut = sineInOut;
+    exports.sineOut = sineOut;
+    });
+
+    unwrapExports(easing);
+    var easing_1 = easing.linear;
+    var easing_2 = easing.backIn;
+    var easing_3 = easing.backInOut;
+    var easing_4 = easing.backOut;
+    var easing_5 = easing.bounceIn;
+    var easing_6 = easing.bounceInOut;
+    var easing_7 = easing.bounceOut;
+    var easing_8 = easing.circIn;
+    var easing_9 = easing.circInOut;
+    var easing_10 = easing.circOut;
+    var easing_11 = easing.cubicIn;
+    var easing_12 = easing.cubicInOut;
+    var easing_13 = easing.cubicOut;
+    var easing_14 = easing.elasticIn;
+    var easing_15 = easing.elasticInOut;
+    var easing_16 = easing.elasticOut;
+    var easing_17 = easing.expoIn;
+    var easing_18 = easing.expoInOut;
+    var easing_19 = easing.expoOut;
+    var easing_20 = easing.quadIn;
+    var easing_21 = easing.quadInOut;
+    var easing_22 = easing.quadOut;
+    var easing_23 = easing.quartIn;
+    var easing_24 = easing.quartInOut;
+    var easing_25 = easing.quartOut;
+    var easing_26 = easing.quintIn;
+    var easing_27 = easing.quintInOut;
+    var easing_28 = easing.quintOut;
+    var easing_29 = easing.sineIn;
+    var easing_30 = easing.sineInOut;
+    var easing_31 = easing.sineOut;
+
+    function fade(node, { delay = 0, duration = 400, easing = easing_1 }) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+    function fly(node, { delay = 0, duration = 400, easing = easing_13, x = 0, y = 0, opacity = 0 }) {
+        const style = getComputedStyle(node);
+        const target_opacity = +style.opacity;
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const od = target_opacity * (1 - opacity);
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+        };
+    }
+
+    const subscriber_queue = [];
+    /**
+     * Creates a `Readable` store that allows reading by subscription.
+     * @param value initial value
+     * @param {StartStopNotifier}start start and stop notifications for subscriptions
+     */
+    function readable(value, start) {
+        return {
+            subscribe: writable(value, start).subscribe,
+        };
+    }
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = internal_94) {
+        let stop;
+        const subscribers = [];
+        function set(new_value) {
+            if (internal_106(value, new_value)) {
+                value = new_value;
+                if (stop) { // store is ready
+                    const run_queue = !subscriber_queue.length;
+                    for (let i = 0; i < subscribers.length; i += 1) {
+                        const s = subscribers[i];
+                        s[1]();
+                        subscriber_queue.push(s, value);
+                    }
+                    if (run_queue) {
+                        for (let i = 0; i < subscriber_queue.length; i += 2) {
+                            subscriber_queue[i][0](subscriber_queue[i + 1]);
+                        }
+                        subscriber_queue.length = 0;
+                    }
+                }
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = internal_94) {
+            const subscriber = [run, invalidate];
+            subscribers.push(subscriber);
+            if (subscribers.length === 1) {
+                stop = start(set) || internal_94;
+            }
+            run(value);
+            return () => {
+                const index = subscribers.indexOf(subscriber);
+                if (index !== -1) {
+                    subscribers.splice(index, 1);
+                }
+                if (subscribers.length === 0) {
+                    stop();
+                    stop = null;
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+    function derived(stores, fn, initial_value) {
+        const single = !Array.isArray(stores);
+        const stores_array = single
+            ? [stores]
+            : stores;
+        const auto = fn.length < 2;
+        return readable(initial_value, (set) => {
+            let inited = false;
+            const values = [];
+            let pending = 0;
+            let cleanup = internal_94;
+            const sync = () => {
+                if (pending) {
+                    return;
+                }
+                cleanup();
+                const result = fn(single ? values[0] : values, set);
+                if (auto) {
+                    set(result);
+                }
+                else {
+                    cleanup = internal_85(result) ? result : internal_94;
+                }
+            };
+            const unsubscribers = stores_array.map((store, i) => store.subscribe((value) => {
+                values[i] = value;
+                pending &= ~(1 << i);
+                if (inited) {
+                    sync();
+                }
+            }, () => {
+                pending |= (1 << i);
+            }));
+            inited = true;
+            sync();
+            return function stop() {
+                internal_105(unsubscribers);
+                cleanup();
+            };
+        });
+    }
+
+    const json = (store) => {
+      store.get = () => internal_73(store);
+      store.toJSON = () => internal_73(store);
+      store.poke = () => store.set(internal_73(store));
+      store.listen = store.subscribe;
+      store.set = store.set || (() => {});
+      return store
+    };
+
+    const write = (thing) => json(writable(thing));
+    const read = (thing, handler) => json(readable(thing, handler));
+
+    const transformer = (transform) => {
+      const store = write();
+
+      const set = store.set;
+      store.set = (update) => {
+        set(transform(update));
+        return store
+      };
+
+      return store
+    };
+
+    const derived$1 = (...args) => json(derived(...args));
+
+    const position = read([0, 0], set => window
+      .addEventListener(`mousemove`, ({ clientX, clientY }) => set([clientX, clientY]))
+    );
+
+    const mouse_up = read(null, set => window
+      .addEventListener(`mouseup`, (e) => set(e))
+    );
+
+    const scroll = read([0, 0, 0], set => window
+      .addEventListener(`wheel`, (e) => {
+        e.preventDefault();
+        set([-e.deltaX, -e.deltaY, 0]);
+      })
+    );
+
+    var mouse = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        position: position,
+        mouse_up: mouse_up,
+        scroll: scroll
+    });
+
+    const player = ({
+      instrument,
+      pattern = []
+    }) => () => {
+      Tone.context.resume();
+
+      const [note, duration] = pattern;
+      instrument.triggerAttackRelease(note, duration);
+    };
+
+    const test = player({
+      instrument: new Tone.Synth().toMaster(),
+      pattern: [`C2`, `8n`]
+    });
+
+    const person = player({
+      instrument: new Tone.Synth().toMaster(),
+      pattern: [`F2`, `16n`]
+    });
+
+    const button = player({
+      instrument: new Tone.Synth().toMaster(),
+      pattern: [`C3`, `8n`]
+    });
+
+    const button_press = player({
+      instrument: new Tone.Synth().toMaster(),
+      pattern: [`A3`, `8n`]
+    });
+
+    const card = player({
+      instrument: new Tone.MembraneSynth().toMaster(),
+      pattern: [`D1`, `16n`]
+    });
+
+    const pluck = player({
+      instrument: new Tone.PluckSynth().toMaster(),
+      pattern: [`C5`, `2n`]
+    });
+
+    const filter = new Tone.Filter({
+      type: `bandpass`,
+      Q: 12
+    }).toMaster();
+
+    const wind_noise = new Tone.Noise(`pink`).connect(filter);
+
+    const notes = [`A2`, `B2`, `C2`, `D6`, `E6`, `F6`, `G6`].reverse();
+    let last_note;
+
+    position.subscribe(([_, y]) => {
+      const yn = Math.floor(y / window.innerHeight * 7);
+      if (last_note === notes[yn] || yn < 0 || yn > notes.length - 1) {
+        return
+      }
+      last_note = notes[yn];
+      filter.frequency.linearRampToValueAtTime(`${notes[yn]}`, Tone.context.currentTime);
+    });
+
+    const animation = { delay: 250, duration: 300 };
+    const tick_rate = 100;
+
+    const path = writable(window.location.pathname.slice(1));
+
+    path.subscribe((new_path) => {
+      if (window.location.pathname === new_path) {
+        return
+      }
+
+      window.history.pushState({ page: 1 }, ``, `/${new_path}`);
+    });
+
+    /* src/ui/app/Intro.svelte generated by Svelte v3.14.1 */
+    const file = "src/ui/app/Intro.svelte";
+
+    function create_fragment(ctx) {
+    	let div2;
+    	let h1;
+    	let t1;
+    	let h2;
+    	let t3;
+    	let div0;
+    	let button0;
+    	let t5;
+    	let button1;
+    	let t7;
+    	let button2;
+    	let t9;
+    	let div1;
+    	let t10;
+    	let br;
+    	let t11;
+    	let a;
+    	let div2_outro;
+    	let current;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "EarthRock";
+    			t1 = space();
+    			h2 = element("h2");
+    			h2.textContent = "The Uncollectable Card Game";
+    			t3 = space();
+    			div0 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "WEAVE";
+    			t5 = space();
+    			button1 = element("button");
+    			button1.textContent = "SOCIAL";
+    			t7 = space();
+    			button2 = element("button");
+    			button2.textContent = "CREDITS";
+    			t9 = space();
+    			div1 = element("div");
+    			t10 = text("We don't use cookies or store anything about you server side.\n  ");
+    			br = element("br");
+    			t11 = space();
+    			a = element("a");
+    			a.textContent = "[ GPL3 - //github.com/agoblinking/EarthRock]";
+    			attr_dev(h1, "class", "title svelte-1hgtbhf");
+    			add_location(h1, file, 45, 0, 786);
+    			attr_dev(h2, "class", "desc svelte-1hgtbhf");
+    			add_location(h2, file, 46, 0, 819);
+    			attr_dev(button0, "class", "svelte-1hgtbhf");
+    			add_location(button0, file, 59, 4, 1108);
+    			attr_dev(button1, "class", "svelte-1hgtbhf");
+    			add_location(button1, file, 64, 4, 1207);
+    			attr_dev(button2, "class", "svelte-1hgtbhf");
+    			add_location(button2, file, 69, 4, 1306);
+    			attr_dev(div0, "class", "menu svelte-1hgtbhf");
+    			add_location(div0, file, 48, 0, 870);
+    			add_location(br, file, 77, 2, 1497);
+    			attr_dev(a, "class", "link svelte-1hgtbhf");
+    			attr_dev(a, "target", "_new");
+    			attr_dev(a, "href", "https://github.com/AGoblinKing/EarthRock");
+    			add_location(a, file, 78, 2, 1505);
+    			attr_dev(div1, "class", "notice svelte-1hgtbhf");
+    			add_location(div1, file, 75, 0, 1410);
+    			attr_dev(div2, "class", "intro svelte-1hgtbhf");
+    			add_location(div2, file, 44, 0, 682);
+
+    			dispose = [
+    				listen_dev(button0, "mouseenter", ctx.mouseOver, false, false, false),
+    				listen_dev(button0, "click", ctx.develop, false, false, false),
+    				listen_dev(button1, "mouseenter", ctx.mouseOver, false, false, false),
+    				listen_dev(button1, "click", ctx.discord, false, false, false),
+    				listen_dev(button2, "mouseenter", ctx.mouseOver, false, false, false),
+    				listen_dev(button2, "click", ctx.credits, false, false, false)
+    			];
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, h1);
+    			append_dev(div2, t1);
+    			append_dev(div2, h2);
+    			append_dev(div2, t3);
+    			append_dev(div2, div0);
+    			append_dev(div0, button0);
+    			append_dev(div0, t5);
+    			append_dev(div0, button1);
+    			append_dev(div0, t7);
+    			append_dev(div0, button2);
+    			append_dev(div2, t9);
+    			append_dev(div2, div1);
+    			append_dev(div1, t10);
+    			append_dev(div1, br);
+    			append_dev(div1, t11);
+    			append_dev(div1, a);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			if (div2_outro) div2_outro.end(1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			div2_outro = create_out_transition(div2, fly, {
+    				delay: 100,
+    				duration: 1000,
+    				x: 0,
+    				y: 4000,
+    				opacity: 0,
+    				easing: internal_78
+    			});
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (detaching && div2_outro) div2_outro.end();
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self) {
+    	const dispatch = target => path.set(target);
+
+    	const mouseOver = () => {
+    		button();
+    	};
+
+    	const click = () => {
+    		button_press();
+    	};
+
+    	const discord = () => {
+    		window.open(`https://discord.gg/HnvRacKS`, `_blank`);
+    		click();
+    	};
+
+    	const develop = () => {
+    		dispatch(`weave`);
+    		click();
+    	};
+
+    	const credits = () => {
+    		dispatch(`credits`);
+    		click();
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		
+    	};
+
+    	return { mouseOver, discord, develop, credits };
+    }
+
+    class Intro extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Intro",
+    			options,
+    			id: create_fragment.name
+    		});
+    	}
+    }
+
+    /* src/ui/app/Tools.svelte generated by Svelte v3.14.1 */
+    const file$1 = "src/ui/app/Tools.svelte";
+
+    // (32:4) {#if $path !== false && $path !== ``}
+    function create_if_block(ctx) {
+    	let div;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "X";
+    			attr_dev(div, "class", "svelte-1t2wqnu");
+    			add_location(div, file$1, 32, 8, 561);
+
+    			dispose = [
+    				listen_dev(div, "click", ctx.end, false, false, false),
+    				listen_dev(div, "mouseenter", button, false, false, false)
+    			];
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(32:4) {#if $path !== false && $path !== ``}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$1(ctx) {
+    	let div1;
+    	let div0;
+    	let t0_value = (ctx.audo_playing ? `>` : `!>`) + "";
+    	let t0;
+    	let t1;
+    	let dispose;
+    	let if_block = ctx.$path !== false && ctx.$path !== `` && create_if_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(div0, "class", "svelte-1t2wqnu");
+    			add_location(div0, file$1, 28, 4, 440);
+    			attr_dev(div1, "class", "tools svelte-1t2wqnu");
+    			add_location(div1, file$1, 27, 0, 416);
+    			dispose = listen_dev(div0, "click", ctx.toggle, false, false, false);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, t0);
+    			append_dev(div1, t1);
+    			if (if_block) if_block.m(div1, null);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.audo_playing && t0_value !== (t0_value = (ctx.audo_playing ? `>` : `!>`) + "")) set_data_dev(t0, t0_value);
+
+    			if (ctx.$path !== false && ctx.$path !== ``) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					if_block.m(div1, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (if_block) if_block.d();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $path;
+    	validate_store(path, "path");
+    	component_subscribe($$self, path, $$value => $$invalidate("$path", $path = $$value));
+    	const audio = new Audio(`/music/earthrock-final-theme.mp3`);
+    	audio.loop = true;
+    	audio.volume = 0.5;
+    	let audo_playing = false;
+
+    	const toggle = () => {
+    		if (audo_playing) {
+    			audio.pause();
+    		} else {
+    			audio.play();
+    		}
+
+    		$$invalidate("audo_playing", audo_playing = !audo_playing);
+    	};
+
+    	const end = () => {
+    		path.set("");
+    		button_press();
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("audo_playing" in $$props) $$invalidate("audo_playing", audo_playing = $$props.audo_playing);
+    		if ("$path" in $$props) path.set($path = $$props.$path);
+    	};
+
+    	return { audo_playing, toggle, end, $path };
+    }
+
+    class Tools extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Tools",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+    }
+
+    const SIZE = 16;
+    const SPACING = 1;
+    const COLUMNS = 32;
+    const COUNT = 1024;
+
+    const ready = new Promise((resolve) => {
+      const tiles = new Image();
+      tiles.src = `/sheets/default.png`;
+
+      tiles.onload = () => {
+        const canvas = document.createElement(`canvas`);
+        canvas.width = tiles.width;
+        canvas.height = tiles.height;
+
+        const ctx = canvas.getContext(`2d`);
+        ctx.drawImage(tiles, 0, 0);
+
+        resolve({ ctx, canvas });
+      };
+    });
+
+    const repo = new Map();
+
+    const num_random = (min, max) =>
+      Math.floor(Math.random() * (Math.abs(min) + Math.abs(max)) - Math.abs(min));
+
+    var Tile = async ({
+      width,
+      height,
+      data,
+      random = false
+    }) => {
+      const { canvas } = await ready;
+
+      const key = `${width}:${height}:${data}`;
+
+      if (!random && repo.has(key)) {
+        return repo.get(key)
+      }
+
+      const data_canvas = document.createElement(`canvas`);
+      const data_ctx = data_canvas.getContext(`2d`);
+
+      data_canvas.width = SIZE * width;
+      data_canvas.height = SIZE * height;
+
+      if (random) {
+        let t_x, t_y;
+        let s_x, s_y;
+
+        for (let x = 0; x < width; x++) {
+          for (let y = 0; y < height; y++) {
+            t_x = x * SIZE;
+            t_y = y * SIZE;
+
+            s_x = num_random(0, COLUMNS) * (SIZE + SPACING);
+            s_y = num_random(0, COUNT / COLUMNS) * (SIZE + SPACING);
+
+            data_ctx.drawImage(
+              canvas,
+              s_x, s_y, SIZE, SIZE,
+              t_x, t_y, SIZE, SIZE
+            );
+          }
+        }
+      } else if (data.length > 0) {
+        let x, y;
+        data.split(` `).forEach((loc, i) => {
+          x = i % width;
+          y = Math.floor(i / width);
+
+          const idx = parseInt(loc, 10);
+          const o_x = idx % COLUMNS;
+          const o_y = Math.floor(idx / COLUMNS);
+
+          const t_x = x * SIZE;
+          const t_y = y * SIZE;
+
+          const s_x = o_x * (SIZE + SPACING);
+          const s_y = o_y * (SIZE + SPACING);
+
+          data_ctx.drawImage(
+            canvas,
+            s_x, s_y, SIZE, SIZE,
+            t_x, t_y, SIZE, SIZE
+          );
+        });
+      }
+
+      const result = data_canvas.toDataURL(`image/png`);
+      if (!random) {
+        repo.set(key, result);
+      }
+
+      return result
+    };
+
+    /* src/ui/image/Tile.svelte generated by Svelte v3.14.1 */
+    const file$2 = "src/ui/image/Tile.svelte";
+
+    // (1:0) <script> import { onMount }
+    function create_catch_block(ctx) {
+    	const block = { c: noop, m: noop, p: noop, d: noop };
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_catch_block.name,
+    		type: "catch",
+    		source: "(1:0) <script> import { onMount }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (18:28)  <img     class="tileset"      alt="tileset image"     {src}
+    function create_then_block(ctx) {
+    	let img;
+    	let img_src_value;
+
+    	const block = {
+    		c: function create() {
+    			img = element("img");
+    			attr_dev(img, "class", "tileset svelte-1weudl2");
+    			attr_dev(img, "alt", "tileset image");
+    			if (img.src !== (img_src_value = ctx.src)) attr_dev(img, "src", img_src_value);
+    			add_location(img, file$2, 18, 0, 286);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, img, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(img);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_then_block.name,
+    		type: "then",
+    		source: "(18:28)  <img     class=\\\"tileset\\\"      alt=\\\"tileset image\\\"     {src}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (1:0) <script> import { onMount }
+    function create_pending_block(ctx) {
+    	const block = { c: noop, m: noop, p: noop, d: noop };
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_pending_block.name,
+    		type: "pending",
+    		source: "(1:0) <script> import { onMount }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$2(ctx) {
+    	let await_block_anchor;
+    	let promise;
+
+    	let info = {
+    		ctx,
+    		current: null,
+    		token: null,
+    		pending: create_pending_block,
+    		then: create_then_block,
+    		catch: create_catch_block,
+    		value: "src",
+    		error: "null"
+    	};
+
+    	handle_promise(promise = ctx.image_src, info);
+
+    	const block = {
+    		c: function create() {
+    			await_block_anchor = empty();
+    			info.block.c();
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, await_block_anchor, anchor);
+    			info.block.m(target, info.anchor = anchor);
+    			info.mount = () => await_block_anchor.parentNode;
+    			info.anchor = await_block_anchor;
+    		},
+    		p: function update(changed, new_ctx) {
+    			ctx = new_ctx;
+    			info.block.p(changed, assign(assign({}, ctx), info.resolved));
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(await_block_anchor);
+    			info.block.d(detaching);
+    			info.token = null;
+    			info = null;
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let { data = "" } = $$props;
+    	let { width = 10 } = $$props;
+    	let { height = 7 } = $$props;
+    	let { random = false } = $$props;
+    	let image_src = Tile({ width, height, data, random });
+    	const writable_props = ["data", "width", "height", "random"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Tile> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("data" in $$props) $$invalidate("data", data = $$props.data);
+    		if ("width" in $$props) $$invalidate("width", width = $$props.width);
+    		if ("height" in $$props) $$invalidate("height", height = $$props.height);
+    		if ("random" in $$props) $$invalidate("random", random = $$props.random);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { data, width, height, random, image_src };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("data" in $$props) $$invalidate("data", data = $$props.data);
+    		if ("width" in $$props) $$invalidate("width", width = $$props.width);
+    		if ("height" in $$props) $$invalidate("height", height = $$props.height);
+    		if ("random" in $$props) $$invalidate("random", random = $$props.random);
+    		if ("image_src" in $$props) $$invalidate("image_src", image_src = $$props.image_src);
+    	};
+
+    	return { data, width, height, random, image_src };
+    }
+
+    class Tile_1 extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { data: 0, width: 0, height: 0, random: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Tile_1",
+    			options,
+    			id: create_fragment$2.name
+    		});
+    	}
+
+    	get data() {
+    		throw new Error("<Tile>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set data(value) {
+    		throw new Error("<Tile>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get width() {
+    		throw new Error("<Tile>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set width(value) {
+    		throw new Error("<Tile>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get height() {
+    		throw new Error("<Tile>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set height(value) {
+    		throw new Error("<Tile>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get random() {
+    		throw new Error("<Tile>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set random(value) {
+    		throw new Error("<Tile>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    const size = read([window.innerWidth, window.innerHeight], (set) => {
+      window.addEventListener(`resize`, () => {
+        set([window.innerWidth, window.innerHeight]);
+      });
+    });
+
+    const scale = write(1);
+
+    size.subscribe(([width, height]) => {
+      const target = width > height
+        ? height
+        : width;
+
+      scale.set(target / 1618);
+    });
+
+    const zoom = derived$1(
+      scroll,
+      ({ deltaY }) => Math.min(3, Math.max(-0.5, deltaY * 0.01))
+    );
+
+    // main canvas
+    const main = write((() => {
+      const canvas = document.createElement(`canvas`);
+      canvas.width = canvas.height = 100;
+      return canvas
+    })());
+
+    var screen = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        size: size,
+        scale: scale,
+        zoom: zoom,
+        main: main
+    });
+
+    /* src/ui/Spatial.svelte generated by Svelte v3.14.1 */
+    const file$3 = "src/ui/Spatial.svelte";
+
+    function create_fragment$3(ctx) {
+    	let div;
+    	let current;
+    	const default_slot_template = ctx.$$slots.default;
+    	const default_slot = create_slot(default_slot_template, ctx, null);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if (default_slot) default_slot.c();
+    			attr_dev(div, "class", "spatial svelte-1wp43vb");
+    			attr_dev(div, "style", ctx.style);
+    			toggle_class(div, "transition", ctx.transition);
+    			add_location(div, file$3, 33, 0, 975);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			if (default_slot && default_slot.p && changed.$$scope) {
+    				default_slot.p(get_slot_changes(default_slot_template, ctx, changed, null), get_slot_context(default_slot_template, ctx, null));
+    			}
+
+    			if (!current || changed.style) {
+    				attr_dev(div, "style", ctx.style);
+    			}
+
+    			if (changed.transition) {
+    				toggle_class(div, "transition", ctx.transition);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (default_slot) default_slot.d(detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$3.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$3($$self, $$props, $$invalidate) {
+    	let $scaling;
+    	validate_store(scale, "scaling");
+    	component_subscribe($$self, scale, $$value => $$invalidate("$scaling", $scaling = $$value));
+    	let { position = [0, 0, 0] } = $$props;
+    	let { anchor = [50, 50] } = $$props;
+    	let { bias = [50, 50] } = $$props;
+    	let { area = [1, 1] } = $$props;
+    	let { scale: scale$1 = 1 } = $$props;
+    	let { rotate = 0 } = $$props;
+    	let { autoscale = true } = $$props;
+    	let { zIndex = 0 } = $$props;
+    	let { transition = true } = $$props;
+
+    	const writable_props = [
+    		"position",
+    		"anchor",
+    		"bias",
+    		"area",
+    		"scale",
+    		"rotate",
+    		"autoscale",
+    		"zIndex",
+    		"transition"
+    	];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Spatial> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+
+    	$$self.$set = $$props => {
+    		if ("position" in $$props) $$invalidate("position", position = $$props.position);
+    		if ("anchor" in $$props) $$invalidate("anchor", anchor = $$props.anchor);
+    		if ("bias" in $$props) $$invalidate("bias", bias = $$props.bias);
+    		if ("area" in $$props) $$invalidate("area", area = $$props.area);
+    		if ("scale" in $$props) $$invalidate("scale", scale$1 = $$props.scale);
+    		if ("rotate" in $$props) $$invalidate("rotate", rotate = $$props.rotate);
+    		if ("autoscale" in $$props) $$invalidate("autoscale", autoscale = $$props.autoscale);
+    		if ("zIndex" in $$props) $$invalidate("zIndex", zIndex = $$props.zIndex);
+    		if ("transition" in $$props) $$invalidate("transition", transition = $$props.transition);
+    		if ("$$scope" in $$props) $$invalidate("$$scope", $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			position,
+    			anchor,
+    			bias,
+    			area,
+    			scale: scale$1,
+    			rotate,
+    			autoscale,
+    			zIndex,
+    			transition,
+    			offset,
+    			tru_scale,
+    			$scaling,
+    			transform,
+    			tru_zIndex,
+    			style
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("position" in $$props) $$invalidate("position", position = $$props.position);
+    		if ("anchor" in $$props) $$invalidate("anchor", anchor = $$props.anchor);
+    		if ("bias" in $$props) $$invalidate("bias", bias = $$props.bias);
+    		if ("area" in $$props) $$invalidate("area", area = $$props.area);
+    		if ("scale" in $$props) $$invalidate("scale", scale$1 = $$props.scale);
+    		if ("rotate" in $$props) $$invalidate("rotate", rotate = $$props.rotate);
+    		if ("autoscale" in $$props) $$invalidate("autoscale", autoscale = $$props.autoscale);
+    		if ("zIndex" in $$props) $$invalidate("zIndex", zIndex = $$props.zIndex);
+    		if ("transition" in $$props) $$invalidate("transition", transition = $$props.transition);
+    		if ("offset" in $$props) $$invalidate("offset", offset = $$props.offset);
+    		if ("tru_scale" in $$props) $$invalidate("tru_scale", tru_scale = $$props.tru_scale);
+    		if ("$scaling" in $$props) scale.set($scaling = $$props.$scaling);
+    		if ("transform" in $$props) $$invalidate("transform", transform = $$props.transform);
+    		if ("tru_zIndex" in $$props) $$invalidate("tru_zIndex", tru_zIndex = $$props.tru_zIndex);
+    		if ("style" in $$props) $$invalidate("style", style = $$props.style);
+    	};
+
+    	let offset;
+    	let tru_scale;
+    	let transform;
+    	let tru_zIndex;
+    	let style;
+
+    	$$self.$$.update = (changed = { anchor: 1, bias: 1, area: 1, autoscale: 1, scale: 1, $scaling: 1, position: 1, offset: 1, rotate: 1, tru_scale: 1, zIndex: 1, tru_zIndex: 1, transform: 1 }) => {
+    		if (changed.anchor) {
+    			 $$invalidate("anchor", anchor = [
+    				anchor[0] <= 50
+    				? `left: ${anchor[0]}%;`
+    				: `right: ${100 - anchor[0]}%;`,
+    				anchor[1] <= 50
+    				? `top: ${anchor[1]}%;`
+    				: `bottom: ${100 - anchor[1]}%;`
+    			].join(` `));
+    		}
+
+    		if (changed.bias || changed.area || changed.anchor) {
+    			 $$invalidate("offset", offset = [
+    				bias[0] * 0.01 * area[0] / 2 * (anchor[0] <= 50 ? -1 : 1),
+    				bias[1] * 0.01 * area[1] / 2 * (anchor[1] <= 50 ? -1 : 1)
+    			]);
+    		}
+
+    		if (changed.autoscale || changed.scale || changed.$scaling) {
+    			 $$invalidate("tru_scale", tru_scale = autoscale ? scale$1 * $scaling : scale$1);
+    		}
+
+    		if (changed.position || changed.offset || changed.rotate || changed.tru_scale) {
+    			 $$invalidate("transform", transform = `transform: translate(${position[0] + offset[0]}px, ${position[1] + offset[1]}px) rotate(${rotate}deg) scale(${tru_scale});`);
+    		}
+
+    		if (changed.scale || changed.zIndex) {
+    			 $$invalidate("tru_zIndex", tru_zIndex = `z-index: ${Math.max(1, Math.round(scale$1 * 100 + zIndex))};`);
+    		}
+
+    		if (changed.tru_zIndex || changed.anchor || changed.transform) {
+    			 $$invalidate("style", style = [tru_zIndex, anchor, transform].join(` `));
+    		}
+    	};
+
+    	return {
+    		position,
+    		anchor,
+    		bias,
+    		area,
+    		scale: scale$1,
+    		rotate,
+    		autoscale,
+    		zIndex,
+    		transition,
+    		style,
+    		$$slots,
+    		$$scope
+    	};
+    }
+
+    class Spatial extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
+    			position: 0,
+    			anchor: 0,
+    			bias: 0,
+    			area: 0,
+    			scale: 0,
+    			rotate: 0,
+    			autoscale: 0,
+    			zIndex: 0,
+    			transition: 0
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Spatial",
+    			options,
+    			id: create_fragment$3.name
+    		});
+    	}
+
+    	get position() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set position(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get anchor() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set anchor(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get bias() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set bias(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get area() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set area(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get scale() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set scale(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get rotate() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set rotate(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get autoscale() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set autoscale(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get zIndex() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set zIndex(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get transition() {
+    		throw new Error("<Spatial>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set transition(value) {
+    		throw new Error("<Spatial>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/app/Design.svelte generated by Svelte v3.14.1 */
+    const file$4 = "src/ui/app/Design.svelte";
+
+    // (23:0) <Spatial      bias={[50, 50]}      anchor={[50, 50]}     area={[-1000, 50]} >
+    function create_default_slot(ctx) {
+    	let div;
+    	let div_outro;
+    	let current;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "Still Ruff";
+    			attr_dev(div, "class", "design svelte-31mij8");
+    			add_location(div, file$4, 27, 4, 480);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			if (div_outro) div_outro.end(1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			div_outro = create_out_transition(div, fade, { duration: 100 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (detaching && div_outro) div_outro.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot.name,
+    		type: "slot",
+    		source: "(23:0) <Spatial      bias={[50, 50]}      anchor={[50, 50]}     area={[-1000, 50]} >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$4(ctx) {
+    	let current;
+
+    	const spatial = new Spatial({
+    			props: {
+    				bias: [50, 50],
+    				anchor: [50, 50],
+    				area: [-1000, 50],
+    				$$slots: { default: [create_default_slot] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(spatial.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(spatial, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const spatial_changes = {};
+
+    			if (changed.$$scope) {
+    				spatial_changes.$$scope = { changed, ctx };
+    			}
+
+    			spatial.$set(spatial_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(spatial.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(spatial.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(spatial, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    class Design extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$4, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Design",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+    }
+
+    const str_color = (str) => {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      }
+
+      let color = `#`;
+      for (let i = 0; i < 3; i++) {
+        const value = (hash >> (i * 8)) & 0xFF;
+        color += (`00` + value.toString(16)).substr(-2);
+      }
+      return color
+    };
+
+    const color = str_color;
+
+    // whiskers on kittens
+    const words = [
+      `groovy`, `cat`, `bird`, `dog`, `poop`, `cool`, `not`, `okay`, `great`, `terrible`, `wat`,
+      `goblin`, `life`, `ferret`, `gregert`, `robert`, `zilla`, `red`, `shirt`, `pants`, `blue`,
+      `luna`, `ember`, `embear`, `lunatic`, `boring`, `killa`, `notice`, `thank`, `tank`,
+      `under`, `near`, `near`, `quaint`, `potato`, `egg`, `bacon`, `narwhal`, `lamp`, `stairs`, `king`,
+      `tyrant`, `grave`, `dire`, `happy`, `amazing`, `terrific`, `terrible`, `good`, `boring`,
+      `rip`, `hello`, `world`, `global`, `universal`, `television`, `computer`
+    ];
+
+    const random = (count) => Array
+      .from(new Array(count))
+      .map(() => words[Math.floor(Math.random() * words.length)])
+      .join(` `);
+
+    const toJSON = (obj) => Object.fromEntries(
+      Object.entries(obj)
+        .filter(([key, val]) => {
+
+        })
+        .map(([key, val]) => {
+          return [key, val.toJSON()]
+        })
+    );
+
+    const powerToJSON = (obj) => {
+      obj.toJSON = () => toJSON(obj);
+      return obj
+    };
+
+    const add = (...vecs) => vecs.reduce((result, vec) =>
+      twgl.v3.add(result, vec)
+    , [0, 0, 0]);
+
+    const minus = twgl.v3.subtract;
+    const lerp = twgl.v3.lerp;
+    const length$1 = twgl.v3.length;
+    const divide_scalar = twgl.v3.divScalar;
+    const divide = twgl.v3.divide;
+    const multiply = twgl.v3.multiply;
+    const multiply_scalar = twgl.v3.mulScalar;
+    const distance = twgl.v3.distance;
+    const negate = twgl.v3.negate;
+
+    const report = (key, store) => {
+      if (store._reporter) return store
+
+      const sub = store.subscribe;
+
+      store._reporter = true;
+      store.subscribe = (fn) => {
+        return sub((val) => {
+          fn(val, key);
+        })
+      };
+
+      return store
+    };
+
+    var stitch = ({
+      value = {},
+      name = random(2),
+      weave
+    }) => ({
+      knot: read(`stitch`),
+
+      value: write(Object
+        .entries(value)
+        .reduce((res, [key, val]) => {
+          res[key] = (val && typeof val.subscribe === `function`)
+            ? report(key, val)
+            : report(key, write(val));
+          return res
+        }, {})),
+
+      name: transformer((name_new) => {
+        // tell weave it update its knots
+        // probably should be on a channel instead
+        weave && weave.knots && weave.knots.poke();
+        return name_new
+      }).set(name)
+    });
+
+    var stream = () => {
+      const value = write();
+      const set = value.set;
+
+      value.set = (val) => {
+        try {
+          set(JSON.parse(val));
+        } catch (ex) {
+          set(val);
+        }
+      };
+
+      value.set(`null`);
+
+      return ({
+        knot: read(`stream`),
+        value
+      })
+    };
+
+    const parser = new expr.Parser();
+
+    const math = (formula, variables) => {
+      return parser.parse(formula).evaluate(variables)
+    };
+
+    const math_run = (expression, arg) => {
+      try {
+        return math(expression, arg)
+      } catch (ex) {
+        return null
+      }
+    };
+
+    var math$1 = ({
+      math = `2+2`,
+      value
+    } = false) => {
+      const m = ({
+        knot: read(`math`),
+        math: write(math),
+        value: write(value)
+      });
+
+      const set = m.value.set;
+      let val_in = value;
+
+      set(math_run(math, val_in));
+
+      m.value.set = (val) => {
+        val_in = typeof val === `object` && !Array.isArray(val)
+          ? val
+          : { v: val };
+
+        set(math_run(m.math.get(), val_in));
+      };
+
+      m.math.subscribe((expression) =>
+        set(math_run(expression, val_in))
+      );
+
+      return m
+    };
+
+    // instead use the weave messaging channel
+    var mail = ({
+      whom = `/sys/mouse/position`,
+      weave,
+      id
+    }) => {
+      const value = write();
+      const { set } = value;
+
+      // when set hit up the remote
+      value.set = (value_new) => {
+        const v = Wheel.get(m.whom.get());
+
+        if (!v.set) {
+          console.warn(`tried to mail a readable`, m.whom.get());
+          return
+        }
+
+        v.set(value_new);
+      };
+
+      // Subscribe to remote
+      const m = ({
+        knot: read(`mail`),
+        whom: transformer((whom_new) => {
+          weave.mails.update(($mails) => ({
+            ...$mails,
+            [id]: whom_new
+          }));
+
+          return whom_new
+        }).set(whom),
+        value,
+        set
+      });
+
+      return m
+    };
+
+    /* @license twgl.js 4.13.0 Copyright (c) 2015, Gregg Tavares All Rights Reserved.
+    Available via the MIT license.
+    see: http://github.com/greggman/twgl.js for details */
+
+    /*
+     * Copyright 2019 Gregg Tavares
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a
+     * copy of this software and associated documentation files (the "Software"),
+     * to deal in the Software without restriction, including without limitation
+     * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+     * and/or sell copies of the Software, and to permit persons to whom the
+     * Software is furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+     * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+     * DEALINGS IN THE SOFTWARE.
+     */
+
+    /* DataType */
+    const BYTE                           = 0x1400;
+    const UNSIGNED_BYTE                  = 0x1401;
+    const SHORT                          = 0x1402;
+    const UNSIGNED_SHORT                 = 0x1403;
+    const INT                            = 0x1404;
+    const UNSIGNED_INT                   = 0x1405;
+    const FLOAT                          = 0x1406;
+
+    /**
+     * Get the GL type for a typedArray
+     * @param {ArrayBufferView} typedArray a typedArray
+     * @return {number} the GL type for array. For example pass in an `Int8Array` and `gl.BYTE` will
+     *   be returned. Pass in a `Uint32Array` and `gl.UNSIGNED_INT` will be returned
+     * @memberOf module:twgl/typedArray
+     */
+    function getGLTypeForTypedArray(typedArray) {
+      if (typedArray instanceof Int8Array)         { return BYTE; }           // eslint-disable-line
+      if (typedArray instanceof Uint8Array)        { return UNSIGNED_BYTE; }  // eslint-disable-line
+      if (typedArray instanceof Uint8ClampedArray) { return UNSIGNED_BYTE; }  // eslint-disable-line
+      if (typedArray instanceof Int16Array)        { return SHORT; }          // eslint-disable-line
+      if (typedArray instanceof Uint16Array)       { return UNSIGNED_SHORT; } // eslint-disable-line
+      if (typedArray instanceof Int32Array)        { return INT; }            // eslint-disable-line
+      if (typedArray instanceof Uint32Array)       { return UNSIGNED_INT; }   // eslint-disable-line
+      if (typedArray instanceof Float32Array)      { return FLOAT; }          // eslint-disable-line
+      throw new Error('unsupported typed array type');
+    }
+
+    /**
+     * Get the GL type for a typedArray type
+     * @param {ArrayBufferView} typedArrayType a typedArray constructor
+     * @return {number} the GL type for type. For example pass in `Int8Array` and `gl.BYTE` will
+     *   be returned. Pass in `Uint32Array` and `gl.UNSIGNED_INT` will be returned
+     * @memberOf module:twgl/typedArray
+     */
+    function getGLTypeForTypedArrayType(typedArrayType) {
+      if (typedArrayType === Int8Array)         { return BYTE; }           // eslint-disable-line
+      if (typedArrayType === Uint8Array)        { return UNSIGNED_BYTE; }  // eslint-disable-line
+      if (typedArrayType === Uint8ClampedArray) { return UNSIGNED_BYTE; }  // eslint-disable-line
+      if (typedArrayType === Int16Array)        { return SHORT; }          // eslint-disable-line
+      if (typedArrayType === Uint16Array)       { return UNSIGNED_SHORT; } // eslint-disable-line
+      if (typedArrayType === Int32Array)        { return INT; }            // eslint-disable-line
+      if (typedArrayType === Uint32Array)       { return UNSIGNED_INT; }   // eslint-disable-line
+      if (typedArrayType === Float32Array)      { return FLOAT; }          // eslint-disable-line
+      throw new Error('unsupported typed array type');
+    }
+
+    const isArrayBuffer = typeof SharedArrayBuffer !== 'undefined'
+      ? function isArrayBufferOrSharedArrayBuffer(a) {
+        return a && a.buffer && (a.buffer instanceof ArrayBuffer || a.buffer instanceof SharedArrayBuffer);
+      }
+      : function isArrayBuffer(a) {
+        return a && a.buffer && a.buffer instanceof ArrayBuffer;
+      };
+
+    function error(...args) {
+      console.error(...args);
+    }
+
+    function isBuffer(gl, t) {
+      return typeof WebGLBuffer !== 'undefined' && t instanceof WebGLBuffer;
+    }
+
+    function isShader(gl, t) {
+      return typeof WebGLShader !== 'undefined' && t instanceof WebGLShader;
+    }
+
+    function isTexture(gl, t) {
+      return typeof WebGLTexture !== 'undefined' && t instanceof WebGLTexture;
+    }
+
+    /*
+     * Copyright 2019 Gregg Tavares
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a
+     * copy of this software and associated documentation files (the "Software"),
+     * to deal in the Software without restriction, including without limitation
+     * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+     * and/or sell copies of the Software, and to permit persons to whom the
+     * Software is furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+     * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+     * DEALINGS IN THE SOFTWARE.
+     */
+    const defaults = {
+      attribPrefix: "",
+    };
+
+    function setBufferFromTypedArray(gl, type, buffer, array, drawType) {
+      gl.bindBuffer(type, buffer);
+      gl.bufferData(type, array, drawType || gl.STATIC_DRAW);
+    }
+
+    /**
+     * Given typed array creates a WebGLBuffer and copies the typed array
+     * into it.
+     *
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext
+     * @param {ArrayBuffer|SharedArrayBuffer|ArrayBufferView|WebGLBuffer} typedArray the typed array. Note: If a WebGLBuffer is passed in it will just be returned. No action will be taken
+     * @param {number} [type] the GL bind type for the buffer. Default = `gl.ARRAY_BUFFER`.
+     * @param {number} [drawType] the GL draw type for the buffer. Default = 'gl.STATIC_DRAW`.
+     * @return {WebGLBuffer} the created WebGLBuffer
+     * @memberOf module:twgl/attributes
+     */
+    function createBufferFromTypedArray(gl, typedArray, type, drawType) {
+      if (isBuffer(gl, typedArray)) {
+        return typedArray;
+      }
+      type = type || gl.ARRAY_BUFFER;
+      const buffer = gl.createBuffer();
+      setBufferFromTypedArray(gl, type, buffer, typedArray, drawType);
+      return buffer;
+    }
+
+    function isIndices(name) {
+      return name === "indices";
+    }
+
+    // This is really just a guess. Though I can't really imagine using
+    // anything else? Maybe for some compression?
+    function getNormalizationForTypedArray(typedArray) {
+      if (typedArray instanceof Int8Array)    { return true; }  // eslint-disable-line
+      if (typedArray instanceof Uint8Array)   { return true; }  // eslint-disable-line
+      return false;
+    }
+
+    // This is really just a guess. Though I can't really imagine using
+    // anything else? Maybe for some compression?
+    function getNormalizationForTypedArrayType(typedArrayType) {
+      if (typedArrayType === Int8Array)    { return true; }  // eslint-disable-line
+      if (typedArrayType === Uint8Array)   { return true; }  // eslint-disable-line
+      return false;
+    }
+
+    function getArray(array) {
+      return array.length ? array : array.data;
+    }
+
+    const texcoordRE = /coord|texture/i;
+    const colorRE = /color|colour/i;
+
+    function guessNumComponentsFromName(name, length) {
+      let numComponents;
+      if (texcoordRE.test(name)) {
+        numComponents = 2;
+      } else if (colorRE.test(name)) {
+        numComponents = 4;
+      } else {
+        numComponents = 3;  // position, normals, indices ...
+      }
+
+      if (length % numComponents > 0) {
+        throw new Error(`Can not guess numComponents for attribute '${name}'. Tried ${numComponents} but ${length} values is not evenly divisible by ${numComponents}. You should specify it.`);
+      }
+
+      return numComponents;
+    }
+
+    function getNumComponents(array, arrayName) {
+      return array.numComponents || array.size || guessNumComponentsFromName(arrayName, getArray(array).length);
+    }
+
+    function makeTypedArray(array, name) {
+      if (isArrayBuffer(array)) {
+        return array;
+      }
+
+      if (isArrayBuffer(array.data)) {
+        return array.data;
+      }
+
+      if (Array.isArray(array)) {
+        array = {
+          data: array,
+        };
+      }
+
+      let Type = array.type;
+      if (!Type) {
+        if (isIndices(name)) {
+          Type = Uint16Array;
+        } else {
+          Type = Float32Array;
+        }
+      }
+      return new Type(array.data);
+    }
+
+    /**
+     * The info for an attribute. This is effectively just the arguments to `gl.vertexAttribPointer` plus the WebGLBuffer
+     * for the attribute.
+     *
+     * @typedef {Object} AttribInfo
+     * @property {number[]|ArrayBufferView} [value] a constant value for the attribute. Note: if this is set the attribute will be
+     *    disabled and set to this constant value and all other values will be ignored.
+     * @property {number} [numComponents] the number of components for this attribute.
+     * @property {number} [size] synonym for `numComponents`.
+     * @property {number} [type] the type of the attribute (eg. `gl.FLOAT`, `gl.UNSIGNED_BYTE`, etc...) Default = `gl.FLOAT`
+     * @property {boolean} [normalize] whether or not to normalize the data. Default = false
+     * @property {number} [offset] offset into buffer in bytes. Default = 0
+     * @property {number} [stride] the stride in bytes per element. Default = 0
+     * @property {number} [divisor] the divisor in instances. Default = undefined. Note: undefined = don't call gl.vertexAttribDivisor
+     *    where as anything else = do call it with this value
+     * @property {WebGLBuffer} buffer the buffer that contains the data for this attribute
+     * @property {number} [drawType] the draw type passed to gl.bufferData. Default = gl.STATIC_DRAW
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Use this type of array spec when TWGL can't guess the type or number of components of an array
+     * @typedef {Object} FullArraySpec
+     * @property {number[]|ArrayBufferView} [value] a constant value for the attribute. Note: if this is set the attribute will be
+     *    disabled and set to this constant value and all other values will be ignored.
+     * @property {(number|number[]|ArrayBufferView)} data The data of the array. A number alone becomes the number of elements of type.
+     * @property {number} [numComponents] number of components for `vertexAttribPointer`. Default is based on the name of the array.
+     *    If `coord` is in the name assumes `numComponents = 2`.
+     *    If `color` is in the name assumes `numComponents = 4`.
+     *    otherwise assumes `numComponents = 3`
+     * @property {constructor} [type] type. This is only used if `data` is a JavaScript array. It is the constructor for the typedarray. (eg. `Uint8Array`).
+     * For example if you want colors in a `Uint8Array` you might have a `FullArraySpec` like `{ type: Uint8Array, data: [255,0,255,255, ...], }`.
+     * @property {number} [size] synonym for `numComponents`.
+     * @property {boolean} [normalize] normalize for `vertexAttribPointer`. Default is true if type is `Int8Array` or `Uint8Array` otherwise false.
+     * @property {number} [stride] stride for `vertexAttribPointer`. Default = 0
+     * @property {number} [offset] offset for `vertexAttribPointer`. Default = 0
+     * @property {number} [divisor] divisor for `vertexAttribDivisor`. Default = undefined. Note: undefined = don't call gl.vertexAttribDivisor
+     *    where as anything else = do call it with this value
+     * @property {string} [attrib] name of attribute this array maps to. Defaults to same name as array prefixed by the default attribPrefix.
+     * @property {string} [name] synonym for `attrib`.
+     * @property {string} [attribName] synonym for `attrib`.
+     * @property {WebGLBuffer} [buffer] Buffer to use for this attribute. This lets you use your own buffer
+     *    but you will need to supply `numComponents` and `type`. You can effectively pass an `AttribInfo`
+     *    to provide this. Example:
+     *
+     *         const bufferInfo1 = twgl.createBufferInfoFromArrays(gl, {
+     *           position: [1, 2, 3, ... ],
+     *         });
+     *         const bufferInfo2 = twgl.createBufferInfoFromArrays(gl, {
+     *           position: bufferInfo1.attribs.position,  // use the same buffer from bufferInfo1
+     *         });
+     *
+     * @memberOf module:twgl
+     */
+
+    /**
+     * An individual array in {@link module:twgl.Arrays}
+     *
+     * When passed to {@link module:twgl.createBufferInfoFromArrays} if an ArraySpec is `number[]` or `ArrayBufferView`
+     * the types will be guessed based on the name. `indices` will be `Uint16Array`, everything else will
+     * be `Float32Array`. If an ArraySpec is a number it's the number of floats for an empty (zeroed) buffer.
+     *
+     * @typedef {(number|number[]|ArrayBufferView|module:twgl.FullArraySpec)} ArraySpec
+     * @memberOf module:twgl
+     */
+
+    /**
+     * This is a JavaScript object of arrays by name. The names should match your shader's attributes. If your
+     * attributes have a common prefix you can specify it by calling {@link module:twgl.setAttributePrefix}.
+     *
+     *     Bare JavaScript Arrays
+     *
+     *         var arrays = {
+     *            position: [-1, 1, 0],
+     *            normal: [0, 1, 0],
+     *            ...
+     *         }
+     *
+     *     Bare TypedArrays
+     *
+     *         var arrays = {
+     *            position: new Float32Array([-1, 1, 0]),
+     *            color: new Uint8Array([255, 128, 64, 255]),
+     *            ...
+     *         }
+     *
+     * *   Will guess at `numComponents` if not specified based on name.
+     *
+     *     If `coord` is in the name assumes `numComponents = 2`
+     *
+     *     If `color` is in the name assumes `numComponents = 4`
+     *
+     *     otherwise assumes `numComponents = 3`
+     *
+     * Objects with various fields. See {@link module:twgl.FullArraySpec}.
+     *
+     *     var arrays = {
+     *       position: { numComponents: 3, data: [0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0], },
+     *       texcoord: { numComponents: 2, data: [0, 0, 0, 1, 1, 0, 1, 1],                 },
+     *       normal:   { numComponents: 3, data: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],     },
+     *       indices:  { numComponents: 3, data: [0, 1, 2, 1, 2, 3],                       },
+     *     };
+     *
+     * @typedef {Object.<string, module:twgl.ArraySpec>} Arrays
+     * @memberOf module:twgl
+     */
+
+
+    /**
+     * Creates a set of attribute data and WebGLBuffers from set of arrays
+     *
+     * Given
+     *
+     *      var arrays = {
+     *        position: { numComponents: 3, data: [0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0], },
+     *        texcoord: { numComponents: 2, data: [0, 0, 0, 1, 1, 0, 1, 1],                 },
+     *        normal:   { numComponents: 3, data: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],     },
+     *        color:    { numComponents: 4, data: [255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 255, 255], type: Uint8Array, },
+     *        indices:  { numComponents: 3, data: [0, 1, 2, 1, 2, 3],                       },
+     *      };
+     *
+     * returns something like
+     *
+     *      var attribs = {
+     *        position: { numComponents: 3, type: gl.FLOAT,         normalize: false, buffer: WebGLBuffer, },
+     *        texcoord: { numComponents: 2, type: gl.FLOAT,         normalize: false, buffer: WebGLBuffer, },
+     *        normal:   { numComponents: 3, type: gl.FLOAT,         normalize: false, buffer: WebGLBuffer, },
+     *        color:    { numComponents: 4, type: gl.UNSIGNED_BYTE, normalize: true,  buffer: WebGLBuffer, },
+     *      };
+     *
+     * notes:
+     *
+     * *   Arrays can take various forms
+     *
+     *     Bare JavaScript Arrays
+     *
+     *         var arrays = {
+     *            position: [-1, 1, 0],
+     *            normal: [0, 1, 0],
+     *            ...
+     *         }
+     *
+     *     Bare TypedArrays
+     *
+     *         var arrays = {
+     *            position: new Float32Array([-1, 1, 0]),
+     *            color: new Uint8Array([255, 128, 64, 255]),
+     *            ...
+     *         }
+     *
+     * *   Will guess at `numComponents` if not specified based on name.
+     *
+     *     If `coord` is in the name assumes `numComponents = 2`
+     *
+     *     If `color` is in the name assumes `numComponents = 4`
+     *
+     *     otherwise assumes `numComponents = 3`
+     *
+     * @param {WebGLRenderingContext} gl The webgl rendering context.
+     * @param {module:twgl.Arrays} arrays The arrays
+     * @param {module:twgl.BufferInfo} [srcBufferInfo] a BufferInfo to copy from
+     *   This lets you share buffers. Any arrays you supply will override
+     *   the buffers from srcBufferInfo.
+     * @return {Object.<string, module:twgl.AttribInfo>} the attribs
+     * @memberOf module:twgl/attributes
+     */
+    function createAttribsFromArrays(gl, arrays) {
+      const attribs = {};
+      Object.keys(arrays).forEach(function(arrayName) {
+        if (!isIndices(arrayName)) {
+          const array = arrays[arrayName];
+          const attribName = array.attrib || array.name || array.attribName || (defaults.attribPrefix + arrayName);
+          if (array.value) {
+            if (!Array.isArray(array.value) && !isArrayBuffer(array.value)) {
+              throw new Error('array.value is not array or typedarray');
+            }
+            attribs[attribName] = {
+              value: array.value,
+            };
+          } else {
+            let buffer;
+            let type;
+            let normalization;
+            let numComponents;
+            if (array.buffer && array.buffer instanceof WebGLBuffer) {
+              buffer = array.buffer;
+              numComponents = array.numComponents || array.size;
+              type = array.type;
+              normalization = array.normalize;
+            } else if (typeof array === "number" || typeof array.data === "number") {
+              const numValues = array.data || array;
+              const arrayType = array.type || Float32Array;
+              const numBytes = numValues * arrayType.BYTES_PER_ELEMENT;
+              type = getGLTypeForTypedArrayType(arrayType);
+              normalization = array.normalize !== undefined ? array.normalize : getNormalizationForTypedArrayType(arrayType);
+              numComponents = array.numComponents || array.size || guessNumComponentsFromName(arrayName, numValues);
+              buffer = gl.createBuffer();
+              gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+              gl.bufferData(gl.ARRAY_BUFFER, numBytes, array.drawType || gl.STATIC_DRAW);
+            } else {
+              const typedArray = makeTypedArray(array, arrayName);
+              buffer = createBufferFromTypedArray(gl, typedArray, undefined, array.drawType);
+              type = getGLTypeForTypedArray(typedArray);
+              normalization = array.normalize !== undefined ? array.normalize : getNormalizationForTypedArray(typedArray);
+              numComponents = getNumComponents(array, arrayName);
+            }
+            attribs[attribName] = {
+              buffer:        buffer,
+              numComponents: numComponents,
+              type:          type,
+              normalize:     normalization,
+              stride:        array.stride || 0,
+              offset:        array.offset || 0,
+              divisor:       array.divisor === undefined ? undefined : array.divisor,
+              drawType:      array.drawType,
+            };
+          }
+        }
+      });
+      gl.bindBuffer(gl.ARRAY_BUFFER, null);
+      return attribs;
+    }
+
+    function getBytesPerValueForGLType(gl, type) {
+      if (type === gl.BYTE)           return 1;  // eslint-disable-line
+      if (type === gl.UNSIGNED_BYTE)  return 1;  // eslint-disable-line
+      if (type === gl.SHORT)          return 2;  // eslint-disable-line
+      if (type === gl.UNSIGNED_SHORT) return 2;  // eslint-disable-line
+      if (type === gl.INT)            return 4;  // eslint-disable-line
+      if (type === gl.UNSIGNED_INT)   return 4;  // eslint-disable-line
+      if (type === gl.FLOAT)          return 4;  // eslint-disable-line
+      return 0;
+    }
+
+    // Tries to get the number of elements from a set of arrays.
+    const positionKeys = ['position', 'positions', 'a_position'];
+
+    function getNumElementsFromAttributes(gl, attribs) {
+      let key;
+      let ii;
+      for (ii = 0; ii < positionKeys.length; ++ii) {
+        key = positionKeys[ii];
+        if (key in attribs) {
+          break;
+        }
+        key = defaults.attribPrefix + key;
+        if (key in attribs) {
+          break;
+        }
+      }
+      if (ii === positionKeys.length) {
+        key = Object.keys(attribs)[0];
+      }
+      const attrib = attribs[key];
+      gl.bindBuffer(gl.ARRAY_BUFFER, attrib.buffer);
+      const numBytes = gl.getBufferParameter(gl.ARRAY_BUFFER, gl.BUFFER_SIZE);
+      gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+      const bytesPerValue = getBytesPerValueForGLType(gl, attrib.type);
+      const totalElements = numBytes / bytesPerValue;
+      const numComponents = attrib.numComponents || attrib.size;
+      // TODO: check stride
+      const numElements = totalElements / numComponents;
+      if (numElements % 1 !== 0) {
+        throw new Error(`numComponents ${numComponents} not correct for length ${length}`);
+      }
+      return numElements;
+    }
+
+    /**
+     * @typedef {Object} BufferInfo
+     * @property {number} numElements The number of elements to pass to `gl.drawArrays` or `gl.drawElements`.
+     * @property {number} [elementType] The type of indices `UNSIGNED_BYTE`, `UNSIGNED_SHORT` etc..
+     * @property {WebGLBuffer} [indices] The indices `ELEMENT_ARRAY_BUFFER` if any indices exist.
+     * @property {Object.<string, module:twgl.AttribInfo>} [attribs] The attribs appropriate to call `setAttributes`
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Creates a BufferInfo from an object of arrays.
+     *
+     * This can be passed to {@link module:twgl.setBuffersAndAttributes} and to
+     * {@link module:twgl:drawBufferInfo}.
+     *
+     * Given an object like
+     *
+     *     var arrays = {
+     *       position: { numComponents: 3, data: [0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0], },
+     *       texcoord: { numComponents: 2, data: [0, 0, 0, 1, 1, 0, 1, 1],                 },
+     *       normal:   { numComponents: 3, data: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],     },
+     *       indices:  { numComponents: 3, data: [0, 1, 2, 1, 2, 3],                       },
+     *     };
+     *
+     *  Creates an BufferInfo like this
+     *
+     *     bufferInfo = {
+     *       numElements: 4,        // or whatever the number of elements is
+     *       indices: WebGLBuffer,  // this property will not exist if there are no indices
+     *       attribs: {
+     *         position: { buffer: WebGLBuffer, numComponents: 3, },
+     *         normal:   { buffer: WebGLBuffer, numComponents: 3, },
+     *         texcoord: { buffer: WebGLBuffer, numComponents: 2, },
+     *       },
+     *     };
+     *
+     *  The properties of arrays can be JavaScript arrays in which case the number of components
+     *  will be guessed.
+     *
+     *     var arrays = {
+     *        position: [0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0],
+     *        texcoord: [0, 0, 0, 1, 1, 0, 1, 1],
+     *        normal:   [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+     *        indices:  [0, 1, 2, 1, 2, 3],
+     *     };
+     *
+     *  They can also be TypedArrays
+     *
+     *     var arrays = {
+     *        position: new Float32Array([0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0]),
+     *        texcoord: new Float32Array([0, 0, 0, 1, 1, 0, 1, 1]),
+     *        normal:   new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]),
+     *        indices:  new Uint16Array([0, 1, 2, 1, 2, 3]),
+     *     };
+     *
+     *  Or AugmentedTypedArrays
+     *
+     *     var positions = createAugmentedTypedArray(3, 4);
+     *     var texcoords = createAugmentedTypedArray(2, 4);
+     *     var normals   = createAugmentedTypedArray(3, 4);
+     *     var indices   = createAugmentedTypedArray(3, 2, Uint16Array);
+     *
+     *     positions.push([0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0]);
+     *     texcoords.push([0, 0, 0, 1, 1, 0, 1, 1]);
+     *     normals.push([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]);
+     *     indices.push([0, 1, 2, 1, 2, 3]);
+     *
+     *     var arrays = {
+     *        position: positions,
+     *        texcoord: texcoords,
+     *        normal:   normals,
+     *        indices:  indices,
+     *     };
+     *
+     * For the last example it is equivalent to
+     *
+     *     var bufferInfo = {
+     *       attribs: {
+     *         position: { numComponents: 3, buffer: gl.createBuffer(), },
+     *         texcoord: { numComponents: 2, buffer: gl.createBuffer(), },
+     *         normal: { numComponents: 3, buffer: gl.createBuffer(), },
+     *       },
+     *       indices: gl.createBuffer(),
+     *       numElements: 6,
+     *     };
+     *
+     *     gl.bindBuffer(gl.ARRAY_BUFFER, bufferInfo.attribs.position.buffer);
+     *     gl.bufferData(gl.ARRAY_BUFFER, arrays.position, gl.STATIC_DRAW);
+     *     gl.bindBuffer(gl.ARRAY_BUFFER, bufferInfo.attribs.texcoord.buffer);
+     *     gl.bufferData(gl.ARRAY_BUFFER, arrays.texcoord, gl.STATIC_DRAW);
+     *     gl.bindBuffer(gl.ARRAY_BUFFER, bufferInfo.attribs.normal.buffer);
+     *     gl.bufferData(gl.ARRAY_BUFFER, arrays.normal, gl.STATIC_DRAW);
+     *     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, bufferInfo.indices);
+     *     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, arrays.indices, gl.STATIC_DRAW);
+     *
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext
+     * @param {module:twgl.Arrays} arrays Your data
+     * @param {module:twgl.BufferInfo} [srcBufferInfo] An existing
+     *        buffer info to start from. WebGLBuffers etc specified
+     *        in the srcBufferInfo will be used in a new BufferInfo
+     *        with any arrays specified overriding the ones in
+     *        srcBufferInfo.
+     * @return {module:twgl.BufferInfo} A BufferInfo
+     * @memberOf module:twgl/attributes
+     */
+    function createBufferInfoFromArrays(gl, arrays, srcBufferInfo) {
+      const newAttribs = createAttribsFromArrays(gl, arrays);
+      const bufferInfo = Object.assign({}, srcBufferInfo ? srcBufferInfo : {});
+      bufferInfo.attribs = Object.assign({}, srcBufferInfo ? srcBufferInfo.attribs : {}, newAttribs);
+      const indices = arrays.indices;
+      if (indices) {
+        const newIndices = makeTypedArray(indices, "indices");
+        bufferInfo.indices = createBufferFromTypedArray(gl, newIndices, gl.ELEMENT_ARRAY_BUFFER);
+        bufferInfo.numElements = newIndices.length;
+        bufferInfo.elementType = getGLTypeForTypedArray(newIndices);
+      } else if (!bufferInfo.numElements) {
+        bufferInfo.numElements = getNumElementsFromAttributes(gl, bufferInfo.attribs);
+      }
+
+      return bufferInfo;
+    }
+
+    /*
+     * Copyright 2019 Gregg Tavares
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a
+     * copy of this software and associated documentation files (the "Software"),
+     * to deal in the Software without restriction, including without limitation
+     * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+     * and/or sell copies of the Software, and to permit persons to whom the
+     * Software is furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+     * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+     * DEALINGS IN THE SOFTWARE.
+     */
+
+    /**
+     * Gets the gl version as a number
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext
+     * @return {number} version of gl
+     * @private
+     */
+    //function getVersionAsNumber(gl) {
+    //  return parseFloat(gl.getParameter(gl.VERSION).substr(6));
+    //}
+
+    /**
+     * Check if context is WebGL 2.0
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext
+     * @return {bool} true if it's WebGL 2.0
+     * @memberOf module:twgl
+     */
+    function isWebGL2(gl) {
+      // This is the correct check but it's slow
+      //  return gl.getParameter(gl.VERSION).indexOf("WebGL 2.0") === 0;
+      // This might also be the correct check but I'm assuming it's slow-ish
+      // return gl instanceof WebGL2RenderingContext;
+      return !!gl.texStorage2D;
+    }
+
+    /*
+     * Copyright 2019 Gregg Tavares
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a
+     * copy of this software and associated documentation files (the "Software"),
+     * to deal in the Software without restriction, including without limitation
+     * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+     * and/or sell copies of the Software, and to permit persons to whom the
+     * Software is furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+     * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+     * DEALINGS IN THE SOFTWARE.
+     */
+
+    /**
+     * Low level shader program related functions
+     *
+     * You should generally not need to use these functions. They are provided
+     * for those cases where you're doing something out of the ordinary
+     * and you need lower level access.
+     *
+     * For backward compatibility they are available at both `twgl.programs` and `twgl`
+     * itself
+     *
+     * See {@link module:twgl} for core functions
+     *
+     * @module twgl/programs
+     */
+
+    const error$1 = error;
+    function getElementById(id) {
+      return (typeof document !== 'undefined' && document.getElementById)
+          ? document.getElementById(id)
+          : null;
+    }
+
+    const FLOAT$2                         = 0x1406;
+    const FLOAT_VEC2                    = 0x8B50;
+    const FLOAT_VEC3                    = 0x8B51;
+    const FLOAT_VEC4                    = 0x8B52;
+    const INT$2                           = 0x1404;
+    const INT_VEC2                      = 0x8B53;
+    const INT_VEC3                      = 0x8B54;
+    const INT_VEC4                      = 0x8B55;
+    const BOOL                          = 0x8B56;
+    const BOOL_VEC2                     = 0x8B57;
+    const BOOL_VEC3                     = 0x8B58;
+    const BOOL_VEC4                     = 0x8B59;
+    const FLOAT_MAT2                    = 0x8B5A;
+    const FLOAT_MAT3                    = 0x8B5B;
+    const FLOAT_MAT4                    = 0x8B5C;
+    const SAMPLER_2D                    = 0x8B5E;
+    const SAMPLER_CUBE                  = 0x8B60;
+    const SAMPLER_3D                    = 0x8B5F;
+    const SAMPLER_2D_SHADOW             = 0x8B62;
+    const FLOAT_MAT2x3                  = 0x8B65;
+    const FLOAT_MAT2x4                  = 0x8B66;
+    const FLOAT_MAT3x2                  = 0x8B67;
+    const FLOAT_MAT3x4                  = 0x8B68;
+    const FLOAT_MAT4x2                  = 0x8B69;
+    const FLOAT_MAT4x3                  = 0x8B6A;
+    const SAMPLER_2D_ARRAY              = 0x8DC1;
+    const SAMPLER_2D_ARRAY_SHADOW       = 0x8DC4;
+    const SAMPLER_CUBE_SHADOW           = 0x8DC5;
+    const UNSIGNED_INT$2                  = 0x1405;
+    const UNSIGNED_INT_VEC2             = 0x8DC6;
+    const UNSIGNED_INT_VEC3             = 0x8DC7;
+    const UNSIGNED_INT_VEC4             = 0x8DC8;
+    const INT_SAMPLER_2D                = 0x8DCA;
+    const INT_SAMPLER_3D                = 0x8DCB;
+    const INT_SAMPLER_CUBE              = 0x8DCC;
+    const INT_SAMPLER_2D_ARRAY          = 0x8DCF;
+    const UNSIGNED_INT_SAMPLER_2D       = 0x8DD2;
+    const UNSIGNED_INT_SAMPLER_3D       = 0x8DD3;
+    const UNSIGNED_INT_SAMPLER_CUBE     = 0x8DD4;
+    const UNSIGNED_INT_SAMPLER_2D_ARRAY = 0x8DD7;
+
+    const TEXTURE_2D                    = 0x0DE1;
+    const TEXTURE_CUBE_MAP              = 0x8513;
+    const TEXTURE_3D                    = 0x806F;
+    const TEXTURE_2D_ARRAY              = 0x8C1A;
+
+    const typeMap = {};
+
+    /**
+     * Returns the corresponding bind point for a given sampler type
+     */
+    function getBindPointForSamplerType(gl, type) {
+      return typeMap[type].bindPoint;
+    }
+
+    // This kind of sucks! If you could compose functions as in `var fn = gl[name];`
+    // this code could be a lot smaller but that is sadly really slow (T_T)
+
+    function floatSetter(gl, location) {
+      return function(v) {
+        gl.uniform1f(location, v);
+      };
+    }
+
+    function floatArraySetter(gl, location) {
+      return function(v) {
+        gl.uniform1fv(location, v);
+      };
+    }
+
+    function floatVec2Setter(gl, location) {
+      return function(v) {
+        gl.uniform2fv(location, v);
+      };
+    }
+
+    function floatVec3Setter(gl, location) {
+      return function(v) {
+        gl.uniform3fv(location, v);
+      };
+    }
+
+    function floatVec4Setter(gl, location) {
+      return function(v) {
+        gl.uniform4fv(location, v);
+      };
+    }
+
+    function intSetter(gl, location) {
+      return function(v) {
+        gl.uniform1i(location, v);
+      };
+    }
+
+    function intArraySetter(gl, location) {
+      return function(v) {
+        gl.uniform1iv(location, v);
+      };
+    }
+
+    function intVec2Setter(gl, location) {
+      return function(v) {
+        gl.uniform2iv(location, v);
+      };
+    }
+
+    function intVec3Setter(gl, location) {
+      return function(v) {
+        gl.uniform3iv(location, v);
+      };
+    }
+
+    function intVec4Setter(gl, location) {
+      return function(v) {
+        gl.uniform4iv(location, v);
+      };
+    }
+
+    function uintSetter(gl, location) {
+      return function(v) {
+        gl.uniform1ui(location, v);
+      };
+    }
+
+    function uintArraySetter(gl, location) {
+      return function(v) {
+        gl.uniform1uiv(location, v);
+      };
+    }
+
+    function uintVec2Setter(gl, location) {
+      return function(v) {
+        gl.uniform2uiv(location, v);
+      };
+    }
+
+    function uintVec3Setter(gl, location) {
+      return function(v) {
+        gl.uniform3uiv(location, v);
+      };
+    }
+
+    function uintVec4Setter(gl, location) {
+      return function(v) {
+        gl.uniform4uiv(location, v);
+      };
+    }
+
+    function floatMat2Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix2fv(location, false, v);
+      };
+    }
+
+    function floatMat3Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix3fv(location, false, v);
+      };
+    }
+
+    function floatMat4Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix4fv(location, false, v);
+      };
+    }
+
+    function floatMat23Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix2x3fv(location, false, v);
+      };
+    }
+
+    function floatMat32Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix3x2fv(location, false, v);
+      };
+    }
+
+    function floatMat24Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix2x4fv(location, false, v);
+      };
+    }
+
+    function floatMat42Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix4x2fv(location, false, v);
+      };
+    }
+
+    function floatMat34Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix3x4fv(location, false, v);
+      };
+    }
+
+    function floatMat43Setter(gl, location) {
+      return function(v) {
+        gl.uniformMatrix4x3fv(location, false, v);
+      };
+    }
+
+    function samplerSetter(gl, type, unit, location) {
+      const bindPoint = getBindPointForSamplerType(gl, type);
+      return isWebGL2(gl) ? function(textureOrPair) {
+        let texture;
+        let sampler;
+        if (isTexture(gl, textureOrPair)) {
+          texture = textureOrPair;
+          sampler = null;
+        } else {
+          texture = textureOrPair.texture;
+          sampler = textureOrPair.sampler;
+        }
+        gl.uniform1i(location, unit);
+        gl.activeTexture(gl.TEXTURE0 + unit);
+        gl.bindTexture(bindPoint, texture);
+        gl.bindSampler(unit, sampler);
+      } : function(texture) {
+        gl.uniform1i(location, unit);
+        gl.activeTexture(gl.TEXTURE0 + unit);
+        gl.bindTexture(bindPoint, texture);
+      };
+    }
+
+    function samplerArraySetter(gl, type, unit, location, size) {
+      const bindPoint = getBindPointForSamplerType(gl, type);
+      const units = new Int32Array(size);
+      for (let ii = 0; ii < size; ++ii) {
+        units[ii] = unit + ii;
+      }
+
+      return isWebGL2(gl) ? function(textures) {
+        gl.uniform1iv(location, units);
+        textures.forEach(function(textureOrPair, index) {
+          gl.activeTexture(gl.TEXTURE0 + units[index]);
+          let texture;
+          let sampler;
+          if (isTexture(gl, textureOrPair)) {
+            texture = textureOrPair;
+            sampler = null;
+          } else {
+            texture = textureOrPair.texture;
+            sampler = textureOrPair.sampler;
+          }
+          gl.bindSampler(unit, sampler);
+          gl.bindTexture(bindPoint, texture);
+        });
+      } : function(textures) {
+        gl.uniform1iv(location, units);
+        textures.forEach(function(texture, index) {
+          gl.activeTexture(gl.TEXTURE0 + units[index]);
+          gl.bindTexture(bindPoint, texture);
+        });
+      };
+    }
+
+    typeMap[FLOAT$2]                         = { Type: Float32Array, size:  4, setter: floatSetter,      arraySetter: floatArraySetter, };
+    typeMap[FLOAT_VEC2]                    = { Type: Float32Array, size:  8, setter: floatVec2Setter,  };
+    typeMap[FLOAT_VEC3]                    = { Type: Float32Array, size: 12, setter: floatVec3Setter,  };
+    typeMap[FLOAT_VEC4]                    = { Type: Float32Array, size: 16, setter: floatVec4Setter,  };
+    typeMap[INT$2]                           = { Type: Int32Array,   size:  4, setter: intSetter,        arraySetter: intArraySetter, };
+    typeMap[INT_VEC2]                      = { Type: Int32Array,   size:  8, setter: intVec2Setter,    };
+    typeMap[INT_VEC3]                      = { Type: Int32Array,   size: 12, setter: intVec3Setter,    };
+    typeMap[INT_VEC4]                      = { Type: Int32Array,   size: 16, setter: intVec4Setter,    };
+    typeMap[UNSIGNED_INT$2]                  = { Type: Uint32Array,  size:  4, setter: uintSetter,       arraySetter: uintArraySetter, };
+    typeMap[UNSIGNED_INT_VEC2]             = { Type: Uint32Array,  size:  8, setter: uintVec2Setter,   };
+    typeMap[UNSIGNED_INT_VEC3]             = { Type: Uint32Array,  size: 12, setter: uintVec3Setter,   };
+    typeMap[UNSIGNED_INT_VEC4]             = { Type: Uint32Array,  size: 16, setter: uintVec4Setter,   };
+    typeMap[BOOL]                          = { Type: Uint32Array,  size:  4, setter: intSetter,        arraySetter: intArraySetter, };
+    typeMap[BOOL_VEC2]                     = { Type: Uint32Array,  size:  8, setter: intVec2Setter,    };
+    typeMap[BOOL_VEC3]                     = { Type: Uint32Array,  size: 12, setter: intVec3Setter,    };
+    typeMap[BOOL_VEC4]                     = { Type: Uint32Array,  size: 16, setter: intVec4Setter,    };
+    typeMap[FLOAT_MAT2]                    = { Type: Float32Array, size: 16, setter: floatMat2Setter,  };
+    typeMap[FLOAT_MAT3]                    = { Type: Float32Array, size: 36, setter: floatMat3Setter,  };
+    typeMap[FLOAT_MAT4]                    = { Type: Float32Array, size: 64, setter: floatMat4Setter,  };
+    typeMap[FLOAT_MAT2x3]                  = { Type: Float32Array, size: 24, setter: floatMat23Setter, };
+    typeMap[FLOAT_MAT2x4]                  = { Type: Float32Array, size: 32, setter: floatMat24Setter, };
+    typeMap[FLOAT_MAT3x2]                  = { Type: Float32Array, size: 24, setter: floatMat32Setter, };
+    typeMap[FLOAT_MAT3x4]                  = { Type: Float32Array, size: 48, setter: floatMat34Setter, };
+    typeMap[FLOAT_MAT4x2]                  = { Type: Float32Array, size: 32, setter: floatMat42Setter, };
+    typeMap[FLOAT_MAT4x3]                  = { Type: Float32Array, size: 48, setter: floatMat43Setter, };
+    typeMap[SAMPLER_2D]                    = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D,       };
+    typeMap[SAMPLER_CUBE]                  = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_CUBE_MAP, };
+    typeMap[SAMPLER_3D]                    = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_3D,       };
+    typeMap[SAMPLER_2D_SHADOW]             = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D,       };
+    typeMap[SAMPLER_2D_ARRAY]              = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D_ARRAY, };
+    typeMap[SAMPLER_2D_ARRAY_SHADOW]       = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D_ARRAY, };
+    typeMap[SAMPLER_CUBE_SHADOW]           = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_CUBE_MAP, };
+    typeMap[INT_SAMPLER_2D]                = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D,       };
+    typeMap[INT_SAMPLER_3D]                = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_3D,       };
+    typeMap[INT_SAMPLER_CUBE]              = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_CUBE_MAP, };
+    typeMap[INT_SAMPLER_2D_ARRAY]          = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D_ARRAY, };
+    typeMap[UNSIGNED_INT_SAMPLER_2D]       = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D,       };
+    typeMap[UNSIGNED_INT_SAMPLER_3D]       = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_3D,       };
+    typeMap[UNSIGNED_INT_SAMPLER_CUBE]     = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_CUBE_MAP, };
+    typeMap[UNSIGNED_INT_SAMPLER_2D_ARRAY] = { Type: null,         size:  0, setter: samplerSetter,    arraySetter: samplerArraySetter, bindPoint: TEXTURE_2D_ARRAY, };
+
+    function floatAttribSetter(gl, index) {
+      return function(b) {
+        if (b.value) {
+          gl.disableVertexAttribArray(index);
+          switch (b.value.length) {
+            case 4:
+              gl.vertexAttrib4fv(index, b.value);
+              break;
+            case 3:
+              gl.vertexAttrib3fv(index, b.value);
+              break;
+            case 2:
+              gl.vertexAttrib2fv(index, b.value);
+              break;
+            case 1:
+              gl.vertexAttrib1fv(index, b.value);
+              break;
+            default:
+              throw new Error('the length of a float constant value must be between 1 and 4!');
+          }
+        } else {
+          gl.bindBuffer(gl.ARRAY_BUFFER, b.buffer);
+          gl.enableVertexAttribArray(index);
+          gl.vertexAttribPointer(
+              index, b.numComponents || b.size, b.type || gl.FLOAT, b.normalize || false, b.stride || 0, b.offset || 0);
+          if (b.divisor !== undefined) {
+            gl.vertexAttribDivisor(index, b.divisor);
+          }
+        }
+      };
+    }
+
+    function intAttribSetter(gl, index) {
+      return function(b) {
+        if (b.value) {
+          gl.disableVertexAttribArray(index);
+          if (b.value.length === 4) {
+            gl.vertexAttrib4iv(index, b.value);
+          } else {
+            throw new Error('The length of an integer constant value must be 4!');
+          }
+        } else {
+          gl.bindBuffer(gl.ARRAY_BUFFER, b.buffer);
+          gl.enableVertexAttribArray(index);
+          gl.vertexAttribIPointer(
+              index, b.numComponents || b.size, b.type || gl.INT, b.stride || 0, b.offset || 0);
+          if (b.divisor !== undefined) {
+            gl.vertexAttribDivisor(index, b.divisor);
+          }
+        }
+      };
+    }
+
+    function uintAttribSetter(gl, index) {
+      return function(b) {
+        if (b.value) {
+          gl.disableVertexAttribArray(index);
+          if (b.value.length === 4) {
+            gl.vertexAttrib4uiv(index, b.value);
+          } else {
+            throw new Error('The length of an unsigned integer constant value must be 4!');
+          }
+        } else {
+          gl.bindBuffer(gl.ARRAY_BUFFER, b.buffer);
+          gl.enableVertexAttribArray(index);
+          gl.vertexAttribIPointer(
+              index, b.numComponents || b.size, b.type || gl.UNSIGNED_INT, b.stride || 0, b.offset || 0);
+          if (b.divisor !== undefined) {
+            gl.vertexAttribDivisor(index, b.divisor);
+          }
+        }
+      };
+    }
+
+    function matAttribSetter(gl, index, typeInfo) {
+      const defaultSize = typeInfo.size;
+      const count = typeInfo.count;
+
+      return function(b) {
+        gl.bindBuffer(gl.ARRAY_BUFFER, b.buffer);
+        const numComponents = b.size || b.numComponents || defaultSize;
+        const size = numComponents / count;
+        const type = b.type || gl.FLOAT;
+        const typeInfo = typeMap[type];
+        const stride = typeInfo.size * numComponents;
+        const normalize = b.normalize || false;
+        const offset = b.offset || 0;
+        const rowOffset = stride / count;
+        for (let i = 0; i < count; ++i) {
+          gl.enableVertexAttribArray(index + i);
+          gl.vertexAttribPointer(
+              index + i, size, type, normalize, stride, offset + rowOffset * i);
+          if (b.divisor !== undefined) {
+            gl.vertexAttribDivisor(index + i, b.divisor);
+          }
+        }
+      };
+    }
+
+
+
+    const attrTypeMap = {};
+    attrTypeMap[FLOAT$2]             = { size:  4, setter: floatAttribSetter, };
+    attrTypeMap[FLOAT_VEC2]        = { size:  8, setter: floatAttribSetter, };
+    attrTypeMap[FLOAT_VEC3]        = { size: 12, setter: floatAttribSetter, };
+    attrTypeMap[FLOAT_VEC4]        = { size: 16, setter: floatAttribSetter, };
+    attrTypeMap[INT$2]               = { size:  4, setter: intAttribSetter,   };
+    attrTypeMap[INT_VEC2]          = { size:  8, setter: intAttribSetter,   };
+    attrTypeMap[INT_VEC3]          = { size: 12, setter: intAttribSetter,   };
+    attrTypeMap[INT_VEC4]          = { size: 16, setter: intAttribSetter,   };
+    attrTypeMap[UNSIGNED_INT$2]      = { size:  4, setter: uintAttribSetter,  };
+    attrTypeMap[UNSIGNED_INT_VEC2] = { size:  8, setter: uintAttribSetter,  };
+    attrTypeMap[UNSIGNED_INT_VEC3] = { size: 12, setter: uintAttribSetter,  };
+    attrTypeMap[UNSIGNED_INT_VEC4] = { size: 16, setter: uintAttribSetter,  };
+    attrTypeMap[BOOL]              = { size:  4, setter: intAttribSetter,   };
+    attrTypeMap[BOOL_VEC2]         = { size:  8, setter: intAttribSetter,   };
+    attrTypeMap[BOOL_VEC3]         = { size: 12, setter: intAttribSetter,   };
+    attrTypeMap[BOOL_VEC4]         = { size: 16, setter: intAttribSetter,   };
+    attrTypeMap[FLOAT_MAT2]        = { size:  4, setter: matAttribSetter,   count: 2, };
+    attrTypeMap[FLOAT_MAT3]        = { size:  9, setter: matAttribSetter,   count: 3, };
+    attrTypeMap[FLOAT_MAT4]        = { size: 16, setter: matAttribSetter,   count: 4, };
+
+    /**
+     * Error Callback
+     * @callback ErrorCallback
+     * @param {string} msg error message.
+     * @param {number} [lineOffset] amount to add to line number
+     * @memberOf module:twgl
+     */
+
+    function addLineNumbers(src, lineOffset) {
+      lineOffset = lineOffset || 0;
+      ++lineOffset;
+
+      return src.split("\n").map(function(line, ndx) {
+        return (ndx + lineOffset) + ": " + line;
+      }).join("\n");
+    }
+
+    const spaceRE = /^[ \t]*\n/;
+
+    /**
+     * Loads a shader.
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext to use.
+     * @param {string} shaderSource The shader source.
+     * @param {number} shaderType The type of shader.
+     * @param {module:twgl.ErrorCallback} opt_errorCallback callback for errors.
+     * @return {WebGLShader} The created shader.
+     * @private
+     */
+    function loadShader(gl, shaderSource, shaderType, opt_errorCallback) {
+      const errFn = opt_errorCallback || error$1;
+      // Create the shader object
+      const shader = gl.createShader(shaderType);
+
+      // Remove the first end of line because WebGL 2.0 requires
+      // #version 300 es
+      // as the first line. No whitespace allowed before that line
+      // so
+      //
+      // <script>
+      // #version 300 es
+      // </script>
+      //
+      // Has one line before it which is invalid according to GLSL ES 3.00
+      //
+      let lineOffset = 0;
+      if (spaceRE.test(shaderSource)) {
+        lineOffset = 1;
+        shaderSource = shaderSource.replace(spaceRE, '');
+      }
+
+      // Load the shader source
+      gl.shaderSource(shader, shaderSource);
+
+      // Compile the shader
+      gl.compileShader(shader);
+
+      // Check the compile status
+      const compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+      if (!compiled) {
+        // Something went wrong during compilation; get the error
+        const lastError = gl.getShaderInfoLog(shader);
+        errFn(addLineNumbers(shaderSource, lineOffset) + "\n*** Error compiling shader: " + lastError);
+        gl.deleteShader(shader);
+        return null;
+      }
+
+      return shader;
+    }
+
+    /**
+     * @typedef {Object} ProgramOptions
+     * @property {function(string)} [errorCallback] callback for errors
+     * @property {Object.<string,number>} [attribLocations] a attribute name to location map
+     * @property {(module:twgl.BufferInfo|Object.<string,module:twgl.AttribInfo>|string[])} [transformFeedbackVaryings] If passed
+     *   a BufferInfo will use the attribs names inside. If passed an object of AttribInfos will use the names from that object. Otherwise
+     *   you can pass an array of names.
+     * @property {number} [transformFeedbackMode] the mode to pass `gl.transformFeedbackVaryings`. Defaults to `SEPARATE_ATTRIBS`.
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Gets the program options based on all these optional arguments
+     * @param {module:twgl.ProgramOptions|string[]} [opt_attribs] Options for the program or an array of attribs names. Locations will be assigned by index if not passed in
+     * @param {number[]} [opt_locations] The locations for the. A parallel array to opt_attribs letting you assign locations.
+     * @param {module:twgl.ErrorCallback} [opt_errorCallback] callback for errors. By default it just prints an error to the console
+     *        on error. If you want something else pass an callback. It's passed an error message.
+     * @return {module:twgl.ProgramOptions} an instance of ProgramOptions based on the arguments passed in
+     * @private
+     */
+    function getProgramOptions(opt_attribs, opt_locations, opt_errorCallback) {
+      let transformFeedbackVaryings;
+      let transformFeedbackMode;
+      if (typeof opt_locations === 'function') {
+        opt_errorCallback = opt_locations;
+        opt_locations = undefined;
+      }
+      if (typeof opt_attribs === 'function') {
+        opt_errorCallback = opt_attribs;
+        opt_attribs = undefined;
+      } else if (opt_attribs && !Array.isArray(opt_attribs)) {
+        // If we have an errorCallback we can just return this object
+        // Otherwise we need to construct one with default errorCallback
+        if (opt_attribs.errorCallback) {
+          return opt_attribs;
+        }
+        const opt = opt_attribs;
+        opt_errorCallback = opt.errorCallback;
+        opt_attribs = opt.attribLocations;
+        transformFeedbackVaryings = opt.transformFeedbackVaryings;
+        transformFeedbackMode = opt.transformFeedbackMode;
+      }
+
+      const options = {
+        errorCallback: opt_errorCallback || error$1,
+        transformFeedbackVaryings: transformFeedbackVaryings,
+        transformFeedbackMode: transformFeedbackMode,
+      };
+
+      if (opt_attribs) {
+        let attribLocations = {};
+        if (Array.isArray(opt_attribs)) {
+          opt_attribs.forEach(function(attrib,  ndx) {
+            attribLocations[attrib] = opt_locations ? opt_locations[ndx] : ndx;
+          });
+        } else {
+          attribLocations = opt_attribs;
+        }
+        options.attribLocations = attribLocations;
+      }
+
+      return options;
+    }
+
+    const defaultShaderType = [
+      "VERTEX_SHADER",
+      "FRAGMENT_SHADER",
+    ];
+
+    function getShaderTypeFromScriptType(gl, scriptType) {
+      if (scriptType.indexOf("frag") >= 0) {
+        return gl.FRAGMENT_SHADER;
+      } else if (scriptType.indexOf("vert") >= 0) {
+        return gl.VERTEX_SHADER;
+      }
+      return undefined;
+    }
+
+    function deleteShaders(gl, shaders) {
+      shaders.forEach(function(shader) {
+        gl.deleteShader(shader);
+      });
+    }
+
+    /**
+     * Creates a program, attaches (and/or compiles) shaders, binds attrib locations, links the
+     * program and calls useProgram.
+     *
+     * NOTE: There are 4 signatures for this function
+     *
+     *     twgl.createProgram(gl, [vs, fs], options);
+     *     twgl.createProgram(gl, [vs, fs], opt_errFunc);
+     *     twgl.createProgram(gl, [vs, fs], opt_attribs, opt_errFunc);
+     *     twgl.createProgram(gl, [vs, fs], opt_attribs, opt_locations, opt_errFunc);
+     *
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext to use.
+     * @param {WebGLShader[]|string[]} shaders The shaders to attach, or element ids for their source, or strings that contain their source
+     * @param {module:twgl.ProgramOptions|string[]|module:twgl.ErrorCallback} [opt_attribs] Options for the program or an array of attribs names or an error callback. Locations will be assigned by index if not passed in
+     * @param {number[]} [opt_locations|module:twgl.ErrorCallback] The locations for the. A parallel array to opt_attribs letting you assign locations or an error callback.
+     * @param {module:twgl.ErrorCallback} [opt_errorCallback] callback for errors. By default it just prints an error to the console
+     *        on error. If you want something else pass an callback. It's passed an error message.
+     * @return {WebGLProgram?} the created program or null if error.
+     * @memberOf module:twgl/programs
+     */
+    function createProgram(
+        gl, shaders, opt_attribs, opt_locations, opt_errorCallback) {
+      const progOptions = getProgramOptions(opt_attribs, opt_locations, opt_errorCallback);
+      const realShaders = [];
+      const newShaders = [];
+      for (let ndx = 0; ndx < shaders.length; ++ndx) {
+        let shader = shaders[ndx];
+        if (typeof (shader) === 'string') {
+          const elem = getElementById(shader);
+          const src = elem ? elem.text : shader;
+          let type = gl[defaultShaderType[ndx]];
+          if (elem && elem.type) {
+            type = getShaderTypeFromScriptType(gl, elem.type) || type;
+          }
+          shader = loadShader(gl, src, type, progOptions.errorCallback);
+          newShaders.push(shader);
+        }
+        if (isShader(gl, shader)) {
+          realShaders.push(shader);
+        }
+      }
+
+      if (realShaders.length !== shaders.length) {
+        progOptions.errorCallback("not enough shaders for program");
+        deleteShaders(gl, newShaders);
+        return null;
+      }
+
+      const program = gl.createProgram();
+      realShaders.forEach(function(shader) {
+        gl.attachShader(program, shader);
+      });
+      if (progOptions.attribLocations) {
+        Object.keys(progOptions.attribLocations).forEach(function(attrib) {
+          gl.bindAttribLocation(program, progOptions.attribLocations[attrib], attrib);
+        });
+      }
+      let varyings = progOptions.transformFeedbackVaryings;
+      if (varyings) {
+        if (varyings.attribs) {
+          varyings = varyings.attribs;
+        }
+        if (!Array.isArray(varyings)) {
+          varyings = Object.keys(varyings);
+        }
+        gl.transformFeedbackVaryings(program, varyings, progOptions.transformFeedbackMode || gl.SEPARATE_ATTRIBS);
+      }
+      gl.linkProgram(program);
+
+      // Check the link status
+      const linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+      if (!linked) {
+        // something went wrong with the link
+        const lastError = gl.getProgramInfoLog(program);
+        progOptions.errorCallback("Error in program linking:" + lastError);
+
+        gl.deleteProgram(program);
+        deleteShaders(gl, newShaders);
+        return null;
+      }
+      return program;
+    }
+
+    /**
+     * Creates a program from 2 sources.
+     *
+     * NOTE: There are 4 signatures for this function
+     *
+     *     twgl.createProgramFromSource(gl, [vs, fs], opt_options);
+     *     twgl.createProgramFromSource(gl, [vs, fs], opt_errFunc);
+     *     twgl.createProgramFromSource(gl, [vs, fs], opt_attribs, opt_errFunc);
+     *     twgl.createProgramFromSource(gl, [vs, fs], opt_attribs, opt_locations, opt_errFunc);
+     *
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext
+     *        to use.
+     * @param {string[]} shaderSources Array of sources for the
+     *        shaders. The first is assumed to be the vertex shader,
+     *        the second the fragment shader.
+     * @param {module:twgl.ProgramOptions|string[]|module:twgl.ErrorCallback} [opt_attribs] Options for the program or an array of attribs names or an error callback. Locations will be assigned by index if not passed in
+     * @param {number[]} [opt_locations|module:twgl.ErrorCallback] The locations for the. A parallel array to opt_attribs letting you assign locations or an error callback.
+     * @param {module:twgl.ErrorCallback} [opt_errorCallback] callback for errors. By default it just prints an error to the console
+     *        on error. If you want something else pass an callback. It's passed an error message.
+     * @return {WebGLProgram?} the created program or null if error.
+     * @memberOf module:twgl/programs
+     */
+    function createProgramFromSources(
+        gl, shaderSources, opt_attribs, opt_locations, opt_errorCallback) {
+      const progOptions = getProgramOptions(opt_attribs, opt_locations, opt_errorCallback);
+      const shaders = [];
+      for (let ii = 0; ii < shaderSources.length; ++ii) {
+        const shader = loadShader(
+            gl, shaderSources[ii], gl[defaultShaderType[ii]], progOptions.errorCallback);
+        if (!shader) {
+          return null;
+        }
+        shaders.push(shader);
+      }
+      return createProgram(gl, shaders, progOptions);
+    }
+
+    /**
+     * Returns true if attribute/uniform is a reserved/built in
+     *
+     * It makes no sense to me why GL returns these because it's
+     * illegal to call `gl.getUniformLocation` and `gl.getAttribLocation`
+     * with names that start with `gl_` (and `webgl_` in WebGL)
+     *
+     * I can only assume they are there because they might count
+     * when computing the number of uniforms/attributes used when you want to
+     * know if you are near the limit. That doesn't really make sense
+     * to me but the fact that these get returned are in the spec.
+     *
+     * @param {WebGLActiveInfo} info As returned from `gl.getActiveUniform` or
+     *    `gl.getActiveAttrib`.
+     * @return {bool} true if it's reserved
+     * @private
+     */
+    function isBuiltIn(info) {
+      const name = info.name;
+      return name.startsWith("gl_") || name.startsWith("webgl_");
+    }
+
+    /**
+     * Creates setter functions for all uniforms of a shader
+     * program.
+     *
+     * @see {@link module:twgl.setUniforms}
+     *
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext to use.
+     * @param {WebGLProgram} program the program to create setters for.
+     * @returns {Object.<string, function>} an object with a setter by name for each uniform
+     * @memberOf module:twgl/programs
+     */
+    function createUniformSetters(gl, program) {
+      let textureUnit = 0;
+
+      /**
+       * Creates a setter for a uniform of the given program with it's
+       * location embedded in the setter.
+       * @param {WebGLProgram} program
+       * @param {WebGLUniformInfo} uniformInfo
+       * @returns {function} the created setter.
+       */
+      function createUniformSetter(program, uniformInfo) {
+        const location = gl.getUniformLocation(program, uniformInfo.name);
+        const isArray = (uniformInfo.size > 1 && uniformInfo.name.substr(-3) === "[0]");
+        const type = uniformInfo.type;
+        const typeInfo = typeMap[type];
+        if (!typeInfo) {
+          throw new Error(`unknown type: 0x${type.toString(16)}`); // we should never get here.
+        }
+        let setter;
+        if (typeInfo.bindPoint) {
+          // it's a sampler
+          const unit = textureUnit;
+          textureUnit += uniformInfo.size;
+          if (isArray) {
+            setter = typeInfo.arraySetter(gl, type, unit, location, uniformInfo.size);
+          } else {
+            setter = typeInfo.setter(gl, type, unit, location, uniformInfo.size);
+          }
+        } else {
+          if (typeInfo.arraySetter && isArray) {
+            setter = typeInfo.arraySetter(gl, location);
+          } else {
+            setter = typeInfo.setter(gl, location);
+          }
+        }
+        setter.location = location;
+        return setter;
+      }
+
+      const uniformSetters = { };
+      const numUniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+
+      for (let ii = 0; ii < numUniforms; ++ii) {
+        const uniformInfo = gl.getActiveUniform(program, ii);
+        if (isBuiltIn(uniformInfo)) {
+            continue;
+        }
+        let name = uniformInfo.name;
+        // remove the array suffix.
+        if (name.substr(-3) === "[0]") {
+          name = name.substr(0, name.length - 3);
+        }
+        const setter = createUniformSetter(program, uniformInfo);
+        uniformSetters[name] = setter;
+      }
+      return uniformSetters;
+    }
+
+    /**
+     * @typedef {Object} TransformFeedbackInfo
+     * @property {number} index index of transform feedback
+     * @property {number} type GL type
+     * @property {number} size 1 - 4
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Create TransformFeedbackInfo for passing to bindTransformFeedbackInfo.
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext to use.
+     * @param {WebGLProgram} program an existing WebGLProgram.
+     * @return {Object<string, module:twgl.TransformFeedbackInfo>}
+     * @memberOf module:twgl
+     */
+    function createTransformFeedbackInfo(gl, program) {
+      const info = {};
+      const numVaryings = gl.getProgramParameter(program, gl.TRANSFORM_FEEDBACK_VARYINGS);
+      for (let ii = 0; ii < numVaryings; ++ii) {
+        const varying = gl.getTransformFeedbackVarying(program, ii);
+        info[varying.name] = {
+          index: ii,
+          type: varying.type,
+          size: varying.size,
+        };
+      }
+      return info;
+    }
+
+    /**
+     * @typedef {Object} UniformData
+     * @property {number} type The WebGL type enum for this uniform
+     * @property {number} size The number of elements for this uniform
+     * @property {number} blockNdx The block index this uniform appears in
+     * @property {number} offset The byte offset in the block for this uniform's value
+     * @memberOf module:twgl
+     */
+
+    /**
+     * The specification for one UniformBlockObject
+     *
+     * @typedef {Object} BlockSpec
+     * @property {number} index The index of the block.
+     * @property {number} size The size in bytes needed for the block
+     * @property {number[]} uniformIndices The indices of the uniforms used by the block. These indices
+     *    correspond to entries in a UniformData array in the {@link module:twgl.UniformBlockSpec}.
+     * @property {bool} usedByVertexShader Self explanatory
+     * @property {bool} usedByFragmentShader Self explanatory
+     * @property {bool} used Self explanatory
+     * @memberOf module:twgl
+     */
+
+    /**
+     * A `UniformBlockSpec` represents the data needed to create and bind
+     * UniformBlockObjects for a given program
+     *
+     * @typedef {Object} UniformBlockSpec
+     * @property {Object.<string, module:twgl.BlockSpec> blockSpecs The BlockSpec for each block by block name
+     * @property {UniformData[]} uniformData An array of data for each uniform by uniform index.
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Creates a UniformBlockSpec for the given program.
+     *
+     * A UniformBlockSpec represents the data needed to create and bind
+     * UniformBlockObjects
+     *
+     * @param {WebGL2RenderingContext} gl A WebGL2 Rendering Context
+     * @param {WebGLProgram} program A WebGLProgram for a successfully linked program
+     * @return {module:twgl.UniformBlockSpec} The created UniformBlockSpec
+     * @memberOf module:twgl/programs
+     */
+    function createUniformBlockSpecFromProgram(gl, program) {
+      const numUniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+      const uniformData = [];
+      const uniformIndices = [];
+
+      for (let ii = 0; ii < numUniforms; ++ii) {
+        uniformIndices.push(ii);
+        uniformData.push({});
+        const uniformInfo = gl.getActiveUniform(program, ii);
+        if (isBuiltIn(uniformInfo)) {
+          break;
+        }
+        // REMOVE [0]?
+        uniformData[ii].name = uniformInfo.name;
+      }
+
+      [
+        [ "UNIFORM_TYPE", "type" ],
+        [ "UNIFORM_SIZE", "size" ],  // num elements
+        [ "UNIFORM_BLOCK_INDEX", "blockNdx" ],
+        [ "UNIFORM_OFFSET", "offset", ],
+      ].forEach(function(pair) {
+        const pname = pair[0];
+        const key = pair[1];
+        gl.getActiveUniforms(program, uniformIndices, gl[pname]).forEach(function(value, ndx) {
+          uniformData[ndx][key] = value;
+        });
+      });
+
+      const blockSpecs = {};
+
+      const numUniformBlocks = gl.getProgramParameter(program, gl.ACTIVE_UNIFORM_BLOCKS);
+      for (let ii = 0; ii < numUniformBlocks; ++ii) {
+        const name = gl.getActiveUniformBlockName(program, ii);
+        const blockSpec = {
+          index: ii,
+          usedByVertexShader: gl.getActiveUniformBlockParameter(program, ii, gl.UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER),
+          usedByFragmentShader: gl.getActiveUniformBlockParameter(program, ii, gl.UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER),
+          size: gl.getActiveUniformBlockParameter(program, ii, gl.UNIFORM_BLOCK_DATA_SIZE),
+          uniformIndices: gl.getActiveUniformBlockParameter(program, ii, gl.UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES),
+        };
+        blockSpec.used = blockSpec.usedByVertexShader || blockSpec.usedByFragmentShader;
+        blockSpecs[name] = blockSpec;
+      }
+
+      return {
+        blockSpecs: blockSpecs,
+        uniformData: uniformData,
+      };
+    }
+
+    /**
+     * Set uniforms and binds related textures.
+     *
+     * example:
+     *
+     *     const programInfo = createProgramInfo(
+     *         gl, ["some-vs", "some-fs"]);
+     *
+     *     const tex1 = gl.createTexture();
+     *     const tex2 = gl.createTexture();
+     *
+     *     ... assume we setup the textures with data ...
+     *
+     *     const uniforms = {
+     *       u_someSampler: tex1,
+     *       u_someOtherSampler: tex2,
+     *       u_someColor: [1,0,0,1],
+     *       u_somePosition: [0,1,1],
+     *       u_someMatrix: [
+     *         1,0,0,0,
+     *         0,1,0,0,
+     *         0,0,1,0,
+     *         0,0,0,0,
+     *       ],
+     *     };
+     *
+     *     gl.useProgram(program);
+     *
+     * This will automatically bind the textures AND set the
+     * uniforms.
+     *
+     *     twgl.setUniforms(programInfo, uniforms);
+     *
+     * For the example above it is equivalent to
+     *
+     *     var texUnit = 0;
+     *     gl.activeTexture(gl.TEXTURE0 + texUnit);
+     *     gl.bindTexture(gl.TEXTURE_2D, tex1);
+     *     gl.uniform1i(u_someSamplerLocation, texUnit++);
+     *     gl.activeTexture(gl.TEXTURE0 + texUnit);
+     *     gl.bindTexture(gl.TEXTURE_2D, tex2);
+     *     gl.uniform1i(u_someSamplerLocation, texUnit++);
+     *     gl.uniform4fv(u_someColorLocation, [1, 0, 0, 1]);
+     *     gl.uniform3fv(u_somePositionLocation, [0, 1, 1]);
+     *     gl.uniformMatrix4fv(u_someMatrix, false, [
+     *         1,0,0,0,
+     *         0,1,0,0,
+     *         0,0,1,0,
+     *         0,0,0,0,
+     *       ]);
+     *
+     * Note it is perfectly reasonable to call `setUniforms` multiple times. For example
+     *
+     *     const uniforms = {
+     *       u_someSampler: tex1,
+     *       u_someOtherSampler: tex2,
+     *     };
+     *
+     *     const moreUniforms {
+     *       u_someColor: [1,0,0,1],
+     *       u_somePosition: [0,1,1],
+     *       u_someMatrix: [
+     *         1,0,0,0,
+     *         0,1,0,0,
+     *         0,0,1,0,
+     *         0,0,0,0,
+     *       ],
+     *     };
+     *
+     *     twgl.setUniforms(programInfo, uniforms);
+     *     twgl.setUniforms(programInfo, moreUniforms);
+     *
+     * You can also add WebGLSamplers to uniform samplers as in
+     *
+     *     const uniforms = {
+     *       u_someSampler: {
+     *         texture: someWebGLTexture,
+     *         sampler: someWebGLSampler,
+     *       },
+     *     };
+     *
+     * In which case both the sampler and texture will be bound to the
+     * same unit.
+     *
+     * @param {(module:twgl.ProgramInfo|Object.<string, function>)} setters a `ProgramInfo` as returned from `createProgramInfo` or the setters returned from
+     *        `createUniformSetters`.
+     * @param {Object.<string, ?>} values an object with values for the
+     *        uniforms.
+     *   You can pass multiple objects by putting them in an array or by calling with more arguments.For example
+     *
+     *     const sharedUniforms = {
+     *       u_fogNear: 10,
+     *       u_projection: ...
+     *       ...
+     *     };
+     *
+     *     const localUniforms = {
+     *       u_world: ...
+     *       u_diffuseColor: ...
+     *     };
+     *
+     *     twgl.setUniforms(programInfo, sharedUniforms, localUniforms);
+     *
+     *     // is the same as
+     *
+     *     twgl.setUniforms(programInfo, [sharedUniforms, localUniforms]);
+     *
+     *     // is the same as
+     *
+     *     twgl.setUniforms(programInfo, sharedUniforms);
+     *     twgl.setUniforms(programInfo, localUniforms};
+     *
+     * @memberOf module:twgl/programs
+     */
+    function setUniforms(setters, values) {  // eslint-disable-line
+      const actualSetters = setters.uniformSetters || setters;
+      const numArgs = arguments.length;
+      for (let aNdx = 1; aNdx < numArgs; ++aNdx) {
+        const values = arguments[aNdx];
+        if (Array.isArray(values)) {
+          const numValues = values.length;
+          for (let ii = 0; ii < numValues; ++ii) {
+            setUniforms(actualSetters, values[ii]);
+          }
+        } else {
+          for (const name in values) {
+            const setter = actualSetters[name];
+            if (setter) {
+              setter(values[name]);
+            }
+          }
+        }
+      }
+    }
+
+    /**
+     * Creates setter functions for all attributes of a shader
+     * program. You can pass this to {@link module:twgl.setBuffersAndAttributes} to set all your buffers and attributes.
+     *
+     * @see {@link module:twgl.setAttributes} for example
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext to use.
+     * @param {WebGLProgram} program the program to create setters for.
+     * @return {Object.<string, function>} an object with a setter for each attribute by name.
+     * @memberOf module:twgl/programs
+     */
+    function createAttributeSetters(gl, program) {
+      const attribSetters = {
+      };
+
+      const numAttribs = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+      for (let ii = 0; ii < numAttribs; ++ii) {
+        const attribInfo = gl.getActiveAttrib(program, ii);
+        if (isBuiltIn(attribInfo)) {
+            continue;
+        }
+        const index = gl.getAttribLocation(program, attribInfo.name);
+        const typeInfo = attrTypeMap[attribInfo.type];
+        const setter = typeInfo.setter(gl, index, typeInfo);
+        setter.location = index;
+        attribSetters[attribInfo.name] = setter;
+      }
+
+      return attribSetters;
+    }
+
+    /**
+     * Sets attributes and binds buffers (deprecated... use {@link module:twgl.setBuffersAndAttributes})
+     *
+     * Example:
+     *
+     *     const program = createProgramFromScripts(
+     *         gl, ["some-vs", "some-fs");
+     *
+     *     const attribSetters = createAttributeSetters(program);
+     *
+     *     const positionBuffer = gl.createBuffer();
+     *     const texcoordBuffer = gl.createBuffer();
+     *
+     *     const attribs = {
+     *       a_position: {buffer: positionBuffer, numComponents: 3},
+     *       a_texcoord: {buffer: texcoordBuffer, numComponents: 2},
+     *     };
+     *
+     *     gl.useProgram(program);
+     *
+     * This will automatically bind the buffers AND set the
+     * attributes.
+     *
+     *     setAttributes(attribSetters, attribs);
+     *
+     * Properties of attribs. For each attrib you can add
+     * properties:
+     *
+     * *   type: the type of data in the buffer. Default = gl.FLOAT
+     * *   normalize: whether or not to normalize the data. Default = false
+     * *   stride: the stride. Default = 0
+     * *   offset: offset into the buffer. Default = 0
+     * *   divisor: the divisor for instances. Default = undefined
+     *
+     * For example if you had 3 value float positions, 2 value
+     * float texcoord and 4 value uint8 colors you'd setup your
+     * attribs like this
+     *
+     *     const attribs = {
+     *       a_position: {buffer: positionBuffer, numComponents: 3},
+     *       a_texcoord: {buffer: texcoordBuffer, numComponents: 2},
+     *       a_color: {
+     *         buffer: colorBuffer,
+     *         numComponents: 4,
+     *         type: gl.UNSIGNED_BYTE,
+     *         normalize: true,
+     *       },
+     *     };
+     *
+     * @param {Object.<string, function>} setters Attribute setters as returned from createAttributeSetters
+     * @param {Object.<string, module:twgl.AttribInfo>} buffers AttribInfos mapped by attribute name.
+     * @memberOf module:twgl/programs
+     * @deprecated use {@link module:twgl.setBuffersAndAttributes}
+     */
+    function setAttributes(setters, buffers) {
+      for (const name in buffers) {
+        const setter = setters[name];
+        if (setter) {
+          setter(buffers[name]);
+        }
+      }
+    }
+
+    /**
+     * Sets attributes and buffers including the `ELEMENT_ARRAY_BUFFER` if appropriate
+     *
+     * Example:
+     *
+     *     const programInfo = createProgramInfo(
+     *         gl, ["some-vs", "some-fs");
+     *
+     *     const arrays = {
+     *       position: { numComponents: 3, data: [0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 10, 0], },
+     *       texcoord: { numComponents: 2, data: [0, 0, 0, 1, 1, 0, 1, 1],                 },
+     *     };
+     *
+     *     const bufferInfo = createBufferInfoFromArrays(gl, arrays);
+     *
+     *     gl.useProgram(programInfo.program);
+     *
+     * This will automatically bind the buffers AND set the
+     * attributes.
+     *
+     *     setBuffersAndAttributes(gl, programInfo, bufferInfo);
+     *
+     * For the example above it is equivalent to
+     *
+     *     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+     *     gl.enableVertexAttribArray(a_positionLocation);
+     *     gl.vertexAttribPointer(a_positionLocation, 3, gl.FLOAT, false, 0, 0);
+     *     gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
+     *     gl.enableVertexAttribArray(a_texcoordLocation);
+     *     gl.vertexAttribPointer(a_texcoordLocation, 4, gl.FLOAT, false, 0, 0);
+     *
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext.
+     * @param {(module:twgl.ProgramInfo|Object.<string, function>)} setters A `ProgramInfo` as returned from {@link module:twgl.createProgramInfo} or Attribute setters as returned from {@link module:twgl.createAttributeSetters}
+     * @param {(module:twgl.BufferInfo|module:twgl.VertexArrayInfo)} buffers a `BufferInfo` as returned from {@link module:twgl.createBufferInfoFromArrays}.
+     *   or a `VertexArrayInfo` as returned from {@link module:twgl.createVertexArrayInfo}
+     * @memberOf module:twgl/programs
+     */
+    function setBuffersAndAttributes(gl, programInfo, buffers) {
+      if (buffers.vertexArrayObject) {
+        gl.bindVertexArray(buffers.vertexArrayObject);
+      } else {
+        setAttributes(programInfo.attribSetters || programInfo, buffers.attribs);
+        if (buffers.indices) {
+          gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
+        }
+      }
+    }
+
+    /**
+     * @typedef {Object} ProgramInfo
+     * @property {WebGLProgram} program A shader program
+     * @property {Object<string, function>} uniformSetters object of setters as returned from createUniformSetters,
+     * @property {Object<string, function>} attribSetters object of setters as returned from createAttribSetters,
+     * @property {module:twgl.UniformBlockSpec} [uniformBlockSpace] a uniform block spec for making UniformBlockInfos with createUniformBlockInfo etc..
+     * @property {Object<string, module:twgl.TransformFeedbackInfo>} [transformFeedbackInfo] info for transform feedbacks
+     * @memberOf module:twgl
+     */
+
+    /**
+     * Creates a ProgramInfo from an existing program.
+     *
+     * A ProgramInfo contains
+     *
+     *     programInfo = {
+     *        program: WebGLProgram,
+     *        uniformSetters: object of setters as returned from createUniformSetters,
+     *        attribSetters: object of setters as returned from createAttribSetters,
+     *     }
+     *
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext
+     *        to use.
+     * @param {WebGLProgram} program an existing WebGLProgram.
+     * @return {module:twgl.ProgramInfo} The created ProgramInfo.
+     * @memberOf module:twgl/programs
+     */
+    function createProgramInfoFromProgram(gl, program) {
+      const uniformSetters = createUniformSetters(gl, program);
+      const attribSetters = createAttributeSetters(gl, program);
+      const programInfo = {
+        program: program,
+        uniformSetters: uniformSetters,
+        attribSetters: attribSetters,
+      };
+
+      if (isWebGL2(gl)) {
+        programInfo.uniformBlockSpec = createUniformBlockSpecFromProgram(gl, program);
+        programInfo.transformFeedbackInfo = createTransformFeedbackInfo(gl, program);
+      }
+
+      return programInfo;
+    }
+
+    /**
+     * Creates a ProgramInfo from 2 sources.
+     *
+     * A ProgramInfo contains
+     *
+     *     programInfo = {
+     *        program: WebGLProgram,
+     *        uniformSetters: object of setters as returned from createUniformSetters,
+     *        attribSetters: object of setters as returned from createAttribSetters,
+     *     }
+     *
+     * NOTE: There are 4 signatures for this function
+     *
+     *     twgl.createProgramInfo(gl, [vs, fs], options);
+     *     twgl.createProgramInfo(gl, [vs, fs], opt_errFunc);
+     *     twgl.createProgramInfo(gl, [vs, fs], opt_attribs, opt_errFunc);
+     *     twgl.createProgramInfo(gl, [vs, fs], opt_attribs, opt_locations, opt_errFunc);
+     *
+     * @param {WebGLRenderingContext} gl The WebGLRenderingContext
+     *        to use.
+     * @param {string[]} shaderSources Array of sources for the
+     *        shaders or ids. The first is assumed to be the vertex shader,
+     *        the second the fragment shader.
+     * @param {module:twgl.ProgramOptions|string[]|module:twgl.ErrorCallback} [opt_attribs] Options for the program or an array of attribs names or an error callback. Locations will be assigned by index if not passed in
+     * @param {number[]} [opt_locations|module:twgl.ErrorCallback] The locations for the. A parallel array to opt_attribs letting you assign locations or an error callback.
+     * @param {module:twgl.ErrorCallback} [opt_errorCallback] callback for errors. By default it just prints an error to the console
+     *        on error. If you want something else pass an callback. It's passed an error message.
+     * @return {module:twgl.ProgramInfo?} The created ProgramInfo or null if it failed to link or compile
+     * @memberOf module:twgl/programs
+     */
+    function createProgramInfo(
+        gl, shaderSources, opt_attribs, opt_locations, opt_errorCallback) {
+      const progOptions = getProgramOptions(opt_attribs, opt_locations, opt_errorCallback);
+      let good = true;
+      shaderSources = shaderSources.map(function(source) {
+        // Lets assume if there is no \n it's an id
+        if (source.indexOf("\n") < 0) {
+          const script = getElementById(source);
+          if (!script) {
+            progOptions.errorCallback("no element with id: " + source);
+            good = false;
+          } else {
+            source = script.text;
+          }
+        }
+        return source;
+      });
+      if (!good) {
+        return null;
+      }
+      const program = createProgramFromSources(gl, shaderSources, progOptions);
+      if (!program) {
+        return null;
+      }
+      return createProgramInfoFromProgram(gl, program);
+    }
+
+    /*
+     * Copyright 2019 Gregg Tavares
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a
+     * copy of this software and associated documentation files (the "Software"),
+     * to deal in the Software without restriction, including without limitation
+     * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+     * and/or sell copies of the Software, and to permit persons to whom the
+     * Software is furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+     * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+     * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+     * DEALINGS IN THE SOFTWARE.
+     */
+
+    /**
+     * Drawing related functions
+     *
+     * For backward compatibility they are available at both `twgl.draw` and `twgl`
+     * itself
+     *
+     * See {@link module:twgl} for core functions
+     *
+     * @module twgl/draw
+     */
+
+    /**
+     * Calls `gl.drawElements` or `gl.drawArrays`, whichever is appropriate
+     *
+     * normally you'd call `gl.drawElements` or `gl.drawArrays` yourself
+     * but calling this means if you switch from indexed data to non-indexed
+     * data you don't have to remember to update your draw call.
+     *
+     * @param {WebGLRenderingContext} gl A WebGLRenderingContext
+     * @param {(module:twgl.BufferInfo|module:twgl.VertexArrayInfo)} bufferInfo A BufferInfo as returned from {@link module:twgl.createBufferInfoFromArrays} or
+     *   a VertexArrayInfo as returned from {@link module:twgl.createVertexArrayInfo}
+     * @param {number} [type] eg (gl.TRIANGLES, gl.LINES, gl.POINTS, gl.TRIANGLE_STRIP, ...). Defaults to `gl.TRIANGLES`
+     * @param {number} [count] An optional count. Defaults to bufferInfo.numElements
+     * @param {number} [offset] An optional offset. Defaults to 0.
+     * @param {number} [instanceCount] An optional instanceCount. if set then `drawArraysInstanced` or `drawElementsInstanced` will be called
+     * @memberOf module:twgl/draw
+     */
+    function drawBufferInfo(gl, bufferInfo, type, count, offset, instanceCount) {
+      type = type === undefined ? gl.TRIANGLES : type;
+      const indices = bufferInfo.indices;
+      const elementType = bufferInfo.elementType;
+      const numElements = count === undefined ? bufferInfo.numElements : count;
+      offset = offset === undefined ? 0 : offset;
+      if (elementType || indices) {
+        if (instanceCount !== undefined) {
+          gl.drawElementsInstanced(type, numElements, elementType === undefined ? gl.UNSIGNED_SHORT : bufferInfo.elementType, offset, instanceCount);
+        } else {
+          gl.drawElements(type, numElements, elementType === undefined ? gl.UNSIGNED_SHORT : bufferInfo.elementType, offset);
+        }
+      } else {
+        if (instanceCount !== undefined) {
+          gl.drawArraysInstanced(type, offset, numElements, instanceCount);
+        } else {
+          gl.drawArrays(type, offset, numElements);
+        }
+      }
+    }
+
+    const tick = read(0, (set) => {
+      setInterval(() => {
+        set(tick.get() + 1);
+      }, tick_rate);
+    });
+
+    const frame = read([0, 0], (set) => {
+      let old;
+      const frame_t = (ts) => {
+        requestAnimationFrame(frame_t);
+
+        if (old === undefined) old = ts;
+        const dt = ts - old;
+
+        set([dt, ts]);
+      };
+
+      requestAnimationFrame(frame_t);
+    });
+
+    var time = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        tick: tick,
+        frame: frame
+    });
+
+    // can import these from their files
+    const trippy = read([
+`attribute vec4 position;
+
+void main() {
+  gl_Position = position;
+}
+`    ,
+`
+precision mediump float;
+
+uniform vec2 resolution;
+uniform float time;
+
+void main() {
+vec2 uv = gl_FragCoord.xy / resolution;
+float color = 0.0;
+
+color += sin( uv.x * cos( time / 3.0 ) * 60.0 ) + cos( uv.y * cos( time / 2.80 ) * 10.0 );
+color += sin( uv.y * sin( time / 2.0 ) * 40.0 ) + cos( uv.x * sin( time / 1.70 ) * 40.0 );
+color += sin( uv.x * sin( time / 1.0 ) * 10.0 ) + sin( uv.y * sin( time / 3.50 ) * 80.0 );
+color *= sin( time / 10.0 ) * 0.5;
+
+gl_FragColor = vec4( vec3( color * 0.5, sin( color + time / 2.5 ) * 0.75, color ), 1.0 );
+}
+`
+    ]);
+
+    var screen$1 = ({
+      value = {
+        position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
+      },
+      id,
+      life
+    }) => {
+      const canvas = document.createElement(`canvas`);
+      canvas.width = 100;
+      canvas.height = 100;
+      const gl = canvas.getContext(`webgl`);
+
+      const program_info = createProgramInfo(gl, trippy.get());
+
+      let arrays_last;
+
+      let buffer;
+
+      const gpu = ({
+        knot: read(`screen`),
+
+        value: transformer((arrays) => {
+          arrays_last = arrays;
+          try {
+            buffer = createAttribsFromArrays(gl, arrays);
+          } catch (ex) {
+            console.error(ex);
+          }
+          // lets return the canvas right now
+          // can be serialized into a data array but GPU nodes
+          // shouldn't serialize their value result
+          // but their value input
+          return canvas
+        }).set(value),
+
+        toJSON: () => ({
+          id,
+          knot: gpu.knot.get(),
+          value: arrays_last,
+          shader: gpu.shader.get()
+        })
+      });
+
+      const arrays = {
+        position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
+      };
+      const bufferInfo = createBufferInfoFromArrays(gl, arrays);
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+      // lifecycle on knot
+      life(() => frame.subscribe(([, t]) => {
+        const uniforms = {
+          time: t * 0.001,
+          resolution: [gl.canvas.width, gl.canvas.height]
+        };
+
+        if (program_info === null) {
+          return
+        }
+
+        gl.useProgram(program_info.program);
+        setBuffersAndAttributes(gl, program_info, bufferInfo);
+        setUniforms(program_info, uniforms);
+        drawBufferInfo(gl, bufferInfo);
+      }));
+
+      return gpu
+    };
+
+
+
+    var knots = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        stitch: stitch,
+        stream: stream,
+        math: math$1,
+        mail: mail,
+        screen: screen$1
+    });
+
+    // the basic knot
+    var Knot_Factory = ({
+      id = uuid(),
+      knot,
+
+      ...rest
+    } = false) => powerToJSON({
+      ...(knots[knot]
+        ? knots[knot]({
+          ...rest,
+          id
+        })
+        : { knot: read(knot) }
+      ),
+
+      id: read(id)
+    });
+
+    // Weave of holes connected with threads
+    var Weave = ({
+      name = random(2),
+      id = uuid(),
+
+      // just some default nodes for start
+      knots = {
+        mail: {
+          knot: `mail`
+        },
+        stream: {
+          knot: `stream`
+        },
+        math: {
+          knot: `math`,
+          math: `[v[0]/10, v[1]/10]`
+        },
+        stitch: {
+          name: `player`,
+          knot: `stitch`,
+          value: {
+            position: [0, 0]
+          }
+        },
+        screen: {
+          knot: `screen`
+        },
+        main: {
+          knot: `mail`,
+          whom: `/sys/screen/main`
+        }
+      },
+
+      threads = {
+        mail: `stream`,
+        stream: `math`,
+        math: `stitch/position`,
+        screen: `main`
+      }
+    } = false) => {
+      let threads_set;
+
+      const w = {
+        id: read(id),
+        knot: read(`weave`),
+
+        name: write(name),
+
+        threads: read(threads, set => {
+          threads_set = set;
+        }),
+
+        lives: write([]),
+        mails: write({}),
+        give_thread: write(),
+        give_knot: transformer((knot) => {
+          const k = Knot_Factory(knot);
+
+          w.knots.update((knots) => ({
+            ...knots,
+            [k.id]: k
+          }));
+
+          return k
+        })
+      };
+
+      const life_set = w.lives.set;
+
+      w.lives.set = undefined;
+      const life_add = (life) => life_set([
+        ...w.lives.get(),
+        life
+      ]);
+
+      w.add = (properties) => {
+        const k = Knot_Factory({
+          ...properties,
+          weave: w,
+          life: life_add
+        });
+
+        w.knots.update(($knots) => ({
+          ...$knots,
+          [k.id.get()]: k
+        }));
+      };
+
+      w.knots = write(Object
+        .entries(knots)
+        .reduce((res, [knot_id, val]) => {
+          if (val.id !== knot_id) {
+            val.id = knot_id;
+          }
+
+          res[knot_id] = Knot_Factory({
+            ...val,
+            weave: w,
+            life: life_add
+          });
+
+          return res
+        }, {})
+      );
+
+      // index by name, uniqueness not guaranteed
+      // Stitches only right now
+      w.names = derived$1(w.knots, ($knots) => Object.fromEntries(
+        Object.values($knots)
+          .filter(({ knot }) => knot.get() === `stitch`)
+          .map(
+            (knot) => [
+              knot.name.get(),
+              knot
+            ]
+          )
+      ));
+
+      w.give_thread.subscribe((match) => {
+        if (!match) return
+
+        const [[
+          x_id,
+          x_dir
+        ], [
+          y_id,
+          y_dir
+        ]] = match.map((address) => address.split(`|`));
+
+        if (x_dir === y_dir) {
+          console.warn(`Tried to match same direction`);
+          return
+        }
+
+        const target = [x_id, y_id];
+        x_dir === `write` && target.reverse();
+
+        const threads = w.threads.get();
+
+        threads[target[0]] = target[1];
+        threads_set(threads);
+      });
+
+      return w
+    };
+
+    const tie = (items) =>
+      Object.entries(items)
+        .reduce((result, [key, value]) => ({
+          ...result,
+          [key]: {
+            name: key,
+            knot: `stitch`,
+            value
+          }
+        }), {});
+
+    var system = Weave({
+      knots: tie({
+        mouse,
+        time,
+        screen
+      })
+    });
+
+    let feed_set;
+    const feed = read({
+      reader: ``
+    }, (set) => {
+      feed_set = set;
+    });
+
+    const SYSTEM = `sys`;
+
+    let weaves_set;
+    // weaves [name]weave
+    const weaves = read({
+      [SYSTEM]: system
+    }, (set) => {
+      weaves_set = set;
+    });
+
+    const highways = new Map();
+
+    let running_set;
+    // run the system weave by default (safe idle)
+    const running$1 = read({
+      [SYSTEM]: true
+    }, (set) => { running_set = set; });
+
+    const trash = write([]);
+
+    // put into trash bin
+    const del = (path) => {
+      if (path[0] === `/`) {
+        path.unshift();
+      }
+
+      const [weave_name, knot_name, chan] = path.split(`/`);
+      if (weave_name === SYSTEM) {
+        throw new Error(`attempted to delete ${SYSTEM}`)
+      }
+
+      const ws = weaves.get();
+
+      if (knot_name === undefined) {
+        const garbo = ws[weave_name];
+        delete ws[weave_name];
+        weaves.set(ws);
+
+        if (garbo) {
+          trash.update(($trash) => [...$trash, garbo]);
+        }
+
+        return
+      }
+      const { names, knots } = ws[weave_name];
+      const k = names.get()[knot_name];
+
+      if (!k) {
+        throw new Error(`tried to delete non-existant path ${path}`)
+      }
+
+      if (chan === undefined) {
+        const ks = knots.get();
+        delete ks[k.id];
+
+        if (k) {
+          trash.update(($trash) => [...$trash, k]);
+        }
+        knots.set(ks);
+        return
+      }
+
+      const chans = k.value.get();
+      const garbo = chans[chan];
+      delete chans[chan];
+
+      garbo && trash.update(($trash) => [...$trash, garbo]);
+      k.value.set(chans);
+    };
+
+    // return back whether this thing exists
+    const exists = (path) => {
+      if (path[0] === `/`) {
+        path.unshift();
+      }
+
+      const [weave_name, knot_name, chan] = path.split(`/`);
+      const w = weaves.get()[weave_name];
+      if (w === undefined || knot_name === undefined) {
+        return w !== undefined
+      }
+
+      const k = w.names.get()[knot_name];
+      if (k === undefined || chan === undefined) {
+        return k !== undefined
+      }
+
+      const c = k.value.get()[chan];
+
+      return c !== undefined
+    };
+
+    // always assume they're right
+    const get = (path) => {
+      if (path[0] === `/`) {
+        path = path.slice(1);
+      }
+
+      const [weave_name, knot_name, chan] = path.split(`/`);
+
+      let w = weaves.get()[weave_name];
+      if (w === undefined) {
+        w = Weave({
+          name: weave_name
+        });
+
+        weaves_set({
+          ...weaves.get(),
+          [weave_name]: w
+        });
+      }
+
+      if (knot_name === undefined) {
+        return w
+      }
+
+      const names = w.names;
+
+      let s = names.get()[knot_name];
+
+      if (!s) {
+        w.give_knot.set({
+          knot: `stitch`,
+          name: knot_name
+        });
+
+        s = names.get()[knot_name];
+      }
+
+      if (chan === undefined) {
+        return s
+      }
+
+      let c = s.value.get()[chan];
+      if (!c) {
+        s.value.set({
+          ...s.value.get(),
+          [chan]: write(`heLLo default value`)
+        });
+
+        c = s.value.get()[chan];
+      }
+
+      return c
+    };
+
+    const start = (weave_name) => {
+      if (weave_name === SYSTEM) {
+        throw new Error(`CaN NoT StArT or StOp /${SYSTEM}`)
+      }
+      const w = get(weave_name);
+      const knots = w.knots.get();
+
+      const by_id = (id) => {
+        const [knot_id, knot_chan] = id.split(`/`);
+        const knot = knots[knot_id];
+
+        if (knot === undefined) {
+          debugger
+          return
+        }
+
+        if (knot_chan === undefined) {
+          return knot.value
+        }
+
+        return knot.value.get()[knot_chan]
+      };
+
+      // this could be reactive
+      highways.set(weave_name, [
+        // the internal streets
+        ...Object.entries(w.threads.get())
+          .map(([
+            reader,
+            writer
+          ]) => {
+            const r = by_id(reader);
+            const w = by_id(writer);
+
+            return r.subscribe(($val) => {
+              w.set($val);
+
+              // costly debug thingy,
+              // TODO: better way?
+              feed_set({
+                reader: `${weave_name}/${reader}`,
+                writer: `${weave_name}/${writer}`,
+                value: $val
+              });
+            })
+          }),
+        // frames
+        ...w.lives.get().map((cb) => cb()),
+
+        // ramp to/from the bifrost
+        ...Object.entries(w.mails.get())
+          .map(
+            ([
+              mail_id,
+              address
+            ]) => get(address).subscribe((value_new) => {
+              knots[mail_id].set(value_new);
+              feed_set({
+                reader: address,
+                writer: `${weave_name}/${mail_id}`,
+                value: value_new
+              });
+            })
+          )
+      ]);
+
+      running_set({
+        ...running$1.get(),
+        [weave_name]: true
+      });
+    };
+
+    const stop = (weave_name) => {
+      if (weave_name === SYSTEM) {
+        throw new Error(`CaN NoT StArT or StOp /${SYSTEM}`)
+      }
+
+      const h = highways.get(weave_name);
+
+      const r = running$1.get();
+      delete r[weave_name];
+
+      running$1.set(r);
+
+      if (h === undefined) {
+        throw new Error(`can't stop ${weave_name}`)
+      }
+
+      h.forEach((cancel) => cancel());
+
+      highways.delete(weave_name);
+    };
+
+    var Wheel$1 = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        feed: feed,
+        weaves: weaves,
+        running: running$1,
+        trash: trash,
+        del: del,
+        exists: exists,
+        get: get,
+        start: start,
+        stop: stop
+    });
+
+    // Which weave is being woven
+    const woven = transformer((weave_id) =>
+      get(weave_id)
+    ).set(`sys`);
+
+    const draggee = write(``);
+    const drag_count = write(0);
+    draggee.listen(() => drag_count.update($d => $d + 1));
+
+    // 50rem between points
+    const STRENGTH = 0.25;
+    const FRICTION = 50;
+    const MIN_MOVE = 5;
+    const MIN_DISTANCE = 150;
+
+    const bodies = write({});
+    // keeps all the postions for woven
+    const positions = write({});
+    let velocities = {};
+
+    // reset positions
+    woven.listen(() => {
+      positions.set({});
+      velocities = {};
+      drag_count.set(0);
+    });
+
+    const vel = (id) => velocities[id] || [0, 0, 0];
+
+    const pull_right = [350, 100, 0];
+
+    tick.listen(() => {
+      const { threads, knots } = woven.get();
+      const $knots = knots.get();
+      const $threads = threads.get();
+      const $positions = positions.get();
+
+      let dirty = false;
+      const pos = (id) => $positions[id] || [0, 0, 0];
+
+      // attempt to pull threads together
+      Object.entries($threads).forEach(([
+        puller,
+        pullee
+      ]) => {
+        pullee = pullee.split(`/`)[0];
+        puller = puller.split(`/`)[0];
+        const pos_er = pos(puller);
+        const pos_ee = pos([pullee]);
+
+        const pull = multiply_scalar(pull_right, scale.get());
+
+        velocities[pullee] = add(
+          divide_scalar(vel(pullee), FRICTION),
+
+          // difference of distance
+          multiply_scalar(
+            add(minus(pos_er, pos_ee), pull),
+            STRENGTH
+          )
+        );
+
+        velocities[puller] = add(
+          divide_scalar(vel(puller), FRICTION),
+
+          // difference of distance
+          multiply_scalar(
+            minus(minus(pos_ee, pos_er), pull),
+            STRENGTH
+          )
+        );
+      });
+
+      // Repulse collisions
+      const $bodies = bodies.get();
+
+      // Quad tree eventually
+      Object.entries($bodies).forEach(([
+        id, [w, h]
+      ]) => {
+        id = id.split(`/`)[0];
+        if (!$knots[id] || $knots[id].knot.get() === `stitch`) return
+
+        const p = pos(id);
+
+        Object.keys($bodies).forEach((o_id) => {
+          if (o_id === id) return
+
+          const dist = distance(p, pos(o_id));
+          if (dist > MIN_DISTANCE) return
+
+          // move it
+          const v = vel(id);
+          velocities[id] = add(
+            v,
+            multiply_scalar(
+              minus(p, pos(o_id)),
+              (MIN_DISTANCE - dist) * 0.01
+            )
+          );
+        });
+
+        // simple length tests to modify velocity
+        const [v_x, v_y] = vel(id);
+        if (Math.abs(v_x) + Math.abs(v_y) < MIN_MOVE) return
+        if (id === draggee.get()) return
+
+        dirty = true;
+        $positions[id] = add(
+          pos(id),
+          vel(id)
+        );
+      });
+
+      if (dirty) positions.set($positions);
+    });
+
+    // TODO: These will hang around reactive statement?
+    const translate_velocity = write([0, 0, 0]);
+    const translate = read(translate_velocity.get(), (set) =>
+      tick.listen(() => {
+        const t = translate_velocity.get();
+        const p = translate.get();
+
+        set([
+          t[0] + p[0],
+          t[1] + p[1],
+          0
+        ]);
+        translate_velocity.set([0, 0, 0]);
+      })
+    );
+
+    scroll.listen(([x, y]) =>
+      translate_velocity.update(([t_x, t_y]) => [t_x + x, t_y + y, 0])
+    );
+
+    /* src/ui/weave/MainScreen.svelte generated by Svelte v3.14.1 */
+    const file$5 = "src/ui/weave/MainScreen.svelte";
+
+    function create_fragment$5(ctx) {
+    	let div;
+    	let insert_action;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			attr_dev(div, "class", "main svelte-15uodzd");
+    			toggle_class(div, "full", ctx.full);
+    			add_location(div, file$5, 23, 0, 379);
+    			dispose = listen_dev(div, "click", ctx.toggle, false, false, false);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			insert_action = ctx.insert.call(null, div) || ({});
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.full) {
+    				toggle_class(div, "full", ctx.full);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (insert_action && is_function(insert_action.destroy)) insert_action.destroy();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$5.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$4($$self, $$props, $$invalidate) {
+    	let { full = false } = $$props;
+
+    	const toggle = () => {
+    		$$invalidate("full", full = !full);
+    	};
+
+    	const insert = node => ({
+    		destroy: main.subscribe(canvas => {
+    			canvas.style.flex = 1;
+
+    			while (node.firstChild) {
+    				node.removeChild(node.firstChild);
+    			}
+
+    			node.appendChild(canvas);
+    		})
+    	});
+
+    	const writable_props = ["full"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<MainScreen> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("full" in $$props) $$invalidate("full", full = $$props.full);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { full };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("full" in $$props) $$invalidate("full", full = $$props.full);
+    	};
+
+    	return { full, toggle, insert };
+    }
+
+    class MainScreen extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$4, create_fragment$5, safe_not_equal, { full: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "MainScreen",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+
+    	get full() {
+    		throw new Error("<MainScreen>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set full(value) {
+    		throw new Error("<MainScreen>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/Controls.svelte generated by Svelte v3.14.1 */
+    const file$6 = "src/ui/weave/Controls.svelte";
+
+    // (29:4) {:else}
+    function create_else_block(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("|>");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(29:4) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (27:4) {#if runs}
+    function create_if_block$1(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("||");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(27:4) {#if runs}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (23:0) <Spatial   anchor={[50, 100]} >
+    function create_default_slot$1(ctx) {
+    	let div;
+    	let dispose;
+
+    	function select_block_type(changed, ctx) {
+    		if (ctx.runs) return create_if_block$1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(null, ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if_block.c();
+    			attr_dev(div, "class", "play svelte-11xfd0o");
+    			toggle_class(div, "runs", ctx.runs);
+    			add_location(div, file$6, 25, 2, 342);
+    			dispose = listen_dev(div, "click", ctx.toggle, false, false, false);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			if_block.m(div, null);
+    		},
+    		p: function update(changed, ctx) {
+    			if (current_block_type !== (current_block_type = select_block_type(changed, ctx))) {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div, null);
+    				}
+    			}
+
+    			if (changed.runs) {
+    				toggle_class(div, "runs", ctx.runs);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if_block.d();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$1.name,
+    		type: "slot",
+    		source: "(23:0) <Spatial   anchor={[50, 100]} >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$6(ctx) {
+    	let div;
+    	let t;
+    	let current;
+
+    	const spatial = new Spatial({
+    			props: {
+    				anchor: [50, 100],
+    				$$slots: { default: [create_default_slot$1] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = space();
+    			create_component(spatial.$$.fragment);
+    			attr_dev(div, "class", "bar svelte-11xfd0o");
+    			add_location(div, file$6, 20, 0, 283);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			insert_dev(target, t, anchor);
+    			mount_component(spatial, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const spatial_changes = {};
+
+    			if (changed.$$scope || changed.runs) {
+    				spatial_changes.$$scope = { changed, ctx };
+    			}
+
+    			spatial.$set(spatial_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(spatial.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(spatial.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(t);
+    			destroy_component(spatial, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$6.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$5($$self, $$props, $$invalidate) {
+    	let $running;
+
+    	let $name,
+    		$$unsubscribe_name = noop,
+    		$$subscribe_name = () => ($$unsubscribe_name(), $$unsubscribe_name = subscribe(name, $$value => $$invalidate("$name", $name = $$value)), name);
+
+    	validate_store(running$1, "running");
+    	component_subscribe($$self, running$1, $$value => $$invalidate("$running", $running = $$value));
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_name());
+    	let { weave } = $$props;
+    	let runs = $running[$name];
+
+    	const toggle = () => {
+    		if (runs) {
+    			stop($name);
+    		} else {
+    			start($name);
+    		}
+
+    		$$invalidate("runs", runs = !runs);
+    	};
+
+    	const writable_props = ["weave"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Controls> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { weave, runs, name, $running, $name };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    		if ("runs" in $$props) $$invalidate("runs", runs = $$props.runs);
+    		if ("name" in $$props) $$subscribe_name($$invalidate("name", name = $$props.name));
+    		if ("$running" in $$props) running$1.set($running = $$props.$running);
+    		if ("$name" in $$props) name.set($name = $$props.$name);
+    	};
+
+    	let name;
+
+    	$$self.$$.update = (changed = { weave: 1 }) => {
+    		if (changed.weave) {
+    			 $$subscribe_name($$invalidate("name", name = weave.name));
+    		}
+    	};
+
+    	return { weave, runs, toggle, name };
+    }
+
+    class Controls extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$5, create_fragment$6, safe_not_equal, { weave: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Controls",
+    			options,
+    			id: create_fragment$6.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.weave === undefined && !("weave" in props)) {
+    			console.warn("<Controls> was created without expected prop 'weave'");
+    		}
+    	}
+
+    	get weave() {
+    		throw new Error("<Controls>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set weave(value) {
+    		throw new Error("<Controls>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    // editor specific
+    // like a real time query
+    const first = writable(false);
+    const second = writable(false);
+    const match = writable(false);
+
+    second.subscribe((value) => {
+      const $first = internal_73(first);
+      const $second = internal_73(second);
+
+      if ($first && $second) {
+        match.set([
+          $first, $second
+        ]);
+      }
+    });
+
+    // clean up
+    mouse_up.subscribe(() => {
+      requestAnimationFrame(() => {
+        const $first = internal_73(first);
+        const $second = internal_73(second);
+
+        if ($first !== false) first.set(false);
+        if ($second !== false) second.set(false);
+      });
+    });
+
+    /* src/ui/weave/Threads.svelte generated by Svelte v3.14.1 */
+
+    const { Object: Object_1 } = globals;
+    const file$7 = "src/ui/weave/Threads.svelte";
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = Object_1.create(ctx);
+    	child_ctx.x = list[i][0];
+    	child_ctx.y = list[i][1];
+    	child_ctx.x_id = list[i][2];
+    	child_ctx.y_id = list[i][3];
+    	return child_ctx;
+    }
+
+    // (109:2) {#if $first}
+    function create_if_block_1(ctx) {
+    	let line;
+    	let line_stroke_value;
+    	let line_x__value;
+    	let line_y__value;
+    	let line_x__value_1;
+    	let line_y__value_1;
+
+    	const block = {
+    		c: function create() {
+    			line = svg_element("line");
+    			attr_dev(line, "stroke", line_stroke_value = ctx.get_color(ctx.$first, ctx.$position));
+    			attr_dev(line, "x1", line_x__value = ctx.first_rec.x + ctx.first_rec.width / 2);
+    			attr_dev(line, "y1", line_y__value = ctx.first_rec.y + ctx.first_rec.height / 2);
+    			attr_dev(line, "x2", line_x__value_1 = ctx.$position[0]);
+    			attr_dev(line, "y2", line_y__value_1 = ctx.$position[1]);
+    			attr_dev(line, "class", "line svelte-hofsw3");
+    			add_location(line, file$7, 109, 4, 3037);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, line, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if ((changed.$first || changed.$position) && line_stroke_value !== (line_stroke_value = ctx.get_color(ctx.$first, ctx.$position))) {
+    				attr_dev(line, "stroke", line_stroke_value);
+    			}
+
+    			if (changed.first_rec && line_x__value !== (line_x__value = ctx.first_rec.x + ctx.first_rec.width / 2)) {
+    				attr_dev(line, "x1", line_x__value);
+    			}
+
+    			if (changed.first_rec && line_y__value !== (line_y__value = ctx.first_rec.y + ctx.first_rec.height / 2)) {
+    				attr_dev(line, "y1", line_y__value);
+    			}
+
+    			if (changed.$position && line_x__value_1 !== (line_x__value_1 = ctx.$position[0])) {
+    				attr_dev(line, "x2", line_x__value_1);
+    			}
+
+    			if (changed.$position && line_y__value_1 !== (line_y__value_1 = ctx.$position[1])) {
+    				attr_dev(line, "y2", line_y__value_1);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(line);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(109:2) {#if $first}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (131:6) {#if $recent.has(`${x_id}-${y_id}`)}
+    function create_if_block$2(ctx) {
+    	let line;
+    	let line_stroke_value;
+    	let line_x__value;
+    	let line_y__value;
+    	let line_x__value_1;
+    	let line_y__value_1;
+    	let line_style_value;
+
+    	const block = {
+    		c: function create() {
+    			line = svg_element("line");
+    			attr_dev(line, "stroke", line_stroke_value = "url(#" + (ctx.x.x > ctx.y.x ? "linear" : "linear-other") + ")");
+    			attr_dev(line, "x1", line_x__value = ctx.x.x + ctx.x.width / 2);
+    			attr_dev(line, "y1", line_y__value = ctx.x.y + ctx.x.height / 2);
+    			attr_dev(line, "x2", line_x__value_1 = ctx.y.x + ctx.y.width / 2);
+    			attr_dev(line, "y2", line_y__value_1 = ctx.y.y + ctx.y.height / 2);
+    			attr_dev(line, "class", "active svelte-hofsw3");
+    			attr_dev(line, "style", line_style_value = `animation-delay: ${ctx.x.x}ms;`);
+    			add_location(line, file$7, 131, 6, 3628);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, line, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.rects && line_stroke_value !== (line_stroke_value = "url(#" + (ctx.x.x > ctx.y.x ? "linear" : "linear-other") + ")")) {
+    				attr_dev(line, "stroke", line_stroke_value);
+    			}
+
+    			if (changed.rects && line_x__value !== (line_x__value = ctx.x.x + ctx.x.width / 2)) {
+    				attr_dev(line, "x1", line_x__value);
+    			}
+
+    			if (changed.rects && line_y__value !== (line_y__value = ctx.x.y + ctx.x.height / 2)) {
+    				attr_dev(line, "y1", line_y__value);
+    			}
+
+    			if (changed.rects && line_x__value_1 !== (line_x__value_1 = ctx.y.x + ctx.y.width / 2)) {
+    				attr_dev(line, "x2", line_x__value_1);
+    			}
+
+    			if (changed.rects && line_y__value_1 !== (line_y__value_1 = ctx.y.y + ctx.y.height / 2)) {
+    				attr_dev(line, "y2", line_y__value_1);
+    			}
+
+    			if (changed.rects && line_style_value !== (line_style_value = `animation-delay: ${ctx.x.x}ms;`)) {
+    				attr_dev(line, "style", line_style_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(line);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(131:6) {#if $recent.has(`${x_id}-${y_id}`)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (121:2) {#each rects as [x, y, x_id, y_id]}
+    function create_each_block(ctx) {
+    	let line;
+    	let line_stroke_value;
+    	let line_x__value;
+    	let line_y__value;
+    	let line_x__value_1;
+    	let line_y__value_1;
+    	let show_if = ctx.$recent.has(`${ctx.x_id}-${ctx.y_id}`);
+    	let if_block_anchor;
+    	let if_block = show_if && create_if_block$2(ctx);
+
+    	const block = {
+    		c: function create() {
+    			line = svg_element("line");
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    			attr_dev(line, "stroke", line_stroke_value = "url(#" + (ctx.x.x > ctx.y.x ? "linear-dark" : "linear-other-dark") + ")");
+    			attr_dev(line, "x1", line_x__value = ctx.x.x + ctx.x.width / 2);
+    			attr_dev(line, "y1", line_y__value = ctx.x.y + ctx.x.height / 2);
+    			attr_dev(line, "x2", line_x__value_1 = ctx.y.x + ctx.y.width / 2);
+    			attr_dev(line, "y2", line_y__value_1 = ctx.y.y + ctx.y.height / 2);
+    			attr_dev(line, "class", "line svelte-hofsw3");
+    			add_location(line, file$7, 121, 6, 3324);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, line, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.rects && line_stroke_value !== (line_stroke_value = "url(#" + (ctx.x.x > ctx.y.x ? "linear-dark" : "linear-other-dark") + ")")) {
+    				attr_dev(line, "stroke", line_stroke_value);
+    			}
+
+    			if (changed.rects && line_x__value !== (line_x__value = ctx.x.x + ctx.x.width / 2)) {
+    				attr_dev(line, "x1", line_x__value);
+    			}
+
+    			if (changed.rects && line_y__value !== (line_y__value = ctx.x.y + ctx.x.height / 2)) {
+    				attr_dev(line, "y1", line_y__value);
+    			}
+
+    			if (changed.rects && line_x__value_1 !== (line_x__value_1 = ctx.y.x + ctx.y.width / 2)) {
+    				attr_dev(line, "x2", line_x__value_1);
+    			}
+
+    			if (changed.rects && line_y__value_1 !== (line_y__value_1 = ctx.y.y + ctx.y.height / 2)) {
+    				attr_dev(line, "y2", line_y__value_1);
+    			}
+
+    			if (changed.$recent || changed.rects) show_if = ctx.$recent.has(`${ctx.x_id}-${ctx.y_id}`);
+
+    			if (show_if) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block$2(ctx);
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(line);
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(121:2) {#each rects as [x, y, x_id, y_id]}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$7(ctx) {
+    	let svg;
+    	let defs;
+    	let linearGradient0;
+    	let stop0;
+    	let stop1;
+    	let linearGradient1;
+    	let stop2;
+    	let stop3;
+    	let linearGradient2;
+    	let stop4;
+    	let stop5;
+    	let linearGradient3;
+    	let stop6;
+    	let stop7;
+    	let if_block_anchor;
+    	let svg_width_value;
+    	let svg_height_value;
+    	let if_block = ctx.$first && create_if_block_1(ctx);
+    	let each_value = ctx.rects;
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			defs = svg_element("defs");
+    			linearGradient0 = svg_element("linearGradient");
+    			stop0 = svg_element("stop");
+    			stop1 = svg_element("stop");
+    			linearGradient1 = svg_element("linearGradient");
+    			stop2 = svg_element("stop");
+    			stop3 = svg_element("stop");
+    			linearGradient2 = svg_element("linearGradient");
+    			stop4 = svg_element("stop");
+    			stop5 = svg_element("stop");
+    			linearGradient3 = svg_element("linearGradient");
+    			stop6 = svg_element("stop");
+    			stop7 = svg_element("stop");
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(stop0, "offset", "30%");
+    			attr_dev(stop0, "stop-color", "#F00");
+    			add_location(stop0, file$7, 89, 8, 2293);
+    			attr_dev(stop1, "offset", "70%");
+    			attr_dev(stop1, "stop-color", "#00F");
+    			add_location(stop1, file$7, 90, 8, 2340);
+    			attr_dev(linearGradient0, "id", "linear");
+    			attr_dev(linearGradient0, "x1", "0%");
+    			attr_dev(linearGradient0, "y1", "0%");
+    			attr_dev(linearGradient0, "x2", "100%");
+    			attr_dev(linearGradient0, "y2", "0%");
+    			add_location(linearGradient0, file$7, 88, 6, 2222);
+    			attr_dev(stop2, "offset", "30%");
+    			attr_dev(stop2, "stop-color", "#00F");
+    			add_location(stop2, file$7, 93, 10, 2488);
+    			attr_dev(stop3, "offset", "70%");
+    			attr_dev(stop3, "stop-color", "#F00");
+    			add_location(stop3, file$7, 94, 10, 2537);
+    			attr_dev(linearGradient1, "id", "linear-other");
+    			attr_dev(linearGradient1, "x1", "0%");
+    			attr_dev(linearGradient1, "y1", "0%");
+    			attr_dev(linearGradient1, "x2", "100%");
+    			attr_dev(linearGradient1, "y2", "0%");
+    			add_location(linearGradient1, file$7, 92, 6, 2409);
+    			attr_dev(stop4, "offset", "5%");
+    			attr_dev(stop4, "stop-color", "#F00");
+    			add_location(stop4, file$7, 97, 8, 2686);
+    			attr_dev(stop5, "offset", "95%");
+    			attr_dev(stop5, "stop-color", "#00F");
+    			add_location(stop5, file$7, 99, 8, 2735);
+    			attr_dev(linearGradient2, "id", "linear-dark");
+    			attr_dev(linearGradient2, "x1", "0%");
+    			attr_dev(linearGradient2, "y1", "0%");
+    			attr_dev(linearGradient2, "x2", "100%");
+    			attr_dev(linearGradient2, "y2", "0%");
+    			add_location(linearGradient2, file$7, 96, 8, 2610);
+    			attr_dev(stop6, "offset", "5%");
+    			attr_dev(stop6, "stop-color", "#00F");
+    			add_location(stop6, file$7, 102, 10, 2888);
+    			attr_dev(stop7, "offset", "95%");
+    			attr_dev(stop7, "stop-color", "#F00");
+    			add_location(stop7, file$7, 104, 10, 2939);
+    			attr_dev(linearGradient3, "id", "linear-other-dark");
+    			attr_dev(linearGradient3, "x1", "0%");
+    			attr_dev(linearGradient3, "y1", "0%");
+    			attr_dev(linearGradient3, "x2", "100%");
+    			attr_dev(linearGradient3, "y2", "0%");
+    			add_location(linearGradient3, file$7, 101, 6, 2804);
+    			add_location(defs, file$7, 87, 4, 2209);
+    			attr_dev(svg, "width", svg_width_value = ctx.$size[0]);
+    			attr_dev(svg, "height", svg_height_value = ctx.$size[1]);
+    			attr_dev(svg, "class", "threads svelte-hofsw3");
+    			add_location(svg, file$7, 86, 0, 2148);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, defs);
+    			append_dev(defs, linearGradient0);
+    			append_dev(linearGradient0, stop0);
+    			append_dev(linearGradient0, stop1);
+    			append_dev(defs, linearGradient1);
+    			append_dev(linearGradient1, stop2);
+    			append_dev(linearGradient1, stop3);
+    			append_dev(defs, linearGradient2);
+    			append_dev(linearGradient2, stop4);
+    			append_dev(linearGradient2, stop5);
+    			append_dev(defs, linearGradient3);
+    			append_dev(linearGradient3, stop6);
+    			append_dev(linearGradient3, stop7);
+    			if (if_block) if_block.m(svg, null);
+    			append_dev(svg, if_block_anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(svg, null);
+    			}
+    		},
+    		p: function update(changed, ctx) {
+    			if (ctx.$first) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block_1(ctx);
+    					if_block.c();
+    					if_block.m(svg, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (changed.$recent || changed.rects) {
+    				each_value = ctx.rects;
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(svg, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+
+    			if (changed.$size && svg_width_value !== (svg_width_value = ctx.$size[0])) {
+    				attr_dev(svg, "width", svg_width_value);
+    			}
+
+    			if (changed.$size && svg_height_value !== (svg_height_value = ctx.$size[1])) {
+    				attr_dev(svg, "height", svg_height_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    			if (if_block) if_block.d();
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$7.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$6($$self, $$props, $$invalidate) {
+    	let $position;
+    	let $frame;
+
+    	let $threads,
+    		$$unsubscribe_threads = noop,
+    		$$subscribe_threads = () => ($$unsubscribe_threads(), $$unsubscribe_threads = subscribe(threads, $$value => $$invalidate("$threads", $threads = $$value)), threads);
+
+    	let $first;
+    	let $size;
+    	let $recent;
+    	validate_store(position, "position");
+    	component_subscribe($$self, position, $$value => $$invalidate("$position", $position = $$value));
+    	validate_store(frame, "frame");
+    	component_subscribe($$self, frame, $$value => $$invalidate("$frame", $frame = $$value));
+    	validate_store(first, "first");
+    	component_subscribe($$self, first, $$value => $$invalidate("$first", $first = $$value));
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate("$size", $size = $$value));
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_threads());
+    	let { weave } = $$props;
+
+    	const recent = read(new Set(), set => {
+    		let t = 0;
+    		const deletes = {};
+
+    		tick.subscribe(() => {
+    			t += 250;
+    			const dels = Object.entries(deletes);
+    			if (dels.length === 0) return;
+    			const r = recent.get();
+    			let change = false;
+
+    			dels.forEach(([key, del_t]) => {
+    				if (del_t < t) {
+    					r.delete(key);
+    					delete deletes[key];
+    					change = true;
+    				}
+    			});
+
+    			if (change) set(r);
+    		});
+
+    		feed.subscribe(({ writer, reader }) => {
+    			if (!writer || !reader) return;
+    			const [weave_write, ...local_write] = writer.split("/");
+    			const [weave_read, ...local_read] = reader.split("/");
+    			const weave_id = weave.name.get();
+    			if (weave_id !== weave_write && weave_id !== weave_read) return;
+    			const id = `${local_read.join("/")}-${local_write.join("/")}`;
+    			const s_recent = recent.get();
+
+    			if (!s_recent.has(id)) {
+    				s_recent.add(id);
+    				set(s_recent);
+    			}
+
+    			deletes[id] = t + 1000;
+    		});
+    	});
+
+    	validate_store(recent, "recent");
+    	component_subscribe($$self, recent, value => $$invalidate("$recent", $recent = value));
+    	const get_pos = id => document.getElementById(id).getBoundingClientRect();
+
+    	const get_color = id => {
+    		const loc = document.getElementById(id).getBoundingClientRect();
+
+    		return id.split(`|`).length === 1
+    		? `gray`
+    		: id.slice(-1) !== `e`
+    			? `url(#${loc.x < $position[0] ? `linear-other` : `linear`})`
+    			: `url(#${loc.x < $position[0] ? `linear` : `linear-other`})`;
+    	};
+
+    	const writable_props = ["weave"];
+
+    	Object_1.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Threads> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			weave,
+    			$position,
+    			threads,
+    			$frame,
+    			rects,
+    			$threads,
+    			first_rec,
+    			$first,
+    			$size,
+    			$recent
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    		if ("$position" in $$props) position.set($position = $$props.$position);
+    		if ("threads" in $$props) $$subscribe_threads($$invalidate("threads", threads = $$props.threads));
+    		if ("$frame" in $$props) frame.set($frame = $$props.$frame);
+    		if ("rects" in $$props) $$invalidate("rects", rects = $$props.rects);
+    		if ("$threads" in $$props) threads.set($threads = $$props.$threads);
+    		if ("first_rec" in $$props) $$invalidate("first_rec", first_rec = $$props.first_rec);
+    		if ("$first" in $$props) first.set($first = $$props.$first);
+    		if ("$size" in $$props) size.set($size = $$props.$size);
+    		if ("$recent" in $$props) recent.set($recent = $$props.$recent);
+    	};
+
+    	let threads;
+    	let rects;
+    	let first_rec;
+
+    	$$self.$$.update = (changed = { $frame: 1, weave: 1, $threads: 1, $first: 1 }) => {
+    		if (changed.$frame || changed.weave) {
+    			 $$subscribe_threads($$invalidate("threads", threads = $frame ? weave.threads : weave.threads));
+    		}
+
+    		if (changed.$threads) {
+    			 $$invalidate("rects", rects = Object.entries($threads).filter(([x, y]) => document.getElementById(`${x}|read`) && document.getElementById(`${y}|write`)).map(([x, y]) => [
+    				document.getElementById(`${x}|read`).getBoundingClientRect(),
+    				document.getElementById(`${y}|write`).getBoundingClientRect(),
+    				x,
+    				y
+    			]));
+    		}
+
+    		if (changed.$first) {
+    			 $$invalidate("first_rec", first_rec = $first ? get_pos($first) : [0, 0]);
+    		}
+    	};
+
+    	return {
+    		weave,
+    		recent,
+    		get_color,
+    		$position,
+    		threads,
+    		rects,
+    		first_rec,
+    		$first,
+    		$size,
+    		$recent
+    	};
+    }
+
+    class Threads extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$6, create_fragment$7, safe_not_equal, { weave: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Threads",
+    			options,
+    			id: create_fragment$7.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.weave === undefined && !("weave" in props)) {
+    			console.warn("<Threads> was created without expected prop 'weave'");
+    		}
+    	}
+
+    	get weave() {
+    		throw new Error("<Threads>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set weave(value) {
+    		throw new Error("<Threads>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    const whiten = (color, amount) => {
+      color.blue += amount;
+      color.red += amount;
+      color.green += amount;
+
+      return color
+    };
+
+    const negate$1 = (color) => {
+      color.red = 1 - color.red;
+      color.green = 1 - color.green;
+      color.blue = 1 - color.blue;
+      return color
+    };
+
+    var color$1 = (node, txt_init) => {
+      const handler = {
+        update: (txt) => {
+          let col = Color(color(JSON.stringify(txt)));
+          if (col.getLuminance() < 0.5) col = whiten(col, 0.5);
+
+          // node.style.color = col.toString()
+          negate$1(col);
+          col.alpha = 0.5;
+          node.style.backgroundColor = col.toCSS();
+        }
+      };
+
+      handler.update(txt_init);
+      return handler
+    };
+
+    var physics = (node, id) => {
+      const update = () =>
+        bodies.update(($b) => ({
+          ...$b,
+          [id]: [
+            node.offsetWidth,
+            node.offsetHeight
+          ]
+        }));
+
+      update();
+
+      // const cancel = tick.listen(() => {
+      //   const [w, h] = bodies.get()[id]
+
+      //   if (
+      //     w === node.offsetWidth &&
+      //     h === node.offsetHeight
+      //   ) {
+      //     return
+      //   }
+
+      //   update()
+      // })
+
+      return {
+        destroy: () => {
+          // cancel()
+
+          bodies.update(($b) => {
+            delete $b[id];
+
+            return $b
+          });
+        }
+      }
+    };
+
+    /* src/ui/weave/Knot.svelte generated by Svelte v3.14.1 */
+    const file$8 = "src/ui/weave/Knot.svelte";
+
+    // (82:6) {#if title}
+    function create_if_block$3(ctx) {
+    	let div;
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t = text(ctx.title);
+    			attr_dev(div, "class", "title svelte-1b5sjjy");
+    			add_location(div, file$8, 82, 6, 1698);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.title) set_data_dev(t, ctx.title);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(82:6) {#if title}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (69:0) <Spatial   anchor = {[50, 50]}   position = {tru_position}   transition = {!dragging}   scale = {tru_scale}   {zIndex} >
+    function create_default_slot$2(ctx) {
+    	let div1;
+    	let div0;
+    	let t;
+    	let physics_action;
+    	let current;
+    	let dispose;
+    	let if_block = ctx.title && create_if_block$3(ctx);
+    	const default_slot_template = ctx.$$slots.default;
+    	const default_slot = create_slot(default_slot_template, ctx, null);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			if (if_block) if_block.c();
+    			t = space();
+    			if (default_slot) default_slot.c();
+    			attr_dev(div0, "class", "knot svelte-1b5sjjy");
+    			add_location(div0, file$8, 76, 4, 1592);
+    			attr_dev(div1, "class", "adjust svelte-1b5sjjy");
+    			add_location(div1, file$8, 75, 2, 1567);
+    			dispose = listen_dev(div0, "mousedown", ctx.drag, false, false, false);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			if (if_block) if_block.m(div0, null);
+    			append_dev(div0, t);
+
+    			if (default_slot) {
+    				default_slot.m(div0, null);
+    			}
+
+    			physics_action = physics.call(null, div0, ctx.$id) || ({});
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			if (ctx.title) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					if_block.m(div0, t);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (default_slot && default_slot.p && changed.$$scope) {
+    				default_slot.p(get_slot_changes(default_slot_template, ctx, changed, null), get_slot_context(default_slot_template, ctx, null));
+    			}
+
+    			if (is_function(physics_action.update) && changed.$id) physics_action.update.call(null, ctx.$id);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (if_block) if_block.d();
+    			if (default_slot) default_slot.d(detaching);
+    			if (physics_action && is_function(physics_action.destroy)) physics_action.destroy();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$2.name,
+    		type: "slot",
+    		source: "(69:0) <Spatial   anchor = {[50, 50]}   position = {tru_position}   transition = {!dragging}   scale = {tru_scale}   {zIndex} >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$8(ctx) {
+    	let current;
+
+    	const spatial = new Spatial({
+    			props: {
+    				anchor: [50, 50],
+    				position: ctx.tru_position,
+    				transition: !ctx.dragging,
+    				scale: ctx.tru_scale,
+    				zIndex: ctx.zIndex,
+    				$$slots: { default: [create_default_slot$2] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(spatial.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(spatial, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const spatial_changes = {};
+    			if (changed.tru_position) spatial_changes.position = ctx.tru_position;
+    			if (changed.dragging) spatial_changes.transition = !ctx.dragging;
+    			if (changed.tru_scale) spatial_changes.scale = ctx.tru_scale;
+    			if (changed.zIndex) spatial_changes.zIndex = ctx.zIndex;
+
+    			if (changed.$$scope || changed.$id || changed.title) {
+    				spatial_changes.$$scope = { changed, ctx };
+    			}
+
+    			spatial.$set(spatial_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(spatial.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(spatial.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(spatial, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$8.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$7($$self, $$props, $$invalidate) {
+    	let $Mouse;
+    	let $size;
+    	let $translate;
+    	let $Scaling;
+    	let $positions;
+
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	validate_store(position, "Mouse");
+    	component_subscribe($$self, position, $$value => $$invalidate("$Mouse", $Mouse = $$value));
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate("$size", $size = $$value));
+    	validate_store(translate, "translate");
+    	component_subscribe($$self, translate, $$value => $$invalidate("$translate", $translate = $$value));
+    	validate_store(scale, "Scaling");
+    	component_subscribe($$self, scale, $$value => $$invalidate("$Scaling", $Scaling = $$value));
+    	validate_store(positions, "positions");
+    	component_subscribe($$self, positions, $$value => $$invalidate("$positions", $positions = $$value));
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	let { position: position$1 = [0, 0, 0] } = $$props;
+    	let { knot } = $$props;
+    	let { title = false } = $$props;
+
+    	const update = () => positions.set({
+    		...positions.get(),
+    		[knot.id.get()]: position$1
+    	});
+
+    	update();
+    	let dragging = false;
+    	let zIndex = 2;
+
+    	const drag = e => {
+    		if (dragging || e.target.classList.contains(`port`) || e.target.tagName === `INPUT` || e.target.tagName === `TEXTAREA`) {
+    			return;
+    		}
+
+    		$$invalidate("dragging", dragging = true);
+    		draggee.set(knot.id.get());
+
+    		const handler = () => {
+    			$$invalidate("dragging", dragging = false);
+
+    			$$invalidate("position", position$1 = [
+    				$Mouse[0] - $size[0] / 2 - $translate[0],
+    				$Mouse[1] - $size[1] / 2 - $translate[1],
+    				0
+    			]);
+
+    			update();
+    			draggee.set("");
+    			$$invalidate("zIndex", zIndex = drag_count.get());
+    			window.removeEventListener(`mouseup`, handler);
+    		};
+
+    		window.addEventListener(`mouseup`, handler);
+    	};
+
+    	const writable_props = ["position", "knot", "title"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Knot> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+
+    	$$self.$set = $$props => {
+    		if ("position" in $$props) $$invalidate("position", position$1 = $$props.position);
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("title" in $$props) $$invalidate("title", title = $$props.title);
+    		if ("$$scope" in $$props) $$invalidate("$$scope", $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			position: position$1,
+    			knot,
+    			title,
+    			dragging,
+    			zIndex,
+    			type,
+    			id,
+    			$Mouse,
+    			$size,
+    			$translate,
+    			tru_position,
+    			$Scaling,
+    			$positions,
+    			tru_scale,
+    			$id
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("position" in $$props) $$invalidate("position", position$1 = $$props.position);
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("title" in $$props) $$invalidate("title", title = $$props.title);
+    		if ("dragging" in $$props) $$invalidate("dragging", dragging = $$props.dragging);
+    		if ("zIndex" in $$props) $$invalidate("zIndex", zIndex = $$props.zIndex);
+    		if ("type" in $$props) type = $$props.type;
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("$Mouse" in $$props) position.set($Mouse = $$props.$Mouse);
+    		if ("$size" in $$props) size.set($size = $$props.$size);
+    		if ("$translate" in $$props) translate.set($translate = $$props.$translate);
+    		if ("tru_position" in $$props) $$invalidate("tru_position", tru_position = $$props.tru_position);
+    		if ("$Scaling" in $$props) scale.set($Scaling = $$props.$Scaling);
+    		if ("$positions" in $$props) positions.set($positions = $$props.$positions);
+    		if ("tru_scale" in $$props) $$invalidate("tru_scale", tru_scale = $$props.tru_scale);
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    	};
+
+    	let type;
+    	let id;
+    	let tru_position;
+    	let tru_scale;
+
+    	$$self.$$.update = (changed = { knot: 1, $Scaling: 1, dragging: 1, $Mouse: 1, $positions: 1, $size: 1, $translate: 1 }) => {
+    		if (changed.knot) {
+    			 type = knot.knot;
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+
+    		if (changed.$Scaling || changed.dragging || changed.$Mouse || changed.$positions || changed.knot || changed.$size || changed.$translate) {
+    			 $$invalidate("tru_position", tru_position = add([-50 * $Scaling, -25 * $Scaling], dragging ? $Mouse : $positions[knot.id.get()], dragging ? [-$size[0] / 2, -$size[1] / 2] : $translate));
+    		}
+
+    		if (changed.dragging) {
+    			 $$invalidate("tru_scale", tru_scale = dragging ? 1.168 : 1);
+    		}
+    	};
+
+    	return {
+    		position: position$1,
+    		knot,
+    		title,
+    		dragging,
+    		zIndex,
+    		drag,
+    		id,
+    		tru_position,
+    		tru_scale,
+    		$id,
+    		$$slots,
+    		$$scope
+    	};
+    }
+
+    class Knot extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$7, create_fragment$8, safe_not_equal, { position: 0, knot: 0, title: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Knot",
+    			options,
+    			id: create_fragment$8.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Knot> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get position() {
+    		throw new Error("<Knot>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set position(value) {
+    		throw new Error("<Knot>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get knot() {
+    		throw new Error("<Knot>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Knot>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get title() {
+    		throw new Error("<Knot>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set title(value) {
+    		throw new Error("<Knot>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/Picker.svelte generated by Svelte v3.14.1 */
+
+    const { Object: Object_1$1 } = globals;
+    const file$9 = "src/ui/weave/Picker.svelte";
+
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = Object_1$1.create(ctx);
+    	child_ctx.kind = list[i][0];
+    	child_ctx.fn = list[i][1];
+    	return child_ctx;
+    }
+
+    // (48:0) {#if picking}
+    function create_if_block$4(ctx) {
+    	let current;
+
+    	const knot_1 = new Knot({
+    			props: {
+    				position: ctx.position,
+    				knot: ctx.knot,
+    				$$slots: { default: [create_default_slot$3] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(knot_1.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(knot_1, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const knot_1_changes = {};
+    			if (changed.position) knot_1_changes.position = ctx.position;
+
+    			if (changed.$$scope || changed.arr_knots) {
+    				knot_1_changes.$$scope = { changed, ctx };
+    			}
+
+    			knot_1.$set(knot_1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(knot_1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(knot_1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(knot_1, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$4.name,
+    		type: "if",
+    		source: "(48:0) {#if picking}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (54:6) {#each arr_knots as [kind, fn] (kind)}
+    function create_each_block$1(key_1, ctx) {
+    	let div;
+    	let t0_value = ctx.kind + "";
+    	let t0;
+    	let t1;
+    	let color_action;
+    	let dispose;
+
+    	function mouseup_handler(...args) {
+    		return ctx.mouseup_handler(ctx, ...args);
+    	}
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			div = element("div");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			attr_dev(div, "class", "kind svelte-zd3nts");
+    			add_location(div, file$9, 54, 8, 1015);
+    			dispose = listen_dev(div, "mouseup", mouseup_handler, false, false, false);
+    			this.first = div;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t0);
+    			append_dev(div, t1);
+    			color_action = color$1.call(null, div, ctx.kind) || ({});
+    		},
+    		p: function update(changed, new_ctx) {
+    			ctx = new_ctx;
+    			if (changed.arr_knots && t0_value !== (t0_value = ctx.kind + "")) set_data_dev(t0, t0_value);
+    			if (is_function(color_action.update) && changed.arr_knots) color_action.update.call(null, ctx.kind);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(54:6) {#each arr_knots as [kind, fn] (kind)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (49:2) <Knot {position} {knot}>
+    function create_default_slot$3(ctx) {
+    	let div1;
+    	let div0;
+    	let t1;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let each_value = ctx.arr_knots;
+    	const get_key = ctx => ctx.kind;
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context$1(ctx, each_value, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$1(key, child_ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			div0.textContent = "SPAWN A ...";
+    			t1 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div0, "class", "title svelte-zd3nts");
+    			add_location(div0, file$9, 50, 6, 911);
+    			attr_dev(div1, "class", "prompt");
+    			add_location(div1, file$9, 49, 4, 884);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div1, t1);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div1, null);
+    			}
+    		},
+    		p: function update(changed, ctx) {
+    			const each_value = ctx.arr_knots;
+    			each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div1, destroy_block, create_each_block$1, null, get_each_context$1);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$3.name,
+    		type: "slot",
+    		source: "(49:2) <Knot {position} {knot}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$9(ctx) {
+    	let div;
+    	let current;
+    	let dispose;
+    	let if_block = ctx.picking && create_if_block$4(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if (if_block) if_block.c();
+    			attr_dev(div, "class", "picker svelte-zd3nts");
+    			toggle_class(div, "picking", ctx.picking);
+    			add_location(div, file$9, 42, 0, 774);
+
+    			dispose = [
+    				listen_dev(window, "mouseup", ctx.nopick, false, false, false),
+    				listen_dev(div, "mousedown", ctx.pick, false, false, false)
+    			];
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			if (if_block) if_block.m(div, null);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			if (ctx.picking) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    					transition_in(if_block, 1);
+    				} else {
+    					if_block = create_if_block$4(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (changed.picking) {
+    				toggle_class(div, "picking", ctx.picking);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (if_block) if_block.d();
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$9.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$8($$self, $$props, $$invalidate) {
+    	let $size;
+    	let $Scaling;
+    	validate_store(size, "size");
+    	component_subscribe($$self, size, $$value => $$invalidate("$size", $size = $$value));
+    	validate_store(scale, "Scaling");
+    	component_subscribe($$self, scale, $$value => $$invalidate("$Scaling", $Scaling = $$value));
+    	let { weave } = $$props;
+    	const knot = Knot_Factory();
+    	let picking = false;
+
+    	const pick = e => {
+    		$$invalidate("position", position = [e.x - $size[0] / 2, e.y + 40 * $Scaling - $size[1] / 2, 0]);
+    		$$invalidate("picking", picking = true);
+    	};
+
+    	const nopick = () => {
+    		$$invalidate("picking", picking = false);
+    	};
+
+    	const create = k => weave.add({ knot: k });
+
+    	const cancel = match.subscribe(new_match => {
+    		if (!new_match) return;
+    		weave.give_thread.set(new_match);
+    	});
+
+    	let position = [0, 0, 0];
+    	const writable_props = ["weave"];
+
+    	Object_1$1.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Picker> was created with unknown prop '${key}'`);
+    	});
+
+    	const mouseup_handler = ({ kind }) => create(kind);
+
+    	$$self.$set = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			weave,
+    			picking,
+    			position,
+    			$size,
+    			$Scaling,
+    			arr_knots
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("weave" in $$props) $$invalidate("weave", weave = $$props.weave);
+    		if ("picking" in $$props) $$invalidate("picking", picking = $$props.picking);
+    		if ("position" in $$props) $$invalidate("position", position = $$props.position);
+    		if ("$size" in $$props) size.set($size = $$props.$size);
+    		if ("$Scaling" in $$props) scale.set($Scaling = $$props.$Scaling);
+    		if ("arr_knots" in $$props) $$invalidate("arr_knots", arr_knots = $$props.arr_knots);
+    	};
+
+    	let arr_knots;
+    	 $$invalidate("arr_knots", arr_knots = Object.entries(knots));
+
+    	return {
+    		weave,
+    		knot,
+    		picking,
+    		pick,
+    		nopick,
+    		create,
+    		position,
+    		arr_knots,
+    		mouseup_handler
+    	};
+    }
+
+    class Picker extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$8, create_fragment$9, safe_not_equal, { weave: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Picker",
+    			options,
+    			id: create_fragment$9.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.weave === undefined && !("weave" in props)) {
+    			console.warn("<Picker> was created without expected prop 'weave'");
+    		}
+    	}
+
+    	get weave() {
+    		throw new Error("<Picker>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set weave(value) {
+    		throw new Error("<Picker>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/Port.svelte generated by Svelte v3.14.1 */
+    const file$a = "src/ui/weave/Port.svelte";
+
+    function create_fragment$a(ctx) {
+    	let div;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			attr_dev(div, "class", "port svelte-1idyrw9");
+    			attr_dev(div, "id", ctx.address);
+    			toggle_class(div, "writable", ctx.writable);
+    			toggle_class(div, "name", ctx.name);
+    			add_location(div, file$a, 19, 0, 270);
+
+    			dispose = [
+    				listen_dev(div, "mousedown", ctx.mousedown, false, false, false),
+    				listen_dev(div, "mouseup", ctx.mouseup, false, false, false)
+    			];
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.address) {
+    				attr_dev(div, "id", ctx.address);
+    			}
+
+    			if (changed.writable) {
+    				toggle_class(div, "writable", ctx.writable);
+    			}
+
+    			if (changed.name) {
+    				toggle_class(div, "name", ctx.name);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$a.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$9($$self, $$props, $$invalidate) {
+    	let { writable = false } = $$props;
+    	let { name = false } = $$props;
+    	let { address = `` } = $$props;
+
+    	const mousedown = () => {
+    		first.set(address);
+    	};
+
+    	const mouseup = () => {
+    		second.set(address);
+    	};
+
+    	const writable_props = ["writable", "name", "address"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Port> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("writable" in $$props) $$invalidate("writable", writable = $$props.writable);
+    		if ("name" in $$props) $$invalidate("name", name = $$props.name);
+    		if ("address" in $$props) $$invalidate("address", address = $$props.address);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { writable, name, address };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("writable" in $$props) $$invalidate("writable", writable = $$props.writable);
+    		if ("name" in $$props) $$invalidate("name", name = $$props.name);
+    		if ("address" in $$props) $$invalidate("address", address = $$props.address);
+    	};
+
+    	return {
+    		writable,
+    		name,
+    		address,
+    		mousedown,
+    		mouseup
+    	};
+    }
+
+    class Port extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$9, create_fragment$a, safe_not_equal, { writable: 0, name: 0, address: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Port",
+    			options,
+    			id: create_fragment$a.name
+    		});
+    	}
+
+    	get writable() {
+    		throw new Error("<Port>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set writable(value) {
+    		throw new Error("<Port>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get name() {
+    		throw new Error("<Port>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set name(value) {
+    		throw new Error("<Port>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get address() {
+    		throw new Error("<Port>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set address(value) {
+    		throw new Error("<Port>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/Mail.svelte generated by Svelte v3.14.1 */
+    const file$b = "src/ui/weave/knot/Mail.svelte";
+
+    function create_fragment$b(ctx) {
+    	let div5;
+    	let div0;
+    	let t0;
+    	let div4;
+    	let div1;
+    	let t1;
+    	let div2;
+    	let input;
+    	let t2;
+    	let div3;
+    	let color_action;
+    	let current;
+    	let dispose;
+
+    	const tile = new Tile_1({
+    			props: { width: 1, height: 1, random: true },
+    			$$inline: true
+    		});
+
+    	const port0 = new Port({
+    			props: {
+    				writable: true,
+    				address: `${ctx.$id}|write`
+    			},
+    			$$inline: true
+    		});
+
+    	const port1 = new Port({
+    			props: { address: `${ctx.$id}|read` },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div5 = element("div");
+    			div0 = element("div");
+    			create_component(tile.$$.fragment);
+    			t0 = space();
+    			div4 = element("div");
+    			div1 = element("div");
+    			create_component(port0.$$.fragment);
+    			t1 = space();
+    			div2 = element("div");
+    			input = element("input");
+    			t2 = space();
+    			div3 = element("div");
+    			create_component(port1.$$.fragment);
+    			attr_dev(div0, "class", "postage svelte-h17axw");
+    			add_location(div0, file$b, 13, 2, 247);
+    			attr_dev(div1, "class", "port left svelte-h17axw");
+    			add_location(div1, file$b, 17, 4, 348);
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "placeholder", "AdDrEsS hErE");
+    			attr_dev(input, "class", "svelte-h17axw");
+    			add_location(input, file$b, 21, 6, 464);
+    			attr_dev(div2, "class", "address svelte-h17axw");
+    			add_location(div2, file$b, 20, 4, 436);
+    			attr_dev(div3, "class", "port right svelte-h17axw");
+    			add_location(div3, file$b, 23, 4, 546);
+    			attr_dev(div4, "class", "center svelte-h17axw");
+    			add_location(div4, file$b, 16, 2, 321);
+    			attr_dev(div5, "class", "mail svelte-h17axw");
+    			add_location(div5, file$b, 12, 0, 197);
+    			dispose = listen_dev(input, "input", ctx.input_input_handler);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, div0);
+    			mount_component(tile, div0, null);
+    			append_dev(div5, t0);
+    			append_dev(div5, div4);
+    			append_dev(div4, div1);
+    			mount_component(port0, div1, null);
+    			append_dev(div4, t1);
+    			append_dev(div4, div2);
+    			append_dev(div2, input);
+    			set_input_value(input, ctx.$whom);
+    			append_dev(div4, t2);
+    			append_dev(div4, div3);
+    			mount_component(port1, div3, null);
+    			color_action = color$1.call(null, div5, ctx.$whom || "/???/") || ({});
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const port0_changes = {};
+    			if (changed.$id) port0_changes.address = `${ctx.$id}|write`;
+    			port0.$set(port0_changes);
+
+    			if (changed.$whom && input.value !== ctx.$whom) {
+    				set_input_value(input, ctx.$whom);
+    			}
+
+    			const port1_changes = {};
+    			if (changed.$id) port1_changes.address = `${ctx.$id}|read`;
+    			port1.$set(port1_changes);
+    			if (is_function(color_action.update) && changed.$whom) color_action.update.call(null, ctx.$whom || "/???/");
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(tile.$$.fragment, local);
+    			transition_in(port0.$$.fragment, local);
+    			transition_in(port1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(tile.$$.fragment, local);
+    			transition_out(port0.$$.fragment, local);
+    			transition_out(port1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div5);
+    			destroy_component(tile);
+    			destroy_component(port0);
+    			destroy_component(port1);
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$b.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$a($$self, $$props, $$invalidate) {
+    	let $whom,
+    		$$unsubscribe_whom = noop,
+    		$$subscribe_whom = () => ($$unsubscribe_whom(), $$unsubscribe_whom = subscribe(whom, $$value => $$invalidate("$whom", $whom = $$value)), whom);
+
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_whom());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	let { knot } = $$props;
+    	const writable_props = ["knot"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Mail> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		$whom = this.value;
+    		whom.set($whom);
+    	}
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { knot, whom, id, $whom, $id };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("whom" in $$props) $$subscribe_whom($$invalidate("whom", whom = $$props.whom));
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("$whom" in $$props) whom.set($whom = $$props.$whom);
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    	};
+
+    	let whom;
+    	let id;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_whom($$invalidate("whom", whom = knot.whom));
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+    	};
+
+    	return {
+    		knot,
+    		whom,
+    		id,
+    		$whom,
+    		$id,
+    		input_input_handler
+    	};
+    }
+
+    class Mail extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$a, create_fragment$b, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Mail",
+    			options,
+    			id: create_fragment$b.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Mail> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Mail>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Mail>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/Math.svelte generated by Svelte v3.14.1 */
+    const file$c = "src/ui/weave/knot/Math.svelte";
+
+    function create_fragment$c(ctx) {
+    	let div4;
+    	let div3;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let input;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let div2;
+    	let color_action;
+    	let current;
+    	let dispose;
+
+    	const port0 = new Port({
+    			props: {
+    				writable: true,
+    				address: `${ctx.$id}|write`
+    			},
+    			$$inline: true
+    		});
+
+    	const port1 = new Port({
+    			props: { address: `${ctx.$id}|read` },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div4 = element("div");
+    			div3 = element("div");
+    			div0 = element("div");
+    			create_component(port0.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			input = element("input");
+    			t1 = space();
+    			t2 = text(ctx.$value);
+    			t3 = space();
+    			div2 = element("div");
+    			create_component(port1.$$.fragment);
+    			attr_dev(div0, "class", "port left svelte-xb2oog");
+    			add_location(div0, file$c, 14, 4, 284);
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "placeholder", "2 + 2 = ChAiR");
+    			attr_dev(input, "class", "svelte-xb2oog");
+    			add_location(input, file$c, 18, 6, 400);
+    			attr_dev(div1, "class", "address svelte-xb2oog");
+    			add_location(div1, file$c, 17, 4, 372);
+    			attr_dev(div2, "class", "port right svelte-xb2oog");
+    			add_location(div2, file$c, 21, 4, 498);
+    			attr_dev(div3, "class", "center svelte-xb2oog");
+    			add_location(div3, file$c, 13, 2, 258);
+    			attr_dev(div4, "class", "mail svelte-xb2oog");
+    			add_location(div4, file$c, 12, 0, 218);
+    			dispose = listen_dev(input, "input", ctx.input_input_handler);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div4, anchor);
+    			append_dev(div4, div3);
+    			append_dev(div3, div0);
+    			mount_component(port0, div0, null);
+    			append_dev(div3, t0);
+    			append_dev(div3, div1);
+    			append_dev(div1, input);
+    			set_input_value(input, ctx.$math);
+    			append_dev(div1, t1);
+    			append_dev(div1, t2);
+    			append_dev(div3, t3);
+    			append_dev(div3, div2);
+    			mount_component(port1, div2, null);
+    			color_action = color$1.call(null, div4, ctx.$value) || ({});
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const port0_changes = {};
+    			if (changed.$id) port0_changes.address = `${ctx.$id}|write`;
+    			port0.$set(port0_changes);
+
+    			if (changed.$math && input.value !== ctx.$math) {
+    				set_input_value(input, ctx.$math);
+    			}
+
+    			if (!current || changed.$value) set_data_dev(t2, ctx.$value);
+    			const port1_changes = {};
+    			if (changed.$id) port1_changes.address = `${ctx.$id}|read`;
+    			port1.$set(port1_changes);
+    			if (is_function(color_action.update) && changed.$value) color_action.update.call(null, ctx.$value);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(port0.$$.fragment, local);
+    			transition_in(port1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(port0.$$.fragment, local);
+    			transition_out(port1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div4);
+    			destroy_component(port0);
+    			destroy_component(port1);
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$c.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$b($$self, $$props, $$invalidate) {
+    	let $value,
+    		$$unsubscribe_value = noop,
+    		$$subscribe_value = () => ($$unsubscribe_value(), $$unsubscribe_value = subscribe(value, $$value => $$invalidate("$value", $value = $$value)), value);
+
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	let $math,
+    		$$unsubscribe_math = noop,
+    		$$subscribe_math = () => ($$unsubscribe_math(), $$unsubscribe_math = subscribe(math, $$value => $$invalidate("$math", $math = $$value)), math);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_value());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_math());
+    	let { knot } = $$props;
+    	const writable_props = ["knot"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Math> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		$math = this.value;
+    		math.set($math);
+    	}
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			knot,
+    			math,
+    			value,
+    			id,
+    			$value,
+    			$id,
+    			$math
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("math" in $$props) $$subscribe_math($$invalidate("math", math = $$props.math));
+    		if ("value" in $$props) $$subscribe_value($$invalidate("value", value = $$props.value));
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("$value" in $$props) value.set($value = $$props.$value);
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    		if ("$math" in $$props) math.set($math = $$props.$math);
+    	};
+
+    	let math;
+    	let value;
+    	let id;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_math($$invalidate("math", math = knot.math));
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_value($$invalidate("value", value = knot.value));
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+    	};
+
+    	return {
+    		knot,
+    		math,
+    		value,
+    		id,
+    		$value,
+    		$id,
+    		$math,
+    		input_input_handler
+    	};
+    }
+
+    class Math$1 extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$b, create_fragment$c, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Math",
+    			options,
+    			id: create_fragment$c.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Math> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Math>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Math>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/stitch/Channel.svelte generated by Svelte v3.14.1 */
+    const file$d = "src/ui/weave/knot/stitch/Channel.svelte";
+
+    function create_fragment$d(ctx) {
+    	let div2;
+    	let t0;
+    	let div1;
+    	let div0;
+    	let t1;
+    	let t2;
+    	let input;
+    	let color_action;
+    	let t3;
+    	let current;
+    	let dispose;
+
+    	const port0 = new Port({
+    			props: {
+    				writable: true,
+    				address: `${ctx.address(ctx.name)}|write`
+    			},
+    			$$inline: true
+    		});
+
+    	const port1 = new Port({
+    			props: { address: `${ctx.address(ctx.name)}|read` },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			create_component(port0.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			t1 = text(ctx.name);
+    			t2 = space();
+    			input = element("input");
+    			t3 = space();
+    			create_component(port1.$$.fragment);
+    			attr_dev(div0, "class", "name svelte-c2na98");
+    			add_location(div0, file$d, 29, 4, 561);
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "class", "edit svelte-c2na98");
+    			attr_dev(input, "placeholder", "JSON plz");
+    			add_location(input, file$d, 30, 4, 597);
+    			attr_dev(div1, "class", "vbox svelte-c2na98");
+    			add_location(div1, file$d, 28, 2, 504);
+    			attr_dev(div2, "class", "channel svelte-c2na98");
+    			add_location(div2, file$d, 26, 0, 426);
+    			dispose = listen_dev(input, "input", ctx.input_input_handler);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			mount_component(port0, div2, null);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, t1);
+    			append_dev(div1, t2);
+    			append_dev(div1, input);
+    			set_input_value(input, ctx.$chan);
+    			color_action = color$1.call(null, div1, JSON.stringify(ctx.$chan)) || ({});
+    			append_dev(div2, t3);
+    			mount_component(port1, div2, null);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const port0_changes = {};
+    			if (changed.name) port0_changes.address = `${ctx.address(ctx.name)}|write`;
+    			port0.$set(port0_changes);
+    			if (!current || changed.name) set_data_dev(t1, ctx.name);
+
+    			if (changed.$chan && input.value !== ctx.$chan) {
+    				set_input_value(input, ctx.$chan);
+    			}
+
+    			if (is_function(color_action.update) && changed.$chan) color_action.update.call(null, JSON.stringify(ctx.$chan));
+    			const port1_changes = {};
+    			if (changed.name) port1_changes.address = `${ctx.address(ctx.name)}|read`;
+    			port1.$set(port1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(port0.$$.fragment, local);
+    			transition_in(port1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(port0.$$.fragment, local);
+    			transition_out(port1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			destroy_component(port0);
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			destroy_component(port1);
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$d.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$c($$self, $$props, $$invalidate) {
+    	let $chan,
+    		$$unsubscribe_chan = noop,
+    		$$subscribe_chan = () => ($$unsubscribe_chan(), $$unsubscribe_chan = subscribe(chan, $$value => $$invalidate("$chan", $chan = $$value)), chan);
+
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_chan());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	let { knot } = $$props;
+    	let { chan } = $$props;
+    	validate_store(chan, "chan");
+    	$$subscribe_chan();
+    	let { name } = $$props;
+    	const edit = write($chan);
+    	const address = channel => `${$id}/${channel}`;
+
+    	const cancel = edit.subscribe(txt => {
+    		let v = txt;
+
+    		try {
+    			v = JSON.parse(txt);
+    		} catch(ex) {
+    			
+    		}
+
+    		chan.set(v);
+    	});
+
+    	const writable_props = ["knot", "chan", "name"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Channel> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		$chan = this.value;
+    		chan.set($chan);
+    	}
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("chan" in $$props) $$subscribe_chan($$invalidate("chan", chan = $$props.chan));
+    		if ("name" in $$props) $$invalidate("name", name = $$props.name);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { knot, chan, name, $chan, id, $id };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("chan" in $$props) $$subscribe_chan($$invalidate("chan", chan = $$props.chan));
+    		if ("name" in $$props) $$invalidate("name", name = $$props.name);
+    		if ("$chan" in $$props) chan.set($chan = $$props.$chan);
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    	};
+
+    	let id;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+    	};
+
+    	return {
+    		knot,
+    		chan,
+    		name,
+    		address,
+    		$chan,
+    		id,
+    		input_input_handler
+    	};
+    }
+
+    class Channel extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$c, create_fragment$d, safe_not_equal, { knot: 0, chan: 0, name: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Channel",
+    			options,
+    			id: create_fragment$d.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Channel> was created without expected prop 'knot'");
+    		}
+
+    		if (ctx.chan === undefined && !("chan" in props)) {
+    			console.warn("<Channel> was created without expected prop 'chan'");
+    		}
+
+    		if (ctx.name === undefined && !("name" in props)) {
+    			console.warn("<Channel> was created without expected prop 'name'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Channel>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Channel>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get chan() {
+    		throw new Error("<Channel>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set chan(value) {
+    		throw new Error("<Channel>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get name() {
+    		throw new Error("<Channel>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set name(value) {
+    		throw new Error("<Channel>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/Stitch.svelte generated by Svelte v3.14.1 */
+
+    const { Object: Object_1$2 } = globals;
+    const file$e = "src/ui/weave/knot/Stitch.svelte";
+
+    function get_each_context$2(ctx, list, i) {
+    	const child_ctx = Object_1$2.create(ctx);
+    	child_ctx.chan_name = list[i][0];
+    	child_ctx.chan = list[i][1];
+    	return child_ctx;
+    }
+
+    // (36:4) {:else}
+    function create_else_block$1(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "/\\/\\";
+    			attr_dev(div, "class", "no-stitches svelte-ouq94y");
+    			add_location(div, file$e, 36, 6, 802);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(36:4) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (34:4) {#each Object.entries($value) as [chan_name, chan] (chan_name)}
+    function create_each_block$2(key_1, ctx) {
+    	let first;
+    	let current;
+
+    	const channel = new Channel({
+    			props: {
+    				chan: ctx.chan,
+    				knot: ctx.knot,
+    				name: ctx.chan_name
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			first = empty();
+    			create_component(channel.$$.fragment);
+    			this.first = first;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, first, anchor);
+    			mount_component(channel, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const channel_changes = {};
+    			if (changed.$value) channel_changes.chan = ctx.chan;
+    			if (changed.knot) channel_changes.knot = ctx.knot;
+    			if (changed.$value) channel_changes.name = ctx.chan_name;
+    			channel.$set(channel_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(channel.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(channel.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(first);
+    			destroy_component(channel, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$2.name,
+    		type: "each",
+    		source: "(34:4) {#each Object.entries($value) as [chan_name, chan] (chan_name)}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$e(ctx) {
+    	let div1;
+    	let div0;
+    	let input0;
+    	let color_action;
+    	let t0;
+    	let div2;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let t1;
+    	let input1;
+    	let current;
+    	let dispose;
+    	let each_value = Object.entries(ctx.$value);
+    	const get_key = ctx => ctx.chan_name;
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context$2(ctx, each_value, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$2(key, child_ctx));
+    	}
+
+    	let each_1_else = null;
+
+    	if (!each_value.length) {
+    		each_1_else = create_else_block$1(ctx);
+    		each_1_else.c();
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			input0 = element("input");
+    			t0 = space();
+    			div2 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t1 = space();
+    			input1 = element("input");
+    			attr_dev(input0, "type", "text");
+    			attr_dev(input0, "class", "edit svelte-ouq94y");
+    			attr_dev(input0, "placeholder", "Name It!");
+    			add_location(input0, file$e, 29, 4, 554);
+    			add_location(div0, file$e, 28, 2, 526);
+    			attr_dev(div1, "class", "nameit svelte-ouq94y");
+    			add_location(div1, file$e, 27, 0, 503);
+    			attr_dev(input1, "type", "text");
+    			attr_dev(input1, "class", "add_channel svelte-ouq94y");
+    			attr_dev(input1, "placeholder", "STITCH IT!");
+    			add_location(input1, file$e, 39, 4, 858);
+    			attr_dev(div2, "class", "board svelte-ouq94y");
+    			add_location(div2, file$e, 32, 0, 648);
+
+    			dispose = [
+    				listen_dev(input0, "input", ctx.input0_input_handler),
+    				listen_dev(input1, "input", ctx.input1_input_handler),
+    				listen_dev(input1, "keypress", ctx.check_add, false, false, false),
+    				listen_dev(input1, "blur", ctx.blur_handler, false, false, false)
+    			];
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, input0);
+    			set_input_value(input0, ctx.$name);
+    			color_action = color$1.call(null, div0, ctx.$name) || ({});
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div2, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div2, null);
+    			}
+
+    			if (each_1_else) {
+    				each_1_else.m(div2, null);
+    			}
+
+    			append_dev(div2, t1);
+    			append_dev(div2, input1);
+    			set_input_value(input1, ctx.weave_add);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.$name && input0.value !== ctx.$name) {
+    				set_input_value(input0, ctx.$name);
+    			}
+
+    			if (is_function(color_action.update) && changed.$name) color_action.update.call(null, ctx.$name);
+    			const each_value = Object.entries(ctx.$value);
+    			group_outros();
+    			each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div2, outro_and_destroy_block, create_each_block$2, t1, get_each_context$2);
+    			check_outros();
+
+    			if (each_value.length) {
+    				if (each_1_else) {
+    					each_1_else.d(1);
+    					each_1_else = null;
+    				}
+    			} else if (!each_1_else) {
+    				each_1_else = create_else_block$1(ctx);
+    				each_1_else.c();
+    				each_1_else.m(div2, t1);
+    			}
+
+    			if (changed.weave_add && input1.value !== ctx.weave_add) {
+    				set_input_value(input1, ctx.weave_add);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div2);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+
+    			if (each_1_else) each_1_else.d();
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$e.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$d($$self, $$props, $$invalidate) {
+    	let $value,
+    		$$unsubscribe_value = noop,
+    		$$subscribe_value = () => ($$unsubscribe_value(), $$unsubscribe_value = subscribe(value, $$value => $$invalidate("$value", $value = $$value)), value);
+
+    	let $name,
+    		$$unsubscribe_name = noop,
+    		$$subscribe_name = () => ($$unsubscribe_name(), $$unsubscribe_name = subscribe(name, $$value => $$invalidate("$name", $name = $$value)), name);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_value());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_name());
+    	let { knot } = $$props;
+    	let weave_add = ``;
+
+    	const check_add = ({ which }) => {
+    		if (which !== 13) return;
+    		const val = $value;
+
+    		if (weave_add[0] === `-`) {
+    			delete val[weave_add.slice(1)];
+    		} else {
+    			val[weave_add] = write(random(2));
+    		}
+
+    		value.set(val);
+    		$$invalidate("weave_add", weave_add = ``);
+    	};
+
+    	const writable_props = ["knot"];
+
+    	Object_1$2.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Stitch> was created with unknown prop '${key}'`);
+    	});
+
+    	function input0_input_handler() {
+    		$name = this.value;
+    		name.set($name);
+    	}
+
+    	function input1_input_handler() {
+    		weave_add = this.value;
+    		$$invalidate("weave_add", weave_add);
+    	}
+
+    	const blur_handler = () => {
+    		$$invalidate("weave_add", weave_add = ``);
+    	};
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {
+    			knot,
+    			weave_add,
+    			value,
+    			name,
+    			$value,
+    			$name
+    		};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("weave_add" in $$props) $$invalidate("weave_add", weave_add = $$props.weave_add);
+    		if ("value" in $$props) $$subscribe_value($$invalidate("value", value = $$props.value));
+    		if ("name" in $$props) $$subscribe_name($$invalidate("name", name = $$props.name));
+    		if ("$value" in $$props) value.set($value = $$props.$value);
+    		if ("$name" in $$props) name.set($name = $$props.$name);
+    	};
+
+    	let value;
+    	let name;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_value($$invalidate("value", value = knot.value));
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_name($$invalidate("name", name = knot.name));
+    		}
+    	};
+
+    	return {
+    		knot,
+    		weave_add,
+    		check_add,
+    		value,
+    		name,
+    		$value,
+    		$name,
+    		input0_input_handler,
+    		input1_input_handler,
+    		blur_handler
+    	};
+    }
+
+    class Stitch extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$d, create_fragment$e, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Stitch",
+    			options,
+    			id: create_fragment$e.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Stitch> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Stitch>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Stitch>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/Stream.svelte generated by Svelte v3.14.1 */
+    const file$f = "src/ui/weave/knot/Stream.svelte";
+
+    // (18:6) {#if $value === null}
+    function create_if_block$5(ctx) {
+    	let div0;
+    	let div0_intro;
+    	let t1;
+    	let div1;
+    	let div1_intro;
+
+    	const block = {
+    		c: function create() {
+    			div0 = element("div");
+    			div0.textContent = "\\/\\/";
+    			t1 = space();
+    			div1 = element("div");
+    			div1.textContent = "JSON IT!";
+    			attr_dev(div0, "class", "doit svelte-19dmdaw");
+    			add_location(div0, file$f, 18, 8, 470);
+    			attr_dev(div1, "class", "doit svelte-19dmdaw");
+    			add_location(div1, file$f, 19, 8, 526);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div0, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div1, anchor);
+    		},
+    		i: function intro(local) {
+    			if (!div0_intro) {
+    				add_render_callback(() => {
+    					div0_intro = create_in_transition(div0, fly, animation);
+    					div0_intro.start();
+    				});
+    			}
+
+    			if (!div1_intro) {
+    				add_render_callback(() => {
+    					div1_intro = create_in_transition(div1, fly, animation);
+    					div1_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$5.name,
+    		type: "if",
+    		source: "(18:6) {#if $value === null}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$f(ctx) {
+    	let div2;
+    	let t0;
+    	let div1;
+    	let div0;
+    	let pre;
+    	let t1_value = JSON.stringify(ctx.$value, null, 2) + "";
+    	let t1;
+    	let t2;
+    	let color_action;
+    	let t3;
+    	let current;
+
+    	const port0 = new Port({
+    			props: {
+    				writable: true,
+    				address: `${ctx.$id}|write`
+    			},
+    			$$inline: true
+    		});
+
+    	let if_block = ctx.$value === null && create_if_block$5(ctx);
+
+    	const port1 = new Port({
+    			props: { address: `${ctx.$id}|read` },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			create_component(port0.$$.fragment);
+    			t0 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			pre = element("pre");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			if (if_block) if_block.c();
+    			t3 = space();
+    			create_component(port1.$$.fragment);
+    			attr_dev(pre, "class", "flex svelte-19dmdaw");
+    			add_location(pre, file$f, 16, 6, 375);
+    			attr_dev(div0, "class", "value_add svelte-19dmdaw");
+    			add_location(div0, file$f, 15, 4, 345);
+    			attr_dev(div1, "class", "JSON svelte-19dmdaw");
+    			add_location(div1, file$f, 14, 2, 303);
+    			attr_dev(div2, "class", "box svelte-19dmdaw");
+    			add_location(div2, file$f, 12, 0, 238);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			mount_component(port0, div2, null);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, pre);
+    			append_dev(pre, t1);
+    			append_dev(div0, t2);
+    			if (if_block) if_block.m(div0, null);
+    			color_action = color$1.call(null, div1, ctx.$value) || ({});
+    			append_dev(div2, t3);
+    			mount_component(port1, div2, null);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const port0_changes = {};
+    			if (changed.$id) port0_changes.address = `${ctx.$id}|write`;
+    			port0.$set(port0_changes);
+    			if ((!current || changed.$value) && t1_value !== (t1_value = JSON.stringify(ctx.$value, null, 2) + "")) set_data_dev(t1, t1_value);
+
+    			if (ctx.$value === null) {
+    				if (!if_block) {
+    					if_block = create_if_block$5(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div0, null);
+    				} else {
+    					transition_in(if_block, 1);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (is_function(color_action.update) && changed.$value) color_action.update.call(null, ctx.$value);
+    			const port1_changes = {};
+    			if (changed.$id) port1_changes.address = `${ctx.$id}|read`;
+    			port1.$set(port1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(port0.$$.fragment, local);
+    			transition_in(if_block);
+    			transition_in(port1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(port0.$$.fragment, local);
+    			transition_out(port1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			destroy_component(port0);
+    			if (if_block) if_block.d();
+    			if (color_action && is_function(color_action.destroy)) color_action.destroy();
+    			destroy_component(port1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$f.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$e($$self, $$props, $$invalidate) {
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	let $value,
+    		$$unsubscribe_value = noop,
+    		$$subscribe_value = () => ($$unsubscribe_value(), $$unsubscribe_value = subscribe(value, $$value => $$invalidate("$value", $value = $$value)), value);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_value());
+    	let { knot } = $$props;
+    	const writable_props = ["knot"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Stream> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { knot, value, id, $id, $value };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("value" in $$props) $$subscribe_value($$invalidate("value", value = $$props.value));
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    		if ("$value" in $$props) value.set($value = $$props.$value);
+    	};
+
+    	let value;
+    	let id;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_value($$invalidate("value", value = knot.value));
+    		}
+
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+    	};
+
+    	return { knot, value, id, $id, $value };
+    }
+
+    class Stream extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$e, create_fragment$f, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Stream",
+    			options,
+    			id: create_fragment$f.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Stream> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Stream>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Stream>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src/ui/weave/knot/Unknown.svelte generated by Svelte v3.14.1 */
+
+    const file$g = "src/ui/weave/knot/Unknown.svelte";
+
+    function create_fragment$g(ctx) {
+    	let h1;
+    	let t0;
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			h1 = element("h1");
+    			t0 = text("Unknown Knot - ");
+    			t1 = text(ctx.$type);
+    			add_location(h1, file$g, 7, 0, 58);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h1, anchor);
+    			append_dev(h1, t0);
+    			append_dev(h1, t1);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.$type) set_data_dev(t1, ctx.$type);
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$g.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$f($$self, $$props, $$invalidate) {
+    	let $type,
+    		$$unsubscribe_type = noop,
+    		$$subscribe_type = () => ($$unsubscribe_type(), $$unsubscribe_type = subscribe(type, $$value => $$invalidate("$type", $type = $$value)), type);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_type());
+    	let { knot } = $$props;
+    	const writable_props = ["knot"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Unknown> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { knot, type, $type };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("type" in $$props) $$subscribe_type($$invalidate("type", type = $$props.type));
+    		if ("$type" in $$props) type.set($type = $$props.$type);
+    	};
+
+    	let type;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_type($$invalidate("type", type = knot.knot));
+    		}
+    	};
+
+    	return { knot, type, $type };
+    }
+
+    class Unknown extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$f, create_fragment$g, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Unknown",
+    			options,
+    			id: create_fragment$g.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Unknown> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Unknown>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Unknown>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    var mirror = (node, canvas) => ({
+      destroy: frame.subscribe(() => {
+        // push to the end of the subscribe
+        requestAnimationFrame(() => {
+          node.src = canvas.toDataURL(`image/jpeg`);
+        });
+      })
+    });
+
+    /* src/ui/weave/knot/Screen.svelte generated by Svelte v3.14.1 */
+    const file$h = "src/ui/weave/knot/Screen.svelte";
+
+    function create_fragment$h(ctx) {
+    	let div2;
+    	let div0;
+    	let t0;
+    	let img;
+    	let mirror_action;
+    	let t1;
+    	let div1;
+    	let current;
+
+    	const port0 = new Port({
+    			props: {
+    				writable: true,
+    				address: `${ctx.$id}|write`
+    			},
+    			$$inline: true
+    		});
+
+    	const port1 = new Port({
+    			props: { address: `${ctx.$id}|read` },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div0 = element("div");
+    			create_component(port0.$$.fragment);
+    			t0 = space();
+    			img = element("img");
+    			t1 = space();
+    			div1 = element("div");
+    			create_component(port1.$$.fragment);
+    			attr_dev(div0, "class", "port svelte-74qeok");
+    			add_location(div0, file$h, 13, 2, 225);
+    			attr_dev(img, "class", "view svelte-74qeok");
+    			attr_dev(img, "alt", "mirror");
+    			add_location(img, file$h, 17, 2, 303);
+    			attr_dev(div1, "class", "port svelte-74qeok");
+    			add_location(div1, file$h, 19, 2, 364);
+    			attr_dev(div2, "class", "main svelte-74qeok");
+    			add_location(div2, file$h, 12, 0, 204);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
+    			mount_component(port0, div0, null);
+    			append_dev(div2, t0);
+    			append_dev(div2, img);
+    			mirror_action = mirror.call(null, img, ctx.value.get()) || ({});
+    			append_dev(div2, t1);
+    			append_dev(div2, div1);
+    			mount_component(port1, div1, null);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const port0_changes = {};
+    			if (changed.$id) port0_changes.address = `${ctx.$id}|write`;
+    			port0.$set(port0_changes);
+    			if (is_function(mirror_action.update) && changed.value) mirror_action.update.call(null, ctx.value.get());
+    			const port1_changes = {};
+    			if (changed.$id) port1_changes.address = `${ctx.$id}|read`;
+    			port1.$set(port1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(port0.$$.fragment, local);
+    			transition_in(port1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(port0.$$.fragment, local);
+    			transition_out(port1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			destroy_component(port0);
+    			if (mirror_action && is_function(mirror_action.destroy)) mirror_action.destroy();
+    			destroy_component(port1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$h.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$g($$self, $$props, $$invalidate) {
+    	let $id,
+    		$$unsubscribe_id = noop,
+    		$$subscribe_id = () => ($$unsubscribe_id(), $$unsubscribe_id = subscribe(id, $$value => $$invalidate("$id", $id = $$value)), id);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_id());
+    	let { knot } = $$props;
+    	const writable_props = ["knot"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Screen> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$set = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    	};
+
+    	$$self.$capture_state = () => {
+    		return { knot, id, vertex, fragment, value, $id };
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("knot" in $$props) $$invalidate("knot", knot = $$props.knot);
+    		if ("id" in $$props) $$subscribe_id($$invalidate("id", id = $$props.id));
+    		if ("vertex" in $$props) vertex = $$props.vertex;
+    		if ("fragment" in $$props) fragment = $$props.fragment;
+    		if ("value" in $$props) $$invalidate("value", value = $$props.value);
+    		if ("$id" in $$props) id.set($id = $$props.$id);
+    	};
+
+    	let id;
+    	let vertex;
+    	let fragment;
+    	let value;
+
+    	$$self.$$.update = (changed = { knot: 1 }) => {
+    		if (changed.knot) {
+    			 $$subscribe_id($$invalidate("id", id = knot.id));
+    		}
+
+    		if (changed.knot) {
+    			 vertex = knot.vertex;
+    		}
+
+    		if (changed.knot) {
+    			 fragment = knot.fragment;
+    		}
+
+    		if (changed.knot) {
+    			 $$invalidate("value", value = knot.value);
+    		}
+    	};
+
+    	return { knot, id, value, $id };
+    }
+
+    class Screen extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$g, create_fragment$h, safe_not_equal, { knot: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Screen",
+    			options,
+    			id: create_fragment$h.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || ({});
+
+    		if (ctx.knot === undefined && !("knot" in props)) {
+    			console.warn("<Screen> was created without expected prop 'knot'");
+    		}
+    	}
+
+    	get knot() {
+    		throw new Error("<Screen>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set knot(value) {
+    		throw new Error("<Screen>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    // spawnable types
+
+    var knot_kinds = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        mail: Mail,
+        math: Math$1,
+        stitch: Stitch,
+        stream: Stream,
+        unknown: Unknown,
+        screen: Screen
+    });
+
+    /* src/ui/weave/Weave.svelte generated by Svelte v3.14.1 */
+
+    const { Object: Object_1$3 } = globals;
+    const file$i = "src/ui/weave/Weave.svelte";
+
+    function get_each_context$3(ctx, list, i) {
+    	const child_ctx = Object_1$3.create(ctx);
+    	child_ctx.knot = list[i];
+    	return child_ctx;
+    }
+
+    // (54:2) <Knot      {knot}     title={get_title(knot)}    >
+    function create_default_slot$4(ctx) {
+    	let t;
+    	let current;
+    	var switch_value = ctx.get_ui(ctx.knot);
+
+    	function switch_props(ctx) {
+    		return {
+    			props: { knot: ctx.knot },
+    			$$inline: true
+    		};
+    	}
+
+    	if (switch_value) {
+    		var switch_instance = new switch_value(switch_props(ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			if (switch_instance) create_component(switch_instance.$$.fragment);
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			if (switch_instance) {
+    				mount_component(switch_instance, target, anchor);
+    			}
+
+    			insert_dev(target, t, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const switch_instance_changes = {};
+    			if (changed.$knots) switch_instance_changes.knot = ctx.knot;
+
+    			if (switch_value !== (switch_value = ctx.get_ui(ctx.knot))) {
+    				if (switch_instance) {
+    					group_outros();
+    					const old_component = switch_instance;
+
+    					transition_out(old_component.$$.fragment, 1, 0, () => {
+    						destroy_component(old_component, 1);
+    					});
+
+    					check_outros();
+    				}
+
+    				if (switch_value) {
+    					switch_instance = new switch_value(switch_props(ctx));
+    					create_component(switch_instance.$$.fragment);
+    					transition_in(switch_instance.$$.fragment, 1);
+    					mount_component(switch_instance, t.parentNode, t);
+    				} else {
+    					switch_instance = null;
+    				}
+    			} else if (switch_value) {
+    				switch_instance.$set(switch_instance_changes);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			if (switch_instance) transition_in(switch_instance.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (switch_instance) transition_out(switch_instance.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (switch_instance) destroy_component(switch_instance, detaching);
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$4.name,
+    		type: "slot",
+    		source: "(54:2) <Knot      {knot}     title={get_title(knot)}    >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (53:0) {#each Object.values($knots) as knot (knot.id.get())}
+    function create_each_block$3(key_1, ctx) {
+    	let first;
+    	let current;
+
+    	const knot = new Knot({
+    			props: {
+    				knot: ctx.knot,
+    				title: ctx.get_title(ctx.knot),
+    				$$slots: { default: [create_default_slot$4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			first = empty();
+    			create_component(knot.$$.fragment);
+    			this.first = first;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, first, anchor);
+    			mount_component(knot, target, anchor);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const knot_changes = {};
+    			if (changed.$knots) knot_changes.knot = ctx.knot;
+    			if (changed.$knots) knot_changes.title = ctx.get_title(ctx.knot);
+
+    			if (changed.$$scope || changed.$knots) {
+    				knot_changes.$$scope = { changed, ctx };
+    			}
+
+    			knot.$set(knot_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(knot.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(knot.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(first);
+    			destroy_component(knot, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$3.name,
+    		type: "each",
+    		source: "(53:0) {#each Object.values($knots) as knot (knot.id.get())}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$i(ctx) {
+    	let t0;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let div;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let current;
+    	const mainscreen = new MainScreen({ $$inline: true });
+
+    	const controls = new Controls({
+    			props: { weave: ctx.weave },
+    			$$inline: true
+    		});
+
+    	const picker = new Picker({
+    			props: { weave: ctx.weave },
+    			$$inline: true
+    		});
+
+    	const threads = new Threads({
+    			props: { weave: ctx.weave },
+    			$$inline: true
+    		});
+
+    	let each_value = Object.values(ctx.$knots);
+    	const get_key = ctx => ctx.knot.id.get();
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context$3(ctx, each_value, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$3(key, child_ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			create_component(mainscreen.$$.fragment);
+    			t0 = space();
+    			create_component(controls.$$.fragment);
+    			t1 = space();
+    			create_component(picker.$$.fragment);
+    			t2 = space();
+    			create_component(threads.$$.fragment);
+    			t3 = space();
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "class", "knots svelte-sokzvx");
+    			add_location(div, file$i, 49, 0, 948);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(mainscreen, target, anchor);
+    			insert_dev(target, t0, anchor);
+    			mount_component(controls, target, anchor);
+    			insert_dev(target, t1, anchor);
+    			mount_component(picker, target, anchor);
+    			insert_dev(target, t2, anchor);
+    			mount_component(threads, target, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			const each_value = Object.values(ctx.$knots);
+    			group_outros();
+    			each_blocks = update_keyed_each(each_blocks, changed, get_key, 1, ctx, each_value, each_1_lookup, div, outro_and_destroy_block, create_each_block$3, null, get_each_context$3);
+    			check_outros();
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(mainscreen.$$.fragment, local);
+    			transition_in(controls.$$.fragment, local);
+    			transition_in(picker.$$.fragment, local);
+    			transition_in(threads.$$.fragment, local);
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(mainscreen.$$.fragment, local);
+    			transition_out(controls.$$.fragment, local);
+    			transition_out(picker.$$.fragment, local);
+    			transition_out(threads.$$.fragment, local);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(mainscreen, detaching);
+    			if (detaching) detach_dev(t0);
+    			destroy_component(controls, detaching);
+    			if (detaching) detach_dev(t1);
+    			destroy_component(picker, detaching);
+    			if (detaching) detach_dev(t2);
+    			destroy_component(threads, detaching);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(div);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$i.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$h($$self, $$props, $$invalidate) {
+    	let $knots;
+    	const id = random(2);
+    	const weave = get(id);
+    	woven.set(id);
+    	const knots = weave.knots;
+    	validate_store(knots, "knots");
+    	component_subscribe($$self, knots, value => $$invalidate("$knots", $knots = value));
+
+    	const titles = {
+    		"math": "mAtH",
+    		stream: "sTrEaM",
+    		screen: "sCrEeN",
+    		mail: "mAiL",
+    		stitch: ""
+    	};
+
+    	const get_title = knot => {
+    		const type = knot.knot.get();
+    		return titles[type];
+    	};
+
+    	const get_ui = knot => {
+    		const ui = knot_kinds[knot.knot.get()];
+    		return ui === undefined ? Unknown : ui;
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("$knots" in $$props) knots.set($knots = $$props.$knots);
+    	};
+
+    	return { weave, knots, get_title, get_ui, $knots };
+    }
+
+    class Weave$1 extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$h, create_fragment$i, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Weave",
+    			options,
+    			id: create_fragment$i.name
+    		});
+    	}
+    }
+
+    var scroller = (node, {
+      rate = 100
+    } = false) => {
+      if (!node.style.transition) {
+        node.style.transition = `transform 250ms linear`;
+      }
+      let clutch = false;
+      let offset = 0;
+      const update = (amount = 0) => {
+        if (Number.isNaN(amount)) return
+        if (
+          Math.abs(offset + amount) > node.offsetHeight ||
+          offset + amount > 0
+        ) return
+
+        offset += amount;
+        node.style.transform = `translate(0, ${offset}px)`;
+      };
+
+      const cancels = [
+        tick.subscribe(() => {
+          if (clutch) return
+          update(-5);
+        }),
+        scroll.subscribe(({ deltaY }) => {
+          update(deltaY);
+          if (clutch) clearTimeout(clutch);
+          node.style.transition = `none`;
+          clutch = setTimeout(() => {
+            clutch = false;
+            node.style.transition = `transform 250ms linear`;
+          }, 1000);
+        })
+      ];
+
+      return {
+        destroy: () => cancels.forEach(fn => fn())
+      }
+    };
+
+    /* src/ui/app/Credits.svelte generated by Svelte v3.14.1 */
+
+    const { Object: Object_1$4 } = globals;
+    const file$j = "src/ui/app/Credits.svelte";
+
+    function get_each_context_2(ctx, list, i) {
+    	const child_ctx = Object_1$4.create(ctx);
+    	child_ctx.h3 = list[i][0];
+    	child_ctx.link = list[i][1];
+    	return child_ctx;
+    }
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = Object_1$4.create(ctx);
+    	child_ctx.h2 = list[i][0];
+    	child_ctx.sub2 = list[i][1];
+    	return child_ctx;
+    }
+
+    function get_each_context$4(ctx, list, i) {
+    	const child_ctx = Object_1$4.create(ctx);
+    	child_ctx.h1 = list[i][0];
+    	child_ctx.sub1 = list[i][1];
+    	return child_ctx;
+    }
+
+    // (72:4) {#each Object.entries(sub2) as [h3, link]}
+    function create_each_block_2(ctx) {
+    	let h3;
+    	let a;
+    	let t_value = ctx.h3 + "";
+    	let t;
+    	let a_href_value;
+
+    	const block = {
+    		c: function create() {
+    			h3 = element("h3");
+    			a = element("a");
+    			t = text(t_value);
+    			attr_dev(a, "href", a_href_value = ctx.link);
+    			attr_dev(a, "target", "_new");
+    			add_location(a, file$j, 72, 10, 2073);
+    			add_location(h3, file$j, 72, 6, 2069);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h3, anchor);
+    			append_dev(h3, a);
+    			append_dev(a, t);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h3);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_2.name,
+    		type: "each",
+    		source: "(72:4) {#each Object.entries(sub2) as [h3, link]}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (70:2) {#each Object.entries(sub1) as [h2, sub2]}
+    function create_each_block_1(ctx) {
+    	let h2;
+    	let t0_value = ctx.h2 + "";
+    	let t0;
+    	let t1;
+    	let each_1_anchor;
+    	let each_value_2 = Object.entries(ctx.sub2);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_2.length; i += 1) {
+    		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			h2 = element("h2");
+    			t0 = text(t0_value);
+    			t1 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    			add_location(h2, file$j, 70, 4, 2002);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h2, anchor);
+    			append_dev(h2, t0);
+    			insert_dev(target, t1, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.Object || changed.credits) {
+    				each_value_2 = Object.entries(ctx.sub2);
+    				let i;
+
+    				for (i = 0; i < each_value_2.length; i += 1) {
+    					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    					} else {
+    						each_blocks[i] = create_each_block_2(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_2.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(t1);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(70:2) {#each Object.entries(sub1) as [h2, sub2]}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (68:0) {#each Object.entries(credits) as [h1, sub1]}
+    function create_each_block$4(ctx) {
+    	let h1;
+    	let t0_value = ctx.h1 + "";
+    	let t0;
+    	let t1;
+    	let each_1_anchor;
+    	let each_value_1 = Object.entries(ctx.sub1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			h1 = element("h1");
+    			t0 = text(t0_value);
+    			t1 = space();
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    			attr_dev(h1, "class", "svelte-106oxtp");
+    			add_location(h1, file$j, 68, 2, 1939);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h1, anchor);
+    			append_dev(h1, t0);
+    			insert_dev(target, t1, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.Object || changed.credits) {
+    				each_value_1 = Object.entries(ctx.sub1);
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    					} else {
+    						each_blocks[i] = create_each_block_1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_1.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h1);
+    			if (detaching) detach_dev(t1);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$4.name,
+    		type: "each",
+    		source: "(68:0) {#each Object.entries(credits) as [h1, sub1]}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$j(ctx) {
+    	let div;
+    	let scroller_action;
+    	let each_value = Object.entries(ctx.credits);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$4(get_each_context$4(ctx, each_value, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(div, "class", "credits svelte-106oxtp");
+    			add_location(div, file$j, 66, 0, 1856);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div, null);
+    			}
+
+    			scroller_action = scroller.call(null, div) || ({});
+    		},
+    		p: function update(changed, ctx) {
+    			if (changed.Object || changed.credits) {
+    				each_value = Object.entries(ctx.credits);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$4(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    					} else {
+    						each_blocks[i] = create_each_block$4(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_each(each_blocks, detaching);
+    			if (scroller_action && is_function(scroller_action.destroy)) scroller_action.destroy();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$j.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$i($$self) {
+    	const credits = {
+    		"EarthRock": {
+    			"Open Source": {
+    				"github.com/agoblinking/earthrock": "http://github.com/agoblinking/earthrock"
+    			},
+    			"Producer": {
+    				"A Goblin King": "mailto:agolbinking@earthrock.run"
+    			},
+    			"Designer": {
+    				"J. Goblin": "mailto:j.goblin@earthrock.run"
+    			},
+    			"Artist": {
+    				"Jorsch Goblin": "mailto:jorsch_goblin@earthrock.run"
+    			},
+    			"Original Sound Track": {
+    				"DayStar Collective": `https://music.apple.com/us/artist/daystar-collective/1484557546`
+    			},
+    			"Programmer": { "Glaive": "mailto:glaive@earthrock.run" },
+    			"Operations": {
+    				"These Are All": "mailto:pseudonyms@earthrock.run"
+    			}
+    		},
+    		"External": {
+    			"Assets": { "Kenney": `http://assetjesus.com` },
+    			"Services": { "GitHub": `http://github.com/` },
+    			"Libraries": {
+    				"TWGL.js": "https://github.com/greggman/twgl.js",
+    				"Svelte": "https://github.com/sveltejs/svelte",
+    				"color": "https://github.com/Qix-/color",
+    				"Tone.js": "https://github.com/Tonejs/Tone.js",
+    				"Rollup": "https://github.com/rollup/rollup",
+    				"Node.js": "https://nodejs.org",
+    				"cuid": "",
+    				"expr-eval": "",
+    				"A Ton of Roll Up Plugins": "https://github.com/AGoblinKing/EarthRock/blob/master/package.json"
+    			},
+    			"Languages": {
+    				"Go": "https://golang.org/",
+    				"JavaScript": "http://devdocs.io"
+    			},
+    			"IDE": {
+    				"Visual Studio Code": "https://code.visualstudio.com/",
+    				"Theme - Cyberpunk - UMBRA protocol": "https://marketplace.visualstudio.com/items?itemName=max-SS.cyberpunk"
+    			}
+    		},
+    		"Special Thanks": {
+    			"Greg": {},
+    			"Robert": {},
+    			"Luna": {},
+    			"Godzirra the Burninator": {},
+    			"Ember": {},
+    			"Tic Tac Toe": {}
+    		}
+    	};
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		
+    	};
+
+    	return { credits };
+    }
+
+    class Credits extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$i, create_fragment$j, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Credits",
+    			options,
+    			id: create_fragment$j.name
+    		});
+    	}
+    }
+
+    /* src/ui/app/app.svelte generated by Svelte v3.14.1 */
+    const file$k = "src/ui/app/app.svelte";
+
+    function create_fragment$k(ctx) {
+    	let t0;
+    	let t1;
+    	let div;
+    	let current;
+    	var switch_value = ctx.$view;
+
+    	function switch_props(ctx) {
+    		return { $$inline: true };
+    	}
+
+    	if (switch_value) {
+    		var switch_instance = new switch_value(switch_props());
+    	}
+
+    	const tools = new Tools({ $$inline: true });
+    	const tile = new Tile_1({ props: { random: true }, $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			if (switch_instance) create_component(switch_instance.$$.fragment);
+    			t0 = space();
+    			create_component(tools.$$.fragment);
+    			t1 = space();
+    			div = element("div");
+    			create_component(tile.$$.fragment);
+    			attr_dev(div, "class", "background svelte-4esgp2");
+    			add_location(div, file$k, 28, 0, 563);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			if (switch_instance) {
+    				mount_component(switch_instance, target, anchor);
+    			}
+
+    			insert_dev(target, t0, anchor);
+    			mount_component(tools, target, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div, anchor);
+    			mount_component(tile, div, null);
+    			current = true;
+    		},
+    		p: function update(changed, ctx) {
+    			if (switch_value !== (switch_value = ctx.$view)) {
+    				if (switch_instance) {
+    					group_outros();
+    					const old_component = switch_instance;
+
+    					transition_out(old_component.$$.fragment, 1, 0, () => {
+    						destroy_component(old_component, 1);
+    					});
+
+    					check_outros();
+    				}
+
+    				if (switch_value) {
+    					switch_instance = new switch_value(switch_props());
+    					create_component(switch_instance.$$.fragment);
+    					transition_in(switch_instance.$$.fragment, 1);
+    					mount_component(switch_instance, t0.parentNode, t0);
+    				} else {
+    					switch_instance = null;
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			if (switch_instance) transition_in(switch_instance.$$.fragment, local);
+    			transition_in(tools.$$.fragment, local);
+    			transition_in(tile.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (switch_instance) transition_out(switch_instance.$$.fragment, local);
+    			transition_out(tools.$$.fragment, local);
+    			transition_out(tile.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (switch_instance) destroy_component(switch_instance, detaching);
+    			if (detaching) detach_dev(t0);
+    			destroy_component(tools, detaching);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div);
+    			destroy_component(tile);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$k.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$j($$self, $$props, $$invalidate) {
+    	let $view;
+
+    	const paths = {
+    		cards: Design,
+    		weave: Weave$1,
+    		"/": Intro,
+    		credits: Credits
+    	};
+
+    	let view = derived$1(path, $path => paths[$path] || Intro);
+    	validate_store(view, "view");
+    	component_subscribe($$self, view, value => $$invalidate("$view", $view = value));
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		if ("view" in $$props) $$invalidate("view", view = $$props.view);
+    		if ("$view" in $$props) view.set($view = $$props.$view);
+    	};
+
+    	return { view, $view };
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$j, create_fragment$k, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment$k.name
+    		});
+    	}
+    }
+
+    window.Wheel = Wheel$1;
+
+    const app = new App({
+      target: document.body,
+      props: {
+        name: `stage`
+      }
+    });
+
+    return app;
+
+}(Tone, cuid, twgl, exprEval, Color));
+//# sourceMappingURL=bundle.js.map

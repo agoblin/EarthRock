@@ -1,77 +1,150 @@
-import { writable, get, readable } from "svelte/store"
+import { write, read, derived, transformer } from "/util/store.js"
 
-import * as Types from "./types.js"
-import Hole from "./type/hole.js"
 import { random } from "/util/text.js"
 
+import Knot from "./knot.js"
+import uuid from "cuid"
+
+// Weave of holes connected with threads
 export default ({
+  name = random(2),
+  id = uuid(),
+
   // just some default nodes for start
-  holes = {
-    // guarantees the key and id will be the same
-    example: {
-      name: `example`,
-      type: ` stitch`,
+  knots = {
+    mail: {
+      knot: `mail`
+    },
+    stream: {
+      knot: `stream`
+    },
+    math: {
+      knot: `math`,
+      math: `[v[0]/10, v[1]/10]`
+    },
+    stitch: {
+      name: `player`,
+      knot: `stitch`,
       value: {
-        [random(1)]: random(2),
-        [random(1)]: random(2)
+        position: [0, 0]
       }
+    },
+    screen: {
+      knot: `screen`
+    },
+    main: {
+      knot: `mail`,
+      whom: `/sys/screen/main`
     }
   },
-  type = ``,
-  threads = {},
-  name = `\\/\\/eave ${random(2)}`,
-  ...junk
+
+  threads = {
+    mail: `stream`,
+    stream: `math`,
+    math: `stitch/position`,
+    screen: `main`
+  }
 } = false) => {
   let threads_set
 
-  const w = Hole({
-    ...junk,
-    name,
-    holes: writable(Object
-      .entries(holes)
-      .reduce((res, [hole_name, val]) => {
-        const type = val.type.slice(1).split(` `).pop()
+  const w = {
+    id: read(id),
+    knot: read(`weave`),
 
-        if (!Types[type]) return console.error(`!UnKoWn TyPe> ${type} - ${name}|${name}`)
-        res[hole_name] = Types[type](val)
-        return res
-      }, {})
-    ),
-    type: `${type} weave`,
-    threads: readable(threads, set => {
+    name: write(name),
+
+    threads: read(threads, set => {
       threads_set = set
     }),
-    // okay this important so you can clean up bad wires
-    give_thread: writable(),
-    take_thread: writable()
-  })
+
+    lives: write([]),
+    mails: write({}),
+    give_thread: write(),
+    give_knot: transformer((knot) => {
+      const k = Knot(knot)
+
+      w.knots.update((knots) => ({
+        ...knots,
+        [k.id]: k
+      }))
+
+      return k
+    })
+  }
+
+  const life_set = w.lives.set
+
+  w.lives.set = undefined
+  const life_add = (life) => life_set([
+    ...w.lives.get(),
+    life
+  ])
+
+  w.add = (properties) => {
+    const k = Knot({
+      ...properties,
+      weave: w,
+      life: life_add
+    })
+
+    w.knots.update(($knots) => ({
+      ...$knots,
+      [k.id.get()]: k
+    }))
+  }
+
+  w.knots = write(Object
+    .entries(knots)
+    .reduce((res, [knot_id, val]) => {
+      if (val.id !== knot_id) {
+        val.id = knot_id
+      }
+
+      res[knot_id] = Knot({
+        ...val,
+        weave: w,
+        life: life_add
+      })
+
+      return res
+    }, {})
+  )
+
+  // index by name, uniqueness not guaranteed
+  // Stitches only right now
+  w.names = derived(w.knots, ($knots) => Object.fromEntries(
+    Object.values($knots)
+      .filter(({ knot }) => knot.get() === `stitch`)
+      .map(
+        (knot) => [
+          knot.name.get(),
+          knot
+        ]
+      )
+  ))
 
   w.give_thread.subscribe((match) => {
     if (!match) return
 
-    const [x, y] = match
+    const [[
+      x_id,
+      x_dir
+    ], [
+      y_id,
+      y_dir
+    ]] = match.map((address) => address.split(`|`))
 
-    const [x_name, y_name] = [x.split(`|`).length === 1, y.split(`|`).length === 1]
-
-    const is_name = x_name || y_name
-
-    // red to blue not samies
-    if (!is_name && x.slice(-1) === y.slice(-1)) return
-    if (is_name && x[0] === `/` && y[0] === `/`) return
-    const threads = get(w.threads)
-
-    // clean up
-    if (threads[x]) {
-      delete threads[threads[x]]
+    if (x_dir === y_dir) {
+      console.warn(`Tried to match same direction`)
+      return
     }
 
-    if (threads[y]) {
-      delete threads[threads[y]]
-    }
+    const target = [x_id, y_id]
+    x_dir === `write` && target.reverse()
 
-    threads[x] = y
-    threads[y] = x
+    const threads = w.threads.get()
 
+    threads[target[0]] = target[1]
     threads_set(threads)
   })
 

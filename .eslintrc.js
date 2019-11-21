@@ -4,6 +4,9 @@ module.exports = {
     "env": {
         browser: true
     },
+    "globals": {
+      "Wheel": "readonly"
+    },
     "plugins": [
         "svelte3"
     ],
@@ -12,6 +15,7 @@ module.exports = {
         processor: 'svelte3/svelte3'
     }],
     "rules": {
+        "multiline-ternary": ["error", "always"],
         "import/no-absolute-path": ["off"],
         "import/first": ["off"],
         quotes: ["error", "backtick"],
