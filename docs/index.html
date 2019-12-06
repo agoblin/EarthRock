@@ -23,19 +23,22 @@
 			font-family: 'Press Start 2P';
 			src: url('/PressStart2P-Regular.ttf') format('truetype');
 		}
-
-		:root {
-			font-size: 62.5%;
-		}
-
+    html {
+      font-size: 10px;
+    }
+    
 		html, window, body {
 			user-select: none;
 			margin: 0;
 			padding: 0;
-			background-color: rgb(252, 241, 221);
+			background-color: rgb(25, 71, 14);
+      color: white;
 			overflow: hidden;
 			font-family: 'Press Start 2P', cursive;
-			cursor: pointer;
+      cursor: pointer;
+      touch-action: none;
+      image-rendering: crisp-edges;
+			image-rendering: pixelated;
 		}
 
 		img, canvas {
@@ -64,7 +67,7 @@
 			font-size: 1rem;
 		}
 
-		input {
+		input, textarea {
 			width: auto;
 			background: transparent;
 			border: none;
@@ -89,6 +92,6 @@
 		<div class="tiny">Also we don't use cookies, yadda yadda EU GDPR stuff.</div>
 	</noscript>
 
-	<script src='/bundle.js?t=1574344199479'></script>
+	<script src='/bundle.js?t=1575670503654'></script>
 </body>
 </html>

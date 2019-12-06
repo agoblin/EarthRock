@@ -1,51 +1,51 @@
 <script>
 import { size } from "/sys/screen.js"
-import { feed } from "/sys/wheel.js"
-import { frame, tick} from "/sys/time.js"
+import { frame, tick } from "/sys/time.js"
 import { first } from "/sys/port-connection.js"
 import { position } from "/sys/mouse.js"
-import { derived, read } from "/util/store.js"
+import { read } from "/util/store.js"
 
 export let weave
 
+const val = new Set()
 // filter for just this weave
-const recent = read(new Set(), (set) => {
+const recent = read(val, (set) => {
   let t = 0
 
   const deletes = {}
 
   tick.subscribe(() => {
-    t += 250
+    t += 100
     const dels = Object.entries(deletes)
-    if(dels.length === 0) return
- 
-    const r = recent.get()
+    if (dels.length === 0) return
+
+    const r = val
 
     let change = false
     dels.forEach(([key, del_t]) => {
-      if(del_t < t) {
+      if (del_t < t) {
         r.delete(key)
         delete deletes[key]
         change = true
       }
     })
 
-    if(change) set(r)
+    if (change) set(r)
   })
 
-  feed.subscribe(({ writer, reader }) => {
-    if(!writer || !reader) return
+  Wheel.feed.subscribe(({ writer, reader }) => {
+    if (!writer || !reader) return
 
-    const [weave_write, ...local_write] = writer.split("/")
-    const [weave_read, ...local_read] = reader.split("/")
+    const [weave_write, ...local_write] = writer.split(`/`)
+    const [weave_read, ...local_read] = reader.split(`/`)
     const weave_id = weave.name.get()
 
     // takes place in this weave!
-    if(weave_id !== weave_write && weave_id !== weave_read) return
-    const id = `${local_read.join("/")}-${local_write.join("/")}`
+    if (weave_id !== weave_write && weave_id !== weave_read) return
+    const id = `${local_read.join(`/`)}-${local_write.join(`/`)}`
 
-    const s_recent = recent.get()
-    if(!s_recent.has(id)) {
+    const s_recent = val
+    if (!s_recent.has(id)) {
       s_recent.add(id)
       set(s_recent)
     }
@@ -66,10 +66,13 @@ const get_color = (id) => {
 }
 
 // tick to recculate position
-$: threads = $frame ? weave.threads : weave.threads
+$: threads = $frame
+  ? weave.threads
+  : weave.threads
+
 $: rects = Object.entries($threads)
-  .filter(([x, y]) => 
-    document.getElementById(`${x}|read`) && 
+  .filter(([x, y]) =>
+    document.getElementById(`${x}|read`) &&
     document.getElementById(`${y}|write`)
   )
   .map(
@@ -81,7 +84,9 @@ $: rects = Object.entries($threads)
     ]
   )
 
-$: first_rec = $first ? get_pos($first) : [0, 0]
+$: first_rec = $first
+  ? get_pos($first)
+  : [0, 0]
 </script>
 
 <svg width={$size[0]} height={$size[1]} class="threads">
@@ -136,7 +141,6 @@ $: first_rec = $first ? get_pos($first) : [0, 0]
         x2={y.x + y.width / 2} 
         y2={y.y + y.height / 2} 
         class="active"
-        style={`animation-delay: ${x.x}ms;`}
       >
       </line> 
       {/if}
@@ -144,28 +148,14 @@ $: first_rec = $first ? get_pos($first) : [0, 0]
 </svg>
 
 <style>
-
 .active {
-  opacity: 0;
-  stroke-width:10;
-  animation: 500ms linear moveit infinite alternate;
+  stroke-width:1rem;
 }
 
 .line {
-  stroke-width: 4;
-  opacity: 0.75;
-  transition: all 250ms linear;
+  stroke-width: 0.25rem;
 }
 
-@keyframes moveit {
-  0% {
-    opacity: 0.25;
-  }
-
-  100% {
-    opacity: 0.5;
-  }
-}
 .threads {
   pointer-events: none;
   z-index: 200;

@@ -1,6 +1,6 @@
 <script>
 import { button_press, button } from "/sound/ui.js"
-import {path} from "/sys/path.js"
+import { path } from "/sys/path.js"
 
 const audio = new Audio(`/music/earthrock-final-theme.mp3`)
 audio.loop = true
@@ -19,29 +19,30 @@ const toggle = () => {
 }
 
 const end = () => {
-  path.set('')
+  path.set(``)
   button_press()
 }
-
 </script>
 
 <div class="tools">
-    <div on:click={toggle}>
-        {audo_playing ? `>` : `!>`}
-    </div>
+    
     {#if $path !== false && $path !== ``}
         <div on:click={end} on:mouseenter={button}>
             X
         </div>
     {/if}
+    <div on:click={toggle}>
+        {audo_playing ? `>` : `!>`}
+    </div>
 </div>
 
 <style>
 .tools {
     display: flex;
     position: absolute; 
-    right: 0;
+    left: 0;
     z-index: 1100;
+    filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
 }
 
 .tools > * {
@@ -55,9 +56,9 @@ const end = () => {
     text-align: center;
 }
 .tools > *:hover {
-    color: #222;
+    color: rgb(245, 222, 13);
 }
 .tools > *:active {
-    color: #111;
+    color: rgb(255, 255, 255);
 }
 </style>

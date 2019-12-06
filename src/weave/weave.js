@@ -1,4 +1,4 @@
-import { write, read, derived, transformer } from "/util/store.js"
+import { write, read, transformer, derived } from "/util/store.js"
 
 import { random } from "/util/text.js"
 
@@ -9,41 +9,8 @@ import uuid from "cuid"
 export default ({
   name = random(2),
   id = uuid(),
-
-  // just some default nodes for start
-  knots = {
-    mail: {
-      knot: `mail`
-    },
-    stream: {
-      knot: `stream`
-    },
-    math: {
-      knot: `math`,
-      math: `[v[0]/10, v[1]/10]`
-    },
-    stitch: {
-      name: `player`,
-      knot: `stitch`,
-      value: {
-        position: [0, 0]
-      }
-    },
-    screen: {
-      knot: `screen`
-    },
-    main: {
-      knot: `mail`,
-      whom: `/sys/screen/main`
-    }
-  },
-
-  threads = {
-    mail: `stream`,
-    stream: `math`,
-    math: `stitch/position`,
-    screen: `main`
-  }
+  knots = {},
+  threads = {}
 } = false) => {
   let threads_set
 
@@ -59,6 +26,7 @@ export default ({
 
     lives: write([]),
     mails: write({}),
+    take_thread: write(),
     give_thread: write(),
     give_knot: transformer((knot) => {
       const k = Knot(knot)
@@ -69,7 +37,24 @@ export default ({
       }))
 
       return k
-    })
+    }),
+    toJSON: () => {
+      const {
+        id,
+        knot,
+        name,
+        threads,
+        knots
+      } = w
+
+      return JSON.parse(JSON.stringify({
+        id,
+        knot,
+        name,
+        threads,
+        knots
+      }))
+    }
   }
 
   const life_set = w.lives.set
@@ -91,6 +76,8 @@ export default ({
       ...$knots,
       [k.id.get()]: k
     }))
+
+    return k
   }
 
   w.knots = write(Object
@@ -112,7 +99,7 @@ export default ({
 
   // index by name, uniqueness not guaranteed
   // Stitches only right now
-  w.names = derived(w.knots, ($knots) => Object.fromEntries(
+  w.names = derived(w.knots, ([$knots]) => Object.fromEntries(
     Object.values($knots)
       .filter(({ knot }) => knot.get() === `stitch`)
       .map(
@@ -122,6 +109,16 @@ export default ({
         ]
       )
   ))
+
+  w.take_thread.subscribe((id) => {
+    if (!id) return
+    const $threads = w.threads.get()
+
+    if (!$threads[id]) return
+    delete $threads[id]
+
+    threads_set($threads)
+  })
 
   w.give_thread.subscribe((match) => {
     if (!match) return

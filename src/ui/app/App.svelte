@@ -8,17 +8,15 @@ import Weave from "/ui/weave/Weave.svelte"
 import Credits from "./Credits.svelte"
 import { path } from "/sys/path.js"
 import { derived } from "/util/store.js"
-
+import { tick } from "/sys/time.js"
 const paths = {
   cards: Design,
   weave: Weave,
-  "/": Intro,
   credits: Credits
 }
 
-let view = derived(path, ($path) => paths[$path] || Intro)
+const view = derived(path, ([$path]) => paths[$path[0]] || Intro)
 </script>
-
 
 <svelte:component 
   this={$view}
@@ -27,7 +25,7 @@ let view = derived(path, ($path) => paths[$path] || Intro)
 <Tools />
 
 <div class="background">
-    <Tile random/>
+    <Tile random width={5} height={5} />
 </div>
 
 <style>
@@ -39,7 +37,7 @@ let view = derived(path, ($path) => paths[$path] || Intro)
     top: 0;
     left: 0;
     position: absolute;
-    filter: sepia(1) hue-rotate(-90deg);
+    filter: sepia(1) hue-rotate(-90deg) lighten(0.5);
     opacity: 0.05;
     pointer-events: none;
 }

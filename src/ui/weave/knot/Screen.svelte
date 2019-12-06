@@ -5,6 +5,7 @@ import mirror from "/ui/action/mirror.js"
 export let knot
 
 $: id = knot.id
+
 $: vertex = knot.vertex
 $: fragment = knot.fragment
 $: value = knot.value
@@ -28,8 +29,8 @@ $: value = knot.value
   display: flex;
   width: 200px;
   height: 200px;
-  border-left: 0.5rem dashed #333;
-  border-right: 0.5rem dashed #333;
+  border-left: 0.5rem solid  #333;
+  border-right: 0.5rem solid  #333;
 }
 
 .main {

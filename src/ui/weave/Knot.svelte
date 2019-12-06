@@ -1,39 +1,57 @@
 <script>
-import color from "/ui/action/color.js"
 import physics from "/ui/action/physics.js"
 
 import Spatial from "/ui/Spatial.svelte"
-import { add , minus } from "/util/vector.js"
-import { read } from "/util/store.js"
+import { minus, multiply_scalar } from "/util/vector.js"
 
-import { positions, draggee, drag_count, translate} from "/sys/weave.js"
+import {
+  zoom,
+  scroll
+} from "/sys/input.js"
+
+import {
+  positions,
+  draggee,
+  hoveree,
+  drag_count
+} from "/sys/weave.js"
+
 import { position as Mouse } from "/sys/mouse.js"
-import { scale as Scaling, size} from "/sys/screen.js"
 
 export let position = [0, 0, 0]
 export let knot
-export let title = false
 
 $: type = knot.knot
 $: id = knot.id
 
-const update = () => 
-  positions.set({
-    ...positions.get(),
-    [knot.id.get()]: position
-  })
+let dragging = false
+let zIndex = 7
+let tru_position
+
+const update = () => {
+  $positions[knot.id.get()] = position
+  positions.set($positions)
+}
+
+$: {
+  if (dragging) {
+    tru_position = multiply_scalar(minus(
+      $Mouse,
+      $scroll
+    ), 1 / $zoom)
+  } else {
+    tru_position = $positions[$id]
+  }
+}
 
 update()
 
-let dragging = false
-let zIndex = 2
-
 const drag = (e) => {
-  if (  
-    dragging 
-    || e.target.classList.contains(`port`) 
-    || e.target.tagName === `INPUT`
-    || e.target.tagName === `TEXTAREA`
+  if (
+    dragging ||
+    e.target.classList.contains(`no-drag`) ||
+    e.target.tagName === `INPUT` ||
+    e.target.tagName === `TEXTAREA`
   ) {
     return
   }
@@ -43,27 +61,24 @@ const drag = (e) => {
 
   const handler = () => {
     dragging = false
-    position = [
-      $Mouse[0] - $size[0]/2 - $translate[0],
-      $Mouse[1] - $size[1]/2 - $translate[1],
+    position = multiply_scalar([
+      $Mouse[0] - $scroll[0],
+      $Mouse[1] - $scroll[1],
       0
-    ]
+    ], 1 / $zoom)
     update()
-    draggee.set('')
-    zIndex = drag_count.get() 
+    draggee.set(``)
+
+    zIndex = drag_count.get()
     window.removeEventListener(`mouseup`, handler)
   }
 
   window.addEventListener(`mouseup`, handler)
 }
 
-$: tru_position = add(
-  [-50 * $Scaling, -25 * $Scaling], 
-  dragging ? $Mouse : $positions[knot.id.get()],
-  dragging ? [-$size[0]/2, -$size[1]/2] : $translate
-)
-$: tru_scale = (dragging ? 1.168 : 1)
-
+$: tru_scale = dragging
+  ? 1.168
+  : 1
 </script>
 
 <Spatial
@@ -73,34 +88,22 @@ $: tru_scale = (dragging ? 1.168 : 1)
   scale = {tru_scale}
   {zIndex}
 >
-  <div class="adjust">
+  <div 
+    class="adjust" 
+    on:mouseover={() => hoveree.set($id)} 
+    on:mouseout={() => hoveree.set(``)}
+  >
     <div 
       class="knot" 
       on:mousedown={drag}
       use:physics={$id}
     >
-      {#if title}
-      <div class="title">{title}</div>
-      {/if}
       <slot />
     </div>
   </div>
 </Spatial>
 
 <style>
-.adjust {
-  transform: translate(-50%, -50%);
-}
-
-.title {
-  position: relative;
-  z-index: 2;
-  text-shadow: 1px 1px 0 #222, -1px 1px 0 #222,1px -1px 0 #222,-1px -1px 0 #222;
-  color: white;
-  margin-top: -2rem;
-  margin-bottom: -1rem;
-  font-size: 3rem;
-}
 
 .knot {
   display: flex;
@@ -108,10 +111,10 @@ $: tru_scale = (dragging ? 1.168 : 1)
   background-color: #222;
   border: 0.5rem solid black;
   z-index: 1;
-  border-radius: 1rem;
-  filter: drop-shadow(1rem 1rem 0 rgba(0,0,0,0.25));
+  font-size: 0.75rem;
 }
+
 .knot:hover {
-  filter: drop-shadow(1rem 1rem 1rem rgba(0, 255, 0, 0.5)) drop-shadow(1rem 1rem 0 rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0rem 0rem 1rem rgba(0, 255, 0, 0.5));
 }
 </style>

@@ -1,65 +1,63 @@
 <script>
-import * as Wheel from "/sys/wheel.js"
+import { size } from "/sys/screen.js"
 import { woven } from "/sys/weave.js"
-import { scroll } from "/sys/mouse.js"
-import { tick } from "/sys/time.js"
+import { scroll, zoom } from "/sys/input.js"
 
 import MainScreen from "./MainScreen.svelte"
 import Controls from "./Controls.svelte"
 import Threads from "./Threads.svelte"
 import Picker from "./Picker.svelte"
 import Knot from "./Knot.svelte"
+import Explore from "./Explore.svelte"
 
-import { random } from "/util/text.js"
 import * as knot_kinds from "./spawnable.js"
 
-const id = random(2)
-const weave = Wheel.get(id)
-woven.set(id)
+// Reset Scroll
+scroll.set([
+  $size[0] / 2, $size[1] / 2, 0
+])
 
-const knots = weave.knots
+zoom.set(0.75)
 
-const titles = {
-  "math": "mAtH",
-  stream: "sTrEaM",
-  screen: "sCrEeN",
-  mail: "mAiL",
-  stitch: ""
-}
-
-const get_title = (knot) => {
-  const type = knot.knot.get()
-  return titles[type]
-}
+$: knots = $woven.knots
+$: weave = $woven
 
 const get_ui = (knot) => {
   const ui = knot_kinds[knot.knot.get()]
 
-  return ui === undefined 
-    ? knot_kinds.unknown 
+  return ui === undefined
+    ? knot_kinds.unknown
     : ui
 }
-
 </script>
 
 <MainScreen />
 <Controls {weave} />
-<Picker {weave} />
+
 <Threads {weave} />
+<Picker {weave} />
+<Explore />
 
 <div 
   class="knots"
+  style={
+    [
+      `transform:`,
+      `translate3d(${$scroll[0]}px, ${$scroll[1]}px, 0)`,
+      `scale(${$zoom})`,
+      `;`
+    ].join(` `)
+  }
 >
+
 {#each Object.values($knots) as knot (knot.id.get())} 
   <Knot 
     {knot}
-    title={get_title(knot)} 
   >
     <svelte:component this={get_ui(knot)} {knot} /> 
   </Knot>
 {/each}
 </div>
-
 <style>
 :global(input:hover::placeholder, input:focus::placeholder, textarea:hover::placeholder, textarea:focus::placeholder) {
   color: black;
@@ -70,10 +68,9 @@ const get_ui = (knot) => {
 }
 
 .knots {
-  z-index: 5;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  z-index: 6;
+  transition: transform 100ms linear;
 }
 
 </style>

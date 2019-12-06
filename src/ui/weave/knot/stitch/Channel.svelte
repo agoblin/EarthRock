@@ -1,34 +1,44 @@
 <script>
 import Port from "/ui/weave/Port.svelte"
 import color from "/ui/action/color.js"
-import { write } from "/util/store.js"
 
 export let knot
 export let chan
 export let name
 
-const edit = write($chan)
+$: edit = JSON.stringify($chan)
 
 $: id = knot.id
 
-const address = (channel) => `${$id}/${channel}`
-
-const cancel = edit.subscribe((txt) => {
-  let v = txt
+const save = () => {
+  let v = $chan
   try {
-    v = JSON.parse(txt)
+    v = JSON.parse(edit)
+    chan.set(v)
   } catch (ex) {
-    // no biggie
+    // no boggie
+    edit = JSON.stringify($chan)
   }
-  chan.set(v)
-})
-
+}
+const address = (channel) => `${$id}/${channel}`
 </script>
 <div class="channel">
   <Port writable address={`${address(name)}|write`}/>
-  <div class="vbox" use:color={JSON.stringify($chan)}>
-    <div class="name" >{name}</div>
-    <input type="text" class="edit" bind:value={$chan} placeholder="JSON plz"/>
+  <div class="vbox" use:color={JSON.stringify(name)}>
+    <div class="name">{name}</div>
+    <input 
+      class="edit" 
+      type="text" 
+      bind:value={edit} 
+      on:blur={() => {
+        save()
+      }}
+      on:keydown={({ which }) => {
+        if (which !== 13) return
+        save()
+      }}
+      placeholder="JSON plz"
+    />
   </div>
   <Port address={`${address(name)}|read`} />
 </div>
@@ -36,16 +46,15 @@ const cancel = edit.subscribe((txt) => {
 <style>
 
 .name {
-  border-bottom: 0.25rem dashed #222;
+  border-bottom: 0.25rem solid  #222;
 }
 
 .name, .edit {
-  border-right: 0.25rem dashed #222;
-  border-left: 0.25rem dashed #222;
+  border-right: 0.25rem solid  #222;
+  border-left: 0.25rem solid  #222;
   margin: 0;
   padding: 1rem;
   flex: 1;
-
   text-align: center;
 }
 
@@ -53,7 +62,6 @@ const cancel = edit.subscribe((txt) => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  transition: all 150ms linear;
 }
 .edit:hover {
   background-color: green !important;
@@ -66,9 +74,8 @@ const cancel = edit.subscribe((txt) => {
   padding: 0rem 1rem;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
   border:solid 0.25rem #111;
-  width: 35rem;
+  width: 30rem;
 }
 
 .channel:hover {
