@@ -1,4 +1,7 @@
 <script>
+import { THEME_BG } from "/sys/flag.js"
+import border from "/ui/action/border.js"
+import focus from "/ui/action/focus.js"
 import Port from "/ui/weave/Port.svelte"
 import color from "/ui/action/color.js"
 
@@ -7,7 +10,6 @@ export let chan
 export let name
 
 $: edit = JSON.stringify($chan)
-
 $: id = knot.id
 
 const save = () => {
@@ -20,15 +22,19 @@ const save = () => {
     edit = JSON.stringify($chan)
   }
 }
+
 const address = (channel) => `${$id}/${channel}`
 </script>
-<div class="channel">
+<div class="channel" use:border style={`background-color:${$THEME_BG};`}>
   <Port writable address={`${address(name)}|write`}/>
-  <div class="vbox" use:color={JSON.stringify(name)}>
-    <div class="name">{name}</div>
-    <input 
+  <div class="vbox">
+    <div class="name" use:border>{name}</div>
+    <input
+      use:color={JSON.stringify(name)} 
+      use:border
       class="edit" 
-      type="text" 
+      type="text"
+      use:focus={address(name)} 
       bind:value={edit} 
       on:blur={() => {
         save()
@@ -46,18 +52,20 @@ const address = (channel) => `${$id}/${channel}`
 <style>
 
 .name {
-  border-bottom: 0.25rem solid  #222;
+  border-top: none !important;
 }
 
 .name, .edit {
-  border-right: 0.25rem solid  #222;
-  border-left: 0.25rem solid  #222;
   margin: 0;
   padding: 1rem;
   flex: 1;
   text-align: center;
 }
 
+.edit {
+  border-top: none !important;
+  border-bottom: none !important;
+}
 .vbox {
   display: flex;
   flex: 1;
@@ -69,12 +77,10 @@ const address = (channel) => `${$id}/${channel}`
 }
 .channel {
   display: flex;
-  background-color: #333;
-  margin: 0.5rem 0;
+  margin: 2rem 0;
   padding: 0rem 1rem;
   justify-content: center;
   align-items: center;
-  border:solid 0.25rem #111;
   width: 30rem;
 }
 
