@@ -36,13 +36,38 @@ const save = async () => {
     GPS: {}
   }
 
+  const tn = tile(`/${$name}`)
   const t = await Tile({
-    width: 2,
-    height: 2,
-    data: `${tile(`/${$name}`)} `.repeat(4)
+    width: 4,
+    height: 4,
+    data: [
+      `18 19 19 20`,
+      `50 ${tn} 0 52`,
+      `50 0 ${tn} 52`,
+      `82 83 83 84`
+    ].join(` `)
   })
 
-  fs.saveAs(exif.insert(exif.dump(obj), t), `${$name}.seed.jpg`)
+  const image = new Image()
+  image.src = t
+
+  image.onload = () => {
+    const canvas = document.createElement(`canvas`)
+    canvas.width = 64
+    canvas.height = 64
+
+    const ctx = canvas.getContext(`2d`)
+    ctx.imageSmoothingEnabled = false
+    ctx.imageSmoothingQuality = 1
+    ctx.filter = `sepia(1) hue-rotate(90deg)`
+    ctx.drawImage(image, 0, 0, 64, 64, 0, 0, 64, 64)
+    ctx.lineWidth = 4
+    ctx.lineCap = `round`
+    // ctx.rect(0, 0, 64, 64)
+    // ctx.rect(4, 4, 56, 56)
+    ctx.stroke()
+    fs.saveAs(exif.insert(exif.dump(obj), canvas.toDataURL(`image/jpeg`, 0.95)), `${$name}.seed.jpg`)
+  }
 }
 </script>
 
@@ -73,8 +98,9 @@ const save = async () => {
   position: absolute;
   display: flex;
   align-items: center;
-  justify-content: center;
+
   bottom: 0;
+  pointer-events: none;
   width: 100%;
 }
 .bar {
@@ -82,14 +108,16 @@ const save = async () => {
   bottom: 0;
   height: 3rem;
   width: 100%;
-  border-top: 0.25rem solid black;
-  background-color: #333;
+  border-top: 0.25rem solid rgb(3, 17, 3);
+  background-color: rgb(6, 48, 4);
+  pointer-events: none;
 }
 
 .play, .save {
   margin: 0 1rem;
   font-size: 2rem;
   color: white;
+  pointer-events: all;
   background-color: #222;
   transition: all 100ms linear;
   border: 0.25rem solid black;

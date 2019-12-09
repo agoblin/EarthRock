@@ -126,7 +126,7 @@ let name
   />
   <div class="controls">
     <div class="false" on:click={() => { nameit = false }}>Cancel</div>
-    <div class="true" on:click={play_it}>Play</div>
+    <div class="true" on:click={play_it}>Plant</div>
   </div>
 </div>
 {/if}
@@ -153,7 +153,7 @@ let name
   <Knot {position} {knot}>
     <div class="prompt">
       <div class="title">
-      SPAWN A ...
+      GROW A ...
       </div>
       {#each arr_knots as [kind, fn] (kind)}
         <div class="kind" use:color={kind} on:mouseup={() => create(kind)}>

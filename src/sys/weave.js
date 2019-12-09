@@ -267,12 +267,20 @@ tick.listen((t) => {
         0
       ]
     }
-    height += $bodies[id][1] + 300
+    const $body = $bodies[id]
+    const offset = $body === undefined
+      ? 100
+      : $body[1]
+
+    height += 300 + offset
   })
 
   if (dirty) positions.set($positions)
 })
 
+let tm
+
+let last_focus
 path.listen(async ($path) => {
   if (
     $path[0] !== `weave` ||
@@ -288,24 +296,46 @@ path.listen(async ($path) => {
   woven.set($path[1])
 
   const [w, h] = size.get()
-  scroll.set([w / 2, h / 4, 0])
+  scroll.set([w / 3, 0, 0])
 
-  if (!$path[2]) return
+  const $names = woven.get().names.get()
+  const keys = Object.keys($names)
+  const k_id = $path[2] || keys[keys.length - 1]
+  const knot = $names[k_id]
 
-  const knot = woven.get().names.get()[$path[2]]
-
-  setTimeout(() => {
+  if (tm) clearTimeout(tm)
+  tm = setTimeout(() => {
+    tm = false
     const $positions = positions.get()
+    const $bodies = bodies.get()
     const $id = knot.id.get()
-
+    last_focus = $id
     const pos = $positions[$id]
-
+    const bod = $bodies[$id]
     if (!pos) return
 
     scroll.set([
-      w / 2,
-      -pos[1] * zoom.get() + h / 4,
+      w / 3,
+      -(pos[1] + bod[1]) * zoom.get() + h - 20,
       0
     ])
   }, 100)
+})
+
+zoom.listen(() => {
+  if (!last_focus) return
+  const [w, h] = size.get()
+  const $positions = positions.get()
+  const $bodies = bodies.get()
+  const $id = last_focus
+
+  const pos = $positions[$id]
+  const bod = $bodies[$id]
+  if (!pos) return
+
+  scroll.set([
+    w / 3,
+    -(pos[1] + bod[1]) * zoom.get() + h - 20,
+    0
+  ])
 })
