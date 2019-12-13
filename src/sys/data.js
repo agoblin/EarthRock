@@ -1,7 +1,9 @@
 import { tick } from "/sys/time.js"
+import { path } from "/sys/path.js"
+import { load } from "/sys/file.js"
 
-const VERSION = 2
-
+const VERSION = 3
+const HOUR_AGO = IDBKeyRange.upperBound(Date.now() - 1000 * 60 * 60)
 let db
 
 let load_res
@@ -12,8 +14,7 @@ export const data = new Promise((resolve) => {
   req.onupgradeneeded = async (e) => {
     db = e.target.result
 
-    db.createObjectStore(`weave`, { keyPath: `id` })
-    db.createObjectStore(`running`, { keyPath: `id` })
+    db.createObjectStore(`wheel`, { keyPath: `date` })
 
     resolve(db)
   }
@@ -26,8 +27,8 @@ export const data = new Promise((resolve) => {
 })
 
 export const query = ({
-  store = `weave`,
-  action = `getAll`,
+  store = `wheel`,
+  action = `get`,
   args = [],
   foronly = `readwrite`
 } = false) => new Promise((resolve, reject) => {
@@ -39,74 +40,76 @@ export const query = ({
 })
 
 export const save = async () => {
-  const {
-    running, weaves
-  } = Wheel.toJSON()
+  const wheel = Wheel.toJSON()
 
-  await Promise.all([
-    query({
-      action: `clear`
-    }),
-    query({
-      store: `running`,
-      action: `clear`
-    })
-  ])
+  wheel.date = Date.now()
 
-  await Promise.all([
-    ...Object.values(weaves).map((data) => query({
-      action: `put`,
-      args: [data]
-    })),
-    ...Object.keys(running).map((id) => query({
-      store: `running`,
-      action: `put`,
-      args: [{
-        id
-      }]
-    }))
-  ])
+  // update current
+  await query({
+    action: `put`,
+    args: [wheel]
+  })
 }
 
-tick.listen((t) => {
-  if (
-    t % 10 !== 0 ||
-    db === undefined ||
-    !loaded
-  ) return
-
-  save()
+export const clean = () => query({
+  action: `delete`,
+  args: [HOUR_AGO]
 })
 
 window.query = query
 
 const init = async () => {
-  const [
-    weaves,
-    running
-  ] = await Promise.all([
-    await query(),
-    await query({
-      store: `running`
+  const result = await query({
+    action: `getAll`
+  }).catch((e) => console.warn(`DB`, e.target.error))
+
+  if (result && result.length > 0) {
+    const { weaves, running } = result.pop()
+    delete weaves[Wheel.SYSTEM]
+
+    Wheel.spawn(weaves)
+
+    Object.keys(running).forEach((id) => {
+      if (id === Wheel.SYSTEM) return
+      if (!Wheel.get(id)) return
+      Wheel.start(id)
     })
-  ])
-
-  Wheel.spawn(Object.fromEntries(
-    weaves
-      .filter((w) => w.name !== Wheel.SYSTEM)
-      .map((w) => [
-        w.name,
-        w
-      ])
-  ))
-
-  running.forEach((r) => {
-    if (r.id === Wheel.SYSTEM) return
-
-    Wheel.start(r.id)
-  })
+  }
 
   load_res(true)
+
+  tick.listen((t) => {
+    if (
+      t % 10 !== 0 ||
+      db === undefined ||
+      !loaded
+    ) return
+
+    save()
+    if (t % 100 === 0) clean()
+  })
 }
 
 init()
+
+path.listen(async ($path) => {
+  if ($path.length < 3) return
+  const url = `https://raw.githubusercontent.com/${$path[0]}/${$path[1]}/master/${$path[2]}.jpg`
+
+  const reader = new FileReader()
+  const blob = await fetch(url)
+    .then((r) => r.blob())
+
+  reader.readAsDataURL(blob)
+
+  reader.addEventListener(`load`, () => {
+    const data = load(reader.result)
+    if (!data) return
+
+    Wheel.spawn({
+      [data.name]: data
+    })
+
+    Wheel.start(data.name)
+  })
+})

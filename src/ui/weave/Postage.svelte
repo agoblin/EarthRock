@@ -1,32 +1,31 @@
 <script>
-import { path } from "/sys/path.js"
-import { woven } from "/sys/weave.js"
-
 import Tile from "/ui/image/Tile.svelte"
+
 export let address = ``
-export let nopunch = false
 
 $: runnings = Wheel.running
-$: weave = address.split(`/`)[1]
-$: running = $runnings[weave] === true
-$: active = $woven.name.get() === weave
 
-const punch_it = (e) => {
-  e.stopPropagation()
-  e.preventDefault()
+const [, w_id, k_id] = address.split(`/`)
 
-  if (nopunch) return
+$: weave = Wheel.get(w_id) || Wheel.get(Wheel.SYSTEM)
+$: names = weave.names
 
-  path.set(`weave${address}`)
-  return true
-}
+$: r = weave.rezed
+$: running = $runnings[w_id] === true
+$: knot = $names[k_id]
+$: id = knot
+  ? knot.id.get()
+  : ``
+
+$: system = w_id === Wheel.SYSTEM
+$: rezed = $r[id]
 </script>
 
 <div 
-  class="postage no-drag"
-  on:click={punch_it}
-  class:active
+  class="postage"
   class:running
+  class:rezed
+  class:system
 >
   <Tile 
     width={1} 
@@ -41,8 +40,8 @@ const punch_it = (e) => {
   display: flex;
   background-color: #111;
   filter: sepia(1) hue-rotate(-50deg)    
-    drop-shadow(-0.25rem 0.25rem 0 black)
-    drop-shadow(0.25rem -0.25rem 0 black);
+    drop-shadow(-0.25rem 0.25rem 0 rgba(0,0,0,0.75))
+    drop-shadow(0.25rem -0.25rem 0 rgba(0,0,0,0.75));
 
   padding: 0.25rem;
   border: 0.25rem solid  #333;
@@ -51,22 +50,34 @@ const punch_it = (e) => {
   background-color: green;
 }
 .postage:active {
-  background-color: black;
+  background-color: rgba(0,0,0,0.75);
   filter: sepia(1) hue-rotate(180deg)    
-    drop-shadow(0.25rem 0.25rem 0 black)
-    drop-shadow(-0.25rem -0.25rem 0 black);
+    drop-shadow(0.25rem 0.25rem 0 rgba(0,0,0,0.75))
+    drop-shadow(-0.25rem -0.25rem 0 rgba(0,0,0,0.75));
 }
 
 .postage.running {
   filter: sepia(1) hue-rotate(90deg) 
-    drop-shadow(-0.25rem 0.25rem 0 black)
-    drop-shadow(0.25rem -0.25rem 0 black);
+    drop-shadow(-0.25rem 0.25rem 0 rgba(0,0,0,0.75))
+    drop-shadow(0.25rem -0.25rem 0 rgba(0,0,0,0.75));
 }
 .postage.running:active {
-  background-color: black;
+  background-color: rgba(0,0,0,0.75);
   filter: sepia(1) hue-rotate(90deg)    
-    drop-shadow(0.25rem 0.25rem 0 black)
-    drop-shadow(-0.25rem -0.25rem 0 black);
+    drop-shadow(0.25rem 0.25rem 0 rgba(0,0,0,0.75))
+    drop-shadow(-0.25rem -0.25rem 0 rgba(0,0,0,0.75));
+}
+.postage.rezed {
+  box-shadow: -0.25rem 0.25rem 0  rgba(255, 255, 255, 0.5),
+   0.25rem 0.25rem 0  rgba(255, 255, 255, 0.5),
+    0.25rem 0.25rem 0 rgba(0, 255, 0, 0.5),
+    -0.25rem 0.25rem 0 rgba(0, 255, 0, 0.5);
+}
+
+.postage.system, .postage.system:active {
+  filter: sepia(1) hue-rotate(200deg)    
+    drop-shadow(0.25rem 0.25rem 0 rgba(255, 255, 255, 0.404))
+    drop-shadow(-0.25rem -0.25rem 0 rgba(255, 255, 255, 0.404));
 }
 
 </style>

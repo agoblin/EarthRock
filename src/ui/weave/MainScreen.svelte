@@ -1,5 +1,5 @@
 <script>
-import { main } from "/sys/screen.js"
+import { main, size } from "/sys/screen.js"
 
 export let full = false
 
@@ -19,45 +19,43 @@ const insert = (node) => ({
     node.appendChild(canvas)
   })
 })
+const sizer = (node) => ({
+  destroy: size.listen(([w, h]) => {
+    const s = w > h
+      ? h
+      : w
+
+    node.style.width = node.style.height = `${s}px`
+  })
+})
 </script>
 
 <div 
-  use:insert 
   class="main" 
   class:full 
+  use:insert
   on:click={toggle}
-/>
+> 
+
+</div>
 
 <style>
-.main {
-  z-index: 2000;
-  position: absolute;
-  left: 5vw;
-  bottom: 5vw;
-  width: 10rem;
-  height: 10rem;
+.resize {
   display: flex;
-  border: 0.25rem solid black;
-  background-color: rgba(0, 0, 0, 0.5);
-  filter: drop-shadow(1rem 1rem 0 rgba(0, 0, 0, 0.5));
 }
 
-.main.full {
+.main {
+  z-index: 1;
+  position: absolute;
   width: auto;
   height: auto;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
-  filter: none;
-}
-
-.main.full:hover {
-  filter: none;
-}
-
-.main:hover {
-  filter: drop-shadow(1rem 1rem 1rem rgba(0, 255, 0, 0.5)) drop-shadow(1rem 1rem 0 rgba(0, 0, 0, 0.5));
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .main canvas {

@@ -1,40 +1,122 @@
 import { math as math_js } from "/util/math.js"
-import { write, read } from "/util/store.js"
+import { write, read, transformer } from "/util/store.js"
 
-const math_run = (expression, arg) => {
-  try {
-    return math_js(expression, arg)
-  } catch (ex) {
-    return null
-  }
-}
+const whitespace = /[ .~]/g
+
+const escape = (str) =>
+  str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`) // $& means the whole matched string
+
+const re_var = /\//g
 
 export default ({
   math = `2+2`,
-  value
+  value,
+  weave,
+  life,
+  id
 } = false) => {
+  let math_fn = () => {}
+
+  const values = write({})
+
+  const math_run = (expression) => requestAnimationFrame(() => {
+    const matches = expression.match(Wheel.REG_ID)
+    const vs = {}
+    const s = weave.to_address(weave.chain(id, true).pop())
+    new Set(matches).forEach((item) => {
+      const shh = item[0] === `$`
+      const gette = item
+        .replace(`.`, s)
+        .replace(`~`, `/${weave.name.get()}`)
+        .replace(`$`, ``)
+        .trim()
+
+      const k = Wheel.get(gette)
+      const name = gette.replace(whitespace, ``).replace(re_var, ``)
+
+      if (!k) {
+        vs[name] = {
+          k: {
+            toJSON: () => null
+          },
+          shh: true
+        }
+        return
+      }
+
+      expression = expression.replace(
+        new RegExp(escape(item), `g`),
+        name
+      )
+      vs[name] = {
+        k,
+        shh
+      }
+    })
+
+    // also wtf dont recompile expression each time
+    try {
+      math_fn = math_js(expression)
+      values.set(vs)
+    } catch (ex) {
+      return console.warn(`MATH`, ex)
+    }
+  })
+
   const m = ({
     knot: read(`math`),
-    math: write(math),
+    math: transformer((expression) => {
+      math_run(expression)
+      return expression
+    }),
     value: write(value)
   })
 
   const set = m.value.set
-  let val_in = value
-
-  set(math_run(math, val_in))
-
   m.value.set = (val) => {
-    val_in = typeof val === `object` && !Array.isArray(val)
-      ? val
-      : { v: val }
+    const vs = values.get()
+    val = val === undefined
+      ? null
+      : val
 
-    set(math_run(m.math.get(), val_in))
+    try {
+      const result = math_fn({
+        ...Object.fromEntries(Object.entries(vs).map(
+          ([key, { k }]) => [key, k.toJSON() === undefined
+            ? null
+            : k.toJSON()
+          ]
+        )),
+        v: val
+      })
+      set(result)
+      return m.value
+    } catch (ex) {
+
+    }
   }
+  m.math.set(math)
+  life(() => {
+    math_run(m.math.get())
+    const cancels = new Set()
+    //
+    const cancel_vs = values.listen((vs) => {
+      cancels.forEach((cancel) => cancel())
+      cancels.clear()
 
-  m.math.subscribe((expression) =>
-    set(math_run(expression, val_in))
-  )
+      Object.entries(vs).forEach(([key, { k, shh }]) => {
+        if (shh) return
 
+        cancels.add(k.listen(m.value.poke))
+      })
+    })
+
+    set(m.value.get())
+
+    return () => {
+      cancel_vs()
+      cancels.forEach((cancel) => cancel())
+    }
+  })
   return m
 }

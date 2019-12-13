@@ -4,11 +4,15 @@ import { write, read } from "/util/store.js"
 export const SYSTEM = `sys`
 
 let feed_set
-export const feed = read({
-  reader: ``
-}, (set) => {
+export const feed = read({}, (set) => {
   feed_set = set
 })
+
+export const feed_add = (address) => {
+  const $f = feed.get()
+  $f[address] = Date.now()
+  feed_set($f)
+}
 
 // weaves [name]weave
 export const weaves = write({
@@ -95,22 +99,17 @@ export const spawn = (pattern = {}) => Object.fromEntries(
       console.warn(`tried to spawn ${SYSTEM}`)
       return [weave_id, get(weave_id)]
     }
-    const weave = get(weave_id)
 
-    if (weave === undefined) {
-      const ws = weaves.get()
-      const w = Weave({
-        ...weave_data,
-        name: weave_id
-      })
+    const ws = weaves.get()
+    const w = Weave({
+      ...weave_data,
+      name: weave_id
+    })
 
-      ws[weave_id] = w
+    ws[weave_id] = w
 
-      weaves.set(ws)
-      return [weave_id, w]
-    }
-
-    return [weave_id, weave]
+    weaves.set(ws)
+    return [weave_id, w]
   })
 )
 
@@ -119,6 +118,8 @@ export const start = (weave_name) => {
     throw new Error(`CaN NoT StArT or StOp /${SYSTEM}`)
   }
   const w = get(weave_name)
+  if (!w) return false
+
   const knots = w.knots.get()
 
   const by_id = (id) => {
@@ -146,52 +147,43 @@ export const start = (weave_name) => {
         writer
       ]) => {
         const r = by_id(reader)
-        const w = by_id(writer)
+        const wr = by_id(writer)
+        if (!wr || !r) {
+          w.threads.update(($t) => {
+            delete $t[reader]
+            return $t
+          })
+          return () => {}
+        }
 
         return r.subscribe(($val) => {
-          w.set($val)
+          wr.set($val)
 
           // costly debug thingy,
           // TODO: better way?
-          feed_set({
-            reader: `${weave_name}/${reader}`,
-            writer: `${weave_name}/${writer}`,
-            value: $val
-          })
+
+          const $f = feed.get()
+          $f[`${weave_name}/${reader}`] = Date.now()
+          $f[`${weave_name}/${writer}`] = Date.now()
+
+          feed_set($f)
         })
       }),
-    // frames
-    ...w.lives.get().map((cb) => cb()),
-
-    // ramp to/from the bifrost
-    ...Object.entries(w.mails.get())
-      .map(
-        ([
-          mail_id,
-          address
-        ]) => {
-          const k = get(address)
-          if (!k) return () => {}
-          return k.subscribe((value_new) => {
-            knots[mail_id].set(value_new)
-            feed_set({
-              reader: address,
-              writer: `${weave_name}/${mail_id}`,
-              value: value_new
-            })
-          })
-        })
+    // lives
+    ...w.lives.get().map((cb) => cb())
   ])
 
   running_set({
     ...running.get(),
     [weave_name]: true
   })
+
+  return true
 }
 
 export const stop = (weave_name) => {
   if (weave_name === SYSTEM) {
-    throw new Error(`CaN NoT StArT or StOp /${SYSTEM}`)
+    console.warn(`CaN NoT StArT or StOp /${SYSTEM}`)
   }
 
   const h = highways.get(weave_name)
@@ -202,7 +194,7 @@ export const stop = (weave_name) => {
   running_set(r)
 
   if (h === undefined) {
-    throw new Error(`can't stop ${weave_name}`)
+    return
   }
 
   h.forEach((cancel) => cancel())
@@ -210,8 +202,16 @@ export const stop = (weave_name) => {
   highways.delete(weave_name)
 }
 
+export const restart = (name) => {
+  Wheel.stop(name)
+  Wheel.start(name)
+}
+
 const bump = (what) => JSON.parse(JSON.stringify(what))
+
 export const toJSON = () => ({
   weaves: bump(weaves),
   running: bump(running)
 })
+
+export const REG_ID = /\$?[~\.]?\/[a-zA-Z \/]+/g
