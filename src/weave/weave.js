@@ -24,14 +24,11 @@ export default ({
   }
   const w = {
     id: read(id),
-    knot: read(`weave`),
-
     name: write(name),
-
     threads: write(threads),
-
     lives: write([]),
     rezed: write(rezed),
+
     validate: () => {
       let dirty = false
       let deletes = 0
@@ -40,17 +37,21 @@ export default ({
 
       Object.values(ks).forEach((k) => {
         if (k.knot.get() === `stitch`) return
+
         const chain = w.chain(k.id.get(), true)
         const last = chain[chain.length - 1].split(`/`)[0]
         const first = chain[0].split(`/`)[0]
         const k_last = ks[last]
         const k_first = ks[first]
+
         if ((k_last && k_last.knot.get() === `stitch`) ||
           (k_first && k_first.knot.get() === `stitch`)
         ) return
+
         delete ks[k.id.get()]
         deletes += 1
       })
+
       if (deletes > 0) {
         console.warn(`Deleted ${deletes} orphans on validation.`)
         w.knots.set(ks)
@@ -114,18 +115,27 @@ export default ({
     })
   })
 
-  w.get_knot = (id) => w.knots.get()[id]
+  w.get_id = (id) => w.knots.get()[id]
   w.to_address = (id_path) => {
     const [knot] = id_path.split(`/`)
 
-    const k = w.get_knot(knot)
+    const k = w.get_id(knot)
     if (!k || !k.name) return `/sys/void`
 
     return `/${w.name.get()}/${k.name.get()}`
   }
-  w.remove_name = (name) => {
+
+  w.get_name = (name) => {
     const k = w.names.get()[name]
     if (!k) return
+
+    return k
+  }
+
+  w.remove_name = (name) => {
+    const k = w.get_name(name)
+    if (!k) return
+
     const id = k.id.get()
     return w.remove(id)
   }
@@ -195,6 +205,35 @@ export default ({
         ]
       )
   ))
+
+  w.update = (structure) => {
+    const $names = w.names.get()
+
+    Object.entries(structure).forEach(([key, data]) => {
+      const k = $names[key]
+
+      if (!k) {
+        console.log(`adding`, key, data)
+        data.name = key
+        w.add(data)
+        return
+      }
+
+      const type = k.knot.get()
+
+      Object.entries(data).forEach(([key_sub, data_sub]) => {
+        if (key_sub === `value` && type === `stitch`) {
+          k[key_sub].set({
+            ...k[key_sub].get(),
+            ...data_sub
+          })
+          return
+        }
+
+        k[key_sub].set(data_sub)
+      })
+    })
+  }
 
   return w
 }

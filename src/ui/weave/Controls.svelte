@@ -31,44 +31,42 @@ const save_it = (e) => {
 $: style = `border: 0.25rem solid ${$THEME_BORDER}; background-color: ${$THEME_BG};`
 </script>
 
-<div 
+<div
   class="controls"
 >
  <div class="postage" on:click={toggle}>
-    <Postage 
-      address={`/${$name}`} 
+    <Postage
+      address={`/${$name}`}
     />
   </div>
-
-  <div 
+  {#if $name !== Wheel.SYSTEM}
+  <div
     class="save"
     on:click={save_it}
-    style="border: 0.5rem solid {$THEME_BORDER};"
-  > 
-    {#await image(weave) then src}
+  >
+    {#await image(weave.name.get()) then src}
       <img {src} alt="save" />
     {/await}
   </div>
+  {/if}
 
 </div>
 
 <style>
 .postage {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   display: flex;
 }
 
 .controls {
   display: flex;
   align-items: center;
-  margin-right: 0.5rem;
+  margin: 0 0.5rem;
 }
 
-.save {
-  width: 2rem;
-  height: 2rem;
-  display: flex;
+.postage, .save {
+  margin: 0 0.5rem;
 }
 
 .save:hover {
@@ -79,7 +77,9 @@ $: style = `border: 0.25rem solid ${$THEME_BORDER}; background-color: ${$THEME_B
 }
 .save img {
   flex: 1;
+  margin-top: 0.25rem;
   width: 2rem;
+  border: 0.25rem solid rgba(0,0,0,0.5);
   height: 2rem;
 }
 

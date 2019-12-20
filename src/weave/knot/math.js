@@ -22,17 +22,23 @@ export default ({
   const math_run = (expression) => requestAnimationFrame(() => {
     const matches = expression.match(Wheel.REG_ID)
     const vs = {}
-    const s = weave.to_address(weave.chain(id, true).pop())
+    const leaf = weave.chain(id, true).shift()
+    const s = weave.to_address(leaf)
+
     new Set(matches).forEach((item) => {
       const shh = item[0] === `$`
       const gette = item
-        .replace(`.`, s)
-        .replace(`~`, `/${weave.name.get()}`)
+        .replace(`./`, `${s}/`)
+        .replace(`~/`, `/${weave.name.get()}/`)
         .replace(`$`, ``)
         .trim()
 
       const k = Wheel.get(gette)
       const name = gette.replace(whitespace, ``).replace(re_var, ``)
+      expression = expression.replace(
+        new RegExp(escape(item), `g`),
+        name
+      )
 
       if (!k) {
         vs[name] = {
@@ -44,10 +50,6 @@ export default ({
         return
       }
 
-      expression = expression.replace(
-        new RegExp(escape(item), `g`),
-        name
-      )
       vs[name] = {
         k,
         shh
@@ -96,6 +98,7 @@ export default ({
     }
   }
   m.math.set(math)
+
   life(() => {
     math_run(m.math.get())
     const cancels = new Set()
@@ -111,12 +114,11 @@ export default ({
       })
     })
 
-    set(m.value.get())
-
     return () => {
       cancel_vs()
       cancels.forEach((cancel) => cancel())
     }
   })
+
   return m
 }
