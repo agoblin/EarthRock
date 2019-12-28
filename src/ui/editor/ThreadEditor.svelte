@@ -10,9 +10,14 @@ export let ondone = () => {}
 
 const focus = (node) => node.focus()
 
+let editing = true
+
 const execute = () => {
-  ondone()
-  compile(code, weave, address)
+	// prevent back to back compiles
+	if (!editing) return
+	editing = false
+	compile(code, weave, address)
+	ondone()
 }
 </script>
 
@@ -48,5 +53,6 @@ const execute = () => {
   margin: 0;
   padding: 1rem;
   color: rgb(224, 168, 83);
+  user-select: all !important;
 }
 </style>

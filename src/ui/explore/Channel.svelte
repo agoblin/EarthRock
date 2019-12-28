@@ -2,6 +2,9 @@
 import SpriteEditor from "/ui/editor/SpriteEditor.svelte"
 import Thread from "./Thread.svelte"
 import { THEME_STYLE } from "/sys/flag.js"
+import { tick } from "/sys/time.js"
+import { json } from "/util/parse.js"
+
 import color from "/ui/action/color.js"
 
 export let stitch
@@ -13,23 +16,29 @@ export let executed = () => {}
 
 $: [key, value] = channel
 
+let edit = ``
+$: {
+	if ($tick % 3 === 0) {
+		edit = $value
+	}
+}
 $: editing = focus
 let val = ``
 
 const execute = () => {
-  editing = false
+	editing = false
 
-  try {
-    value.set(JSON.parse(val))
-  } catch (ex) {
-    // no boggie
-  }
-  val = ``
-  executed()
+	try {
+		value.set(json(val))
+	} catch (ex) {
+		// no boggie
+	}
+	val = ``
+	executed()
 }
 
 const focusd = (node) => {
-  node.focus()
+	node.focus()
 }
 </script>
 
@@ -53,7 +62,7 @@ const focusd = (node) => {
   {:else}
   <div class="value">
     {
-     JSON.stringify($value)
+     JSON.stringify(edit)
     }
     </div>
   {/if}
