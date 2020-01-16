@@ -2,6 +2,8 @@ import * as twgl from "twgl"
 import { TIME_TICK_RATE } from "/sys/flag.js"
 import { tick } from "/sys/time.js"
 
+import { map } from "/object.js"
+
 const blank = () => ({
 	sprite: [],
 
@@ -35,12 +37,12 @@ const verts = twgl.primitives.createXYQuadVertices(1)
 let count = 0
 
 const buffer = {
-	...Object.fromEntries(Object.entries(verts).map(
+	...map(verts)(
 		([key, val]) => {
 			val.divisor = 0
 			return [key, val]
 		}
-	)),
+	),
 	translate_last: {
 		divisor: 1,
 		data: [],
@@ -114,6 +116,7 @@ export const snapshot = () => ({
 	time: (Date.now() - last_snap) / TIME_TICK_RATE.get()
 })
 
+// TODO: Buffers could keep a fairly stagnent array with some work
 // RAF so it happens at end of frame
 tick.listen(() => requestAnimationFrame(() => {
 	const buffs = blank()
@@ -129,18 +132,11 @@ tick.listen(() => requestAnimationFrame(() => {
 		// not running
 		if (!running[weave.name.get()]) return
 
-		const rezed = weave.rezed.get()
-		let dirty = false
-		Object.keys(rezed).forEach((id) => {
-			const knot = weave.get_id(id)
+		const spaces = [...weave.spaces.get().values()]
 
-			if (!knot || knot.knot.get() !== `stitch`) {
-				dirty = true
-				delete rezed[id]
-				return
-			}
-
-			const vs = knot.value.get()
+		spaces.forEach((warp) => {
+			const id = warp.id.get()
+			const vs = warp.value.get()
 
 			defaults.forEach(([key, def]) => {
 				if (!vs[key]) {
@@ -150,7 +146,7 @@ tick.listen(() => requestAnimationFrame(() => {
 				let value = vs[key].get()
 
 				if (typeof value === `number`) {
-					value = [value]
+					value = Array(def.length).fill(value)
 				}
 
 				if (!Array.isArray(value)) {
@@ -175,9 +171,6 @@ tick.listen(() => requestAnimationFrame(() => {
 			set_last(`rotation`, id)
 			set_last(`color`, id)
 		})
-
-		// clean up bad rezes
-		if (dirty) weave.rezed.set(rezed)
 	})
 
 	Object.entries(buffs).forEach(([key, buff]) => {

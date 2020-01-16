@@ -1,59 +1,76 @@
-import { decompile, compile } from "/thread/thread.js"
+import { decompile, compile } from "/weave/thread.js"
+import { extend, keys } from "/object.js"
 
-export default ({
-	weave,
-	stitch,
-	value,
-	id
-}) => {
-	const destroys = new Set()
+export default extend({
+	grab_script (other, key) {
+		const weave_other = other.weave
+		const other_id = `${other.id.get()}/${key}`
+		const c_o = weave_other.chain(other_id).slice(0, -1)
+		if (c_o.length === 0) return
 
-	const clean = () => destroys.forEach((d) => d())
-	let stop_other
+		const { weave, id, space } = this
 
-	const stop_value = value.listen(($value) => {
-		clean()
-		if (stop_other) stop_other()
-		stop_other = false
+		//  we got a chain to clone!
+		const code = decompile(other_id, weave_other)
+		const address = `${id}/${key}`
 
-		const addr_o = weave.resolve($value, id)
-		const split = addr_o.split(`/`)
+		const $value = weave_other.get_id(other.id.get())
+			.value.get(key).get()
 
-		const other = Wheel.get(addr_o)
-		if (!other) return
+		// don't overwrite existing values
+		if (!space.value.has(key)) 	{
+			space.value.write({ [key]: $value })
+		}
 
-		const weave_other = Wheel.get(split[0])
-
-		stop_other = other.value.listen((vs_o) => {
-			clean()
-
-			Object.entries(vs_o).forEach(([key, value_o]) =>
-				destroys.add(value_o.listen((v_o) => {
-					stitch.value.update({
-						[key]: v_o
-					})
-				}))
-			)
-
-			// going to cause flap
-			requestAnimationFrame(() => {
-				// basic values added, we can now attach scripts
-				Object.keys(vs_o).forEach((key) => {
-					const other_id = `${other.id.get()}/${key}`
-					const c_o = weave_other.chain(other_id).slice(0, -1)
-					if (c_o.length === 0) return
-
-					//  we got a chain to clone!
-					const code = decompile(other_id, weave_other)
-					compile(code, weave, `${id}/${key}`)
-				})
-			})
+		// compile script later
+		requestAnimationFrame(() => {
+			this.scripts.push(...compile({
+				code,
+				weave,
+				address,
+				prefix: `&`
+			}))
 		})
-	})
+	},
 
-	return () => {
-		clean()
-		stop_other()
-		stop_value()
+	rez () {
+		const { space, weave, value, id } = this
+		this.scripts = this.scripts || []
+
+		this.cancel = value.listen(($value) => {
+			this.weave.remove(...this.scripts)
+			const other = Wheel.get(weave.resolve($value, id))
+
+			if (!other) {
+				console.warn(`Invid other for clone`)
+			}
+
+			const proto = other
+				? other.value.get()
+				: {}
+
+			keys(proto).forEach((key) => {
+				this.grab_script(other, key)
+			})
+
+			// set proto
+			space.set({
+				...space.get(),
+				__proto__: proto
+			}, true)
+		})
+	},
+
+	derez () {
+		this.cancel()
+
+		// remove proto
+		this.space.set({
+			...this.space.get()
+		}, true)
+
+		// leave the scripts sadly
+		this.weave.remove(...this.scripts)
 	}
-}
+
+})

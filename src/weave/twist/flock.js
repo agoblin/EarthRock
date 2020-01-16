@@ -1,46 +1,52 @@
-export default ({
-	stitch,
-	weave,
-	value,
-	id
-}) => {
-	const $value = value.get()
-	const other = Wheel.get(weave.resolve($value, id))
+import { extend } from "/object.js"
+import cuid from "cuid"
 
-	if (!other || other.knot.get() !== `stitch`) return
+export default extend({
+	cancel () {
+		const removes = [...this.birds]
 
-	const vs = stitch.value.get()
-	const count = vs[`!flock count`]
-		? vs[`!flock count`].get()
-		: 1
-
-	const w_update = {}
-
-	const birds = new Promise((resolve) => {
-		// rez the birds next chance
+		// basically anything that fucks with the weave you want to delay
 		requestAnimationFrame(() => {
-		// spawn a flock
-			for (let i = 0; i < count; i++) {
-				const key = `&${stitch.name.get()} ${i + 1}`
-				w_update[key] = {
-					knot: `stitch`,
-					value: {
-						"!clone": $value,
-						"!leader": `${stitch.name.get()}`,
-						"!bird": i
-					}
-				}
+			this.weave.remove(...removes)
+		})
+	},
+
+	rez () {
+		const { value, space, weave } = this
+		this.birds = []
+
+		this.value_cancel = value.listen(($value) => {
+			const split = $value.split(` `)
+			let count = 1
+			if (split.length > 1) {
+				count = parseInt(split[0])
+				$value = split.slice(1).join(` `)
 			}
 
-			const birds = Object.values(weave.update(w_update)).map((bird) => bird.id.get())
+			this.cancel()
+			const update = Object.fromEntries([...Array(count)].map(
+				(_, i) => {
+					return [`&${cuid()}`, {
+						type: `space`,
+						value: {
+							"!clone": $value,
+							"!leader": `~/${space.value.get(`!name`).get()}`,
+							"!bird": i
+						}
+					}]
+				}
+			))
 
-			weave.rez(...birds)
-
-			resolve(birds)
+			// store bird ids for later deletion
+			requestAnimationFrame(() => {
+				this.birds = Object.values(weave.write_ids(update)).map((item) => item.id.get())
+				this.weave.rez(...this.birds)
+			})
 		})
-	})
+	},
 
-	return async () => {
-		weave.remove(...await birds)
+	derez () {
+		this.value_cancel()
+		this.cancel()
 	}
-}
+})

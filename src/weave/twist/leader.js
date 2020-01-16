@@ -1,41 +1,58 @@
-import { write } from "/util/store.js"
+import { write } from "/store.js"
+import { extend } from "/object.js"
 
-// Who to follow
-export default ({
-	value,
-	weave,
-	id
-}) => {
-	const cancel = value.listen((leader) => {
-		const l = weave.get_name(leader)
-		if (!l) return
+export default extend({
+	rez () {
+		// console.log(`leader`, this.space.id.get())
 
-		const vs = l.value.get()
-		if (!vs[`!birds`]) {
-			vs[`!birds`] = write([id])
-			l.value.set(vs)
+		this.cancel = this.value.listen((leader) => {
+			const id = this.space.id.get()
+			const $leader = Wheel.get(this.weave.resolve(leader, id))
+
+			if (!$leader) {
+				console.warn(`leader not found`)
+				return
+			}
+
+			const vs = $leader.value.get()
+			if (!vs[`!birds`]) {
+				vs[`!birds`] = write(new Set([id]))
+				$leader.value.set(vs)
+				return
+			}
+
+			let birds = vs[`!birds`].get()
+			if (!birds.add && !Array.isArray(birds)) birds = new Set()
+			if (Array.isArray(birds)) birds = new Set(birds)
+
+			if (birds.has(id)) return
+
+			birds.add(id)
+			vs[`!birds`].set([...birds])
+		})
+	},
+
+	derez () {
+		const id = this.space.id.get()
+
+		this.cancel()
+		const $leader = Wheel.get(this.weave.resolve(this.value.get(), id))
+		if (!$leader) {
+			console.warn(`no leader`)
 			return
 		}
 
-		let v = vs[`!birds`].get()
-		if (!Array.isArray(v)) v = []
-		if (v.indexOf(id) !== -1) return
+		const vs = $leader.value.get()
+		if (!vs) {
+			console.warn(`no leader value`)
+			return
+		}
+		let birds = vs[`!birds`].get()
 
-		v.push(id)
-		vs[`!birds`].set(v)
-	})
+		if (!birds.add && !Array.isArray(birds)) birds = new Set()
+		if (Array.isArray(birds)) birds = new Set(birds)
+		birds.delete(id)
 
-	return () => {
-		cancel()
-		const l = weave.get_name(value.get())
-		if (!l) return
-
-		const vs = l.value.get()
-		if (!vs) return
-
-		const bs = vs[`!birds`].get()
-		bs.splice(bs.indexOf(id), 1)
-
-		vs[`!birds`].set(bs)
+		vs[`!birds`].set([...birds])
 	}
-}
+})

@@ -1,21 +1,24 @@
 import { m4 } from "twgl"
-import { write } from "/util/store.js"
+import { write } from "/store.js"
 
-const validate = ({ set }) => (val) => {
-	if (!Array.isArray(val)) {
-		if (
-			val &&
-      typeof val[0] === `number` &&
-      typeof val[1] === `number` &&
-      typeof val[2] === `number`
-		) {
-			set(val)
+const validate = (thing) => {
+	const set = thing.set.bind(thing)
+	return (val) => {
+		if (!Array.isArray(val)) {
+			if (
+				val &&
+				typeof val[0] === `number` &&
+				typeof val[1] === `number` &&
+				typeof val[2] === `number`
+			) {
+				thing.set(val)
+				return
+			}
+
 			return
 		}
-
-		return
+		set(val)
 	}
-	set(val)
 }
 
 export const camera = write(m4.identity())

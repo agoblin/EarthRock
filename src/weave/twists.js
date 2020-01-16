@@ -1,3 +1,6 @@
 export { default as flock } from "./twist/flock.js"
 export { default as clone } from "./twist/clone.js"
 export { default as leader } from "./twist/leader.js"
+export { default as name } from "./twist/name.js"
+export { default as birds } from "./twist/birds.js"
+export { default as velocity } from "./twist/velocity.js"
