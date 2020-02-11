@@ -2,18 +2,22 @@ import { decompile, compile } from "/weave/thread.js"
 import { extend, keys } from "/object.js"
 
 export default extend({
-	grab_script (other, key) {
+	grab_script (other, key, right) {
 		const weave_other = other.weave
 		const other_id = `${other.id.get()}/${key}`
-		const c_o = weave_other.chain(other_id).slice(0, -1)
+		const c_o = weave_other.chain(other_id, right).slice(0, -1)
+
 		if (c_o.length === 0) return
 
 		const { weave, id, space } = this
 
 		//  we got a chain to clone!
-		const code = decompile(other_id, weave_other)
-		const address = `${id}/${key}`
+		const code = decompile({
+			address: other_id,
+			weave: weave_other
+		})
 
+		const address = `${id}/${key}`
 		const $value = weave_other.get_id(other.id.get())
 			.value.get(key).get()
 
@@ -28,6 +32,7 @@ export default extend({
 				code,
 				weave,
 				address,
+				right,
 				prefix: `&`
 			}))
 		})
@@ -42,15 +47,17 @@ export default extend({
 			const other = Wheel.get(weave.resolve($value, id))
 
 			if (!other) {
-				console.warn(`Invid other for clone`)
+				console.warn(`Invalid other for clone`)
 			}
 
+			// allows to reset existing protos
 			const proto = other
 				? other.value.get()
 				: {}
 
 			keys(proto).forEach((key) => {
 				this.grab_script(other, key)
+				this.grab_script(other, key, true)
 			})
 
 			// set proto

@@ -5,6 +5,7 @@ import { compile } from "/weave/thread.js"
 export let code
 export let weave
 export let address
+export let right
 
 export let ondone = () => {}
 
@@ -15,8 +16,9 @@ let editing = true
 const execute = () => {
 	// prevent back to back compiles
 	if (!editing) return
+
 	editing = false
-	compile({ code, weave, address })
+	compile({ code, weave, address, right })
 	ondone()
 }
 </script>
@@ -31,6 +33,14 @@ const execute = () => {
 	bind:value={code}
 	on:click={(e) => e.stopPropagation()}
 	on:keydown={(e) => {
+		if (e.key.toLowerCase() === `end`) {
+			e.preventDefault()
+			e.stopPropagation()
+
+			editing = false
+			ondone()
+			return
+		}
 		if (e.ctrlKey && e.which === 13) {
 			execute()
 			e.preventDefault()

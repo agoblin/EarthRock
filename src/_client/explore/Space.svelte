@@ -1,8 +1,8 @@
 <script>
 import color from "/_client/action/color.js"
-import { THEME_BORDER } from "/sys/flag.js"
 import { read, write } from "/store.js"
 
+import nav, { goto, cursor } from "/_client/action/nav.js"
 import Flock from "./Flock.svelte"
 import Channel from "./Channel.svelte"
 import Postage from "/_client/weave/Postage.svelte"
@@ -10,6 +10,8 @@ import Postage from "/_client/weave/Postage.svelte"
 export let space
 export let weave
 export let is_bird = false
+export let navi = {}
+export let i
 
 const open = true
 
@@ -34,9 +36,32 @@ $: chans = Object.entries($value).sort(([a], [b]) => {
 
 $: rezed = $w_rezed[$id]
 
+const get_nav = (idx) => {
+	const self = chans[idx][0]
+	const down = chans[idx + 1]
+		? `${space.address()}/${chans[idx + 1][0]}`
+		: navi.down
+
+	const up = chans[idx - 1]
+		? `${space.address()}/${chans[idx - 1][0]}`
+		: space.address()
+
+	return {
+		id: `${space.address()}/${self}`,
+		down,
+		up,
+		page_up: space.address(),
+		page_down: navi.down,
+		home: space.address()
+	}
+}
+
 const toggle = (e) => {
-	e.preventDefault()
-	e.stopPropagation()
+	if (e) {
+		e.preventDefault()
+		e.stopPropagation()
+	}
+
 	const id = space.id.get()
 
 	if (rezed) {
@@ -53,79 +78,100 @@ const space_bird = write(false)
 	<div
 		class="space"
 		class:open
+		class:zero={i === 0}
 		use:color={$name}
-		style="border: 0.25rem solid {$THEME_BORDER};"
+		use:nav={{
+			id: space.address(),
+			up: navi.up,
+			left: toggle,
+			down: chans.length > 0 ? `${space.address()}/${chans[0][0]}` : navi.down,
+			page_up: navi.page_up,
+			page_down: navi.down,
+			del: () => {
+				weave.remove($id)
+				return navi.down === `/` ? navi.up : navi.down
+			},
+			insert: () => {
+				space.write({
+					"": ``
+				})
+
+				// now put that node in edit mode
+				requestAnimationFrame(() => {
+					goto(`${space.address()}/`)
+					cursor.get().insert()
+				})
+			}
+		}}
 	>
-	<div class="postage" on:click={toggle}>
+		<div class="postage" on:click={toggle}>
 			<Postage address={`/${$w_name}/${$name}`}/>
 		</div>
 		<div class="name">
 			{$name}
 		</div>
-
-
 	</div>
 {/if}
 
 {#if open}
-  <div class="chans">
-  {#each chans as channel (channel[0])}
-	  <Channel
+<div class="chans">
+	{#each chans as channel, i (channel[0])}
+	<Channel
 		{channel}
 		{space}
 		{weave}
 		nothread={is_bird}
-	  />
-  {/each}
-  </div>
+		navi={get_nav(i)}
+	/>
+	{/each}
+</div>
 {/if}
 
 {#if birds && rezed}
 	<Flock {birds} {weave} set_bird={(bird) => { space_bird.set(bird) }}>
-
 		{#if $space_bird}
 			<svelte:self
 				{weave}
 				space={$space_bird}
 				is_bird={true}
 			/>
-
 		{/if}
-
 	</Flock>
 {/if}
 
-
 <style>
 .chans {
-  margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 .postage {
-  width: 2rem;
-  height: 2rem;
-  margin: 0.5rem 1rem;
+	width: 2rem;
+	height: 2rem;
+	margin: 0.5rem 1rem;
 }
 
 .space {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
+	box-shadow: inset 10rem 10rem 0 rgba(0,0,0,0.25),
+		inset -10rem -10rem 0 rgba(0,0,0,0.25);
+	display: flex;
+	align-items: center;
+	padding: 0.5rem;
+	padding-right: 1rem;
+	border-radius: 0.5rem;
 	margin: 0 1rem;
-  border-right: none;
-  padding-right: 1rem;
 }
 
 .name {
-  flex: 1;
+	flex: 1;
 	font-size: 2rem;
 }
 
 .space:hover {
-  color: white;
+	color: white;
 }
 
-.is_bird {
-	display: none;
+.zero {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 </style>

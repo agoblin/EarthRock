@@ -20,17 +20,30 @@ const escape = (str) =>
 
 const type = read(`math`)
 
+const lookup = {}
+
 const proto_math = extend(proto_warp, {
 	run (expression) {
 		const matches = expression.match(Wheel.REG_ID)
 		const vs = {}
+
 		const leaf = this.weave.chain(this.id.get(), true).shift()
-		const s = this.weave.to_address(leaf)
+		let space_addr = this.weave.to_address(leaf)
+
+		// nad address
+		if (!space_addr) return
+
+		const space = Wheel.get(space_addr)
+
+		if (space.type.get() !== `space`) {
+			const leaf_right = this.weave.chain(this.id.get()).shift()
+			space_addr = this.weave.to_address(leaf_right)
+		}
 
 		new Set(matches).forEach((item) => {
 			const shh = item[0] === `$`
 			const gette = item
-				.replace(path_space, `${s}/`)
+				.replace(path_space, `${space_addr}/`)
 				.replace(path_weave, `/${this.weave.name.get()}/`)
 				.replace(path_ssh, ``)
 				.trim()
@@ -45,6 +58,8 @@ const proto_math = extend(proto_warp, {
 				.replace(path_weave, `weave`)
 				.replace(bad_variable_characters, `z`)
 
+			lookup[name] = item
+
 			expression = expression.replace(
 				new RegExp(escape(item), `g`),
 				name
@@ -58,10 +73,11 @@ const proto_math = extend(proto_warp, {
 
 		try {
 			this.fn = math_js(expression)
+
 			this.values.set(vs)
 		} catch (ex) {
 			// TODO: Alert user of math error here
-			// console.warn(`MATH`, ex)
+			console.warn(`Math parse error`, ex)
 		}
 	},
 
@@ -80,7 +96,7 @@ const proto_math = extend(proto_warp, {
 					this.value.set(this.value.last)
 				}))
 			})
-		})
+		})	// do latter once setup
 	},
 
 	derez () {
@@ -91,21 +107,21 @@ const proto_math = extend(proto_warp, {
 	toJSON () {
 		return {
 			type: this.type.get(),
-			value: this.value.get(),
+			value: null,
 			math: this.math.get()
 		}
 	}
 })
 
 const proto_math_value = extend(proto_write, {
-	set (expression) {
-		this.warp.run(expression)
-		return expression
+	set (expression, silent) {
+		proto_write.set.call(this, expression, silent)
+		if (!silent) this.warp.run(expression)
 	}
 })
 
 const proto_value = extend(proto_write, {
-	set (value) {
+	set (value, silent) {
 		this.last = value
 
 		const vs = this.warp.values.get()
@@ -113,6 +129,7 @@ const proto_value = extend(proto_write, {
 			? null
 			: value
 
+		// could be faster
 		const params = {
 			...Object.fromEntries(Object.entries(vs).map(
 				([key, { warp }]) => [key, warp.toJSON() === undefined
@@ -123,12 +140,38 @@ const proto_value = extend(proto_write, {
 			value
 		}
 
-		try {
-			const result = this.warp.fn(params)
-			proto_write.set.call(this, result)
-		} catch (ex) {
-			if (ex.message !== `stop`) console.warn(`math error`, ex)
+		params.null = null
+		params.delay = false
+
+		const result = this.warp.fn(params)
+
+		// allow for setting multiple values
+		// Object.entries(vs).forEach(([key, { warp }]) => {
+		// 	const original = warp.toJSON()
+		// 	const value = params[key]
+
+		// 	if (
+		// 		Array.isArray(original) &&
+		// 		Array.isArray(value) &&
+		// 		original.some((x, i) => x !== value[key]) === false
+		// 	) return
+
+		// 	if (original === value) return
+		// 	vs[key].warp.value.set(value)
+		// })
+
+		// null or undefined means do nothing
+		if (result === null || result === undefined) return
+
+		if (params.delay) {
+			requestAnimationFrame(() => {
+				proto_write.set.call(this, result)
+			})
+
+			return this
 		}
+
+		proto_write.set.call(this, result, silent)
 
 		return this
 	}
@@ -158,10 +201,7 @@ export default ({
 		warp: m
 	})
 
-	// do latter once setup
-	requestAnimationFrame(() => {
-		m.math.set(math)
-	})
+	requestAnimationFrame(() => m.math.set(math, true))
 
 	return m
 }

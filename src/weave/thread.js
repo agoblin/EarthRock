@@ -73,13 +73,31 @@ const what_is = (data) => {
 
 const warp_create = (data) => {
 	const what = what_is(data)
+
 	return warps_create[what](data)
 }
 
-export const decompile = (address, weave) =>
-	weave.chain(address).slice(0, -1)
+export const chain = (weave, address, right) => {
+	if (right) {
+		return weave.chain(address, true).slice(1)
+	}
+	return weave.chain(address).slice(0, -1)
+}
+
+export const decompile = ({
+	address,
+	weave,
+	right = false
+}) => {
+	const c = chain(weave, address, right)
 		.map((i) => translate(i, weave))
-		.join(` => `)
+
+	if (right) {
+		return c.reverse().join(` => `)
+	}
+
+	return c.join(` => `)
+}
 
 export const translate = (id, weave) => {
 	if (id[0] === `{`) return id
@@ -98,20 +116,24 @@ export const compile = ({
 	code,
 	weave,
 	address,
-	prefix = ``
+	prefix = ``,
+	right = false
 }) => {
-	const parts = code
+	let parts = code
 		.replace(/[\r\n]/g, ``)
 		.split(`=>`)
-		.reverse()
 
+	if (!right) parts = parts.reverse()
+`
 	const wefts_update = weave.wefts.get()
 
-	weave.remove(...weave.chain(address).slice(0, -1))
+	// remove old thread
+	weave.remove(...chain(weave, address, right))
 
 	const space = weave.get_id(address.split(`/`)[0])
 
 	let connection = address
+
 	// lets create these warps
 	const ids = parts.map((part) => {
 		part = part.trim()
@@ -124,7 +146,12 @@ export const compile = ({
 		const k = weave.add(w_data)
 		const id = k.id.get()
 
-		wefts_update[id] = connection
+		if (right) {
+			wefts_update[connection] = id
+		} else {
+			wefts_update[id] = connection
+		}
+
 		connection = id
 
 		return id

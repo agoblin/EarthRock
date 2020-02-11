@@ -1,6 +1,6 @@
 <script>
 import color from "/_client/action/color.js"
-import { THEME_BORDER } from "/sys/flag.js"
+import { THEME_BORDER, THEME_STYLE } from "/sys/flag.js"
 import { read } from "/store.js"
 
 export let weave
@@ -33,8 +33,9 @@ $: {
 <div
 	class="sub_space"
 >
+
 	<div class="navigation"
-		style="border-bottom: 0.25rem solid {$THEME_BORDER}; background-color: {$THEME_BORDER}">
+		style="background-color: {$THEME_BORDER}">
 		<div
 			class="button"
 			on:click={() => {
@@ -47,8 +48,7 @@ $: {
 
 			use:color={$bird_name}
 		>&lt;</div>
-
-		<div class="flex">{birdex + 1} : {$birds.length}</div>
+		<div class="flex">{`~~${$bird_name}~~`} : {birdex + 1} : {$birds.length} </div>
 		<div
 			class="button"
 			use:color={$bird_name}
@@ -76,7 +76,14 @@ $: {
 
 .button	 {
 	padding: 0;
-	border: 0.5rem solid rgba(0,0,0,0.5);
+
+}
+
+.name {
+	text-align: center;
+	padding: 0.5rem 0;
+	margin: 0 3rem;
+	font-size: 2rem;
 }
 
 .button:hover {
@@ -88,8 +95,8 @@ $: {
 	user-select: none;
 	display: flex;
 	flex-basis: 1;
-	margin-left: 3rem;
-	margin-right: 3rem;
+	margin-left: 2rem;
+	margin-right: 2rem;
 
 }
 
